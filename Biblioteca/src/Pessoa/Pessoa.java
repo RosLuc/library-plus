@@ -7,7 +7,7 @@ package Pessoa;
 
 /**
  *
- * @author lucas
+ * @author
  */
 public class Pessoa {
     
