@@ -47,5 +47,6 @@ Contributor(s):
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">8237</property>
     <mapping resource="Pessoa/pessoa.hbm.xml"/>
+    <mapping resource="Usuario/usuario.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
