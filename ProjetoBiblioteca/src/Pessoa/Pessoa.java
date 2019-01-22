@@ -2,10 +2,14 @@ package Pessoa;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -17,7 +21,7 @@ public class Pessoa {
     private int codinsc;
     private int usercode;
     private String estado;
-    private int numero;
+    private String numero;
     private String serie;
     private String endereco;
     private String turno;
@@ -26,9 +30,8 @@ public class Pessoa {
     private String cidade;
     private String categoria;
     private String email;
-    private int celular;
+    private String contato;
     private String nome;
-    private int telefone;
     private String cep;
     
     /**
@@ -58,10 +61,10 @@ public class Pessoa {
      * @param telefone - Telefone da pessoa.
      * @param cep - CEP da residência da pessoa.
      */
-    public Pessoa(int codinsc, int usercode, String estado, int numero,
+    public Pessoa(int codinsc, int usercode, String estado, String numero,
             String serie, String endereco, String turno, String bairro,
             String turma, String cidade, String categoria, String email,
-            int celular, String nome, int telefone, String cep) {
+            String contato, String nome, String cep) {
         this.codinsc = codinsc;
         this.usercode = usercode;
         this.estado = estado;
@@ -74,9 +77,7 @@ public class Pessoa {
         this.cidade = cidade;
         this.categoria = categoria;
         this.email = email;
-        this.celular = celular;
         this.nome = nome;
-        this.telefone = telefone;
         this.cep = cep;
     }
 
@@ -132,9 +133,9 @@ public class Pessoa {
 
     /**
     * Método para acessar o numero.
-    * @return int - Nº da residência.
+    * @return String - Nº da residência.
     */
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
@@ -142,7 +143,7 @@ public class Pessoa {
     * Método para modificar o numero.
     * @param numero - Nº da residência.
     */
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -275,19 +276,19 @@ public class Pessoa {
     }
 
     /**
-    * Método para acessar a Celular.
+    * Método para acessar o contato.
     * @return int - Celular da pessoa.
     */
-    public int getCelular() {
-        return celular;
+    public String getContato() {
+        return contato;
     }
 
     /**
-    * Método para modificar a celular.
+    * Método para modificar o contato.
     * @param celular - Celular da pessoa.
     */
-    public void setCelular(int celular) {
-        this.celular = celular;
+    public void setContato(String celular) {
+        this.contato = celular;
     }
 
     /**
@@ -305,23 +306,7 @@ public class Pessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    /**
-    * Método para acessar a Telefone.
-    * @return int - Telefone da pessoa.
-    */
-    public int getTelefone() {
-        return telefone;
-    }
-
-    /**
-    * Método para modificar a telefone.
-    * @param telefone - Telefone da pessoa.
-    */
-    public void setTelefone(int telefone) {
-        this.telefone = telefone;
-    }
-
+    
     /**
     * Método para acessar a CEP.
     * @return int - CEP da pessoa.
@@ -351,9 +336,12 @@ public class Pessoa {
             sessao.save(this);
             tx_part.commit();
             sessao.close();
+            fabrica.close();
             return true;
         }
-        catch(Exception e){
+        catch(HibernateException e){
+            System.err.println("Erro: "+e);
+            e.printStackTrace();
             return false;
         }
     }
@@ -370,9 +358,12 @@ public class Pessoa {
             sessao.update(this);
             tx_part.commit();
             sessao.close();
+            fabrica.close();
             return true;
         }
-        catch(Exception e){
+        catch(HibernateException e){
+            System.err.println("Erro: "+e);
+            e.printStackTrace();
             return false;
         }
     }
@@ -387,11 +378,14 @@ public class Pessoa {
             SessionFactory fabrica = new Configuration().configure("Hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
             lista_Pessoa = new ArrayList();
-            lista_Pessoa = sessao.createQuery("from Pessoa.Pessoa").list();
+            lista_Pessoa = sessao.createCriteria(Pessoa.class).addOrder(Order.asc("nome")).list();
             sessao.close();
+            fabrica.close();
             return lista_Pessoa;
         }
-        catch(Exception e){
+        catch(HibernateException e){
+            System.err.println("Erro: "+e);
+            e.printStackTrace();
             return null;
         }
     }
@@ -408,9 +402,12 @@ public class Pessoa {
             sessao.delete(this);
             tx_part.commit();
             sessao.close();
+            fabrica.close();
             return true;
         }
-        catch(Exception e){
+        catch(HibernateException e){
+            System.err.println("Erro: "+e);
+            e.printStackTrace();
             return false;
         }
     }
@@ -427,9 +424,12 @@ public class Pessoa {
             Session sessao = fabrica.openSession();
             Pessoa p =(Pessoa) sessao.createCriteria(Pessoa.class).add(Restrictions.eq("codinsc", codInsc)).uniqueResult();
             sessao.close();
+            fabrica.close();
             return p;
         }
-        catch(Exception e){
+        catch(HibernateException e){
+            System.err.println("Erro: "+e);
+            e.printStackTrace();
             return null;
         }
     }
@@ -437,20 +437,22 @@ public class Pessoa {
     /**
      * Metodo responsável por filtrar uma lista dos objetos pessoa salvos no banco de dados.
      * A operação é realizada utilizando hibernate.
-     * @param filtro - Filtro da lista.
-     * @param coluna - Coluna da tabela.
      * @return List - Caso a operação for realizada com sucesso retorna uma lista de pessoa, caso contrário retorna null.
      */
-    public List filtrarPessoa(String coluna, String filtro){
+    public List filtrarPessoa(){
         try{
             SessionFactory fabrica = new Configuration().configure("Hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
             List<Pessoa> listaPessoa = new ArrayList();
-            listaPessoa = sessao.createCriteria(Pessoa.class).add(Restrictions.eq(coluna, filtro)).list();
+            Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes().ignoreCase();
+            listaPessoa = sessao.createCriteria(Pessoa.class).add(exp).addOrder(Order.desc("nome")).list();
             sessao.close();
+            fabrica.close();
             return listaPessoa;
         }
-        catch(Exception e){
+        catch(HibernateException e){
+            System.err.println("Erro: "+e);
+            e.printStackTrace();
             return null;
         }
     }

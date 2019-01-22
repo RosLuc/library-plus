@@ -16,7 +16,7 @@ public class testePessoa {
         Pessoa p = new Pessoa();
             p.setBairro("Manoel");
             p.setCategoria("a");
-            p.setCelular(99695866);
+            p.setContato("99695866");
             p.setCep("099");
             p.setCidade("pdf");
             p.setCodinsc(3334);
@@ -24,17 +24,18 @@ public class testePessoa {
             p.setEndereco("RN-PDF");
             p.setEstado("RN");
             p.setNome("rosendo");
-            p.setNumero(9);
+            p.setNumero("9");
             p.setSerie("b");
-            p.setTelefone(40028922);
             p.setTurma("1");
             p.setTurno("nocturne");
             p.setUsercode(1111);
-            p.salvarPessoa();
+            //p.salvarPessoa();
             Pessoa temp = new Pessoa();
-            List<Pessoa> lista = temp.filtrarPessoa("nome", "rosendo");
-            temp = lista.get(0);
-            System.out.println(temp.getCodinsc()+ "\n" +temp.getNome());
+            List<Pessoa> lista = temp.ListaDePessoa();
+            for(int i = 0;i < lista.size(); i++){
+                temp = lista.get(i);
+                System.out.println(temp.getCodinsc()+ "\n" +temp.getNome());
+            }
             
     }
     

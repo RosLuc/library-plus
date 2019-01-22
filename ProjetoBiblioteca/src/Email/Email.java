@@ -62,6 +62,9 @@ public class Email {
         else if("hotmail.com".equals(smtpServer)){
             props = smtpMicrosoft();
         }
+        else if("outlook.com".equals(smtpServer)){
+            props = smtpMicrosoft();
+        }
         return props;
     }
     
@@ -88,7 +91,7 @@ public class Email {
     }
     
     /**
-     * Metodo responsavel por identificar o servidor do remetente.
+     * Metodo responsavel por enviar a mensagem.
      * @param remetente uma string que indica o email do remetente.
      * @param destinatario uma string que indica o email do destinatario.
      * @param titulo uma string que indica o titulo da mensagem.

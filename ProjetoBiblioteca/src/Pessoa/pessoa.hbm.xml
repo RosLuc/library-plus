@@ -53,9 +53,8 @@ Contributor(s):
         <property name="cidade"/>
         <property name="categoria"/>
         <property name="email"/>
-        <property name="celular"/>
+        <property name="contato"/>
         <property name="nome"/>
-        <property name="telefone"/>
         <property name="cep"/>
     </class>
 </hibernate-mapping>
