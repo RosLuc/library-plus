@@ -29,7 +29,7 @@ create table Prateleira(
 	codprateleira integer,
 	corredor integer not null,
 	genero varchar(20) not null,
-	primary key (codestante)
+	primary key (codestante, codprateleira)
 );
 create table Material(
 	nchamada text primary key unique,
@@ -43,7 +43,7 @@ create table Material(
 	volume integer,
 	local text not null,
 	anopublicacao integer not null,
-	formadeaquisicao string not null,
+	formadeaquisicao varchar(15) not null,
 	observacao text,
 	status varchar(10) not null,
 	foreign key(usercode) references Usuario(UserCode),

@@ -19,7 +19,7 @@ public class testePessoa {
             p.setContato("99695866");
             p.setCep("099");
             p.setCidade("pdf");
-            p.setCodinsc(3334);
+            //p.setCodinsc(3327);
             p.setEmail("lucas-rosendo@hotmail.com");
             p.setEndereco("RN-PDF");
             p.setEstado("RN");
@@ -29,7 +29,7 @@ public class testePessoa {
             p.setTurma("1");
             p.setTurno("nocturne");
             p.setUsercode(1111);
-            //p.salvarPessoa();
+            p.salvarPessoa();
             Pessoa temp = new Pessoa();
             List<Pessoa> lista = temp.ListaDePessoa();
             for(int i = 0;i < lista.size(); i++){

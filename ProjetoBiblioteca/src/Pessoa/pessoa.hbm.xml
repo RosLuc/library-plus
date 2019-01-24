@@ -41,7 +41,11 @@ Contributor(s):
 -->
 <hibernate-mapping>
     <class name="Pessoa.Pessoa" table="pessoa">
-        <id name="codinsc" column="codinsc" type="int"/>
+        <id name="codinsc" column="codinsc" type="int">
+            <generator class="sequence" >              
+                <param name="sequence">pessoa_codinsc_seq</param>
+            </generator>
+        </id>
         <property name="usercode"/>
         <property name="estado"/>
         <property name="numero"/>

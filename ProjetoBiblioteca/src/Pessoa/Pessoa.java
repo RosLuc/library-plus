@@ -56,9 +56,8 @@ public class Pessoa {
      * @param cidade - Cidade da residência da pessoa.
      * @param categoria - Categoria da pessoa.
      * @param email - Email da pessoa.
-     * @param celular - Celular da pessoa.
+     * @param contato - Contato da pessoa.
      * @param nome - Nome da pessoa.
-     * @param telefone - Telefone da pessoa.
      * @param cep - CEP da residência da pessoa.
      */
     public Pessoa(int codinsc, int usercode, String estado, String numero,
@@ -285,10 +284,10 @@ public class Pessoa {
 
     /**
     * Método para modificar o contato.
-    * @param celular - Celular da pessoa.
+    * @param contato - Celular da pessoa.
     */
-    public void setContato(String celular) {
-        this.contato = celular;
+    public void setContato(String contato) {
+        this.contato = contato;
     }
 
     /**
@@ -341,7 +340,6 @@ public class Pessoa {
         }
         catch(HibernateException e){
             System.err.println("Erro: "+e);
-            e.printStackTrace();
             return false;
         }
     }
@@ -363,7 +361,6 @@ public class Pessoa {
         }
         catch(HibernateException e){
             System.err.println("Erro: "+e);
-            e.printStackTrace();
             return false;
         }
     }
@@ -385,7 +382,6 @@ public class Pessoa {
         }
         catch(HibernateException e){
             System.err.println("Erro: "+e);
-            e.printStackTrace();
             return null;
         }
     }
@@ -407,7 +403,6 @@ public class Pessoa {
         }
         catch(HibernateException e){
             System.err.println("Erro: "+e);
-            e.printStackTrace();
             return false;
         }
     }
@@ -429,7 +424,6 @@ public class Pessoa {
         }
         catch(HibernateException e){
             System.err.println("Erro: "+e);
-            e.printStackTrace();
             return null;
         }
     }
@@ -452,7 +446,6 @@ public class Pessoa {
         }
         catch(HibernateException e){
             System.err.println("Erro: "+e);
-            e.printStackTrace();
             return null;
         }
     }
