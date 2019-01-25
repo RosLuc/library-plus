@@ -1,0 +1,57 @@
+.background{
+    -fx-background-color:
+        linear-gradient(to top right, #778899  0%, #ffb6c1 100%);
+}
+
+.library-logo{
+    -fx-background-image: url("Logo Library+.png");
+    -fx-background-repeat: repeat;
+}
+
+.text-field{
+    -fx-opacity: 0.50;
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 18;
+    -fx-alignment: center;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-text-alignment: center;
+    -fx-text-fill: grey;
+}
+
+.login-btn{
+    -fx-opacity: 0.50;
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 18;
+    -fx-alignment: center;
+    -fx-background-color: #000000;
+    -fx-background-radius: 12;
+    -fx-text-fill: grey;
+}
+
+.other-btn{
+    -fx-opacity: 0.50;
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 18;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.label{
+    -fx-opacity: 0.50;
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 32;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.label2{
+    -fx-opacity: 0.50;
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 18;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}

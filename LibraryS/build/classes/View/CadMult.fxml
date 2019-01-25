@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" stylesheets="@../CSS/principal.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controller.CadMultController">
+    <children>
+        <TextField fx:id="tituleTxt" layoutX="77.0" layoutY="137.0" prefHeight="39.0" prefWidth="364.0" promptText="TÍTULO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <Label layoutX="290.0" layoutY="74.0" prefHeight="47.0" prefWidth="381.0" text="CADASTRAR MULTIMÍDIA">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Button fx:id="cancelBtn" layoutX="795.0" layoutY="45.0" mnemonicParsing="false" onAction="#cancelBtnAction" prefHeight="39.0" prefWidth="119.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="CANCELAR" />
+        <ImageView fitHeight="81.0" fitWidth="200.0" layoutX="30.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/LogoLPColor.png" />
+            </image>
+        </ImageView>
+        <TextField fx:id="produtorTxt" layoutX="77.0" layoutY="192.0" prefHeight="39.0" prefWidth="364.0" promptText="PRODUTOR(A)" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="estudioTxt" layoutX="77.0" layoutY="247.0" prefHeight="39.0" prefWidth="364.0" promptText="ESTÚDIO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="volTxt" layoutX="77.0" layoutY="302.0" prefHeight="39.0" prefWidth="364.0" promptText="VOLUME" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="numChamTxt" layoutX="519.0" layoutY="137.0" prefHeight="39.0" prefWidth="364.0" promptText="NÚMERO DE CHAMADA" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+      <TextField fx:id="anoPublicTxt" layoutX="77.0" layoutY="411.0" prefHeight="39.0" prefWidth="364.0" promptText="ANO DE PUBLICAÇAO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+      <Button fx:id="addBtn" layoutX="519.0" layoutY="466.0" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="39.0" prefWidth="364.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="CADASTRAR" />
+      <TextField fx:id="localPublicTxt" layoutX="77.0" layoutY="356.0" prefHeight="39.0" prefWidth="364.0" promptText="LOCAL DE PUBLICAÇÃO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+      <TextField fx:id="exemplarTxt" layoutX="519.0" layoutY="192.0" prefHeight="39.0" prefWidth="364.0" promptText="EXEMPLAR" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+      <TextField fx:id="aquisicaoTxt" layoutX="519.0" layoutY="247.0" prefHeight="39.0" prefWidth="364.0" promptText="FORMA DE AQUISIÇÃO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+      <TextField fx:id="obsTxt" layoutX="519.0" layoutY="302.0" prefHeight="39.0" prefWidth="364.0" promptText="OBSERVAÇÃO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+      <TextField fx:id="prateleiraTxt" layoutX="519.0" layoutY="356.0" prefHeight="39.0" prefWidth="364.0" promptText="PRATELEIRA" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+      <TextField fx:id="numSeqTxt1" layoutX="77.0" layoutY="466.0" prefHeight="39.0" prefWidth="364.0" promptText="NÚMERO DE SEQUÊNCIA" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+      <TextField fx:id="estanteTxt" layoutX="519.0" layoutY="411.0" prefHeight="39.0" prefWidth="364.0" promptText="ESTANTE" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+    </children>
+</AnchorPane>

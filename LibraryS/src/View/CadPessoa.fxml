@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="595.0" prefWidth="960.0" stylesheets="@../CSS/principal.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CadPessoaController">
+    <children>
+        <TextField fx:id="codInsTxt" layoutX="77.0" layoutY="137.0" prefHeight="39.0" prefWidth="364.0" promptText="CÓDIGO DE INSCRIÇÃO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <Label layoutX="324.0" layoutY="77.0" prefHeight="47.0" prefWidth="312.0" text="CADASTRAR PESSOA">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Button fx:id="cancelBtn" layoutX="795.0" layoutY="45.0" mnemonicParsing="false" onAction="#cancelBtnAction" prefHeight="39.0" prefWidth="119.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="CANCELAR" />
+        <ImageView fitHeight="81.0" fitWidth="200.0" layoutX="30.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/LogoLPColor.png" />
+            </image>
+        </ImageView>
+        <TextField fx:id="nomeTxt" layoutX="77.0" layoutY="192.0" prefHeight="39.0" prefWidth="364.0" promptText="NOME" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="serieTxt" layoutX="77.0" layoutY="247.0" prefHeight="39.0" prefWidth="364.0" promptText="SÉRIE" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="turnoTxt" layoutX="77.0" layoutY="302.0" prefHeight="39.0" prefWidth="364.0" promptText="TURNO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="enderecoTxt" layoutX="519.0" layoutY="137.0" prefHeight="39.0" prefWidth="364.0" promptText="ENDERECO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="categoriaTxt" layoutX="77.0" layoutY="411.0" prefHeight="39.0" prefWidth="364.0" promptText="CATEGORIA" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <Button fx:id="addBtn" layoutX="519.0" layoutY="466.0" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="39.0" prefWidth="364.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="CADASTRAR" />
+        <TextField fx:id="turmaTxt" layoutX="77.0" layoutY="356.0" prefHeight="39.0" prefWidth="364.0" promptText="TURMA" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="numeroTxt" layoutX="519.0" layoutY="192.0" prefHeight="39.0" prefWidth="364.0" promptText="NUMERO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="bairroTxt" layoutX="519.0" layoutY="247.0" prefHeight="39.0" prefWidth="364.0" promptText="BAIRRO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="cidadeTxt" layoutX="519.0" layoutY="302.0" prefHeight="39.0" prefWidth="364.0" promptText="CIDADE" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="cepTxt" layoutX="519.0" layoutY="356.0" prefHeight="39.0" prefWidth="364.0" promptText="CEP" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="telTxt" layoutX="77.0" layoutY="466.0" prefHeight="39.0" prefWidth="364.0" promptText="TELEFONE" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="estadoTxt" layoutX="519.0" layoutY="411.0" prefHeight="39.0" prefWidth="364.0" promptText="ESTADO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+      <TextField fx:id="emailTxt" layoutX="77.0" layoutY="521.0" prefHeight="39.0" prefWidth="364.0" promptText="EMAIL" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+    </children>
+</AnchorPane>

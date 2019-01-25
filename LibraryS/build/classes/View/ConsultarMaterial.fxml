@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" stylesheets="@../CSS/principal.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ConsultarMaterialController">
+    <children>
+        <Label layoutX="306.0" layoutY="97.0" prefHeight="47.0" prefWidth="348.0" text="CONSULTAR MATERIAL">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Button fx:id="backBtn" layoutX="795.0" layoutY="45.0" mnemonicParsing="false" onAction="#backBtnAction" prefHeight="39.0" prefWidth="119.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="VOLTAR" />
+        <ImageView fitHeight="81.0" fitWidth="200.0" layoutX="30.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/LogoLPColor.png" />
+            </image>
+        </ImageView>
+        <TableView fx:id="livroTbl" layoutX="119.0" layoutY="144.0" onSort="#livroTblAction" prefHeight="339.0" prefWidth="722.0" stylesheets="@../CSS/principal.css">
+            <columns>
+                <TableColumn minWidth="-Infinity" prefWidth="108.0" resizable="false" text="Título" />
+                <TableColumn minWidth="0.0" prefWidth="106.0" resizable="false" text="Autor" />
+                <TableColumn prefWidth="242.0" text="Nº de Chamada" />
+                <TableColumn prefWidth="266.0" text="Nº de Sequência" />
+            </columns>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </TableView>
+    </children>
+</AnchorPane>

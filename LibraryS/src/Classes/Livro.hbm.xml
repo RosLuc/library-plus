@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/01/2019 19:13:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <joined-subclass name="Classes.Livro" table="livro" extends="Classes.Material">
+        <key column="nchamada"/>
+        <property name="autor" type="string">
+            <column name="autor" length="50" not-null="true" />
+        </property>
+        <property name="editora" type="string">
+            <column name="editora" length="40" not-null="true" />
+        </property>
+    </joined-subclass>
+</hibernate-mapping>

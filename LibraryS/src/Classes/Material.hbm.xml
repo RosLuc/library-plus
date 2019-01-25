@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/01/2019 19:13:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Classes.Material" table="material">
+        <id name="nchamada" type="string">
+            <column name="nchamada" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="usercode" type="int">
+            <column name="usercode" />
+        </property>
+        <property name="codestante" type="int">
+            <column name="codestante" />
+        </property>
+        <property name="codprateleira" type="int">
+            <column name="codprateleira" />
+        </property>
+        <property name="nsequencia" type="int">
+            <column name="nsequencia" not-null="true" />
+        </property>
+        <property name="data" type="date">
+            <column name="data" length="13" not-null="true" />
+        </property>
+        <property name="titulo" type="string">
+            <column name="titulo" not-null="true" />
+        </property>
+        <property name="exemplar" type="int">
+            <column name="exemplar"/>
+        </property>
+        <property name="volume" type="int">
+            <column name="volume"/>
+        </property>
+        <property name="local" type="string">
+            <column name="local" not-null="true" />
+        </property>
+        <property name="anopublicacao" type="int">
+            <column name="anopublicacao" not-null="true" />
+        </property>
+        <property name="formadeaquisicao" type="string">
+            <column name="formadeaquisicao" not-null="true" />
+        </property>
+        <property name="observacao" type="string">
+            <column name="observacao" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
