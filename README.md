@@ -4,4 +4,4 @@ Temos como objetivo a criação de um software para desktop, em conjunto com o u
 
 O software a ser desenvolvido deve ser usado exclusivamente por um único usuário, o bibliotecário em que irá auxiliá-lo a manter um acervo com informações atualizadas, tendo total controle de todos os materiais existentes, como também, facilitar no processo de empréstimos e devoluções evitando a perda de livros e informações.
 
-Nosso software, será composto por 6(seis) funcionalidades que são: gerenciamento de login, gerenciamento de empréstimos, gerenciamento de pessoas, controle do acervo, notificações e emissão de documentos que serão descritas nos tópicos abaixo.
+Nosso software, será composto por 6(seis) funcionalidades que são: gerenciamento de login, gerenciamento de empréstimos, gerenciamento de pessoas, controle do acervo, notificações e emissão de documentos.
