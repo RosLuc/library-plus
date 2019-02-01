@@ -1,4 +1,4 @@
-#Library +
+##**Library +**
 
 Temos como objetivo a criação de um software para desktop, em conjunto com o uso da linguagem de programação java e a utilização de um banco de dados (SQL), que visa otimizar o tempo de busca de livros, além de proporcionar uma organização nas prateleiras facilitando cada vez mais a localização dos livros, substituindo o uso de papéis, e sendo capaz de suportar um número maior de dados.
 
