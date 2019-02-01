@@ -2,6 +2,14 @@
     -fx-background-color: #ffffff;
 }
 
+.labelname{
+    -fx-opacity: 0.50;
+    -fx-font-family: "Montserrat";
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+}
+
 .library-logo{
     -fx-background-image: url("Logo Library+.png");
     -fx-background-repeat: repeat;
@@ -10,23 +18,24 @@
 .textfield{
     -fx-opacity: 0.50;
     -fx-font-family: "Montserrat";
-    -fx-font-size: 18;
+    -fx-font-size: 22;
     -fx-text-fill: #000000;
     -fx-alignment: center;
-    -fx-background-color: #A8A8A8;
-    -fx-background-radius: 12;
+    -fx-background-color: transparent;
+    -fx-border-color: #000000;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-text-alignment: center;
     -fx-prompt-text-fill: #000000;
 }
 
 .btn{
-    -fx-opacity: 0.50;
     -fx-font-family: "Montserrat";
     -fx-font-size: 18;
     -fx-alignment: center;
     -fx-background-color: #71C875;
     -fx-background-radius: 12;
-    -fx-text-fill: black;
+    -fx-text-fill: #39643b;
 }
 
 .other-btn{
@@ -47,67 +56,3 @@
     -fx-text-fill: black;
 }
 
-/*.table-view{
-    -fx-opacity: 0.50;
-    -fx-font-family: "Montserrat";
-    -fx-font-size: 32;
-    -fx-alignment: center;
-    -fx-background-color: transparent;
-    -fx-text-fill: black;
-    -fx-background-radius: 12;
-    -fx-padding: 3;
-}
-.table-view .column-header .label {
-    -fx-text-fill : green;
-}
-.table-view .column-header {
-    -fx-background-color : yellow;
-}*/
-
-.table-view{
-    -fx-opacity: 0.50;
-    -fx-background-color: #ffffff;
-}
-
-.table-view:focused{
-    -fx-background-color: #ffffff;
-}
-
-.table-view .column-header-background{
-    -fx-background-color: #71C875;
-}
-
-.table-view .column-header-background .label{
-    -fx-background-color: #71C875;
-    -fx-text-fill: #000000;
-    -fx-font-family: "Montserrat";
-}
-
-.table-view .column-header {
-    -fx-background-color: #71C875;
-}
-
-.table-view .table-cell{
-    -fx-text-fill: #000000;
-    -fx-font-family: "Montserrat";
-    -fx-font-size: 18;
-    -fx-alignment: center;
-}
-
-.table-row-cell{
-    -fx-background-color: -fx-table-cell-border-color, #71C875;
-    -fx-background-insets: 0, 0 0 1 0;
-    -fx-padding: 0.0em; /* 0 */
-}
-
-.table-row-cell:odd{
-    -fx-background-color: -fx-table-cell-border-color, #71C875;
-    -fx-background-insets: 0, 0 0 1 0;
-    -fx-padding: 0.0em; /* 0 */
-}
-
-.table-row-cell:selected {
-    -fx-background-color: #005797;
-    -fx-background-insets: 0;
-    -fx-background-radius: 1;
-}
