@@ -8,10 +8,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" stylesheets="@../CSS/principal.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controller.CadMultController">
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" stylesheets="@../CSS/consultar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CadMultController">
     <children>
-        <TextField fx:id="tituleTxt" layoutX="77.0" layoutY="137.0" prefHeight="39.0" prefWidth="364.0" promptText="TÍTULO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
-        <Label layoutX="290.0" layoutY="74.0" prefHeight="47.0" prefWidth="381.0" text="CADASTRAR MULTIMÍDIA">
+        <TextField fx:id="tituleTxt" layoutX="134.0" layoutY="141.0" prefHeight="32.0" prefWidth="558.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
+        <Label layoutX="340.0" layoutY="41.0" prefHeight="47.0" prefWidth="280.0" stylesheets="@../CSS/principal.css" text="CADASTRAR LIVRO">
             <font>
                 <Font size="14.0" />
             </font>
@@ -22,18 +22,31 @@
                 <Image url="@../images/LogoLPColor.png" />
             </image>
         </ImageView>
-        <TextField fx:id="produtorTxt" layoutX="77.0" layoutY="192.0" prefHeight="39.0" prefWidth="364.0" promptText="PRODUTOR(A)" styleClass="textfield" stylesheets="@../CSS/principal.css" />
-        <TextField fx:id="estudioTxt" layoutX="77.0" layoutY="247.0" prefHeight="39.0" prefWidth="364.0" promptText="ESTÚDIO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
-        <TextField fx:id="volTxt" layoutX="77.0" layoutY="302.0" prefHeight="39.0" prefWidth="364.0" promptText="VOLUME" styleClass="textfield" stylesheets="@../CSS/principal.css" />
-        <TextField fx:id="numChamTxt" layoutX="519.0" layoutY="137.0" prefHeight="39.0" prefWidth="364.0" promptText="NÚMERO DE CHAMADA" styleClass="textfield" stylesheets="@../CSS/principal.css" />
-      <TextField fx:id="anoPublicTxt" layoutX="77.0" layoutY="411.0" prefHeight="39.0" prefWidth="364.0" promptText="ANO DE PUBLICAÇAO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
-      <Button fx:id="addBtn" layoutX="519.0" layoutY="466.0" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="39.0" prefWidth="364.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="CADASTRAR" />
-      <TextField fx:id="localPublicTxt" layoutX="77.0" layoutY="356.0" prefHeight="39.0" prefWidth="364.0" promptText="LOCAL DE PUBLICAÇÃO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
-      <TextField fx:id="exemplarTxt" layoutX="519.0" layoutY="192.0" prefHeight="39.0" prefWidth="364.0" promptText="EXEMPLAR" styleClass="textfield" stylesheets="@../CSS/principal.css" />
-      <TextField fx:id="aquisicaoTxt" layoutX="519.0" layoutY="247.0" prefHeight="39.0" prefWidth="364.0" promptText="FORMA DE AQUISIÇÃO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
-      <TextField fx:id="obsTxt" layoutX="519.0" layoutY="302.0" prefHeight="39.0" prefWidth="364.0" promptText="OBSERVAÇÃO" styleClass="textfield" stylesheets="@../CSS/principal.css" />
-      <TextField fx:id="prateleiraTxt" layoutX="519.0" layoutY="356.0" prefHeight="39.0" prefWidth="364.0" promptText="PRATELEIRA" styleClass="textfield" stylesheets="@../CSS/principal.css" />
-      <TextField fx:id="numSeqTxt1" layoutX="77.0" layoutY="466.0" prefHeight="39.0" prefWidth="364.0" promptText="NÚMERO DE SEQUÊNCIA" styleClass="textfield" stylesheets="@../CSS/principal.css" />
-      <TextField fx:id="estanteTxt" layoutX="519.0" layoutY="411.0" prefHeight="39.0" prefWidth="364.0" promptText="ESTANTE" styleClass="textfield" stylesheets="@../CSS/principal.css" />
+        <TextField fx:id="produtorTxt" layoutX="159.0" layoutY="194.0" prefHeight="32.0" prefWidth="221.0" styleClass="textfield" />
+        <TextField fx:id="estudioTxt" layoutX="146.0" layoutY="248.0" prefHeight="32.0" prefWidth="233.0" styleClass="textfield" />
+        <TextField fx:id="volTxt" layoutX="783.0" layoutY="141.0" prefHeight="32.0" prefWidth="109.0" styleClass="textfield" />
+        <TextField fx:id="numChamTxt" layoutX="216.0" layoutY="301.0" prefHeight="32.0" prefWidth="185.0" styleClass="textfield" />
+        <TextField fx:id="anoPublicTxt" layoutX="575.0" layoutY="301.0" prefHeight="32.0" prefWidth="119.0" styleClass="textfield" />
+        <Button fx:id="addBtn" layoutX="293.0" layoutY="436.0" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="39.0" prefWidth="364.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="CADASTRAR" />
+        <TextField fx:id="localPublicTxt" layoutX="247.0" layoutY="352.0" prefHeight="32.0" prefWidth="252.0" styleClass="textfield" />
+        <TextField fx:id="exemplarTxt" layoutX="481.0" layoutY="196.0" prefHeight="32.0" prefWidth="185.0" styleClass="textfield" />
+        <TextField fx:id="aquisicaoTxt" layoutX="564.0" layoutY="248.0" prefHeight="32.0" prefWidth="152.0" styleClass="textfield" />
+        <TextField fx:id="obsTxt" layoutX="622.0" layoutY="352.0" prefHeight="32.0" prefWidth="271.0" styleClass="textfield" />
+        <TextField fx:id="prateleiraTxt" layoutX="797.0" layoutY="301.0" prefHeight="32.0" prefWidth="95.0" styleClass="textfield" />
+        <TextField fx:id="numSeqTxt1" layoutX="826.0" layoutY="195.0" prefHeight="32.0" prefWidth="66.0" styleClass="textfield" />
+        <TextField fx:id="estanteTxt" layoutX="798.0" layoutY="248.0" prefHeight="32.0" prefWidth="95.0" styleClass="textfield" />
+        <Label layoutX="77.0" layoutY="197.0" stylesheets="@../CSS/label.css" text="Produtor:" />
+        <Label layoutX="77.0" layoutY="251.0" stylesheets="@../CSS/label.css" text="Estúdio:" />
+        <Label layoutX="76.0" layoutY="143.0" stylesheets="@../CSS/label.css" text="Título:" />
+        <Label layoutX="707.0" layoutY="144.0" stylesheets="@../CSS/label.css" text="Volume:" />
+        <Label layoutX="77.0" layoutY="354.0" stylesheets="@../CSS/label.css" text="Local de Publicação:" />
+        <Label layoutX="77.0" layoutY="304.0" stylesheets="@../CSS/label.css" text="Nº de Chamada:" />
+        <Label layoutX="395.0" layoutY="198.0" stylesheets="@../CSS/label.css" text="Exemplar:" />
+        <Label layoutX="394.0" layoutY="251.0" stylesheets="@../CSS/label.css" text="Forma de Aquisiçao:" />
+        <Label layoutX="681.0" layoutY="198.0" stylesheets="@../CSS/label.css" text="Nº de Sequência:" />
+        <Label layoutX="415.0" layoutY="303.0" stylesheets="@../CSS/label.css" text="Ano de Publicação:" />
+        <Label layoutX="708.0" layoutY="303.0" stylesheets="@../CSS/label.css" text="Prateleira:" />
+        <Label layoutX="726.0" layoutY="250.0" stylesheets="@../CSS/label.css" text="Estante:" />
+        <Label layoutX="515.0" layoutY="355.0" stylesheets="@../CSS/label.css" text="Observação:" />
     </children>
 </AnchorPane>
