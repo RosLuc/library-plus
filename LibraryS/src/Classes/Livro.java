@@ -175,7 +175,7 @@ public class Livro  extends Material{
         try{
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
-            Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes().ignoreCase();
+            Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes();
             listLivro = session.createCriteria(Livro.class).add(exp).addOrder(Order.desc("nsequencia")).list();
             session.close();
             return listLivro;

@@ -51,14 +51,14 @@ public class CadastrarController {
      */
     @FXML
     void signInBtnAction(ActionEvent event) {
-Usuario user = new Usuario();
+        Usuario user = new Usuario();
         user.setCpf(cpfTxt.getText());
         user.setEmail(emailTxt.getText());
         user.setLogin(usernameTxt.getText());
         user.setNome(nameTxt.getText());
         user.setSenha(passTxt.getText());
         user.setUserCode(11111);
-        
+        returnLogin();
         if(!user.salvarUsuario()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("CADASTRO");
@@ -73,7 +73,6 @@ Usuario user = new Usuario();
             alert.show();
             
         }
-        returnLogin();
     }
 
     /**
