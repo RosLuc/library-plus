@@ -26,9 +26,9 @@ public class CadPessoaController {
     @FXML
     private Button cancelBtn;
     @FXML
-    private TextField enderecoTxt;
-    @FXML
     private TextField telTxt;
+    @FXML
+    private TextField enderecoTxt;
     @FXML
     private TextField codInsTxt;
     @FXML

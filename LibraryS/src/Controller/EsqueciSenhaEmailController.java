@@ -42,21 +42,34 @@ public class EsqueciSenhaEmailController {
      */
     @FXML
     void confirmBtnAction(ActionEvent event) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        Usuario us = new Usuario();
-        us = us.verificarUsuario();
-        
-        //verificar email
-        if(us.getEmail().equals(emailTxt.getText())){
-            
-            String cod;
-            if((cod = us.recupera()) != null){
-                us.setCodRed(cod);
-                confirmacao();
-                if(us.atualizaUsuario() == true){
-                    esqSenha();
-                }else erro();
-            }else erro();
-        }else erro();
+        Usuario novo = new Usuario();
+        novo.setEmail(emailTxt.getText());
+                
+        if(!novo.verificarEmail()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("EMAIL INVALIDO");
+            alert.setTitle("Código de Verificação"); 
+            alert.setContentText("Error");
+            alert.show();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("EMAIL VALIDO");
+            alert.setTitle("Código de Verificação");
+            String res = novo.recupera();
+            if(res == null){
+                alert.setContentText("ERROR");
+                alert.setContentText("Não foi possivel recuperar sua nova senha. Verifique se as informações estão corretas, e tente novamente");
+                alert.show();
+            }else{
+               
+                novo.verificarUsuario();
+                novo.setSenha(res);
+                novo.atualizaUsuario();
+  
+            }
+        }
+        esqSenha();
     }
 
     /**
@@ -93,21 +106,6 @@ public class EsqueciSenhaEmailController {
             Logger.getLogger(EsqueciSenhaEmailController.class.getName()).log(Level.SEVERE, null, ex);
         }
         fecha();
-    }
-    
-    public void erro(){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Email");
-            alert.setTitle("Email invalido");
-            alert.setContentText("Não foi possivel redefinir a nova senha. Verifique se as informações estão corretas, e tente novamente.");
-    }
-    
-    public void confirmacao(){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText("Email");
-            alert.setTitle("Email verificado");
-            alert.setContentText("Codigo enviado para o seu email.");
-            alert.show();
     }
 
 }
