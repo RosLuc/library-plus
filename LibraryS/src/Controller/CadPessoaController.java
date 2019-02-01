@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import Pessoa.Pessoa;
 
 /**
  * FXML Controller class
@@ -74,12 +75,44 @@ public class CadPessoaController {
      */
     @FXML
     void addBtnAction(ActionEvent event) {
-        returnPes();
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText("CADASTRO");
-        alert.setTitle("Nova Pessoa");
-        alert.setContentText("Pessoa adicionada com sucesso");
-        alert.show();
+        Pessoa p = new Pessoa();
+        p.setBairro(bairroTxt.getText());
+        p.setCategoria(categoriaTxt.getText());
+        p.setCep(cepTxt.getText());
+        p.setCidade(cidadeTxt.getText());
+        p.setContato(telTxt.getText());
+        p.setEmail(emailTxt.getText());
+        p.setEndereco(enderecoTxt.getText());
+        p.setEstado(estadoTxt.getText());
+        p.setNome(nomeTxt.getText());
+        p.setNumero(numeroTxt.getText());
+        p.setSerie(serieTxt.getText());
+        p.setTurma(turmaTxt.getText());
+        p.setTurno(turnoTxt.getText());
+        p.setUsercode(11111);
+        if(!"".equals(p.getNome()) && !"".equals(p.getCategoria())){
+            if(p.getCategoria().equalsIgnoreCase("Aluno")){
+                if(!"".equals(p.getTurno()) && !"".equals(p.getTurno()) && !"".equals(p.getTurno())){
+                    if(p.salvarPessoa()){
+                        confirma();
+                        returnPes();
+                    }else{
+                        erro();
+                    }
+                }else{
+                    erro();
+                }
+            }else{
+                if(p.salvarPessoa()){
+                    confirma();
+                    returnPes();
+                }else{
+                    erro();
+                }
+            }
+        }else erro();
+        
+        
     }
 
     /**
@@ -102,5 +135,26 @@ public class CadPessoaController {
     public void fecha() {
         CadPessoa.getStage().close();
     }
-
+    
+    /**
+     * Método responsável por confirmar.
+     */
+    public void confirma(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("CADASTRO");
+        alert.setTitle("Nova Pessoa");
+        alert.setContentText("Pessoa adicionada com sucesso");
+        alert.show();
+    }
+    
+    /**
+     * Método responsável por alertar erro.
+     */
+    public void erro(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("CADASTRO");
+        alert.setTitle("Nova Pessoa");
+        alert.setContentText("Erro ao cadastrar pessoa.");
+        alert.show();
+    }
 }
