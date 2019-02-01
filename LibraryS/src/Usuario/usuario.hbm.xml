@@ -47,6 +47,5 @@ Contributor(s):
         <property name="senha"/>
         <property name="email"/>
         <property name="cpf"/>
-        <property name="codRed" column="codred"/>
     </class>
 </hibernate-mapping>

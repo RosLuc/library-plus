@@ -61,7 +61,11 @@ public class LoginController {
             }
             fecha();
         } else {
-            erro();
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("ERRO");
+            alert.setTitle("Erro");
+            alert.setContentText("Login ou Senha Incorretos");
+            alert.show();
         }
     }
 
@@ -102,13 +106,5 @@ public class LoginController {
      */
     public void fecha() {
         Login.getStage().close();
-    }
-    
-    public void erro() {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setHeaderText("ERRO");
-        alert.setTitle("Erro");
-        alert.setContentText("Login ou Senha Incorretos");
-        alert.show();
     }
 }

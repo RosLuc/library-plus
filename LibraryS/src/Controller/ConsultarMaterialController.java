@@ -6,17 +6,15 @@
 package Controller;
 
 import LibraryScreens.ConsultarMaterial;
-import LibraryScreens.GerAcervo;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -26,35 +24,80 @@ import javafx.stage.Stage;
 public class ConsultarMaterialController implements Initializable {
 
     @FXML
+    private Button limparBtn;
+
+    @FXML
+    private TableColumn<?, ?> nseqTb;
+
+    @FXML
+    private TableColumn<?, ?> nchamTb;
+
+    @FXML
+    private TextField tituloTxt;
+
+    @FXML
+    private TableColumn<?, ?> tituloTb;
+
+    @FXML
+    private TableColumn<?, ?> autorTb;
+
+    @FXML
+    private TableColumn<?, ?> npraTb;
+
+    @FXML
+    private TextField nSeqTxt;
+
+    @FXML
+    private TextField localTxt;
+
+    @FXML
+    private TextField editTxt;
+
+    @FXML
+    private TableColumn<?, ?> volTb;
+
+    @FXML
+    private TableColumn<?, ?> editTb;
+
+    @FXML
+    private TextField nChamTxt;
+
+    @FXML
     private Button backBtn;
 
     @FXML
-    private TableView<?> livroTbl;
+    private TableColumn<?, ?> statusTb;
 
-    /**
-     * Método responssável por cancelar a ação atual e retornar para a tela
-     * antetior
-     *
-     * @param event
-     */
+    @FXML
+    private Button pesquisarBtn;
+
+    @FXML
+    private TableColumn<?, ?> anoTb;
+
+    @FXML
+    private TableColumn<?, ?> exemplarTb;
+
+    @FXML
+    private TableColumn<?, ?> nestTb;
+
+    @FXML
+    private TextField autorTx;
+
+    @FXML
+    private TableView<?> table;
+
     @FXML
     void backBtnAction(ActionEvent event) {
-        GerAcervo g = new GerAcervo();
-        try {
-            g.start(new Stage());
-            fecha();
-        } catch (Exception ex) {
-            Logger.getLogger(ConsultarMaterialController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
 
-    /**
-     * Método responsável por listar o Material
-     *
-     * @param event
-     */
     @FXML
-    void livroTblAction(ActionEvent event) {
+    void pesquisarBtnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void limparBtnAction(ActionEvent event) {
 
     }
 
