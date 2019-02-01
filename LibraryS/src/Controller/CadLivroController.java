@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.hibernate.HibernateException;
 
 /**
  * FXML Controller class
@@ -136,29 +137,31 @@ public class CadLivroController {
                 livro.setCodprateleira(CodPrateleira);
             }
             else{
-                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Não existir uma estante com esse número e número de prateleira");
+                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Não existir uma estante com esse número e número de prateleira.");
                 return;
             }
             
-            
-            int nsequencia = Integer.parseInt(numSeqTxt1.getText());
-            if(livro.buscarMaterialNS(nsequencia) == null)  livro.setNsequencia(nsequencia);
-            else{
-                alertaErro("FALHA AO CADASTRAR LIVRO","ATENÇÃO: Já existir um livro com número de sequência digitado ou campo não preenchido");
-                return;
+            String temp = numSeqTxt1.getText();
+            if (!(temp.equals(""))){
+                int nsequencia = Integer.parseInt(temp);
+                if(livro.buscarMaterialNS(nsequencia) == null)  livro.setNsequencia(nsequencia);
+                else{
+                    alertaErro("FALHA AO CADASTRAR LIVRO","ATENÇÃO: Já existir um livro com número de sequência digitado.");
+                    return;
+                }
             }
-
+            
             livro.setData(new Date());
 
             String titulo = tituleTxt.getText();
             if(!(titulo.equals(""))) livro.setTitulo(titulo);
             else{
-                alertaErro("FALHA AO CADASTRAR LIVRO","ATENÇÃO: Campo de obrigatorio título não preenchido");
+                alertaErro("FALHA AO CADASTRAR LIVRO","ATENÇÃO: Campo de obrigatorio título não preenchido.");
                 return;            
             }
 
             int exemplar = 0;
-            String temp = exemplarTxt.getText();
+            temp = exemplarTxt.getText();
             if(!(temp.equals(""))){
                exemplar = Integer.parseInt(temp);
             }
@@ -175,7 +178,7 @@ public class CadLivroController {
             if(!(temp.equals(""))){
                 livro.setLocal(temp);
             }else{
-                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo local de publicação obrigatorio não foi preenchido");
+                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo local de publicação obrigatorio não foi preenchido.");
                 return;
             } 
 
@@ -185,7 +188,7 @@ public class CadLivroController {
             if(!(temp.equals(""))){
                 livro.setFormadeaquisicao(temp);
             }else{
-                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo forma de arquisição obrigatorio não foi preenchido");
+                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo forma de arquisição obrigatorio não foi preenchido.");
                 return;
             }
             
@@ -196,28 +199,28 @@ public class CadLivroController {
             if(!(temp.equals(""))){
                 livro.setAutor(temp);
             }else{
-                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo autor obrigatorio não foi preenchido");
+                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo autor obrigatorio não foi preenchido.");
                 return;
             }
             temp = editorTxt.getText();
             if(!(temp.equals(""))){
                 livro.setEditora(temp);
             }else{
-                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo editora obrigatorio não foi preenchido");
+                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo editora obrigatorio não foi preenchido.");
                 return;
             }
 
 
             if(livro.cadastrarMaterial()){
-                alertaComf("LIVRO CADASTRADO", "Cadastro do livro realizado com sucesso");
+                alertaComf("LIVRO CADASTRADO", "Cadastro do livro realizado com sucesso.");
             }else{
-                alertaErro("LIVRO NÃO CADASTRADO", "Falha ao cadastrar novo Livro");          
+                alertaErro("LIVRO NÃO CADASTRADO", "Falha ao cadastrar novo Livro.");          
             }
             
         }catch (NumberFormatException e){
-            alertaErro("FALHA AO CADASTRAR LIVRO","ATENÇÃO: Campos númericos não peenchido ou se adicionou simbolos como: [,./ -] ou outro. Adicione apenas inteiros");
+            alertaErro("FALHA AO CADASTRAR LIVRO","ATENÇÃO: Campos númericos não peenchido ou se adicionou simbolos como: [,./ -] ou outro. Adicione apenas inteiros.");
         }catch (Exception er){
-            alertaErro("FALHA AO CADASTRAR LIVRO", "Erro");
+            alertaErro("FALHA AO CADASTRAR LIVRO", "Erro.");
         }
     }
     
