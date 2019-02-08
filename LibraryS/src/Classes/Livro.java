@@ -170,19 +170,21 @@ public class Livro  extends Material{
      * A operação é realizada utilizando hibernate.
      * @return List - Caso a operação for realizada com sucesso retorna lista de objetos do tipo Livro, caso contrário retorna null.
      */
-    public List filtrarMaterialCMP(){
-        List<Livro> listLivro = null;
+     @Override
+    public List<Livro> filtrarMaterialCMP(){
+        List<Livro> listLivro;
+        SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
+        Session session = factory.openSession();
         try{
-            SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
-            Session session = factory.openSession();
-            Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes();
-            listLivro = session.createCriteria(Livro.class).add(exp).addOrder(Order.desc("nsequencia")).list();
-            session.close();
+            Example exp = Example.create(this).enableLike().excludeZeroes().ignoreCase();
+            listLivro = session.createCriteria(Livro.class).add(exp).addOrder(Order.asc("nsequencia")).list();
             return listLivro;
         }catch(HibernateException e){
-             System.err.println("Erro ao filtrar: " + e);
-             e.printStackTrace();
-             return null;
+            System.err.println("Erro ao filtrar: " + e);
+            e.printStackTrace();
+            return null;
+        }finally{
+            session.close();
         }   
     }
     
