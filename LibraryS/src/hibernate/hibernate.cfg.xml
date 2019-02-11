@@ -13,5 +13,6 @@
     <mapping resource="Classes/Multimidia.hbm.xml"/>
     <mapping resource="Usuario/usuario.hbm.xml"/>
     <mapping resource="Pessoa/pessoa.hbm.xml"/>
+    <mapping resource="Emprestimo/Emprestimo.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
