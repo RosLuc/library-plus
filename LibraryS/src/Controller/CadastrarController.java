@@ -16,6 +16,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -44,6 +46,13 @@ public class CadastrarController {
     @FXML
     private TextField cpfTxt;
 
+    @FXML
+    void signUpBtnKeyAction(KeyEvent e) {
+        if (e.getCode() == KeyCode.ENTER) {
+            cadastrar();
+        }
+    }
+
     /**
      * Método responsável por cadastrar um Usuário
      *
@@ -51,28 +60,7 @@ public class CadastrarController {
      */
     @FXML
     void signInBtnAction(ActionEvent event) {
-        Usuario user = new Usuario();
-        user.setCpf(cpfTxt.getText());
-        user.setEmail(emailTxt.getText());
-        user.setLogin(usernameTxt.getText());
-        user.setNome(nameTxt.getText());
-        user.setSenha(passTxt.getText());
-        user.setUserCode(11111);
-        returnLogin();
-        if(!user.salvarUsuario()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("CADASTRO");
-            alert.setTitle("Novo Cadastro");
-            alert.setContentText("Erro! Verifique se as informações informadas estão corretas e tente novamente.");
-            alert.show();
-        }else {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText("CADASTRO");
-            alert.setTitle("Novo Cadastro");
-            alert.setContentText("Cadastro realizado com sucesso");
-            alert.show();
-            
-        }
+        cadastrar();
     }
 
     /**
@@ -105,6 +93,32 @@ public class CadastrarController {
             Logger.getLogger(CadastrarController.class.getName()).log(Level.SEVERE, null, ex);
         }
         fecha();
+    }
+
+    public void cadastrar() {
+        Usuario user = new Usuario();
+        user.setCpf(cpfTxt.getText());
+        user.setEmail(emailTxt.getText());
+        user.setLogin(usernameTxt.getText());
+        user.setNome(nameTxt.getText());
+        user.setSenha(passTxt.getText());
+        user.setUserCode(11111);
+
+        if (!user.salvarUsuario()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("CADASTRO");
+            alert.setTitle("Novo Cadastro");
+            alert.setContentText("Erro! Verifique se as informações informadas estão corretas e tente novamente.");
+            alert.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("CADASTRO");
+            alert.setTitle("Novo Cadastro");
+            alert.setContentText("Cadastro realizado com sucesso");
+            alert.show();
+
+        }
+        returnLogin();
     }
 
 }

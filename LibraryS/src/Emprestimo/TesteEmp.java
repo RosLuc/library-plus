@@ -22,8 +22,8 @@ public class TesteEmp {
        emp.setCodiemp(1);
        emp.setCodinsc(3);
        emp.setUsercode(11111);
-       emp.setDataemp(new Date());
-       emp.setDatadev(new Date());
+       //emp.setDataemp(new Date());
+       //emp.setDatadev(new Date());
        emp.setStatus("Disp");
        emp.salvarEmprestimo();
        

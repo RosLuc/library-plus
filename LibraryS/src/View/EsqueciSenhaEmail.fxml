@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../CSS/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EsqueciSenhaEmailController">
     <children>
-        <TextField fx:id="emailTxt" layoutX="344.0" layoutY="237.0" prefHeight="39.0" prefWidth="274.0" promptText="EMAIL" />
+        <TextField fx:id="emailTxt" layoutX="344.0" layoutY="237.0" onKeyPressed="#confirmKeyAction" prefHeight="39.0" prefWidth="274.0" promptText="EMAIL" />
         <Label layoutX="289.0" layoutY="123.0" prefHeight="48.0" prefWidth="383.0" styleClass="other-btn" stylesheets="@../CSS/login.css" text="ESQUECI MINHA SENHA">
             <font>
                 <Font size="14.0" />

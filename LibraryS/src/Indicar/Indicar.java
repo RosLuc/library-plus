@@ -5,8 +5,16 @@
  */
 package Indicar;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
+
+import Emprestimo.Emprestimo;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -111,8 +119,4 @@ public class Indicar {
         }
     }
    
-}
-
-    
-    
 }

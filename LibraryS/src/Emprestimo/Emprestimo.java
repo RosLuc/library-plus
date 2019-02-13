@@ -66,7 +66,7 @@ public class Emprestimo {
         this.codinsc = codinsc;
     }
 
-    public Date getDataemp() {
+    /*public Date getDataemp() {
         return dataemp;
     }
 
@@ -80,7 +80,7 @@ public class Emprestimo {
 
     public void setDatadev(Date datadev) {
         this.datadev = datadev;
-    }
+    }*/
 
     public String getStatus() {
         return status;
