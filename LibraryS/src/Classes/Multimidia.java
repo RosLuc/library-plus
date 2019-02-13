@@ -173,7 +173,7 @@ public class Multimidia extends Material {
         try{
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
-            Example exp = Example.create(this).enableLike().excludeZeroes().ignoreCase();
+            Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes().ignoreCase();
             List<Multimidia> listMultimidia = session.createCriteria(Multimidia.class).add(exp).addOrder(Order.desc("nsequencia")).list();
             session.close();
             return listMultimidia;
@@ -190,8 +190,7 @@ public class Multimidia extends Material {
      * A operação é realizada utilizando hibernate.
      * @return List - Caso a operação for realizada com sucesso retorna uma lista de objetos do tipo Multimídia, caso contrário retorna null.
      */
-     @Override
-    public List<Multimidia> filtrarMaterialAtraso(){
+    public List filtrarMaterialAtraso(){
         try{
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
@@ -212,7 +211,6 @@ public class Multimidia extends Material {
      * @param nchamada Número de sequencia a ser comparado.
      * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Multimídia, caso contrário retorna null.
      */
-     @Override
     public Material buscarMaterialNC(String nchamada){
         Multimidia l = null;
         try{
@@ -238,7 +236,6 @@ public class Multimidia extends Material {
      * @param nseq Número de sequencia a ser comparado.
      * @return Multimidia - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
      */
-     @Override
     public Material buscarMaterialNS(int nseq){
         Multimidia l = null;
         try{

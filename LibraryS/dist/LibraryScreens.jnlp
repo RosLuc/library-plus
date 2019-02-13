@@ -8,7 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
     <jar href="LibraryScreens.jar" size="119756" download="eager" />
+=======
+    <jar href="LibraryScreens.jar" size="111057" download="eager" />
+>>>>>>> parent of 47ceb9d... Merge pull request #9 from RosLuc/versão
     <jar href="lib\antlr-2.7.7.jar" size="445288" download="eager" />
     <jar href="lib\commons-collections-3.1.jar" size="559366" download="eager" />
     <jar href="lib\dom4j-1.6.1.jar" size="313898" download="eager" />
