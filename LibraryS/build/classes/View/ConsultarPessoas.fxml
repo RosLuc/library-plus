@@ -1,38 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" stylesheets="@../CSS/principal.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controller.ConsultarPessoasController">
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" stylesheets="@../CSS/consultar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ConsultarPessoasController">
     <children>
-        <Label layoutX="306.0" layoutY="97.0" prefHeight="47.0" prefWidth="348.0" text="CONSULTAR PESSOAS">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Label>
-        <Button fx:id="backBtn" layoutX="795.0" layoutY="45.0" mnemonicParsing="false" onAction="#backBtnAction" prefHeight="39.0" prefWidth="119.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="VOLTAR" />
-        <ImageView fitHeight="81.0" fitWidth="200.0" layoutX="30.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/LogoLPColor.png" />
             </image>
         </ImageView>
-        <TableView fx:id="pesTbl" layoutX="119.0" layoutY="144.0" onSort="#pesTblAction" prefHeight="339.0" prefWidth="722.0" stylesheets="@../CSS/principal.css">
+        <Button fx:id="backBtn" layoutX="814.0" layoutY="29.0" mnemonicParsing="false" onAction="#backBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="CANCELAR" />
+        <Text layoutX="66.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Nome:">
+            <font>
+                <Font name="Comic Sans MS Bold" size="18.0" />
+            </font>
+        </Text>
+        <TextField fx:id="nomeTxt" alignment="BASELINE_LEFT" layoutX="116.0" layoutY="97.0" prefHeight="32.0" prefWidth="319.0" styleClass="textfield" />
+        <Text fontSmoothingType="LCD" layoutX="66.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Código de Inscrição:">
+            <font>
+                <Font name="Comic Sans MS Bold" size="17.0" />
+            </font>
+        </Text>
+        <TextField fx:id="codInscTxt" layoutX="206.0" layoutY="167.0" prefHeight="32.0" prefWidth="229.0" styleClass="textfield" />
+        <Text layoutX="66.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Email:">
+            <font>
+                <Font name="Comic Sans MS Bold" size="17.0" />
+            </font>
+        </Text>
+        <TextField fx:id="emailTxt" layoutX="116.0" layoutY="132.0" prefHeight="32.0" prefWidth="319.0" styleClass="textfield" />
+        <TableView fx:id="table" layoutX="66.0" layoutY="292.0" prefHeight="221.0" prefWidth="828.0">
             <columns>
-                <TableColumn minWidth="-Infinity" prefWidth="108.0" resizable="false" text="Nome" />
-                <TableColumn minWidth="0.0" prefWidth="202.0" resizable="false" text="CPF" />
-                <TableColumn prefWidth="146.0" text="ID" />
-                <TableColumn prefWidth="266.0" text="Nº de Sequência" />
+                <TableColumn fx:id="nchamTb" prefWidth="59.0" text="Código de Inscrição" />
+                <TableColumn fx:id="nseqTb" prefWidth="141.0" text="Nome" />
+                <TableColumn fx:id="tituloTb" minWidth="0.0" prefWidth="131.0" text="Email" />
+                <TableColumn fx:id="autorTb" prefWidth="102.0" text="Endereco" />
+                <TableColumn fx:id="editTb" prefWidth="75.0" text="Bairro" />
+                <TableColumn fx:id="anoTb" prefWidth="63.0" text="Cidade" />
+                <TableColumn fx:id="exemplarTb" prefWidth="46.0" text="Cep" />
+                <TableColumn fx:id="volTb" minWidth="0.0" prefWidth="89.0" text="Turno" />
+                <TableColumn fx:id="nestTb" prefWidth="60.0" text="Turma" />
+                <TableColumn fx:id="npraTb" prefWidth="53.0" text="Série" />
+                <TableColumn fx:id="statusTb" minWidth="0.0" prefWidth="78.0" text="Status" />
             </columns>
-            <opaqueInsets>
-                <Insets />
-            </opaqueInsets>
         </TableView>
+        <Button fx:id="pesquisarBtn" layoutX="362.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="PESQUISAR" />
+        <Button fx:id="limparBtn" layoutX="509.0" layoutY="242.0" mnemonicParsing="false" styleClass="btn" stylesheets="@../CSS/principal.css" text="LIMPAR" />
+        <Label layoutX="367.0" layoutY="25.0" styleClass="labelname" stylesheets="@../CSS/principal.css" text="FILTRAR BUSCA">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
     </children>
 </AnchorPane>

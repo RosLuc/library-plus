@@ -10,18 +10,17 @@ import LibraryScreens.EsqueciSenhaEmail;
 import LibraryScreens.Login;
 import LibraryScreens.Principal;
 import Usuario.Usuario;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -48,25 +47,20 @@ public class LoginController {
      * @param event
      */
     @FXML
-    void loginBtnAction(ActionEvent event) {
-        Usuario us = new Usuario();
-        us.setLogin(userTxt.getText());
-        us.setSenha(passTxt.getText());
-        if (us.validarUsuario()) {
-            Principal p = new Principal();
-            try {
-                p.start(new Stage());
-            } catch (Exception ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            fecha();
-        } else {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setHeaderText("ERRO");
-            alert.setTitle("Erro");
-            alert.setContentText("Login ou Senha Incorretos");
-            alert.show();
+    void loginBtnKeyAction(KeyEvent e) {
+        if (e.getCode() == KeyCode.ENTER) {
+            logar();
         }
+    }
+
+    /**
+     * Método responsável por realizar o login do Usuário
+     *
+     * @param event
+     */
+    @FXML
+    void loginBtnAction(ActionEvent event) {
+        logar();
     }
 
     /**
@@ -106,5 +100,26 @@ public class LoginController {
      */
     public void fecha() {
         Login.getStage().close();
+    }
+
+    public void logar() {
+        Usuario us = new Usuario();
+        us.setLogin(userTxt.getText());
+        us.setSenha(passTxt.getText());
+        if (us.validarUsuario()) {
+            Principal p = new Principal();
+            try {
+                p.start(new Stage());
+            } catch (Exception ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            fecha();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("ERRO");
+            alert.setTitle("Erro");
+            alert.setContentText("Login ou Senha Incorretos");
+            alert.show();
+        }
     }
 }
