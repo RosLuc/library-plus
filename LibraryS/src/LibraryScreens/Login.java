@@ -5,12 +5,10 @@
  */
 package LibraryScreens;
 
-import com.sun.javafx.scene.SceneHelper;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -29,13 +27,9 @@ public class Login extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/View/Login.fxml")); //carrega o FXML
         Scene scene = new Scene(root); //Coloca o FXML em uma cena
-        stage.setResizable(false);
-        stage.setTitle("Library+");
-        SceneHelper.getSceneAccessor();
+        stage.setTitle("Login");
         stage.setScene(scene); //Coloca cena em uma janela
         stage.show(); //mostra janela2
-        Image image = new Image("/images/LPScreenIcon.png");
-        stage.getIcons().add(image);
         setStage(stage);
     }
 

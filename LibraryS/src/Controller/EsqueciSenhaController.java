@@ -18,8 +18,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -44,20 +42,22 @@ public class EsqueciSenhaController {
      * @param event
      */
     @FXML
-    void changePassKeyAction(KeyEvent e) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        if (e.getCode() == KeyCode.ENTER) {
-            changePassword();
-        }
-    }
-
-    /**
-     * Método responsável por mudar a senha do Usuário
-     *
-     * @param event
-     */
-    @FXML
     void changePassBtnAction(ActionEvent event) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        changePassword();
+        Usuario us = new Usuario();
+        
+        if(us.redefinirSenha(newPassTxt.getText())){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("SENHA");
+            alert.setTitle("Nova Senha");
+            alert.setContentText("Senha alterada com sucesso");
+            alert.show();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("SENHA");
+            alert.setTitle("Nova Senha");
+            alert.setContentText("Não foi possivel redefinir a nova senha. Verifique se as informações estão corretas, e tente novamente.");
+        }   
+        returnLogin();
     }
 
     /**
@@ -89,24 +89,6 @@ public class EsqueciSenhaController {
             Logger.getLogger(EsqueciSenhaController.class.getName()).log(Level.SEVERE, null, ex);
         }
         fecha();
-    }
-
-    public void changePassword() throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        Usuario us = new Usuario();
-
-        if (us.redefinirSenha(newPassTxt.getText())) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText("SENHA");
-            alert.setTitle("Nova Senha");
-            alert.setContentText("Senha alterada com sucesso");
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("SENHA");
-            alert.setTitle("Nova Senha");
-            alert.setContentText("Não foi possivel redefinir a nova senha. Verifique se as informações estão corretas, e tente novamente.");
-        }
-        returnLogin();
     }
 
 }

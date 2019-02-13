@@ -1,6 +1,6 @@
 .background{
     -fx-background-color:
-        linear-gradient(to top right, #4d5491  0%, #ff8282 100%);
+        linear-gradient(to top right, #778899  0%, #ffb6c1 100%);
 }
 
 .library-logo{
@@ -12,11 +12,11 @@
     -fx-opacity: 0.50;
     -fx-font-family: "Montserrat";
     -fx-font-size: 18;
-    -fx-prompt-text-fill: grey;
     -fx-alignment: center;
     -fx-background-color: #ffffff;
     -fx-background-radius: 12;
     -fx-text-alignment: center;
+    -fx-text-fill: grey;
 }
 
 .login-btn{

@@ -18,8 +18,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -40,24 +38,38 @@ public class EsqueciSenhaEmailController {
      * Método responsável por enviar um código de verificação para o email do
      * Usuário
      *
-     * @param e
-     */
-    @FXML
-    void confirmKeyAction(KeyEvent e) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        if (e.getCode() == KeyCode.ENTER) {
-            emailEsqSenha();
-        }
-    }
-
-    /**
-     * Método responsável por enviar um código de verificação para o email do
-     * Usuário
-     *
      * @param event
      */
     @FXML
     void confirmBtnAction(ActionEvent event) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        emailEsqSenha();
+        Usuario novo = new Usuario();
+        novo.setEmail(emailTxt.getText());
+                
+        if(!novo.verificarEmail()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("EMAIL INVALIDO");
+            alert.setTitle("Código de Verificação"); 
+            alert.setContentText("Error");
+            alert.show();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("EMAIL VALIDO");
+            alert.setTitle("Código de Verificação");
+            String res = novo.recupera();
+            if(res == null){
+                alert.setContentText("ERROR");
+                alert.setContentText("Não foi possivel recuperar sua nova senha. Verifique se as informações estão corretas, e tente novamente");
+                alert.show();
+            }else{
+               
+                novo.verificarUsuario();
+                novo.setSenha(res);
+                novo.atualizaUsuario();
+  
+            }
+        }
+        esqSenha();
     }
 
     /**
@@ -94,36 +106,6 @@ public class EsqueciSenhaEmailController {
             Logger.getLogger(EsqueciSenhaEmailController.class.getName()).log(Level.SEVERE, null, ex);
         }
         fecha();
-    }
-
-    public void emailEsqSenha() throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        Usuario novo = new Usuario();
-        novo.setEmail(emailTxt.getText());
-
-        if (!novo.verificarEmail()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("EMAIL INVALIDO");
-            alert.setTitle("Código de Verificação");
-            alert.setContentText("Error");
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("EMAIL VALIDO");
-            alert.setTitle("Código de Verificação");
-            String res = novo.recupera();
-            if (res == null) {
-                alert.setContentText("ERROR");
-                alert.setContentText("Não foi possivel recuperar sua nova senha. Verifique se as informações estão corretas, e tente novamente");
-                alert.show();
-            } else {
-
-                novo.verificarUsuario();
-                novo.setSenha(res);
-                novo.atualizaUsuario();
-
-            }
-        }
-        esqSenha();
     }
 
 }

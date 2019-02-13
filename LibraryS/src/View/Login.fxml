@@ -11,7 +11,7 @@
 <AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../CSS/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
     <children>
         <TextField fx:id="userTxt" layoutX="337.0" layoutY="221.0" prefHeight="39.0" prefWidth="287.0" promptText="USUÁRIO" />
-        <PasswordField fx:id="passTxt" layoutX="337.0" layoutY="277.0" onKeyPressed="#loginBtnKeyAction" prefHeight="39.0" prefWidth="287.0" promptText="SENHA" />
+        <PasswordField fx:id="passTxt" layoutX="337.0" layoutY="277.0" prefHeight="39.0" prefWidth="287.0" promptText="SENHA" />
         <Button fx:id="loginBtn" layoutX="337.0" layoutY="330.0" mnemonicParsing="false" onAction="#loginBtnAction" prefHeight="39.0" prefWidth="287.0" styleClass="login-btn" text="LOGIN" />
         <ImageView fitHeight="125.0" fitWidth="419.0" layoutX="303.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
             <image>

@@ -8,10 +8,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../CSS/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CadastrarController">
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../CSS/login.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controller.CadastrarController">
     <children>
         <TextField fx:id="nameTxt" layoutX="77.0" layoutY="229.0" prefHeight="39.0" prefWidth="364.0" promptText="NOME" />
-        <Label layoutX="368.0" layoutY="45.0" prefHeight="47.0" prefWidth="225.0" styleClass="other-btn" stylesheets="@../CSS/login.css" text="CADASTRAR">
+        <Label layoutX="368.0" layoutY="133.0" prefHeight="47.0" prefWidth="225.0" styleClass="other-btn" stylesheets="@../CSS/login.css" text="CADASTRAR">
             <font>
                 <Font size="14.0" />
             </font>
@@ -28,6 +28,6 @@
       <TextField fx:id="telTxt" layoutX="77.0" layoutY="394.0" prefHeight="39.0" prefWidth="364.0" promptText="TELEFONE" />
       <TextField fx:id="usernameTxt" layoutX="519.0" layoutY="229.0" prefHeight="39.0" prefWidth="364.0" promptText="NOME DE USUÁRIO" />
       <PasswordField fx:id="passTxt" layoutX="519.0" layoutY="284.0" prefHeight="39.0" prefWidth="364.0" promptText="SENHA" />
-      <PasswordField fx:id="confirmPassTxt" layoutX="519.0" layoutY="339.0" onKeyPressed="#signUpBtnKeyAction" prefHeight="39.0" prefWidth="364.0" promptText="CONFIRMAR SENHA" />
+      <PasswordField fx:id="confirmPassTxt" layoutX="519.0" layoutY="339.0" prefHeight="39.0" prefWidth="364.0" promptText="CONFIRMAR SENHA" />
     </children>
 </AnchorPane>
