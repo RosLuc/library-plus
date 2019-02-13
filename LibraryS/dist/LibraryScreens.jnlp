@@ -9,7 +9,11 @@
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <jar href="LibraryScreens.jar" size="119756" download="eager" />
+=======
+    <jar href="LibraryScreens.jar" size="111057" download="eager" />
+>>>>>>> parent of 47ceb9d... Merge pull request #9 from RosLuc/versão
 =======
     <jar href="LibraryScreens.jar" size="111057" download="eager" />
 >>>>>>> parent of 47ceb9d... Merge pull request #9 from RosLuc/versão
