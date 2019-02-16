@@ -369,7 +369,7 @@ public class Pessoa {
      * A operação é realizada utilizando hibernate.
      * @return List - Caso a operação for realizada com sucesso retorna uma lista de pessoa, caso contrário retorna null.
      */
-    public List ListaDePessoa(){
+    static public List ListaDePessoa(){
         List<Pessoa> lista_Pessoa;
         try{
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
@@ -443,8 +443,7 @@ public class Pessoa {
             sessao.close();
             fabrica.close();
             return listaPessoa;
-        }
-        catch(HibernateException e){
+        }catch(HibernateException e){
             System.err.println("Erro: "+e);
             return null;
         }

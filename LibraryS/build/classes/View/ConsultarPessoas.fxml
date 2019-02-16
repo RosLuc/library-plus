@@ -37,21 +37,21 @@
         <TextField fx:id="emailTxt" layoutX="116.0" layoutY="132.0" prefHeight="32.0" prefWidth="319.0" styleClass="textfield" />
         <TableView fx:id="table" layoutX="66.0" layoutY="292.0" prefHeight="221.0" prefWidth="828.0">
             <columns>
-                <TableColumn fx:id="nchamTb" prefWidth="59.0" text="Código de Inscrição" />
-                <TableColumn fx:id="nseqTb" prefWidth="141.0" text="Nome" />
-                <TableColumn fx:id="tituloTb" minWidth="0.0" prefWidth="131.0" text="Email" />
-                <TableColumn fx:id="autorTb" prefWidth="102.0" text="Endereco" />
-                <TableColumn fx:id="editTb" prefWidth="75.0" text="Bairro" />
-                <TableColumn fx:id="anoTb" prefWidth="63.0" text="Cidade" />
-                <TableColumn fx:id="exemplarTb" prefWidth="46.0" text="Cep" />
-                <TableColumn fx:id="volTb" minWidth="0.0" prefWidth="89.0" text="Turno" />
-                <TableColumn fx:id="nestTb" prefWidth="60.0" text="Turma" />
-                <TableColumn fx:id="npraTb" prefWidth="53.0" text="Série" />
+                <TableColumn fx:id="codinscTb" prefWidth="59.0" text="Código de Inscrição" />
+                <TableColumn fx:id="nomeTb" prefWidth="141.0" text="Nome" />
+                <TableColumn fx:id="emailTb" minWidth="0.0" prefWidth="131.0" text="Email" />
+                <TableColumn fx:id="enderecoTb" prefWidth="102.0" text="Endereco" />
+                <TableColumn fx:id="bairroTb" prefWidth="75.0" text="Bairro" />
+                <TableColumn fx:id="cidadeTb" prefWidth="63.0" text="Cidade" />
+                <TableColumn fx:id="cepTb" prefWidth="46.0" text="Cep" />
+                <TableColumn fx:id="turnoTb" minWidth="0.0" prefWidth="89.0" text="Turno" />
+                <TableColumn fx:id="turmaTb" prefWidth="60.0" text="Turma" />
+                <TableColumn fx:id="serieTb" prefWidth="53.0" text="Série" />
                 <TableColumn fx:id="statusTb" minWidth="0.0" prefWidth="78.0" text="Status" />
             </columns>
         </TableView>
-        <Button fx:id="pesquisarBtn" layoutX="362.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="PESQUISAR" />
-        <Button fx:id="limparBtn" layoutX="509.0" layoutY="242.0" mnemonicParsing="false" styleClass="btn" stylesheets="@../CSS/principal.css" text="LIMPAR" />
+        <Button fx:id="pesquisarBtn" layoutX="362.0" layoutY="242.0" mnemonicParsing="false" onAction="#pesquisarBtnAction" prefHeight="25.0" prefWidth="116.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="PESQUISAR" />
+        <Button fx:id="limparBtn" layoutX="509.0" layoutY="242.0" mnemonicParsing="false" onAction="#limparBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="LIMPAR" />
         <Label layoutX="367.0" layoutY="25.0" styleClass="labelname" stylesheets="@../CSS/principal.css" text="FILTRAR BUSCA">
             <font>
                 <Font size="24.0" />
