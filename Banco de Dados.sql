@@ -1,5 +1,5 @@
 create table Usuario(
-	UserCode integer primary key unique,
+	usercode integer primary key unique,
 	login varchar(40) not null,
 	senha varchar(40) not null,
 	nome varchar(70) not null,
@@ -7,36 +7,30 @@ create table Usuario(
 	cpf varchar(11) not null unique
 );
 create table Pessoa(
-	CodInsc serial primary key unique,
-	UserCode integer not null,
-	Estado varchar(25) not null,
-	Numero varchar(6) not null,
-	Serie varchar(10),
-	Endereco varchar(40) not null,
-	Turno varchar(10),
-	Bairro varchar(25) not null,
-	Turma varchar(5),
-	Cidade varchar(30) not null,
-	Categoria varchar(20) not null,
-	Email varchar(40) not null,
-	Contato varchar(15) not null,
-	Nome varchar(50) not null,
-	Cep varchar(10),
-	foreign key(UserCode) references Usuario(UserCode)
-);
-create table Prateleira(
-	codestante integer unique ,
-	codprateleira integer,
-	corredor integer not null,
-	genero varchar(20) not null,
-	primary key (codestante, codprateleira)
+	codinsc serial primary key unique,
+	usercode integer not null,
+	estado varchar(25) not null,
+	numero varchar(6) not null,
+	serie varchar(10),
+	endereco varchar(40) not null,
+	turno varchar(10),
+	bairro varchar(25) not null,
+	turma varchar(5),
+	cidade varchar(30) not null,
+	categoria varchar(20) not null,
+	email varchar(40) not null,
+	contato varchar(15) not null,
+	nome varchar(50) not null,
+	cep varchar(10),
+	foreign key(usercode) references Usuario(usercode)
 );
 create table Material(
-	nchamada text primary key unique,
+	nchamada serial primary key unique,
 	usercode integer not null,
-	codestante integer not null,
+	corestante varchar(10) not null,
 	codprateleira integer not null,
-	nsequencia integer not null,
+	cdu integer,
+	cdd integer,
 	data date not null,
 	titulo text not null,
 	exemplar integer,
@@ -46,20 +40,39 @@ create table Material(
 	formadeaquisicao varchar(15) not null,
 	observacao text,
 	status varchar(10) not null,
-	foreign key(usercode) references Usuario(UserCode),
-	foreign key(codestante, codprateleira) references Prateleira (codestante, codprateleira)
+	foreign key(usercode) references Usuario(usercode)
 );
 
 create table Livro(
-	nchamada text primary key,
+	nchamada integer primary key,
 	autor varchar(50) not null,
 	editora varchar(40) not null,
 	foreign key(nchamada) references Material(nchamada)
 ); 
 
 create table Multimidia(
-	nchamada text primary key,
+	nchamada integer primary key,
 	produtor varchar(50) not null,
 	estudio varchar(40) not null,
 	foreign key(nchamada) references Material(nchamada)
+);
+
+create table Emprestimo(
+	codemp serial primary key unique,
+	codinsc integer not null,
+	usercode integer not null,
+	dataemp Date not null,
+	datadev date not null,
+	status varchar(20) not null,
+	foreign key(usercode) references Usuario(usercode),
+	foreign key(codinsc) references Pessoa(codinsc)
+);
+
+
+create table Indicar(
+	nchamada integer not null,
+	codemp integer not null,
+	primary key(nchamada,codemp),
+	foreign key(nchamada) references Material(nchamada),
+	foreign key(codemp) references Emprestimo(codemp)
 );

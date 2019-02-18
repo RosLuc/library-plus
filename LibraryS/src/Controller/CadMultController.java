@@ -6,7 +6,6 @@
 package Controller;
 
 import Classes.Multimidia;
-import Classes.Prateleira;
 import LibraryScreens.CadMaterial;
 import LibraryScreens.CadMult;
 import java.util.Date;
@@ -18,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.hibernate.HibernateException;
 
 /**
  * FXML Controller class
@@ -25,9 +25,6 @@ import javafx.stage.Stage;
  * @author death
  */
 public class CadMultController {
-
-    @FXML
-    private TextField numChamTxt;
 
     @FXML
     private Button cancelBtn;
@@ -42,13 +39,13 @@ public class CadMultController {
     private Button addBtn;
 
     @FXML
-    private TextField numSeqTxt1;
-
-    @FXML
     private TextField estanteTxt;
 
     @FXML
     private TextField exemplarTxt;
+
+    @FXML
+    private TextField cddTxt;
 
     @FXML
     private TextField prateleiraTxt;
@@ -57,16 +54,22 @@ public class CadMultController {
     private TextField obsTxt;
 
     @FXML
+    private TextField volTxt;
+
+    @FXML
     private TextField produtorTxt;
 
     @FXML
-    private TextField volTxt;
+    private TextField nchamadaTxt;
 
     @FXML
     private TextField tituleTxt;
 
     @FXML
     private TextField anoPublicTxt;
+
+    @FXML
+    private TextField cduTxt;
 
     @FXML
     private TextField localPublicTxt;
@@ -117,54 +120,50 @@ public class CadMultController {
         private void addMultimidia(){
         try{
             Multimidia mult = new Multimidia();
-            String nchamada = numChamTxt.getText();
-            if(mult.buscarMaterialNC(nchamada) == null && !(nchamada.equals(""))) mult.setNchamada(nchamada);
-            else{
-                alertaErro("FALHA AO CADASTRAR MULTIMÍDIA","ATENÇÃO: Já existir uma multimídia com número de chamada digitado ou campo não preenchido");
-                return;
-            }
             //Verificar usuario
             mult.setUsercode(11111);
             
-            int Codestante = Integer.parseInt(estanteTxt.getText());
-            int CodPrateleira = Integer.parseInt(prateleiraTxt.getText());
-            if(Prateleira.verifcarPrateleira(Codestante, CodPrateleira)){
-                mult.setCodestante(Codestante);
-                mult.setCodprateleira(CodPrateleira);
+            String temp = estanteTxt.getText();
+            if(!(temp.equals(""))){
+                mult.setCorestante(temp);
             }
             else{
-                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Não existir uma estante com esse número e número de prateleira");
+                alertaErro("FALHA AO CADASTRAR MULTIMÍDIA", "ATENÇÃO: Campo de obrigatorio Cor da estante não preenchido.");
                 return;
             }
+            mult.setCodprateleira(Integer.parseUnsignedInt(prateleiraTxt.getText()));
             
-            int nsequencia = Integer.parseInt(numSeqTxt1.getText());
-            if(mult.buscarMaterialNS(nsequencia) == null)  mult.setNsequencia(nsequencia);
-            else{
-                alertaErro("FALHA AO CADASTRAR LIVRO","ATENÇÃO: Já existir um livro com número de sequência digitado ou campo não preenchido");
+            mult.setCdu(Integer.parseUnsignedInt(cduTxt.getText()));
+            if((mult.buscarMaterialCDU())!= null){
+                alertaErro("FALHA AO CADASTRAR MULTIMÍDIA","ATENÇÃO: Já existir um multimídia com número de CDU digitado.");
                 return;
             }
-
+            mult.setCdd(Integer.parseUnsignedInt(cddTxt.getText()));
+            if((mult.buscarMaterialCDD())!= null){
+                alertaErro("FALHA AO CADASTRAR MULTIMÍDIA","ATENÇÃO: Já existir um multimídia com número de CDD digitado.");
+                return;
+            }
 
             mult.setData(new Date());
 
             String titulo = tituleTxt.getText();
             if(!(titulo.equals(""))) mult.setTitulo(titulo);
             else{
-                alertaErro("FALHA AO CADASTRAR MULTIMÍDIA","ATENÇÃO: Campo título não preenchido");
+                alertaErro("FALHA AO CADASTRAR MULTIMÍDIA","ATENÇÃO: Campo título obrigatorio não preenchido");
                 return;            
             }
 
             int exemplar = 0;
-            String temp = exemplarTxt.getText();
+            temp = exemplarTxt.getText();
             if(!(temp.equals(""))){
-               exemplar = Integer.parseInt(temp);
+               exemplar = Integer.parseUnsignedInt(temp);
             }
             mult.setExemplar(exemplar);
 
             int volume = 0;
             temp = volTxt.getText();
             if(!(temp.equals(""))){
-               volume = Integer.parseInt(temp);
+               volume = Integer.parseUnsignedInt(temp);
             }
             mult.setVolume(volume);
 
@@ -172,17 +171,17 @@ public class CadMultController {
             if(!(temp.equals(""))){
                 mult.setLocal(temp);
             }else{
-                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo local de publicação obrigatorio não foi preenchido");
+                alertaErro("FALHA AO CADASTRAR MULTIMÍDIA", "ATENÇÃO: Campo local de publicação obrigatorio não foi preenchido");
                 return;
             } 
 
-            mult.setAnopublicacao(Integer.parseInt(anoPublicTxt.getText())); 
+            mult.setAnopublicacao(Integer.parseUnsignedInt(anoPublicTxt.getText())); 
             
             temp = aquisicaoTxt.getText();
             if(!(temp.equals(""))){
                 mult.setFormadeaquisicao(temp);
             }else{
-                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo forma de arquisição obrigatorio não foi preenchido");
+                alertaErro("FALHA AO CADASTRAR MULTIMÍDIA", "ATENÇÃO: Campo forma de arquisição obrigatorio não foi preenchido");
                 return;
             }
             
@@ -193,7 +192,7 @@ public class CadMultController {
             if(!(temp.equals(""))){
                 mult.setProdutor(temp);
             }else{
-                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo produtor obrigatorio não foi preenchido");
+                alertaErro("FALHA AO CADASTRAR MULTIMÍDIA", "ATENÇÃO: Campo produtor obrigatorio não foi preenchido");
                 return;
             }
             
@@ -201,7 +200,7 @@ public class CadMultController {
             if(!(temp.equals(""))){
                 mult.setEstudio(temp);
             }else{
-                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo estudio obrigatorio não foi preenchido");
+                alertaErro("FALHA AO CADASTRAR MULTIMÍDIA", "ATENÇÃO: Campo estudio obrigatorio não foi preenchido");
                 return;
             }
 
@@ -213,6 +212,8 @@ public class CadMultController {
             
         }catch (NumberFormatException e){
             alertaErro("FALHA AO CADASTRAR MULTIMÍDIA","ATENÇÃO: Campos númericos não peenchido ou se adicionou simbolos como: [,./ -] e outro. Adicione apenas inteiros");
+        }catch (HibernateException er){
+            alertaErro("FALHA AO CADASTRAR LIVRO MULTIMÍDIA", er.toString());
         }catch (Exception er){
             alertaErro("FALHA AO CADASTRA MULTIMÍDIA", "Erro");
         }

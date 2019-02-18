@@ -8,6 +8,7 @@ package Controller;
 import Classes.Livro;
 import LibraryScreens.ConsultarMaterial;
 import LibraryScreens.GerAcervo;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -28,15 +29,18 @@ import javafx.stage.Stage;
  * @author death
  */
 public class ConsultarMaterialController{
-    
+
     @FXML
     private TableView<Livro> table;
         
     @FXML
-    private TableColumn<Livro, Integer> nseqTb;
+    private TableColumn<Livro, Integer> cduTb;
     
     @FXML
-    private TableColumn<Livro, String> nchamTb;
+    private TableColumn<Livro, Integer> cddTb;
+    
+    @FXML
+    private TableColumn<Livro, Integer> nchamTb;
         
     @FXML
     private TableColumn<Livro, String> tituloTb;
@@ -45,7 +49,7 @@ public class ConsultarMaterialController{
     private TableColumn<Livro, String> autorTb;
 
     @FXML
-    private TableColumn<Livro, Integer> nestTb;
+    private TableColumn<Livro, String> nestTb;
     
     @FXML
     private TableColumn<Livro, Integer> npraTb;
@@ -66,14 +70,20 @@ public class ConsultarMaterialController{
     private TableColumn<Livro, Integer> exemplarTb;
     
     @FXML
+    private TableColumn<Livro, String> dataTb;
+    
+    @FXML
     private Button limparBtn;
 
     @FXML
     private TextField tituloTxt;
     
     @FXML
-    private TextField nSeqTxt;
+    private TextField cduTxt;
 
+    @FXML
+    private TextField cddTxt;
+    
     @FXML
     private TextField localTxt;
 
@@ -106,9 +116,10 @@ public class ConsultarMaterialController{
     @SuppressWarnings("unchecked")
     private void initTable(ObservableList<Livro> list) throws Exception{
         
-        nseqTb.setCellValueFactory(new PropertyValueFactory<>("nsequencia"));
+        cduTb.setCellValueFactory(new PropertyValueFactory<>("cdu"));
+        cddTb.setCellValueFactory(new PropertyValueFactory<>("cdd"));
         nchamTb.setCellValueFactory(new PropertyValueFactory<>("nchamada"));
-        nestTb.setCellValueFactory(new PropertyValueFactory<>("codestante"));
+        nestTb.setCellValueFactory(new PropertyValueFactory<>("corestante"));
         npraTb.setCellValueFactory(new PropertyValueFactory<>("codprateleira"));
         tituloTb.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         autorTb.setCellValueFactory(new PropertyValueFactory<>("autor"));
@@ -117,6 +128,7 @@ public class ConsultarMaterialController{
         volTb.setCellValueFactory(new PropertyValueFactory<>("volume"));
         anoTb.setCellValueFactory(new PropertyValueFactory<>("anopublicacao"));
         statusTb.setCellValueFactory(new PropertyValueFactory<>("status"));
+        dataTb.setCellValueFactory(new PropertyValueFactory<>("data"));
 
         table.setItems(list);
             
@@ -128,37 +140,30 @@ public class ConsultarMaterialController{
             Livro l = new Livro();
             String temp = nChamTxt.getText();
             if(!(temp.equals(""))){
-                l.setNchamada(temp);
+                l.setNchamada(Integer.parseUnsignedInt(temp));
             }
             
-            temp = nSeqTxt.getText();
+            temp = cddTxt.getText();
             if(!(temp.equals(""))){
-                l.setNsequencia(Integer.parseInt(temp));
+                l.setCdd(Integer.parseUnsignedInt(temp));
             }
             
-            temp = tituloTxt.getText();
+            temp = cduTxt.getText();
             if(!(temp.equals(""))){
-                l.setTitulo(temp);
+                
+                l.setCdu(Integer.parseUnsignedInt(temp));
             }
             
-            temp = autorTx.getText();
-            if(!(temp.equals(""))){
-               l.setAutor(temp);
-            }
+            l.setTitulo(tituloTxt.getText());
+            l.setAutor(autorTx.getText());
+            l.setEditora(editTxt.getText());
+            l.setLocal(localTxt.getText());
+            List<Livro> list = l.filtrarMaterialCMP(); 
             
-            temp = editTxt.getText();
-            if(!(temp.equals(""))){
-               l.setEditora(temp);
+            if(list != null){
+                ObservableList<Livro> Obslist = FXCollections.observableList(list);
+                initTable(Obslist);                
             }
-            
-            temp = localTxt.getText();
-            if(!(temp.equals(""))){
-               l.setLocal(temp);
-            }
-        
-            @SuppressWarnings("unchecked")
-            ObservableList<Livro> list = FXCollections.observableList(l.filtrarMaterialCMP());
-            initTable(list);
         }catch(NumberFormatException e){
             alertaErro("Erro ao pesquisar", "Nós campos númericos digite apenas números inteiros.");
             Logger.getLogger(ConsultarMaterialController.class.getName()).log(Level.SEVERE, null, e);

@@ -6,35 +6,49 @@
 package Emprestimo;
 
 
-import java.util.ArrayList;
+import Classes.Livro;
+import Classes.Material;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import java.util.GregorianCalendar;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
-import org.hibernate.criterion.Example;
-import org.hibernate.criterion.MatchMode;
+import java.util.Set;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 /**
- *
- * @author maria
+ * Classe para objetos do tipo Emprestimo, onde serão contidos, valores e métodos para o mesmo.
+ * @author Adriana
  */
 public class Emprestimo {
-    private int codiemp; 
+    private int codemp; 
     private int usercode;
     private int codinsc;
-    private GregorianCalendar dataemp;
-    private GregorianCalendar datadev;
+    private Date dataemp;
+    private Date datadev;
     private String status;
-
+    private Set<Material> materiais = new HashSet<>(5);
+    
+    /**
+     * Construtor padrão.
+     */
     public Emprestimo() {
     }
 
-    public Emprestimo(int codiemp, int usercode, int codinsc, GregorianCalendar dataemp, GregorianCalendar datadev, String status) {
-        this.codiemp = codiemp;
+    /**
+     * Construtor Completo.
+     * @param codemp
+     * @param usercode
+     * @param codinsc
+     * @param dataemp
+     * @param datadev
+     * @param status 
+     */
+    public Emprestimo(int codemp, int usercode, int codinsc, Date dataemp, Date datadev, String status) {
+        this.codemp = codemp;
         this.usercode = usercode;
         this.codinsc = codinsc;
         this.dataemp = dataemp;
@@ -42,54 +56,124 @@ public class Emprestimo {
         this.status = status;
     }
 
-    public int getCodiemp() {
-        return codiemp;
+    /**
+     * Método de acesso à codemp.
+     * @return int - Código do emprestimo
+     */
+    public int getCodemp() {
+        return codemp;
     }
 
-    public void setCodiemp(int codiemp) {
-        this.codiemp = codiemp;
+    /**
+     * Métedo modificador de codemp.
+     * @param codiemp Código do emprestimo.
+     */
+    public void setCodemp(int codiemp) {
+        this.codemp = codiemp;
     }
 
+    /**
+     * Método de acesso à usecode.
+     * @return int - Código de usuário.
+     */
     public int getUsercode() {
         return usercode;
     }
 
+    /**
+     * Método modificador de usercode.
+     * @param usercode Código de usuário.
+     */
     public void setUsercode(int usercode) {
         this.usercode = usercode;
     }
 
+    /**
+     * Método de acesso à codinsc.
+     * @return int - Código de Inscrição.
+     */
     public int getCodinsc() {
         return codinsc;
     }
 
+    /**
+     * Método modificador de codinsc.
+     * @param codinsc Código de Inscrição.
+     */
     public void setCodinsc(int codinsc) {
         this.codinsc = codinsc;
     }
 
-    /*public Date getDataemp() {
+    /**
+     * Método de acesso à dataemp.
+     * @return Date - Data de emprestmo.
+     */
+    public Date getDataemp() {
         return dataemp;
     }
 
+    /**
+     * Método modificador de dataemp.
+     * @param dataemp Data de emprestimo.
+     */
     public void setDataemp(Date dataemp) {
         this.dataemp = dataemp;
     }
 
+    /**
+     * Método de acesso a datadev.
+     * @return Date - Data de devolução.
+     */
     public Date getDatadev() {
         return datadev;
     }
 
+    /**
+     * Método modificador de datadev.
+     * @param datadev - Data de devolução.
+     */
     public void setDatadev(Date datadev) {
         this.datadev = datadev;
-    }*/
+    }
 
+    /**
+     * Método de acesso a status.
+     * @return String - Status de emprestimo.
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * Método modificador de status.
+     * @param status - Status de emprestimo.
+     */
     public void setStatus(String status) {
         this.status = status;
     }
-       
+
+    /**
+     * Método de acessor à referencia de Set do tipo Material.
+     * @return Set - Set do tipo material.
+     */
+    public Set<Material> getMateriais() {
+        return materiais;
+    }
+    /**
+     * Método para modificar referencia de Set do tipo Material.
+     * @param materiais Set do tipo material.
+     */
+    public void setMateriais(Set<Material> materiais) {
+        this.materiais = materiais;
+    }
+    
+    
+    
+    /**
+     * Método  responsável por salvar um objeto Emprestimo no banco de dados.
+     * A operação é realizada utilizando hibernate.
+     * @return boolean - Caso a operação for realizada com sucesso returna true, caso contrário false.
+     */
     public boolean salvarEmprestimo(){
         try{
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
@@ -98,16 +182,18 @@ public class Emprestimo {
             sessao.save(this);
             tx_part.commit();
             sessao.close();
-            fabrica.close();
-            System.out.println("Emprestimo salvo");
             return true;  
         }
         catch(HibernateException e){
-            System.out.println("ERRO ao salvar" );
             return false;
         }
     }
     
+    /**
+     * Método  responsável por excluir um objeto Emprestimo no banco de dados.
+     * A operação é realizada utilizando hibernate.
+     * @return boolean - Caso a operação for realizada com sucesso returna true, caso contrário false.
+     */ 
     public boolean excluirEmprestimo() {
         try{
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
@@ -117,15 +203,18 @@ public class Emprestimo {
             tx_part.commit();
             sessao.close();
             fabrica.close();
-            System.out.println("Emprestimo excluido");
             return true;
         }
         catch(HibernateException e){
-            System.out.println("ERRO ao excluir");
             return false;
         }
     }
-   
+    
+    /**
+     * Método  responsável por atualizar um objeto Emprestimo no banco de dados.
+     * A operação é realizada utilizando hibernate.
+     * @return boolean - Caso a operação for realizada com sucesso returna true, caso contrário false.
+     */   
      public boolean atualizarEmprestimo(){
         try{
             //é criado uma sessao de acordo com seu banco de dados, caso for tester configure o arquivo hibernate.gfj.xml
@@ -143,7 +232,7 @@ public class Emprestimo {
         }
     }
         
-    public Emprestimo verificarEmprestimo(){
+    /*public Emprestimo verificarEmprestimo(){
         try{
             //é criado uma sessao de acordo com seu banco de dados, caso for tester configure o arquivo hibernate.gfj.xml
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
@@ -159,14 +248,19 @@ public class Emprestimo {
         catch(HibernateException e){
             return null;
         }
-    }
+    }*/
     
-    public List ListaDeEmprestimo(){
+    /**
+     * Método responsável por obter uma lista de objetos do tipo Emprestimo do banco de dados.
+     * A operação é realizada utilizando hibernate.
+     * @return List - Caso a operação for realizada com sucesso retorna lista de objetos do tipo Livro, caso contrário retorna null.
+     */    
+    @SuppressWarnings("unchecked")
+    public List<Emprestimo> ListaDeEmprestimo(){
         List<Emprestimo> lista_Emprestimo;
         try{
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
-            lista_Emprestimo = new ArrayList();
             lista_Emprestimo = sessao.createCriteria(Emprestimo.class).addOrder(Order.asc("nome")).list();
             sessao.close();
             fabrica.close();
@@ -178,12 +272,18 @@ public class Emprestimo {
             return null;
         }
     }
-    
-    public Emprestimo buscarEmprestimo(int ccodiemp){
+    /**
+     * Método  responsável em obter um objeto do tipo Livro no banco de dados,
+     * sendo este com codemp igual parâmentro enviado.
+     * A operação é realizada utilizando hibernate.
+     * @param codemp Código de emprestimo a ser comparado.
+     * @return Emprestimo - Caso a operação for realizada com sucesso retorna um objeto Emprestimo, caso contrário retorna null.
+     */    
+    public Emprestimo buscarEmprestimo(int codemp){
         try{
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
-            Emprestimo emp =(Emprestimo) sessao.createCriteria(Emprestimo.class).add(Restrictions.eq("codiemp", codiemp)).uniqueResult();
+            Emprestimo emp =(Emprestimo) sessao.createCriteria(Emprestimo.class).add(Restrictions.eq("codemp", codemp)).uniqueResult();
             sessao.close();
             fabrica.close();
             return emp;
@@ -194,13 +294,13 @@ public class Emprestimo {
             return null;
         }
     }
-     public List filtrarEmprestimo(){
+    /* public List<Emprestimo> filtrarEmprestimo(){
         try{
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
-            List<Emprestimo> listaEmprestimo = new ArrayList();
             Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes().ignoreCase();
-            listaEmprestimo = sessao.createCriteria(Emprestimo.class).add(exp).addOrder(Order.desc("nome")).list();
+            @SuppressWarnings("unchecked")
+            List<Emprestimo> listaEmprestimo = sessao.createCriteria(Emprestimo.class).add(exp).addOrder(Order.desc("nome")).list();
             sessao.close();
             fabrica.close();
             return listaEmprestimo;
@@ -210,5 +310,27 @@ public class Emprestimo {
             e.printStackTrace();
             return null;
         }
-    } 
+    }*/ 
+    
+    /**
+     * Método sobreposto da superclasse Material responsável em obter uma lista de objetos do tipo Livro no banco de dados, 
+     * filtrados conforme data de emprestimo atrasada.
+     * A operação é realizada utilizando hibernate.
+     * @return List - Caso a operação for realizada com sucesso retorna lista de objetos do tipo Livro,  caso contrário retorna null.
+     *//*
+    public List<Livro> filtrarMaterialAtraso(){
+        List<Livro> listLivro;
+        try{
+            SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
+            Session session = factory.openSession();
+            listLivro = session.createCriteria(Livro.class).add(Restrictions.le("data", new Date())).addOrder(Order.desc("data")).list();
+            session.close();
+            factory.close();
+            return listLivro;
+        }catch(HibernateException e){
+             System.err.println("Erro ao filtrar: " + e);
+             e.printStackTrace();
+             return null;
+        } 
+    }*/
 }
