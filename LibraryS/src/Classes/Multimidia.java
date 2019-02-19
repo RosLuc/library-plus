@@ -29,9 +29,10 @@ public class Multimidia extends Material {
      * @param estudio Nome do studio.
      * @param nchamada Número de chamada relacionado ao BD (passado para superclasse).
      * @param usercode Código usuário relacionado ao BD (passado para superclasse).
-     * @param codestante Código da estante relacionado ao BD (passado para superclasse).
+     * @param corestante Cor da estante relacionado ao BD (passado para superclasse).
      * @param codprateleira Código da prateleira relacionado ao BD (passado para superclasse).
-     * @param nsequencia Número de sequência(passado para superclasse).
+     * @param cdu Número do CDU(passado para superclasse).
+     * @param cdd Número do CDD(passado para superclasse).
      * @param data Data de cadastro (passado para superclasse).
      * @param titulo Título (passado para superclasse).
      * @param exemplar Número do exemplar (passado para superclasse).
@@ -42,8 +43,8 @@ public class Multimidia extends Material {
      * @param observacao Observação (passado para superclasse).
      * @param status Status (passado para superclasse).
      */
-    public Multimidia(String produtor, String estudio, String nchamada, int usercode, int codestante, int codprateleira, int nsequencia, Date data, String titulo, int exemplar, int volume, String local, int anopublicacao, String formadeaquisicao, String observacao, String status) {
-        super(nchamada, usercode, codestante, codprateleira, nsequencia, data, titulo, exemplar, volume, local, anopublicacao, formadeaquisicao, observacao, status);
+    public Multimidia(String produtor, String estudio, int nchamada, int usercode, String corestante, int codprateleira, int cdu, int cdd, Date data, String titulo, int exemplar, int volume, String local, int anopublicacao, String formadeaquisicao, String observacao, String status) {
+        super(nchamada, usercode, corestante, codprateleira, cdu, cdd, data, titulo, exemplar, volume, local, anopublicacao, formadeaquisicao, observacao, status);
         this.produtor = produtor;
         this.estudio = estudio;
     }
@@ -85,6 +86,7 @@ public class Multimidia extends Material {
      * A operação é realizada utilizando hibernate.
      * @return boolean - Caso a operação for realizada com sucesso returna true, caso contrário false.
      */
+     @Override
     public boolean cadastrarMaterial(){
         try {
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
@@ -106,6 +108,7 @@ public class Multimidia extends Material {
      * A operação é realizada utilizando hibernate.
      * @return boolean - Caso a operação for realizada com sucesso returna true, caso contrário false.
      */
+     @Override
     public boolean updateMaterial(){
         try {
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
@@ -127,13 +130,13 @@ public class Multimidia extends Material {
      * A operação é realizada utilizando hibernate.
      * @return List - Caso a operação for realizada com sucesso retorna uma lista de objetos do tipo Multimídia, caso contrário retorna null.
      */
-    public List listarMaterial(){
-        List<Multimidia> listMultimidia;
+     @Override
+    public List<Multimidia> listarMaterial(){
         try {
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
-            listMultimidia= new ArrayList();
-            listMultimidia = session.createQuery("from Classes.Multimidia").list();
+            @SuppressWarnings("unchecked")
+            List<Multimidia> listMultimidia = session.createQuery("from Classes.Multimidia").list();
             session.close();
             return listMultimidia;
         } catch (HibernateException e) {
@@ -148,6 +151,7 @@ public class Multimidia extends Material {
      * A operação é realizada utilizando hibernate.
      * @return boolean - Caso a operação for realizada com sucesso returna true, caso contrário false. 
      */
+     @Override
     public boolean deleteMaterial(){
         try {
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
@@ -169,12 +173,14 @@ public class Multimidia extends Material {
      * A operação é realizada utilizando hibernate.
      * @return List - Caso a operação for realizada com sucesso retorna uma lista de objetos do tipo Multimídia, caso contrário retorna null.
      */
-    public List filtrarMaterialCMP(){
+     @Override
+    public List<Multimidia> filtrarMaterialCMP(){
         try{
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
             Example exp = Example.create(this).enableLike().excludeZeroes().ignoreCase();
-            List<Multimidia> listMultimidia = session.createCriteria(Multimidia.class).add(exp).addOrder(Order.desc("nsequencia")).list();
+            @SuppressWarnings("unchecked")
+            List<Multimidia> listMultimidia = session.createCriteria(Multimidia.class).add(exp).addOrder(Order.desc("nchamada")).list();
             session.close();
             return listMultimidia;
         }catch(HibernateException e){
@@ -182,79 +188,80 @@ public class Multimidia extends Material {
              e.printStackTrace();
              return null;
         }
-    }
-    
-    /**
-     * Método sobreposto da superclasse Material responsável em obter uma lista de objetos do tipo Multimídia no banco de dados, 
-     * filtrados conforme data de emprestimo atrasada.
-     * A operação é realizada utilizando hibernate.
-     * @return List - Caso a operação for realizada com sucesso retorna uma lista de objetos do tipo Multimídia, caso contrário retorna null.
-     */
-     @Override
-    public List<Multimidia> filtrarMaterialAtraso(){
-        try{
-            SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
-            Session session = factory.openSession();
-            List<Multimidia> listMultimidia = session.createCriteria(Multimidia.class).add(Restrictions.gt("data", new Date())).addOrder(Order.desc("data")).list();
-            session.close();
-            return listMultimidia;
-        }catch(HibernateException e){
-             System.err.println("Erro ao filtrar: " + e);
-             e.printStackTrace();
-             return null;
-        } 
     }
     
     /**
      * Método sobreposto da superclasse Material responsável em obter um objeto do tipo Multimídia no banco de dados,
      * sendo este com nchamada igual ao objeto instanciado.
      * A operação é realizada utilizando hibernate.
-     * @param nchamada Número de sequencia a ser comparado.
      * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Multimídia, caso contrário retorna null.
      */
      @Override
-    public Material buscarMaterialNC(String nchamada){
-        Multimidia l = null;
+    public Multimidia buscarMaterialNC(){
         try{
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
-            Criterion cri1 = Restrictions.ilike("nchamada", nchamada);
-            l = (Multimidia) session.createCriteria(Multimidia.class).add(cri1).uniqueResult();
+            Criterion cri1 = Restrictions.eq("nchamada", this.getNchamada());
+            Multimidia l = (Multimidia) session.createCriteria(Multimidia.class).add(cri1).uniqueResult();
             session.close();
             return l;
         }catch(NonUniqueResultException er){
             System.err.println("Erro ao filtrar: " + er);
-            return l;
+            return null;
         }catch(HibernateException e){
             System.err.println("Erro ao filtrar: " + e);
             e.printStackTrace();
-            return l;
+            return null;
         }
     }
-        /**
+    
+    /**
      * Método sobreposto da superclasse Material responsável em obter um objeto do tipo Livro no banco de dados,
-     * sendo este com nsequencia igual ao objeto instanciado.
+     * sendo este com cdu igual ao objeto instanciado.
      * A operação é realizada utilizando hibernate.
-     * @param nseq Número de sequencia a ser comparado.
      * @return Multimidia - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
      */
      @Override
-    public Material buscarMaterialNS(int nseq){
-        Multimidia l = null;
+    public Multimidia buscarMaterialCDU(){
         try{
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
-            Criterion cri1 = Restrictions.eq("nsequencia", nseq);
-            l = (Multimidia) session.createCriteria(Multimidia.class).add(cri1).uniqueResult();
+            Criterion cri1 = Restrictions.eq("cdu", this.getCdu());
+            Multimidia l = (Multimidia) session.createCriteria(Multimidia.class).add(cri1).uniqueResult();
             session.close();
             return l;
         }catch(NonUniqueResultException er){
             System.err.println("Erro ao filtrar: " + er);
-            return l;
+            return null;
         }catch(HibernateException e){
             System.err.println("Erro ao filtrar: " + e);
             e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Método sobreposto da superclasse Material responsável em obter um objeto do tipo Livro no banco de dados,
+     * sendo este com cdd igual ao objeto instanciado.
+     * A operação é realizada utilizando hibernate.
+     * @return Multimidia - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
+     */
+     @Override
+    public Multimidia buscarMaterialCDD(){
+        try{
+            SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
+            Session session = factory.openSession();
+            Criterion cri1 = Restrictions.eq("cdd", this.getCdd());
+            Multimidia l = (Multimidia) session.createCriteria(Multimidia.class).add(cri1).uniqueResult();
+            session.close();
             return l;
+        }catch(NonUniqueResultException er){
+            System.err.println("Erro ao filtrar: " + er);
+            return null;
+        }catch(HibernateException e){
+            System.err.println("Erro ao filtrar: " + e);
+            e.printStackTrace();
+            return null;
         }
     }
 }

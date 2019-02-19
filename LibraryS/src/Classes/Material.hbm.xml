@@ -1,27 +1,30 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 17/01/2019 19:13:24 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping>
     <class name="Classes.Material" table="material">
-        <id name="nchamada" type="string">
-            <column name="nchamada" />
-            <generator class="assigned"></generator>
+        <id name="nchamada" column="nchamada" type="int">
+            <generator class="sequence" >              
+                <param name="sequence">material_nchamada_seq</param>
+            </generator>
         </id>
         <property name="usercode" type="int">
-            <column name="usercode" />
+            <column name="usercode"/>
         </property>
-        <property name="codestante" type="int">
-            <column name="codestante" />
+        <property name="corestante" type="string">
+            <column name="corestante" length="10" not-null="true"/>
         </property>
         <property name="codprateleira" type="int">
-            <column name="codprateleira" />
+            <column name="codprateleira" not-null="true"/>
         </property>
-        <property name="nsequencia" type="int">
-            <column name="nsequencia" not-null="true" />
+        <property name="cdu" type="int">
+            <column name="cdu"/>
+        </property>
+        <property name="cdd" type="int">
+            <column name="cdd"/>
         </property>
         <property name="data" type="date">
-            <column name="data" length="13" not-null="true" />
+            <column name="data" not-null="true"/>
         </property>
         <property name="titulo" type="string">
             <column name="titulo" not-null="true" />

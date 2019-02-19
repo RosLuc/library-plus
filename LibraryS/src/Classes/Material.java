@@ -2,8 +2,6 @@ package Classes;
 
 
 import java.util.*;
-import org.hibernate.*;
-import org.hibernate.cfg.*;
 
 /**
  * Classe abstract para objetos do tipo Material, onde serão contidos, valores e métodos para o mesmo.
@@ -13,11 +11,12 @@ import org.hibernate.cfg.*;
  */
 public abstract class Material {
     
-     private String nchamada;
+     private int nchamada;
      private int usercode;
-     private int codestante;
+     private String corestante;
      private int codprateleira;
-     private int nsequencia;
+     private int cdu;
+     private int cdd;
      private Date data;
      private String titulo;
      private int exemplar;
@@ -38,9 +37,10 @@ public abstract class Material {
      * Construtor completo que recebe argumentos para inicializar os campos da classe.
      * @param nchamada Número de chamada.
      * @param usercode Código do usuário relacionado ao BD.
-     * @param codestante Código da estante relacionado ao BD.
+     * @param corestante Cor da estante relacionado ao BD.
      * @param codprateleira Código da prateleira relacionado ao BD.
-     * @param nsequencia Número de sequencia .
+     * @param cdu Número do CDU.
+     * @param cdd Número do CDD.
      * @param data Data de cadastro do material.
      * @param titulo Título.
      * @param exemplar Número de exemplar.
@@ -51,12 +51,13 @@ public abstract class Material {
      * @param observacao Observação sobre material.
      * @param status Status do material.
      */
-    public Material(String nchamada, int usercode, int codestante, int codprateleira, int nsequencia, Date data, String titulo, int exemplar, int volume, String local, int anopublicacao, String formadeaquisicao, String observacao, String status) {
+    public Material(int nchamada, int usercode, String corestante, int codprateleira, int cdu, int cdd, Date data, String titulo, int exemplar, int volume, String local, int anopublicacao, String formadeaquisicao, String observacao, String status) {
         this.nchamada = nchamada;
         this.usercode = usercode;
-        this.codestante = codestante;
+        this.corestante = corestante;
         this.codprateleira = codprateleira;
-        this.nsequencia = nsequencia;
+        this.cdu = cdu;
+        this.cdd = cdd;
         this.data = data;
         this.titulo = titulo;
         this.exemplar = exemplar;
@@ -67,12 +68,12 @@ public abstract class Material {
         this.observacao = observacao;
         this.status = status;
     }
-    
+
     /**
-    * Método de acesso à nChamada.
-    * @return String - Número de chamada.
-    */       
-    public String getNchamada() {
+     * Método de acesso à nChamada.
+     * @return int - Número de chamada.
+     */       
+    public int getNchamada() {
         return this.nchamada;
     }
     
@@ -80,7 +81,7 @@ public abstract class Material {
     * Método modificador para nchamada.
     * @param nchamada Número de chamada.
     */
-    public void setNchamada(String nchamada) {
+    public void setNchamada(int nchamada) {
         this.nchamada = nchamada;
     }
     
@@ -101,19 +102,19 @@ public abstract class Material {
     }
     
     /**
-     * Método de acesso à codestante relacionado no BD.
-     * @return int - Código da estante.
+     * Método de acesso à corestante relacionado no BD.
+     * @return String - Cor da estante.
      */
-    public int getCodestante() {
-        return this.codestante;
+    public String getCorestante() {
+        return corestante;
     }
-    
+
     /**
-     * Método modificador de codestante relacionado no BD.
-     * @param codestante Código da estante.
+     * Método modificador de corestante relacionado no BD.
+     * @param corestante Cor da estante.
      */
-    public void setCodestante(int codestante) {
-        this.codestante = codestante;
+    public void setCorestante(String corestante) {
+        this.corestante = corestante;
     }
     
     /**
@@ -133,21 +134,36 @@ public abstract class Material {
     }
     
     /**
-     * Método de acesso à nsequencia.
-     * @return int - Número de sequência.
+     * Método de acesso à cdu.
+     * @return int - Número do CDU.
      */
-    public int getNsequencia() {
-        return this.nsequencia;
+    public int getCdu() {
+        return cdu;
     }
     
     /**
-     * Método modificador de nsequencia.
-     * @param nsequencia Número de sequência.
+     * Método modificador do cdu.
+     * @param cdu Número do CDU.
      */
-    public void setNsequencia(int nsequencia) {
-        this.nsequencia = nsequencia;
+    public void setCdu(int cdu) {
+        this.cdu = cdu;
     }
     
+    /**
+     * Método de acesso à cdd.
+     * @return int - Número do CDD.
+     */
+    public int getCdd() {
+        return cdd;
+    }
+    /**
+     * Método modificador do cdd.
+     * @param cdd Número do CDD.
+     */
+    public void setCdd(int cdd) {
+        this.cdd = cdd;
+    }
+        
     /**
      * Método de acesso à data.
      * @return Date - Data de cadastro.
@@ -292,6 +308,11 @@ public abstract class Material {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Material{" + "nchamada=" + nchamada + ", usercode=" + usercode + ", corestante=" + corestante + ", codprateleira=" + codprateleira + ", cdu=" + cdu + ", cdd=" + cdd + ", data=" + data + ", titulo=" + titulo + ", exemplar=" + exemplar + ", volume=" + volume + ", local=" + local + ", anopublicacao=" + anopublicacao + ", formadeaquisicao=" + formadeaquisicao + ", observacao=" + observacao + ", status=" + status + '}';
+    }
+
     /**
      * Método abstract responsável por cadastrar um objeto Material no banco de dados.
      * A operação é realizada utilizando hibernate.
@@ -329,30 +350,26 @@ public abstract class Material {
     public abstract List filtrarMaterialCMP();
     
     /**
-     * Método abstract responsável em obter uma lista de objetos do tipo Material no banco de dados, 
-     * filtrados conforme data de emprestimo atrasada.
-     * A operação é realizada utilizando hibernate.
-     * @return List - Caso a operação for realizada com sucesso retorna uma lista de objetos do tipo Material, caso contrário retorna null.
-     */
-    public abstract List filtrarMaterialAtraso();
-    
-    /**
      * Método abstract responsável em obter um objeto do tipo Material no banco de dados,
      * sendo este com nchamada igual ao objeto instanciado.
      * A operação é realizada utilizando hibernate.
-     * @param nchamada Número de sequencia a ser comparado.
      * @return Material - Caso a operação for realizada com sucesso retorna um objeto Material, caso contrário retorna null.
      */
-    public abstract Material buscarMaterialNC(String nchamada);
+    public abstract Material buscarMaterialNC();
 
     /**
      * Método abstract responsável em obter um objeto do tipo Material no banco de dados,
-     * sendo este com nsequencia igual ao objeto instanciado.
+     * sendo este com cdu igual ao objeto instanciado.
      * A operação é realizada utilizando hibernate.
-     * @param nseq Número de sequencia a ser comparado.
      * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
      */
-    public abstract Material buscarMaterialNS(int nseq);    
+    public abstract Material buscarMaterialCDU();
+
+    /**
+     * Método abstract responsável em obter um objeto do tipo Material no banco de dados,
+     * sendo este com cdd igual ao objeto instanciado.
+     * A operação é realizada utilizando hibernate.
+     * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
+     */
+    public abstract Material buscarMaterialCDD();        
 }
-
-

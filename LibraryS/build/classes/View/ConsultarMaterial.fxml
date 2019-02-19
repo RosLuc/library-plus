@@ -17,46 +17,53 @@
             </image>
         </ImageView>
         <Button fx:id="backBtn" layoutX="814.0" layoutY="29.0" mnemonicParsing="false" onAction="#backBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="CANCELAR" />
-        <Text layoutX="163.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Nº de chamada:">
+        <Text layoutX="235.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Nº de chamada:">
             <font>
                 <Font name="Comic Sans MS Bold" size="18.0" />
             </font>
         </Text>
-        <TextField fx:id="nChamTxt" alignment="BASELINE_LEFT" layoutX="271.0" layoutY="94.0" prefHeight="32.0" prefWidth="281.0" styleClass="textfield" />
-        <Text fontSmoothingType="LCD" layoutX="572.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Nº de sequência:">
+        <TextField fx:id="nChamTxt" alignment="BASELINE_LEFT" layoutX="343.0" layoutY="82.0" prefHeight="32.0" prefWidth="69.0" styleClass="textfield" />
+        <Text fontSmoothingType="LCD" layoutX="423.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="CDU:">
             <font>
                 <Font name="Comic Sans MS Bold" size="17.0" />
             </font>
         </Text>
-        <TextField fx:id="nSeqTxt" layoutX="691.0" layoutY="95.0" prefHeight="32.0" prefWidth="135.0" styleClass="textfield" />
-        <Text layoutX="164.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Título:">
+        <TextField fx:id="cduTxt" layoutX="464.0" layoutY="83.0" prefHeight="32.0" prefWidth="112.0" styleClass="textfield" />
+      <Text fontSmoothingType="LCD" layoutX="585.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="CDD:">
+         <font>
+            <Font name="Comic Sans MS Bold" size="17.0" />
+         </font>
+      </Text>
+      <TextField fx:id="cddTxt" layoutX="626.0" layoutY="83.0" prefHeight="32.0" prefWidth="112.0" styleClass="textfield" />
+        <Text layoutX="236.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Título:">
             <font>
                 <Font name="Comic Sans MS Bold" size="17.0" />
             </font>
         </Text>
-        <TextField fx:id="tituloTxt" layoutX="214.0" layoutY="129.0" prefHeight="32.0" prefWidth="612.0" styleClass="textfield" />
-        <Text layoutX="166.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Autor:">
+        <TextField fx:id="tituloTxt" layoutX="286.0" layoutY="117.0" prefHeight="32.0" prefWidth="455.0" styleClass="textfield" />
+        <Text layoutX="238.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Autor:">
             <font>
                 <Font name="Comic Sans MS Bold" size="17.0" />
             </font>
         </Text>
-        <TextField fx:id="autorTx" layoutX="214.0" layoutY="164.0" prefHeight="32.0" prefWidth="274.0" styleClass="textfield" />
-        <Text layoutX="502.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Editora:">
+        <TextField fx:id="autorTx" layoutX="286.0" layoutY="152.0" prefHeight="32.0" prefWidth="168.0" styleClass="textfield" />
+        <Text layoutX="465.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Editora:">
             <font>
                 <Font name="Comic Sans MS Bold" size="17.0" />
             </font>
         </Text>
-        <TextField fx:id="editTxt" layoutX="562.0" layoutY="164.0" prefHeight="32.0" prefWidth="264.0" styleClass="textfield" />
-        <Text layoutX="158.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Local de publicação:" wrappingWidth="145.5625">
+        <TextField fx:id="editTxt" layoutX="525.0" layoutY="152.0" prefHeight="32.0" prefWidth="215.0" styleClass="textfield" />
+        <Text layoutX="230.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Local de publicação:" wrappingWidth="145.5625">
             <font>
                 <Font name="MingLiU-ExtB" size="17.0" />
             </font>
         </Text>
-        <TextField fx:id="localTxt" layoutX="303.0" layoutY="198.0" prefHeight="32.0" prefWidth="523.0" styleClass="textfield" />
-        <TableView fx:id="table" layoutX="66.0" layoutY="292.0" prefHeight="221.0" prefWidth="828.0">
+        <TextField fx:id="localTxt" layoutX="375.0" layoutY="186.0" prefHeight="32.0" prefWidth="364.0" styleClass="textfield" />
+        <TableView fx:id="table" layoutX="66.0" layoutY="276.0" prefHeight="250.0" prefWidth="828.0">
             <columns>
                 <TableColumn fx:id="nchamTb" prefWidth="59.0" text="Nº de Chamada" />
-                <TableColumn fx:id="nseqTb" prefWidth="67.0" text="Nº de Sequência" />
+                <TableColumn fx:id="cddTb" prefWidth="67.0" text="CDD" />
+            <TableColumn fx:id="cduTb" prefWidth="67.0" text="CDU" />
                 <TableColumn fx:id="tituloTb" minWidth="0.0" prefWidth="205.0" text="Título" />
                 <TableColumn fx:id="autorTb" prefWidth="84.0" text="Autor" />
                 <TableColumn fx:id="editTb" prefWidth="65.0" text="Editora" />
@@ -66,11 +73,12 @@
                 <TableColumn fx:id="nestTb" text="Estante" />
                 <TableColumn fx:id="npraTb" prefWidth="76.0" text="Prateleira" />
                 <TableColumn fx:id="statusTb" prefWidth="76.0" text="Status" />
+            <TableColumn fx:id="dataTb" prefWidth="76.0" text="Data de Cadastro" />
             </columns>
         </TableView>
-        <Button fx:id="pesquisarBtn" layoutX="362.0" layoutY="242.0" mnemonicParsing="false" onAction="#pesquisarBtnAction" prefHeight="25.0" prefWidth="116.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="PESQUISAR" />
-        <Button fx:id="limparBtn" layoutX="509.0" layoutY="242.0" mnemonicParsing="false" onAction="#limparBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="LIMPAR" />
-        <Label layoutX="367.0" layoutY="25.0" styleClass="labelname" stylesheets="@../CSS/principal.css" text="FILTRAR BUSCA">
+        <Button fx:id="pesquisarBtn" layoutX="378.0" layoutY="231.0" mnemonicParsing="false" onAction="#pesquisarBtnAction" prefHeight="25.0" prefWidth="116.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="PESQUISAR" />
+        <Button fx:id="limparBtn" layoutX="525.0" layoutY="231.0" mnemonicParsing="false" onAction="#limparBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="LIMPAR" />
+        <Label layoutX="283.0" layoutY="25.0" styleClass="labelname" stylesheets="@../CSS/principal.css" text="FILTRAR BUSCA POR LIVROS">
             <font>
                 <Font size="24.0" />
             </font>

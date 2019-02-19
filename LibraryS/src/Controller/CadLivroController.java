@@ -6,7 +6,6 @@
 package Controller;
 
 import Classes.Livro;
-import Classes.Prateleira;
 import LibraryScreens.CadLivro;
 import LibraryScreens.CadMaterial;
 import java.util.Date;
@@ -26,11 +25,8 @@ import org.hibernate.HibernateException;
  * @author death
  */
 public class CadLivroController {
-
-    @FXML
-    private TextField numChamTxt;
-
-    @FXML
+    
+ @FXML
     private TextField editorTxt;
 
     @FXML
@@ -43,13 +39,13 @@ public class CadLivroController {
     private Button addBtn;
 
     @FXML
-    private TextField numSeqTxt1;
-
-    @FXML
     private TextField estanteTxt;
 
     @FXML
     private TextField exemplarTxt;
+
+    @FXML
+    private TextField cddTxt;
 
     @FXML
     private TextField prateleiraTxt;
@@ -64,10 +60,16 @@ public class CadLivroController {
     private TextField volTxt;
 
     @FXML
+    private TextField nchamadaTxt;
+
+    @FXML
     private TextField tituleTxt;
 
     @FXML
     private TextField anoPublicTxt;
+
+    @FXML
+    private TextField cduTxt;
 
     @FXML
     private TextField localPublicTxt;
@@ -75,7 +77,6 @@ public class CadLivroController {
     /**
      * Método responssável por cancelar a ação atual e retornar para a tela
      * antetior
-     *
      * @param event
      */
     @FXML
@@ -85,7 +86,6 @@ public class CadLivroController {
 
     /**
      * Método responsável pelo cadastro do livro
-     *
      * @param event
      */
     @FXML
@@ -121,34 +121,28 @@ public class CadLivroController {
     private void addLivro(){
         try{
             Livro livro = new Livro();
-            String nchamada = numChamTxt.getText();
-            if(livro.buscarMaterialNC(nchamada) == null && !(nchamada.equals(""))) livro.setNchamada(nchamada);
-            else{
-                alertaErro("FALHA AO CADASTRAR LIVRO","ATENÇÃO: Já existir um livro com número de chamada digitado ou campo não preenchido");
-                return;
-            }
             //Verificar usuario 
             livro.setUsercode(11111);
                         
-            int Codestante = Integer.parseInt(estanteTxt.getText());
-            int CodPrateleira = Integer.parseInt(prateleiraTxt.getText());
-            if(Prateleira.verifcarPrateleira(Codestante, CodPrateleira)){
-                livro.setCodestante(Codestante);
-                livro.setCodprateleira(CodPrateleira);
+            String temp = estanteTxt.getText();
+            if(!(temp.equals(""))){
+                livro.setCorestante(temp);
             }
             else{
-                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Não existir uma estante com esse número e número de prateleira.");
+                alertaErro("FALHA AO CADASTRAR LIVRO", "ATENÇÃO: Campo de obrigatorio Cor da estante não preenchido.");
                 return;
             }
-            
-            String temp = numSeqTxt1.getText();
-            if (!(temp.equals(""))){
-                int nsequencia = Integer.parseInt(temp);
-                if(livro.buscarMaterialNS(nsequencia) == null)  livro.setNsequencia(nsequencia);
-                else{
-                    alertaErro("FALHA AO CADASTRAR LIVRO","ATENÇÃO: Já existir um livro com número de sequência digitado.");
-                    return;
-                }
+            livro.setCodprateleira(Integer.parseUnsignedInt(prateleiraTxt.getText()));
+
+            livro.setCdu(Integer.parseUnsignedInt(cduTxt.getText()));
+            if((livro.buscarMaterialCDU())!= null){
+                alertaErro("FALHA AO CADASTRAR LIVRO","ATENÇÃO: Já existir um livro com número de CDU digitado.");
+                return;
+            }
+            livro.setCdd(Integer.parseUnsignedInt(cddTxt.getText()));
+            if((livro.buscarMaterialCDD())!= null){
+                alertaErro("FALHA AO CADASTRAR LIVRO","ATENÇÃO: Já existir um livro com número de CDD digitado.");
+                return;
             }
             
             livro.setData(new Date());
@@ -163,14 +157,14 @@ public class CadLivroController {
             int exemplar = 0;
             temp = exemplarTxt.getText();
             if(!(temp.equals(""))){
-               exemplar = Integer.parseInt(temp);
+               exemplar = Integer.parseUnsignedInt(temp);
             }
             livro.setExemplar(exemplar);
 
             int volume = 0;
             temp = volTxt.getText();
             if(!(temp.equals(""))){
-               volume = Integer.parseInt(temp);
+               volume = Integer.parseUnsignedInt(temp);
             }
             livro.setVolume(volume);
 
@@ -182,7 +176,7 @@ public class CadLivroController {
                 return;
             } 
 
-            livro.setAnopublicacao(Integer.parseInt(anoPublicTxt.getText()));
+            livro.setAnopublicacao(Integer.parseUnsignedInt(anoPublicTxt.getText()));
             
             temp = aquisicaoTxt.getText();
             if(!(temp.equals(""))){
@@ -219,8 +213,10 @@ public class CadLivroController {
             
         }catch (NumberFormatException e){
             alertaErro("FALHA AO CADASTRAR LIVRO","ATENÇÃO: Campos númericos não peenchido ou se adicionou simbolos como: [,./ -] ou outro. Adicione apenas inteiros.");
-        }catch (Exception er){
-            alertaErro("FALHA AO CADASTRAR LIVRO", "Erro.");
+        }catch (HibernateException er){
+            alertaErro("FALHA AO CADASTRAR LIVRO", er.toString());
+        }catch (Exception erro){
+            alertaErro("FALHA AO CADASTRAR LIVRO", "ERRO");
         }
     }
     

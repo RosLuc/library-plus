@@ -1,6 +1,5 @@
 package Classes;
 
-import java.sql.Connection;
 import java.util.*;
 import org.hibernate.*;
 import org.hibernate.cfg.*;
@@ -30,9 +29,10 @@ public class Livro  extends Material{
      * @param editora Editora do livro.
      * @param nchamada Número de chamada relacionado ao BD (passado para superclasse).
      * @param usercode Código usuário relacionado ao BD (passado para superclasse).
-     * @param codestante Código da estante relacionado ao BD (passado para superclasse).
+     * @param corestante Cor da estante relacionado ao BD (passado para superclasse).
      * @param codprateleira Código da prateleira relacionado ao BD (passado para superclasse).
-     * @param nsequencia Número de sequência(passado para superclasse).
+     * @param cdu Número do CDU(passado para superclasse).
+     * @param cdd Número do CDD(passado para superclasse).
      * @param data Data de cadastro (passado para superclasse).
      * @param titulo Título (passado para superclasse).
      * @param exemplar Número do exemplar (passado para superclasse).
@@ -43,8 +43,8 @@ public class Livro  extends Material{
      * @param observacao Observação (passado para superclasse).
      * @param status Status (passado para superclasse).
      */
-    public Livro(String autor, String editora, String nchamada, int usercode, int codestante, int codprateleira, int nsequencia, Date data, String titulo, int exemplar, int volume, String local, int anopublicacao, String formadeaquisicao, String observacao, String status) {
-        super(nchamada, usercode, codestante, codprateleira, nsequencia, data, titulo, exemplar, volume, local, anopublicacao, formadeaquisicao, observacao, status);
+    public Livro(String autor, String editora, int nchamada, int usercode, String corestante, int codprateleira, int cdu, int cdd, Date data, String titulo, int exemplar, int volume, String local, int anopublicacao, String formadeaquisicao, String observacao, String status) {
+        super(nchamada, usercode, corestante, codprateleira, cdu, cdd, data, titulo, exemplar, volume, local, anopublicacao, formadeaquisicao, observacao, status);
         this.autor = autor;
         this.editora = editora;
     }
@@ -80,12 +80,19 @@ public class Livro  extends Material{
     public void setEditora(String editora) {
         this.editora = editora;
     }
+
+    @Override
+    public String toString() {
+        return "Livro{" + "autor=" + autor + ", editora=" + editora + '}';
+    }
+    
     
     /**
      * Método sobreposto da superclasse Material responsável por cadastrar um objeto Livro no banco de dados.
      * A operação é realizada utilizando hibernate.
      * @return boolean - Caso a operação for realizada com sucesso returna true, caso contrário false.
      */
+     @Override
     public boolean cadastrarMaterial(){
         try {
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
@@ -94,6 +101,7 @@ public class Livro  extends Material{
             session.save(this);
             tx.commit();
             session.close();
+            factory.close();
             return true;
         } catch (HibernateException e) {
              System.err.println("Erro na insersão de Material:." + e);
@@ -107,6 +115,7 @@ public class Livro  extends Material{
      * A operação é realizada utilizando hibernate.
      * @return boolean - Caso a operação for realizada com sucesso returna true, caso contrário false.
      */
+     @Override
     public boolean updateMaterial(){
         try {
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
@@ -115,6 +124,7 @@ public class Livro  extends Material{
             session.update(this);
             tx.commit();
             session.close();
+            factory.close();
             return true;
         } catch (HibernateException e) {
             System.err.println("Erro na atualização Material: " + e);
@@ -124,17 +134,19 @@ public class Livro  extends Material{
     }
     
     /**
-     *Método sobreposto da superclasse Material responsável por obter uma lista de objetos do tipo Livro do banco de dados conforme clásula de seleção enviada para str.
+     *Método sobreposto da superclasse Material responsável por obter uma lista de objetos do tipo Livro do banco de dados.
      * A operação é realizada utilizando hibernate.
      * @return List - Caso a operação for realizada com sucesso retorna lista de objetos do tipo Livro, caso contrário retorna null.
      */
-    public List listarMaterial(){
+     @Override
+    public List<Livro> listarMaterial(){
         try {
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
-            List<Livro> listLivro= new ArrayList();
-            listLivro = session.createQuery("from Classes.Livro").list();
+            @SuppressWarnings("unchecked")
+            List<Livro> listLivro= session.createQuery("from Classes.Livro").list();
             session.close();
+            factory.close();
             return listLivro;
         } catch (HibernateException e) {
              System.err.println("Erro na seleção: " + e);
@@ -148,6 +160,7 @@ public class Livro  extends Material{
      * A operação é realizada utilizando hibernate.
      * @return boolean - Caso a operação for realizada com sucesso returna true, caso contrário false.
      */
+     @Override
     public boolean deleteMaterial(){
         try {
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
@@ -156,6 +169,7 @@ public class Livro  extends Material{
             session.delete(this);
             tx.commit();
             session.close();
+            factory.close();
             return true;
         } catch (HibernateException e) {
              System.err.println("Erro ao deletar: " + e);
@@ -171,13 +185,14 @@ public class Livro  extends Material{
      * @return List - Caso a operação for realizada com sucesso retorna lista de objetos do tipo Livro, caso contrário retorna null.
      */
      @Override
+     @SuppressWarnings("unchecked")
     public List<Livro> filtrarMaterialCMP(){
         List<Livro> listLivro;
         SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
         Session session = factory.openSession();
         try{
-            Example exp = Example.create(this).enableLike().excludeZeroes().ignoreCase();
-            listLivro = session.createCriteria(Livro.class).add(exp).addOrder(Order.asc("nsequencia")).list();
+            Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes().ignoreCase();
+            listLivro = session.createCriteria(Livro.class).add(exp).addOrder(Order.asc("nchamada")).list();
             return listLivro;
         }catch(HibernateException e){
             System.err.println("Erro ao filtrar: " + e);
@@ -185,83 +200,87 @@ public class Livro  extends Material{
             return null;
         }finally{
             session.close();
+            factory.close();
         }   
-    }
-    
-    /**
-     * Método sobreposto da superclasse Material responsável em obter uma lista de objetos do tipo Livro no banco de dados, 
-     * filtrados conforme data de emprestimo atrasada.
-     * A operação é realizada utilizando hibernate.
-     * @return List - Caso a operação for realizada com sucesso retorna lista de objetos do tipo Livro,  caso contrário retorna null.
-     */
-    public List filtrarMaterialAtraso(){
-        List<Livro> listLivro = null;
-        try{
-            SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
-            Session session = factory.openSession();
-            listLivro = session.createCriteria(Livro.class).add(Restrictions.le("data", new Date())).addOrder(Order.desc("data")).list();
-            session.close();
-            return listLivro;
-        }catch(HibernateException e){
-             System.err.println("Erro ao filtrar: " + e);
-             e.printStackTrace();
-             return null;
-        } 
     }
 
     /**
      * Método sobreposto da superclasse Material responsável em obter um objeto do tipo Livro no banco de dados,
      * sendo este com nchamada igual ao objeto instanciado.
      * A operação é realizada utilizando hibernate.
-     * @param nchamada Número de sequencia a ser comparado.
      * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
      */
-    public Material buscarMaterialNC(String nchamada){
-        Livro l = null;
+     @Override
+    public Livro buscarMaterialNC(){        
         try{
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
-            Criterion cri1 = Restrictions.ilike("nchamada", nchamada);
-            l = (Livro) session.createCriteria(Livro.class).add(cri1).uniqueResult();
+            Criterion cri1 = Restrictions.eq("nchamada", this.getNchamada());
+            Livro l = (Livro) session.createCriteria(Livro.class).add(cri1).uniqueResult();
             session.close();
+            factory.close();
             return l;
         }catch(NonUniqueResultException er){
             System.err.println("Erro ao filtrar: " + er);
-            return l;
+            return null;
         }catch(HibernateException e){
             System.err.println("Erro ao filtrar: " + e);
             e.printStackTrace();
-            return l;
+            return null;
         }
     }
     
     /**
      * Método sobreposto da superclasse Material responsável em obter um objeto do tipo Livro no banco de dados,
-     * sendo este com nsequencia igual ao objeto instanciado.
+     * sendo este com cdu igual ao objeto instanciado.
      * A operação é realizada utilizando hibernate.
-     * @param nseq Número de sequencia a ser comparado.
      * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
      */
-    public Material buscarMaterialNS(int nseq){
-        Livro l = null;
+     @Override
+    public Livro buscarMaterialCDU(){
         try{
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
-            Criterion cri1 = Restrictions.eq("nsequencia", nseq);
-            l = (Livro) session.createCriteria(Livro.class).add(cri1).uniqueResult();
+            Criterion cri1 = Restrictions.eq("cdu", this.getCdu());
+            Livro l = (Livro) session.createCriteria(Livro.class).add(cri1).uniqueResult();
             session.close();
+            factory.close();
             return l;
         }catch(NonUniqueResultException er){
             System.err.println("Erro ao filtrar: " + er);
-            return l;
+            return null;
         }catch(HibernateException e){
             System.err.println("Erro ao filtrar: " + e);
             e.printStackTrace();
-            return l;
+            return null;
         }
     }
     
-
+    /**
+     * Método sobreposto da superclasse Material responsável em obter um objeto do tipo Livro no banco de dados,
+     * sendo este com cdd igual ao objeto instanciado.
+     * A operação é realizada utilizando hibernate.
+     * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
+     */
+     @Override
+    public Livro buscarMaterialCDD(){
+        try{
+            SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
+            Session session = factory.openSession();
+            Criterion cri1 = Restrictions.eq("cdd", this.getCdd());
+            Livro l = (Livro) session.createCriteria(Livro.class).add(cri1).uniqueResult();
+            session.close();
+            factory.close();
+            return l;
+        }catch(NonUniqueResultException er){
+            System.err.println("Erro ao filtrar: " + er);
+            return null;
+        }catch(HibernateException e){
+            System.err.println("Erro ao filtrar: " + e);
+            e.printStackTrace();
+            return null;
+        }
+    }  
 }
 
 
