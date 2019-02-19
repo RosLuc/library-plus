@@ -11,7 +11,6 @@ import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import hibernate.NewHibernateUtil;
 
 /**
  * Classe para objetos do tipo Pessoa, onde serão contidos, valores e métodos para o mesmo.
@@ -19,7 +18,6 @@ import hibernate.NewHibernateUtil;
  * @version 1.5
  */
 public class Pessoa {
-    
     private int codinsc;
     private int usercode;
     private String estado;
@@ -436,20 +434,18 @@ public class Pessoa {
      * @return List - Caso a operação for realizada com sucesso retorna uma lista de pessoa, caso contrário retorna null.
      */
     public List filtrarPessoa(){
-        SessionFactory fabrica = NewHibernateUtil.getSessionFactory();
-        Session sessao = fabrica.openSession();
         try{
-            
+            SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
+            Session sessao = fabrica.openSession();
             List<Pessoa> listaPessoa = new ArrayList();
             Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes().ignoreCase();
             listaPessoa = sessao.createCriteria(Pessoa.class).add(exp).addOrder(Order.desc("nome")).list();
+            sessao.close();
+            fabrica.close();
             return listaPessoa;
         }catch(HibernateException e){
             System.err.println("Erro: "+e);
             return null;
-        }finally{
-            sessao.close();
-            fabrica.close();
         }
     }
 }

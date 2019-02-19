@@ -8,13 +8,12 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="LibraryScreens.jar" size="139318" download="eager" />
+    <jar href="LibraryScreens.jar" size="135404" download="eager" />
     <jar href="lib\antlr-2.7.7.jar" size="445288" download="eager" />
     <jar href="lib\commons-collections-3.1.jar" size="559366" download="eager" />
     <jar href="lib\dom4j-1.6.1.jar" size="313898" download="eager" />
     <jar href="lib\hibernate-jpa-2.0-api-1.0.0.Final.jar" size="100884" download="eager" />
     <jar href="lib\hibernate3.jar" size="4117255" download="eager" />
-    <jar href="lib\itextpdf-5.5.13.jar" size="2320581" download="eager" />
     <jar href="lib\javassist-3.24.0-GA.jar" size="777669" download="eager" />
     <jar href="lib\javax.mail.jar" size="659033" download="eager" />
     <jar href="lib\jta-1.1.jar" size="10899" download="eager" />

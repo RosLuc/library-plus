@@ -92,21 +92,31 @@ public class EsqueciSenhaController {
     }
 
     public void changePassword() throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        Usuario us = new Usuario();
-
-        if (us.redefinirSenha(newPassTxt.getText())) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText("SENHA");
-            alert.setTitle("Nova Senha");
-            alert.setContentText("Senha alterada com sucesso");
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("SENHA");
-            alert.setTitle("Nova Senha");
+        Usuario user = new Usuario();
+        user = user.verificarUsuario();
+        if(user.getCodRed().equals(codVerTxt.getText())){
+            user.setSenha(newPassTxt.getText());
+            user.setCodRed(null);
+            if(user.atualizaUsuario() == true){
+                returnLogin();
+                confirmacao();
+            }else erro();  
+        }else erro();
+    }
+    
+    public void erro(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Redefinir senha");
+            alert.setTitle("Codigo invalido");
             alert.setContentText("Não foi possivel redefinir a nova senha. Verifique se as informações estão corretas, e tente novamente.");
-        }
-        returnLogin();
+    }
+    
+    public void confirmacao(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("Redefinir senha");
+            alert.setTitle("Senha redefinida");
+            alert.setContentText("Senha alterada com sucesso!");
+            alert.show();
     }
 
 }
