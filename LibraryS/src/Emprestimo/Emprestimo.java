@@ -30,7 +30,7 @@ public class Emprestimo {
     private Date dataemp;
     private Date datadev;
     private String status;
-    private Set<Material> materiais = new HashSet<>(5);
+    private Set<Material> materiais;
     
     /**
      * Construtor padrão.
@@ -279,7 +279,7 @@ public class Emprestimo {
      * @param codemp Código de emprestimo a ser comparado.
      * @return Emprestimo - Caso a operação for realizada com sucesso retorna um objeto Emprestimo, caso contrário retorna null.
      */    
-    public Emprestimo buscarEmprestimo(int codemp){
+    static public Emprestimo buscarEmprestimo(int codemp){
         try{
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();

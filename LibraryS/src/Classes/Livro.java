@@ -80,6 +80,12 @@ public class Livro  extends Material{
     public void setEditora(String editora) {
         this.editora = editora;
     }
+
+    @Override
+    public String toString() {
+        return "Livro{" + "autor=" + autor + ", editora=" + editora + '}';
+    }
+    
     
     /**
      * Método sobreposto da superclasse Material responsável por cadastrar um objeto Livro no banco de dados.
