@@ -21,7 +21,9 @@ public class Usuario {
     private String email;
     private String login;
     private String cpf;
-   /**
+    private String codred;
+   
+    /**
      * @return the usercode
      */
     public int getUserCode() {
@@ -92,6 +94,18 @@ public class Usuario {
      */
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+    /**
+     * @return the codred
+     */
+    public String getCodRed() {
+        return codred;
+    }
+    /**
+     * @param codred the codred to set
+     */
+    public void setCodRed(String codred) {
+        this.codred = codred;
     }
     public Usuario(int userCode, String nome, String senha, String email, String login, String cpf) {
         this.userCode = userCode;

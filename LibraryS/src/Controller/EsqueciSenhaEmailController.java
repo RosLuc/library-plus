@@ -107,7 +107,7 @@ public class EsqueciSenhaEmailController {
             alert.setContentText("Error");
             alert.show();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText("EMAIL VALIDO");
             alert.setTitle("Código de Verificação");
             String res = novo.recupera();
@@ -116,14 +116,12 @@ public class EsqueciSenhaEmailController {
                 alert.setContentText("Não foi possivel recuperar sua nova senha. Verifique se as informações estão corretas, e tente novamente");
                 alert.show();
             } else {
-
                 novo.verificarUsuario();
                 novo.setSenha(res);
                 novo.atualizaUsuario();
-
+                esqSenha();
             }
         }
-        esqSenha();
     }
 
 }
