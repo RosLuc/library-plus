@@ -6,6 +6,7 @@
 package Controller;
 
 import LibraryScreens.GerAcervo;
+import LibraryScreens.GerEmprestimos;
 import LibraryScreens.GerPessoas;
 import LibraryScreens.Login;
 import LibraryScreens.Principal;
@@ -87,7 +88,13 @@ public class PrincipalController {
      */
     @FXML
     void gerEmpBtnAction(ActionEvent event) {
-
+        GerEmprestimos cm = new GerEmprestimos();
+        try {
+            cm.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        fecha();
     }
 
     /**
