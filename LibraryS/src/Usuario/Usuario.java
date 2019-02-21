@@ -174,6 +174,7 @@ public class Usuario {
             Usuario temp = (Usuario) sessao.createCriteria(Usuario.class).uniqueResult();
             sessao.close();//sessao finalizada
             fabrica.close();
+            if(temp == null) return false;
             return (this.senha.equals(temp.getSenha()) && this.login.equals(temp.getLogin()));      
         }
         catch(HibernateException e){
