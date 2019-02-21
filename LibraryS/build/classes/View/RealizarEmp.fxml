@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" stylesheets="@../CSS/consultar.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controller.RealizarEmpController">
+    <children>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/LogoLPColor.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="backBtn" layoutX="814.0" layoutY="29.0" mnemonicParsing="false" onAction="#backBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="CANCELAR" />
+        <Text layoutX="70.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Nome:">
+            <font>
+                <Font name="Comic Sans MS Bold" size="18.0" />
+            </font>
+        </Text>
+        <TextField fx:id="nomeTxt" alignment="BASELINE_LEFT" layoutX="120.0" layoutY="90.0" prefHeight="32.0" prefWidth="319.0" styleClass="textfield" />
+        <Text fontSmoothingType="LCD" layoutX="70.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Código de Inscrição:">
+            <font>
+                <Font name="Comic Sans MS Bold" size="17.0" />
+            </font>
+        </Text>
+        <TextField fx:id="codInscTxt" layoutX="210.0" layoutY="160.0" prefHeight="32.0" prefWidth="229.0" styleClass="textfield" />
+        <Text layoutX="70.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Email:">
+            <font>
+                <Font name="Comic Sans MS Bold" size="17.0" />
+            </font>
+        </Text>
+        <TextField fx:id="emailTxt" layoutX="120.0" layoutY="125.0" prefHeight="32.0" prefWidth="319.0" styleClass="textfield" />
+        <TableView fx:id="tablePes" layoutX="34.0" layoutY="251.0" prefHeight="175.0" prefWidth="429.0">
+            <columns>
+                <TableColumn fx:id="nchamTb" prefWidth="59.0" text="Código de Inscrição" />
+                <TableColumn fx:id="nseqTb" prefWidth="115.0" text="Nome" />
+                <TableColumn fx:id="tituloTb" minWidth="0.0" prefWidth="128.0" text="Email" />
+                <TableColumn fx:id="nestTb" prefWidth="60.0" text="Turma" />
+                <TableColumn fx:id="npraTb" prefWidth="59.0" text="Série" />
+            </columns>
+        </TableView>
+        <Button fx:id="pesquisarBtn" layoutX="62.0" layoutY="201.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="133.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="PESQUISAR" />
+        <Button fx:id="limparBtn" layoutX="214.0" layoutY="201.0" mnemonicParsing="false" styleClass="btn" stylesheets="@../CSS/principal.css" text="LIMPAR" />
+        <Label layoutX="367.0" layoutY="25.0" styleClass="labelname" stylesheets="@../CSS/principal.css" text="FILTRAR BUSCA">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+      <TableView fx:id="tableMat" layoutX="497.0" layoutY="251.0" prefHeight="175.0" prefWidth="429.0">
+         <columns>
+            <TableColumn fx:id="nchamTb1" prefWidth="59.0" text="Nº de Chamada" />
+            <TableColumn fx:id="nseqTb1" prefWidth="115.0" text="Título" />
+            <TableColumn fx:id="tituloTb1" minWidth="0.0" prefWidth="128.0" text="Autor" />
+            <TableColumn fx:id="nestTb1" prefWidth="60.0" text="Editora" />
+            <TableColumn fx:id="npraTb1" prefWidth="59.0" text="Exemplar" />
+         </columns>
+      </TableView>
+      <Button fx:id="realizarEmpBtn" layoutX="383.0" layoutY="465.0" mnemonicParsing="false" onAction="#realizarEmpBtnAction" prefHeight="39.0" prefWidth="229.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="REALIZAR EMPRÉSTIMO" />
+      <Label layoutX="554.0" layoutY="131.0" text="ÁREA DE INFORMAÇÕES DA PESSOA SELECIONADA" />
+    </children>
+</AnchorPane>
