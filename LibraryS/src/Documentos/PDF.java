@@ -27,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.itextpdf.text.pdf.fonts.*;
 import java.awt.Color;
+import java.io.File;
 
 /**
  *
@@ -42,7 +43,8 @@ public class PDF {
         try{
             document = new Document(PageSize.A4.rotate(),30,20,20,30);
             Font fonte = new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.BOLD, new BaseColor(245, 245, 245));
-            outPutstream = new FileOutputStream ("TabelaLivros.pdf");
+            new File("Documento").mkdir();
+            outPutstream = new FileOutputStream("Documento/TabelaLivros.pdf");
             try{
                 PdfWriter writer = PdfWriter.getInstance(document, outPutstream);
                 document.open();
@@ -60,9 +62,7 @@ public class PDF {
                     canvas.setGState(state);
                     canvas.addImage(image);
                     canvas.restoreState();
-                } catch (BadElementException ex) {
-                    Logger.getLogger(PDF.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
+                } catch (BadElementException | IOException ex) {
                     Logger.getLogger(PDF.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 //colunas
