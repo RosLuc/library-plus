@@ -40,7 +40,7 @@
                 <Font name="Comic Sans MS Bold" size="17.0" />
             </font>
         </Text>
-        <TextField fx:id="tituloTxt" layoutX="286.0" layoutY="117.0" prefHeight="32.0" prefWidth="455.0" styleClass="textfield" />
+        <TextField fx:id="tituloTxt" layoutX="286.0" layoutY="117.0" prefHeight="32.0" prefWidth="453.0" styleClass="textfield" />
         <Text layoutX="238.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Autor:">
             <font>
                 <Font name="Comic Sans MS Bold" size="17.0" />
@@ -76,9 +76,9 @@
             <TableColumn fx:id="dataTb" prefWidth="76.0" text="Data de Cadastro" />
             </columns>
         </TableView>
-        <Button fx:id="pesquisarBtn" layoutX="378.0" layoutY="231.0" mnemonicParsing="false" onAction="#pesquisarBtnAction" prefHeight="25.0" prefWidth="116.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="PESQUISAR" />
-        <Button fx:id="limparBtn" layoutX="525.0" layoutY="231.0" mnemonicParsing="false" onAction="#limparBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="LIMPAR" />
-        <Label layoutX="283.0" layoutY="25.0" styleClass="labelname" stylesheets="@../CSS/principal.css" text="FILTRAR BUSCA POR LIVROS">
+        <Button fx:id="pesquisarBtn" layoutX="367.0" layoutY="231.0" mnemonicParsing="false" onAction="#pesquisarBtnAction" prefHeight="25.0" prefWidth="116.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="PESQUISAR" />
+        <Button fx:id="limparBtn" layoutX="507.0" layoutY="231.0" mnemonicParsing="false" onAction="#limparBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="LIMPAR" />
+        <Label layoutX="277.0" layoutY="25.0" styleClass="labelname" stylesheets="@../CSS/principal.css" text="FILTRAR BUSCA DE LIVROS">
             <font>
                 <Font size="24.0" />
             </font>

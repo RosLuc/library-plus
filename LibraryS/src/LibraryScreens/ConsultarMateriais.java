@@ -7,6 +7,7 @@ package LibraryScreens;
 
 import com.sun.javafx.scene.SceneHelper;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
  *
  * @author death
  */
-public class CadLivro extends Application {
+public class ConsultarMateriais extends Application {
 
     private static Stage stage; //janela1
 
@@ -27,7 +28,7 @@ public class CadLivro extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/View/CadLivro.fxml")); //carrega o FXML
+        Parent root = FXMLLoader.load(getClass().getResource("/View/ConsultarMateriais.fxml")); //carrega o FXML
         Scene scene = new Scene(root); //Coloca o FXML em uma cena
         stage.setResizable(false);
         stage.setTitle("Library+");
@@ -44,6 +45,6 @@ public class CadLivro extends Application {
     }
 
     public static void setStage(Stage stage) {
-        CadLivro.stage = stage;
+        ConsultarMateriais.stage = stage;
     }
 }

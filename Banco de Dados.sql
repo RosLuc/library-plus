@@ -4,7 +4,8 @@ create table Usuario(
 	senha varchar(40) not null,
 	nome varchar(70) not null,
 	email varchar(40) not null,
-	cpf varchar(11) not null unique
+	cpf varchar(11) not null unique,
+	codred varchar(15)
 );
 create table Pessoa(
 	codinsc serial primary key unique,
