@@ -6,7 +6,7 @@
 package Controller;
 
 import LibraryScreens.CadMaterial;
-import LibraryScreens.ConsultarMaterial;
+import LibraryScreens.ConsultarMateriais;
 import LibraryScreens.GerAcervo;
 import LibraryScreens.Principal;
 import java.util.logging.Level;
@@ -24,6 +24,9 @@ import javafx.stage.Stage;
 public class GerAcervoController {
 
     @FXML
+    private Button deletMatBtn1;
+
+    @FXML
     private Button backBtn;
 
     @FXML
@@ -32,6 +35,11 @@ public class GerAcervoController {
     @FXML
     private Button consMatBtn;
 
+    @FXML
+    void delMatBtnAction(ActionEvent event) {
+
+    }
+
     /**
      * Método responsavel por Abrir a tela de Consultar Material
      *
@@ -39,7 +47,7 @@ public class GerAcervoController {
      */
     @FXML
     void consMatBtnAction(ActionEvent event) {
-        ConsultarMaterial c = new ConsultarMaterial();
+        ConsultarMateriais c = new ConsultarMateriais();
         try {
             c.start(new Stage());
             fecha();

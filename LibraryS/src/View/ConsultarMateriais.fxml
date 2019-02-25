@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.98" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../CSS/principal.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ConsultarMateriaisController">
+  <tabs>
+    <Tab text="Consultar Livros">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="background" stylesheets="@../CSS/consultar.css">
+               <children>
+                  <Button fx:id="limparBtn" layoutX="514.0" layoutY="184.0" mnemonicParsing="false" onAction="#limparBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="LIMPAR" />
+                  <Button fx:id="pesquisarBtn" layoutX="364.0" layoutY="184.0" mnemonicParsing="false" onAction="#pesquisarBtnAction" prefHeight="25.0" prefWidth="116.0" styleClass="btn" text="PESQUISAR">
+                     <stylesheets>
+                        <URL value="@../CSS/principal.css" />
+                        <URL value="@../CSS/consultar.css" />
+                     </stylesheets></Button>
+                  <Button fx:id="backBtn" layoutX="827.0" layoutY="15.0" mnemonicParsing="false" onAction="#backBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="CANCELAR" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/LogoLPColor.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="327.0" layoutY="9.0" prefHeight="0.0" prefWidth="382.0" styleClass="labelname" stylesheets="@../CSS/principal.css" text="FILTRAR BUSCA DE LIVROS">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nChamTxt" alignment="BASELINE_LEFT" layoutX="232.0" layoutY="68.0" prefHeight="32.0" prefWidth="69.0" styleClass="textfield" />
+                  <TextField fx:id="cduTxt" layoutX="353.0" layoutY="68.0" prefHeight="32.0" prefWidth="102.0" styleClass="textfield" />
+                  <TextField fx:id="cddTxt" layoutX="507.0" layoutY="68.0" prefHeight="32.0" prefWidth="112.0" styleClass="textfield" />
+                  <TextField fx:id="tituloTxt" layoutX="172.0" layoutY="105.0" prefHeight="32.0" prefWidth="365.0" styleClass="textfield" />
+                  <TextField fx:id="autorTx" layoutX="684.0" layoutY="68.0" prefHeight="32.0" prefWidth="135.0" styleClass="textfield" />
+                  <TextField fx:id="editTxt" layoutX="602.0" layoutY="104.0" prefHeight="32.0" prefWidth="215.0" styleClass="textfield" />
+                  <TextField fx:id="localTxt" layoutX="259.0" layoutY="142.0" prefHeight="32.0" prefWidth="373.0" styleClass="textfield" />
+                  <Text layoutX="119.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Local de publicação:" wrappingWidth="139.5625">
+                     <font>
+                        <Font name="MingLiU-ExtB" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="547.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Editora:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="632.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Autor:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="124.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Título:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fontSmoothingType="LCD" layoutX="465.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="CDD:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fontSmoothingType="LCD" layoutX="311.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="CDU:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="124.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Nº de chamada:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <TableView fx:id="table" layoutX="67.0" layoutY="232.0" prefHeight="264.0" prefWidth="828.0">
+                     <columns>
+                        <TableColumn fx:id="nchamTb" prefWidth="59.0" text="Nº de Chamada" />
+                        <TableColumn fx:id="cddTb" prefWidth="67.0" text="CDD" />
+                        <TableColumn fx:id="cduTb" prefWidth="67.0" text="CDU" />
+                        <TableColumn fx:id="tituloTb" minWidth="0.0" prefWidth="205.0" text="Título" />
+                        <TableColumn fx:id="autorTb" prefWidth="84.0" text="Autor" />
+                        <TableColumn fx:id="editTb" prefWidth="65.0" text="Editora" />
+                        <TableColumn fx:id="anoTb" prefWidth="45.0" text="Ano" />
+                        <TableColumn fx:id="exemplarTb" prefWidth="68.0" text="Exemplar" />
+                        <TableColumn fx:id="volTb" minWidth="0.0" prefWidth="72.0" text="Volume" />
+                        <TableColumn fx:id="nestTb" text="Estante" />
+                        <TableColumn fx:id="npraTb" prefWidth="76.0" text="Prateleira" />
+                        <TableColumn fx:id="statusTb" prefWidth="76.0" text="Status" />
+                        <TableColumn fx:id="dataTb" prefWidth="76.0" text="Data de Cadastro" />
+                     </columns>
+                  </TableView>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab closable="false" text="Consultar Multimídia">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="background" stylesheets="@../CSS/consultar.css">
+               <children>
+                  <Label layoutX="259.0" layoutY="11.0" prefHeight="47.0" prefWidth="479.0" styleClass="labelname" text="FILTRAR BUSCA DE MULTIMÍDIAS">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@../CSS/consultar.css" />
+                        <URL value="@../CSS/principal.css" />
+                     </stylesheets>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/LogoLPColor.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="backBtn2" layoutX="827.0" layoutY="15.0" mnemonicParsing="false" onAction="#backBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="CANCELAR" />
+                  <Text layoutX="208.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Nº de chamada:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="396.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Título:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="501.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Estúdio:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="17.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="203.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Local de publicação:" wrappingWidth="140.89584350585938">
+                     <font>
+                        <Font name="MingLiU-ExtB" size="17.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="tituloTxt2" layoutX="444.0" layoutY="67.0" prefHeight="32.0" prefWidth="330.0" styleClass="textfield" />
+                  <TextField fx:id="estudioTxt2" layoutX="559.0" layoutY="105.0" prefHeight="32.0" prefWidth="215.0" styleClass="textfield" />
+                  <TextField fx:id="localTxt2" layoutX="353.0" layoutY="141.0" prefHeight="32.0" prefWidth="326.0" styleClass="textfield" />
+                  <TextField fx:id="nChamaTxt2" alignment="BASELINE_LEFT" layoutX="317.0" layoutY="67.0" prefHeight="32.0" prefWidth="69.0" styleClass="textfield" />
+                  <Text layoutX="208.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Produtor:">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="17.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="produtorTx2" layoutX="276.0" layoutY="104.0" prefHeight="32.0" prefWidth="215.0" styleClass="textfield" />
+                  <TableView fx:id="tableMult" layoutX="66.0" layoutY="232.0" prefHeight="264.0" prefWidth="828.0" styleClass="background">
+                     <columns>
+                        <TableColumn fx:id="nchamTb2" prefWidth="59.0" text="Nº de Chamada" />
+                        <TableColumn fx:id="tituloTb2" minWidth="0.0" prefWidth="205.0" text="Título" />
+                        <TableColumn fx:id="produtorTb" prefWidth="84.0" text="Produtor" />
+                        <TableColumn fx:id="estudioTb" prefWidth="65.0" text="Estúdio" />
+                        <TableColumn fx:id="anoTb2" prefWidth="45.0" text="Ano" />
+                        <TableColumn fx:id="exemplarTb2" prefWidth="68.0" text="Exemplar" />
+                        <TableColumn fx:id="volTb2" minWidth="0.0" prefWidth="72.0" text="Volume" />
+                        <TableColumn fx:id="nestTb2" text="Estante" />
+                        <TableColumn fx:id="npraTb2" prefWidth="76.0" text="Prateleira" />
+                        <TableColumn fx:id="statusTb2" prefWidth="76.0" text="Status" />
+                        <TableColumn fx:id="dataTb2" prefWidth="76.0" text="Data de Cadastro" />
+                     </columns>
+                  </TableView>
+                  <Button fx:id="pesquisarBtn2" layoutX="371.0" layoutY="184.0" mnemonicParsing="false" onAction="#pesquisarMultBtnAction" prefHeight="25.0" prefWidth="116.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="PESQUISAR" />
+                  <Button fx:id="limparBtn2" layoutX="515.0" layoutY="184.0" mnemonicParsing="false" onAction="#limparMultBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="LIMPAR" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

@@ -178,7 +178,7 @@ public class Multimidia extends Material {
         try{
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
-            Example exp = Example.create(this).enableLike().excludeZeroes().ignoreCase();
+            Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes().ignoreCase();
             @SuppressWarnings("unchecked")
             List<Multimidia> listMultimidia = session.createCriteria(Multimidia.class).add(exp).addOrder(Order.desc("nchamada")).list();
             session.close();
