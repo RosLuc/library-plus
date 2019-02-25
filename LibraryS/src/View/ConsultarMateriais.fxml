@@ -27,7 +27,7 @@
                         <Image url="@../images/LogoLPColor.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="327.0" layoutY="9.0" prefHeight="0.0" prefWidth="382.0" styleClass="labelname" stylesheets="@../CSS/label.css" text="FILTRAR BUSCA DE LIVROS">
+                  <Label layoutX="327.0" layoutY="9.0" prefHeight="0.0" prefWidth="382.0" styleClass="labelname" stylesheets="@../CSS/principal.css" text="FILTRAR BUSCA DE LIVROS">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -98,10 +98,14 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="background" stylesheets="@../CSS/consultar.css">
                <children>
-                  <Label layoutX="259.0" layoutY="11.0" prefHeight="47.0" prefWidth="479.0" styleClass="labelname" stylesheets="@../CSS/label.css" text="FILTRAR BUSCA DE MULTIMÍDIAS">
+                  <Label layoutX="259.0" layoutY="11.0" prefHeight="47.0" prefWidth="479.0" styleClass="labelname" text="FILTRAR BUSCA DE MULTIMÍDIAS">
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <stylesheets>
+                        <URL value="@../CSS/consultar.css" />
+                        <URL value="@../CSS/principal.css" />
+                     </stylesheets>
                   </Label>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
