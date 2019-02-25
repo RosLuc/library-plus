@@ -16,13 +16,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import Pessoa.Pessoa;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 
 /**
  * FXML Controller class
  *
  * @author death
  */
-public class CadPessoaController {
+public class CadPessoaController implements Initializable {
 
     @FXML
     private Button cancelBtn;
@@ -56,6 +60,10 @@ public class CadPessoaController {
     private TextField bairroTxt;
     @FXML
     private TextField estadoTxt;
+    @FXML
+    private ComboBox<String> categoriaBox;
+    @FXML
+    private Button ButtonCategoria;
 
     /**
      * Método responssável por cancelar a ação atual e retornar para a tela
@@ -67,6 +75,12 @@ public class CadPessoaController {
     void cancelBtnAction(ActionEvent event) {
         returnPes();
     }
+    
+     @Override
+    public void initialize(URL url, ResourceBundle rb){
+        String[] lista = {"Funcionario", "Professor", "Aluno"};
+        categoriaBox.getItems().addAll(lista);
+    }
 
     /**
      * Método responsável por cadastrar uma pessoa
@@ -77,7 +91,7 @@ public class CadPessoaController {
     void addBtnAction(ActionEvent event) {
         Pessoa p = new Pessoa();
         p.setBairro(bairroTxt.getText());
-        p.setCategoria(categoriaTxt.getText());
+        p.setCategoria(categoriaBox.getValue());
         p.setCep(cepTxt.getText());
         p.setCidade(cidadeTxt.getText());
         p.setContato(telTxt.getText());
@@ -157,4 +171,5 @@ public class CadPessoaController {
         alert.setContentText("Erro ao cadastrar pessoa.");
         alert.show();
     }
+    
 }
