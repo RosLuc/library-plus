@@ -122,4 +122,46 @@ public class LoginController {
             alert.show();
         }
     }
+    /**
+     * login()
+     *
+     * Esse metodo é responsavel por verificar as entradas do usuario e
+     * disponibilizar a entreada no sistema.
+     *
+     */
+    /*private void login() {
+        String login = userTxt.getText();
+        String senha = passTxt.getText();
+        Usuario us = new Usuario();
+        us.setLogin(userTxt.getText());
+        us.setSenha(passTxt.getText());
+
+        txtSenha.clear();
+
+        if (login.length() == 0 && passTxt.length() == 0) {
+            errorTxt.setText("Campos obrigatórios não informados!");
+            userTxt.setStyle("-fx-border-color: #FF0000");
+            passTxt.setStyle("-fx-border-color: #FF0000");
+        } else if (login.length() == 0 && senha.length() != 0) {
+            errorTxt.setText("Campo login obrigatório!");
+            userTxt.setStyle("-fx-border-color: #FF0000");
+        } else if (login.length() != 0 && senha.length() == 0) {
+            errorTxt.setText("Campo senha obrigatório!");
+            passTxt.setStyle("-fx-border-color: #FF0000");
+        } else {
+            if (us.validarUsuario()) {
+                Principal p = new Principal();
+                try {
+                    p.start(new Stage());
+                } catch (Exception ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                fecha();
+            } else {
+                errorTxt.setText("Login ou Senha incorreto!!");
+                userTxt.setStyle("-fx-border-color: #FF0000");
+                passTxt.setStyle("-fx-border-color: #FF0000");
+            }
+        }
+    }*/
 }

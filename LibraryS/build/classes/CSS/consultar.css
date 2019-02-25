@@ -95,14 +95,14 @@
 }
 
 .table-view .table-cell{
-    -fx-text-fill: #000000;
+    -fx-text-fill: gray;
     -fx-font-family: "Montserrat";
     -fx-font-size: 18;
     -fx-alignment: center;
 }
 
 .table-row-cell{
-    -fx-background-color: -fx-table-cell-border-color, #71C875;
+    -fx-background-color: -fx-table-cell-border-color, #ffffff;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em; /* 0 */
 }
