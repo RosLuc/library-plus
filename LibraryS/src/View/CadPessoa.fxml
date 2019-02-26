@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="CategoriaBox" prefHeight="595.0" prefWidth="960.0" stylesheets="@../CSS/consultar.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CadPessoaController">
+<AnchorPane id="AnchorPane" fx:id="CategoriaBox" prefHeight="595.0" prefWidth="960.0" stylesheets="@../CSS/consultar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CadPessoaController">
     <children>
         <TextField fx:id="nomeTxt" layoutX="135.0" layoutY="141.0" prefHeight="32.0" prefWidth="527.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
         <Label layoutX="321.0" layoutY="41.0" prefHeight="47.0" prefWidth="321.0" stylesheets="@../CSS/principal.css" text="CADASTRAR PESSOA">
@@ -48,7 +53,7 @@
         <Label layoutX="647.0" layoutY="356.0" stylesheets="@../CSS/label.css" text="Cidade:" />
         <Label layoutX="651.0" layoutY="304.0" stylesheets="@../CSS/label.css" text="Estado:" />
         <Label layoutX="503.0" layoutY="251.0" stylesheets="@../CSS/label.css" text="Turma:" />
-      <ComboBox fx:id="categoriaBox" layoutX="758.0" layoutY="140.0" prefHeight="32.0" prefWidth="132.0" />
+      <ComboBox fx:id="categoriaBox" layoutX="771.0" layoutY="140.0" prefHeight="32.0" prefWidth="119.0" promptText="Selecione" stylesheets="@../CSS/combobox.css" />
       <Label layoutX="251.0" layoutY="250.0" stylesheets="@../CSS/label.css" text="Turno:" />
       <TextField fx:id="turnoTxt" layoutX="312.0" layoutY="248.0" prefHeight="32.0" prefWidth="161.0" styleClass="textfield" />
     </children>

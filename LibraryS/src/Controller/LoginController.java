@@ -10,13 +10,15 @@ import LibraryScreens.EsqueciSenhaEmail;
 import LibraryScreens.Login;
 import LibraryScreens.Principal;
 import Usuario.Usuario;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -28,7 +30,7 @@ import javafx.stage.Stage;
  *
  * @author death
  */
-public class LoginController {
+public class LoginController implements Initializable {
 
     @FXML
     private Button signupBtn;
@@ -41,6 +43,9 @@ public class LoginController {
     @FXML
     private TextField userTxt;
 
+    @FXML
+    private Label errorTxt;
+
     /**
      * Método responsável por realizar o login do Usuário
      *
@@ -49,7 +54,8 @@ public class LoginController {
     @FXML
     void loginBtnKeyAction(KeyEvent e) {
         if (e.getCode() == KeyCode.ENTER) {
-            logar();
+            // logar();
+            login();
         }
     }
 
@@ -60,7 +66,8 @@ public class LoginController {
      */
     @FXML
     void loginBtnAction(ActionEvent event) {
-        logar();
+        //logar();
+        login();
     }
 
     /**
@@ -102,7 +109,7 @@ public class LoginController {
         Login.getStage().close();
     }
 
-    public void logar() {
+    /* public void logar() {
         Usuario us = new Usuario();
         us.setLogin(userTxt.getText());
         us.setSenha(passTxt.getText());
@@ -121,7 +128,15 @@ public class LoginController {
             alert.setContentText("Login ou Senha Incorretos");
             alert.show();
         }
+    }*/
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Usuario us = new Usuario();
+        if (us.verificarUsuario() != null) {
+            signupBtn.setVisible(false);
+        }
     }
+
     /**
      * login()
      *
@@ -129,25 +144,29 @@ public class LoginController {
      * disponibilizar a entreada no sistema.
      *
      */
-    /*private void login() {
+    private void login() {
         String login = userTxt.getText();
         String senha = passTxt.getText();
         Usuario us = new Usuario();
         us.setLogin(userTxt.getText());
         us.setSenha(passTxt.getText());
 
-        txtSenha.clear();
+        userTxt.clear();
+        passTxt.clear();
 
-        if (login.length() == 0 && passTxt.length() == 0) {
-            errorTxt.setText("Campos obrigatórios não informados!");
-            userTxt.setStyle("-fx-border-color: #FF0000");
-            passTxt.setStyle("-fx-border-color: #FF0000");
+        if (login.length() == 0 && senha.length() == 0) {
+            errorTxt.setStyle("-fx-opacity: 1");
+            errorTxt.setText("CAMPOS OBRIGATÓRIOS NÃO INFORMADOS!");
+            userTxt.setStyle("-fx-border-color: #ff2323");
+            passTxt.setStyle("-fx-border-color: #ff2323");
         } else if (login.length() == 0 && senha.length() != 0) {
-            errorTxt.setText("Campo login obrigatório!");
-            userTxt.setStyle("-fx-border-color: #FF0000");
+            errorTxt.setStyle("-fx-opacity: 1");
+            errorTxt.setText("CAMPO USUÁRIO OBRIGATÓRIO!");
+            userTxt.setStyle("-fx-border-color: #ff2323");
         } else if (login.length() != 0 && senha.length() == 0) {
-            errorTxt.setText("Campo senha obrigatório!");
-            passTxt.setStyle("-fx-border-color: #FF0000");
+            errorTxt.setStyle("-fx-opacity: 1");
+            errorTxt.setText("CAMPO SENHA OBRIGATÓRIO!");
+            passTxt.setStyle("-fx-border-color: #ff2323");
         } else {
             if (us.validarUsuario()) {
                 Principal p = new Principal();
@@ -158,10 +177,11 @@ public class LoginController {
                 }
                 fecha();
             } else {
-                errorTxt.setText("Login ou Senha incorreto!!");
-                userTxt.setStyle("-fx-border-color: #FF0000");
-                passTxt.setStyle("-fx-border-color: #FF0000");
+                errorTxt.setStyle("-fx-opacity: 1");
+                errorTxt.setText("LOGIN OU SENHA INCORRETOS!");
+                userTxt.setStyle("-fx-border-color: #ff2323");
+                passTxt.setStyle("-fx-border-color: #ff2323");
             }
         }
-    }*/
+    }
 }
