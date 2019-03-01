@@ -45,7 +45,11 @@ public class CadastrarController {
     private Button signInBtn;
     @FXML
     private TextField cpfTxt;
-
+    
+    /**
+     * Método reponsável por identificar
+     * @param e 
+     */
     @FXML
     void signUpBtnKeyAction(KeyEvent e) {
         if (e.getCode() == KeyCode.ENTER) {
