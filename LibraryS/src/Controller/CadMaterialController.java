@@ -78,7 +78,11 @@ public class CadMaterialController {
 
     @FXML
     private TextField localPublicTxt;
-
+    
+    /**
+     * Método responssável por bloquear o livroSelectBox caso multSelectBox
+     * @param event
+     */
     @FXML
     void multSelectBox(ActionEvent event) {
         cduTxt.setEditable(false);
@@ -87,7 +91,11 @@ public class CadMaterialController {
         cddTxt.setText("-");
         livroBox.setIndeterminate(true);
     }
-
+    
+    /**
+     * Método responssável por bloquear o multSelectBox caso livroSelectBox
+     * @param event
+     */
     @FXML
     void livroSelectBox(ActionEvent event) {
         multBox.setIndeterminate(true);

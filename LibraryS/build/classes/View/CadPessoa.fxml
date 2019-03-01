@@ -43,12 +43,12 @@
         <Label layoutX="77.0" layoutY="357.0" stylesheets="@../CSS/label.css" text="Endereco:" />
         <Label layoutX="677.0" layoutY="144.0" stylesheets="@../CSS/label.css" text="Categoria:" />
         <Label layoutX="394.0" layoutY="304.0" stylesheets="@../CSS/label.css" text="CEP:" />
-        <Label layoutX="657.0" layoutY="199.0" stylesheets="@../CSS/label.css" text="Código de Inscrição:" />
+        <Label layoutX="653.0" layoutY="199.0" stylesheets="@../CSS/label.css" text="Código de Inscrição:" />
         <Label layoutX="415.0" layoutY="356.0" stylesheets="@../CSS/label.css" text="Bairro:" />
         <Label layoutX="647.0" layoutY="356.0" stylesheets="@../CSS/label.css" text="Cidade:" />
         <Label layoutX="651.0" layoutY="304.0" stylesheets="@../CSS/label.css" text="Estado:" />
         <Label layoutX="503.0" layoutY="251.0" stylesheets="@../CSS/label.css" text="Turma:" />
-      <ComboBox fx:id="categoriaBox" layoutX="758.0" layoutY="140.0" prefHeight="32.0" prefWidth="132.0" />
+      <ComboBox fx:id="categoriaBox" layoutX="764.0" layoutY="140.0" prefHeight="32.0" prefWidth="126.0" />
       <Label layoutX="251.0" layoutY="250.0" stylesheets="@../CSS/label.css" text="Turno:" />
       <TextField fx:id="turnoTxt" layoutX="312.0" layoutY="248.0" prefHeight="32.0" prefWidth="161.0" styleClass="textfield" />
     </children>
