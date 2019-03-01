@@ -15,6 +15,8 @@ public class Livro  extends Material{
    
      private String autor;
      private String editora;
+     private int cdu;
+     private int cdd;
      
     /**
      * Construto padrão.
@@ -31,8 +33,8 @@ public class Livro  extends Material{
      * @param usercode Código usuário relacionado ao BD (passado para superclasse).
      * @param corestante Cor da estante relacionado ao BD (passado para superclasse).
      * @param codprateleira Código da prateleira relacionado ao BD (passado para superclasse).
-     * @param cdu Número do CDU(passado para superclasse).
-     * @param cdd Número do CDD(passado para superclasse).
+     * @param cdu Número do CDU.
+     * @param cdd Número do CDD.
      * @param data Data de cadastro (passado para superclasse).
      * @param titulo Título (passado para superclasse).
      * @param exemplar Número do exemplar (passado para superclasse).
@@ -43,12 +45,14 @@ public class Livro  extends Material{
      * @param observacao Observação (passado para superclasse).
      * @param status Status (passado para superclasse).
      */
-    public Livro(String autor, String editora, int nchamada, int usercode, String corestante, int codprateleira, int cdu, int cdd, Date data, String titulo, int exemplar, int volume, String local, int anopublicacao, String formadeaquisicao, String observacao, String status) {
-        super(nchamada, usercode, corestante, codprateleira, cdu, cdd, data, titulo, exemplar, volume, local, anopublicacao, formadeaquisicao, observacao, status);
+    public Livro(String autor, String editora, int cdu, int cdd, int nchamada, int usercode, String corestante, int codprateleira, Date data, String titulo, int exemplar, int volume, String local, int anopublicacao, String formadeaquisicao, String observacao, String status) {
+        super(nchamada, usercode, corestante, codprateleira, data, titulo, exemplar, volume, local, anopublicacao, formadeaquisicao, observacao, status);
         this.autor = autor;
         this.editora = editora;
+        this.cdu = cdu;
+        this.cdd = cdd;
     }
-    
+
     /**
      * Método de acesso à autor.
      * @return String - Nome do autor do livro.
@@ -80,12 +84,42 @@ public class Livro  extends Material{
     public void setEditora(String editora) {
         this.editora = editora;
     }
+    
+    /**
+     * Método de acesso ao CDU.
+     * @return int -  Número do CDU.
+     */
+    public int getCdu() {
+        return cdu;
+    }
+
+    /**
+     * Método modificador para cdu.  
+     * @param cdu Número do cdu.
+     */
+    public void setCdu(int cdu) {
+        this.cdu = cdu;
+    }
+    /*
+     * Método de acesso ao cdd.
+     * @return int -  Número do cdd.
+     */
+    public int getCdd() {
+        return cdd;
+    }
+
+    /**
+     * Método modificador para cdd.  
+     * @param cdd Número do cddd.
+     */
+    public void setCdd(int cdd) {
+        this.cdd = cdd;
+    }
 
     @Override
     public String toString() {
-        return "Livro{" + "autor=" + autor + ", editora=" + editora + '}';
+        return "Livro{" + "autor=" + autor + ", editora=" + editora + ", cdu=" + cdu + ", cdd=" + cdd + '}';
     }
-    
     
     /**
      * Método sobreposto da superclasse Material responsável por cadastrar um objeto Livro no banco de dados.
@@ -231,13 +265,12 @@ public class Livro  extends Material{
     }
     
     /**
-     * Método sobreposto da superclasse Material responsável em obter um objeto do tipo Livro no banco de dados,
+     * Método responsável em obter um objeto do tipo Livro no banco de dados,
      * sendo este com cdu igual ao objeto instanciado.
      * A operação é realizada utilizando hibernate.
      * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
      */
-     @Override
-    public Livro buscarMaterialCDU(){
+    public Livro buscarLivroCDU(){
         try{
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
@@ -257,13 +290,12 @@ public class Livro  extends Material{
     }
     
     /**
-     * Método sobreposto da superclasse Material responsável em obter um objeto do tipo Livro no banco de dados,
+     * Método responsável em obter um objeto do tipo Livro no banco de dados,
      * sendo este com cdd igual ao objeto instanciado.
      * A operação é realizada utilizando hibernate.
      * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
      */
-     @Override
-    public Livro buscarMaterialCDD(){
+    public Livro buscarLivroCDD(){
         try{
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();

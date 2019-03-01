@@ -30,8 +30,6 @@ create table Material(
 	usercode integer not null,
 	corestante varchar(10) not null,
 	codprateleira integer not null,
-	cdu integer,
-	cdd integer,
 	data date not null,
 	titulo text not null,
 	exemplar integer,
@@ -48,6 +46,8 @@ create table Livro(
 	nchamada integer primary key,
 	autor varchar(50) not null,
 	editora varchar(40) not null,
+	cdu integer,
+	cdd integer,
 	foreign key(nchamada) references Material(nchamada)
 ); 
 
@@ -71,8 +71,8 @@ create table Emprestimo(
 
 
 create table Indicar(
-	nchamada integer not null,
-	codemp integer not null,
+	nchamada integer,
+	codemp integer,
 	primary key(nchamada,codemp),
 	foreign key(nchamada) references Material(nchamada),
 	foreign key(codemp) references Emprestimo(codemp)

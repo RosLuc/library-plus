@@ -15,8 +15,6 @@ public abstract class Material {
      private int usercode;
      private String corestante;
      private int codprateleira;
-     private int cdu;
-     private int cdd;
      private Date data;
      private String titulo;
      private int exemplar;
@@ -39,8 +37,6 @@ public abstract class Material {
      * @param usercode Código do usuário relacionado ao BD.
      * @param corestante Cor da estante relacionado ao BD.
      * @param codprateleira Código da prateleira relacionado ao BD.
-     * @param cdu Número do CDU.
-     * @param cdd Número do CDD.
      * @param data Data de cadastro do material.
      * @param titulo Título.
      * @param exemplar Número de exemplar.
@@ -51,13 +47,11 @@ public abstract class Material {
      * @param observacao Observação sobre material.
      * @param status Status do material.
      */
-    public Material(int nchamada, int usercode, String corestante, int codprateleira, int cdu, int cdd, Date data, String titulo, int exemplar, int volume, String local, int anopublicacao, String formadeaquisicao, String observacao, String status) {
+    public Material(int nchamada, int usercode, String corestante, int codprateleira, Date data, String titulo, int exemplar, int volume, String local, int anopublicacao, String formadeaquisicao, String observacao, String status) {
         this.nchamada = nchamada;
         this.usercode = usercode;
         this.corestante = corestante;
         this.codprateleira = codprateleira;
-        this.cdu = cdu;
-        this.cdd = cdd;
         this.data = data;
         this.titulo = titulo;
         this.exemplar = exemplar;
@@ -131,37 +125,6 @@ public abstract class Material {
      */
     public void setCodprateleira(int codprateleira) {
         this.codprateleira = codprateleira;
-    }
-    
-    /**
-     * Método de acesso à cdu.
-     * @return int - Número do CDU.
-     */
-    public int getCdu() {
-        return cdu;
-    }
-    
-    /**
-     * Método modificador do cdu.
-     * @param cdu Número do CDU.
-     */
-    public void setCdu(int cdu) {
-        this.cdu = cdu;
-    }
-    
-    /**
-     * Método de acesso à cdd.
-     * @return int - Número do CDD.
-     */
-    public int getCdd() {
-        return cdd;
-    }
-    /**
-     * Método modificador do cdd.
-     * @param cdd Número do CDD.
-     */
-    public void setCdd(int cdd) {
-        this.cdd = cdd;
     }
         
     /**
@@ -310,9 +273,9 @@ public abstract class Material {
 
     @Override
     public String toString() {
-        return "Material{" + "nchamada=" + nchamada + ", usercode=" + usercode + ", corestante=" + corestante + ", codprateleira=" + codprateleira + ", cdu=" + cdu + ", cdd=" + cdd + ", data=" + data + ", titulo=" + titulo + ", exemplar=" + exemplar + ", volume=" + volume + ", local=" + local + ", anopublicacao=" + anopublicacao + ", formadeaquisicao=" + formadeaquisicao + ", observacao=" + observacao + ", status=" + status + '}';
-    }
-
+        return "Material{" + "nchamada=" + nchamada + ", usercode=" + usercode + ", corestante=" + corestante + ", codprateleira=" + codprateleira + ", data=" + data + ", titulo=" + titulo + ", exemplar=" + exemplar + ", volume=" + volume + ", local=" + local + ", anopublicacao=" + anopublicacao + ", formadeaquisicao=" + formadeaquisicao + ", observacao=" + observacao + ", status=" + status + '}';
+    }    
+    
     /**
      * Método abstract responsável por cadastrar um objeto Material no banco de dados.
      * A operação é realizada utilizando hibernate.
@@ -355,21 +318,5 @@ public abstract class Material {
      * A operação é realizada utilizando hibernate.
      * @return Material - Caso a operação for realizada com sucesso retorna um objeto Material, caso contrário retorna null.
      */
-    public abstract Material buscarMaterialNC();
-
-    /**
-     * Método abstract responsável em obter um objeto do tipo Material no banco de dados,
-     * sendo este com cdu igual ao objeto instanciado.
-     * A operação é realizada utilizando hibernate.
-     * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
-     */
-    public abstract Material buscarMaterialCDU();
-
-    /**
-     * Método abstract responsável em obter um objeto do tipo Material no banco de dados,
-     * sendo este com cdd igual ao objeto instanciado.
-     * A operação é realizada utilizando hibernate.
-     * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
-     */
-    public abstract Material buscarMaterialCDD();        
+    public abstract Material buscarMaterialNC();    
 }

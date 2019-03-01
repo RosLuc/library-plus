@@ -81,12 +81,20 @@ public class CadMaterialController {
 
     @FXML
     void multSelectBox(ActionEvent event) {
+        cduTxt.setEditable(false);
+        cduTxt.setText("-");
+        cddTxt.setEditable(false);
+        cddTxt.setText("-");
         livroBox.setIndeterminate(true);
     }
 
     @FXML
     void livroSelectBox(ActionEvent event) {
         multBox.setIndeterminate(true);
+        cduTxt.setEditable(true);
+        cduTxt.setText("");
+        cddTxt.setEditable(true);
+        cddTxt.setText("");
     }
 
     /**
@@ -185,11 +193,19 @@ public class CadMaterialController {
             temp = cduTxt.getText().trim();
             if(!(temp.equals(""))){
                 livro.setCdu(Integer.parseUnsignedInt(temp));
+                if(livro.buscarLivroCDU()!=null){
+                    alertaErro("FALHA AO CADASTRAR LIVRO.", "ATENÇÃO: Já existe um livro cadastraso com esse CDU.");
+                    return null;
+                }
             }
 
             temp = cddTxt.getText().trim();
             if(!(temp.equals(""))){
                 livro.setCdd(Integer.parseUnsignedInt(temp));
+                if(livro.buscarLivroCDD()!=null){
+                    alertaErro("FALHA AO CADASTRAR LIVRO.", "ATENÇÃO: Já existe um livro cadastraso com esse CDD.");
+                    return null;
+                }
             }
             
             livro.setData(new Date());
@@ -276,23 +292,6 @@ public class CadMaterialController {
                 mult.setCodprateleira(Integer.parseUnsignedInt(temp));
             }else{
                 alertaErro("FALHA AO CADASTRAR MULTIMÍDIA.", "ATENÇÃO: Campo de obrigatorio número da prateleira não preenchido.");
-                return null;
-            }
-            
-            temp = cduTxt.getText().trim();
-            if(!(temp.equals(""))){
-                mult.setCdu(Integer.parseUnsignedInt(temp));
-            }
-            if((mult.buscarMaterialCDU())!= null){
-                alertaErro("FALHA AO CADASTRAR MULTIMÍDIA.","ATENÇÃO: Já existir um multimídia com número de CDU digitado.");
-                return null;
-            }
-            temp = cddTxt.getText().trim();
-            if(!(temp.equals(""))){
-                mult.setCdd(Integer.parseUnsignedInt(temp));
-            }
-            if((mult.buscarMaterialCDD())!= null){
-                alertaErro("FALHA AO CADASTRAR MULTIMÍDIA.","ATENÇÃO: Já existir um multimídia com número de CDD digitado.");
                 return null;
             }
 

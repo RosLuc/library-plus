@@ -31,8 +31,6 @@ public class Multimidia extends Material {
      * @param usercode Código usuário relacionado ao BD (passado para superclasse).
      * @param corestante Cor da estante relacionado ao BD (passado para superclasse).
      * @param codprateleira Código da prateleira relacionado ao BD (passado para superclasse).
-     * @param cdu Número do CDU(passado para superclasse).
-     * @param cdd Número do CDD(passado para superclasse).
      * @param data Data de cadastro (passado para superclasse).
      * @param titulo Título (passado para superclasse).
      * @param exemplar Número do exemplar (passado para superclasse).
@@ -43,8 +41,8 @@ public class Multimidia extends Material {
      * @param observacao Observação (passado para superclasse).
      * @param status Status (passado para superclasse).
      */
-    public Multimidia(String produtor, String estudio, int nchamada, int usercode, String corestante, int codprateleira, int cdu, int cdd, Date data, String titulo, int exemplar, int volume, String local, int anopublicacao, String formadeaquisicao, String observacao, String status) {
-        super(nchamada, usercode, corestante, codprateleira, cdu, cdd, data, titulo, exemplar, volume, local, anopublicacao, formadeaquisicao, observacao, status);
+    public Multimidia(String produtor, String estudio, int nchamada, int usercode, String corestante, int codprateleira, Date data, String titulo, int exemplar, int volume, String local, int anopublicacao, String formadeaquisicao, String observacao, String status) {
+        super(nchamada, usercode, corestante, codprateleira, data, titulo, exemplar, volume, local, anopublicacao, formadeaquisicao, observacao, status);
         this.produtor = produtor;
         this.estudio = estudio;
     }
@@ -202,56 +200,6 @@ public class Multimidia extends Material {
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
             Criterion cri1 = Restrictions.eq("nchamada", this.getNchamada());
-            Multimidia l = (Multimidia) session.createCriteria(Multimidia.class).add(cri1).uniqueResult();
-            session.close();
-            return l;
-        }catch(NonUniqueResultException er){
-            System.err.println("Erro ao filtrar: " + er);
-            return null;
-        }catch(HibernateException e){
-            System.err.println("Erro ao filtrar: " + e);
-            e.printStackTrace();
-            return null;
-        }
-    }
-    
-    /**
-     * Método sobreposto da superclasse Material responsável em obter um objeto do tipo Livro no banco de dados,
-     * sendo este com cdu igual ao objeto instanciado.
-     * A operação é realizada utilizando hibernate.
-     * @return Multimidia - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
-     */
-     @Override
-    public Multimidia buscarMaterialCDU(){
-        try{
-            SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
-            Session session = factory.openSession();
-            Criterion cri1 = Restrictions.eq("cdu", this.getCdu());
-            Multimidia l = (Multimidia) session.createCriteria(Multimidia.class).add(cri1).uniqueResult();
-            session.close();
-            return l;
-        }catch(NonUniqueResultException er){
-            System.err.println("Erro ao filtrar: " + er);
-            return null;
-        }catch(HibernateException e){
-            System.err.println("Erro ao filtrar: " + e);
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * Método sobreposto da superclasse Material responsável em obter um objeto do tipo Livro no banco de dados,
-     * sendo este com cdd igual ao objeto instanciado.
-     * A operação é realizada utilizando hibernate.
-     * @return Multimidia - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
-     */
-     @Override
-    public Multimidia buscarMaterialCDD(){
-        try{
-            SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
-            Session session = factory.openSession();
-            Criterion cri1 = Restrictions.eq("cdd", this.getCdd());
             Multimidia l = (Multimidia) session.createCriteria(Multimidia.class).add(cri1).uniqueResult();
             session.close();
             return l;

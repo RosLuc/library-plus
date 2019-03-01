@@ -4,9 +4,9 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Biblioteca</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Library</property>
     <property name="hibernate.connection.username">postgres</property>
-    <property name="hibernate.connection.password">8237</property>
+    <property name="hibernate.connection.password">011329</property>
     <!--<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Library</property>

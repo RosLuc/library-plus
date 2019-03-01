@@ -5,6 +5,7 @@
 .labelname{
     -fx-opacity: 0.50;
     -fx-font-family: "Montserrat";
+    -fx-font-size: 32;
     -fx-alignment: center;
     -fx-background-color: transparent;
     -fx-text-fill: black;

@@ -10,5 +10,11 @@
         <property name="editora" type="string">
             <column name="editora" length="40" not-null="true" />
         </property>
+        <property name="cdu" type="int">
+            <column name="cdu"/>
+        </property>
+        <property name="cdd" type="int">
+            <column name="cdd"/>
+        </property>
     </joined-subclass>
 </hibernate-mapping>

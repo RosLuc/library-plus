@@ -17,12 +17,6 @@
         <property name="codprateleira" type="int">
             <column name="codprateleira" not-null="true"/>
         </property>
-        <property name="cdu" type="int">
-            <column name="cdu"/>
-        </property>
-        <property name="cdd" type="int">
-            <column name="cdd"/>
-        </property>
         <property name="data" type="date">
             <column name="data" not-null="true"/>
         </property>

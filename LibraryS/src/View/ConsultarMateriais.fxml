@@ -22,12 +22,12 @@
                         <URL value="@../CSS/consultar.css" />
                      </stylesheets></Button>
                   <Button fx:id="backBtn" layoutX="827.0" layoutY="15.0" mnemonicParsing="false" onAction="#backBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="CANCELAR" />
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="19.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/LogoLPColor.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="327.0" layoutY="9.0" prefHeight="0.0" prefWidth="382.0" styleClass="labelname" stylesheets="@../CSS/principal.css" text="FILTRAR BUSCA DE LIVROS">
+                  <Label layoutX="316.0" layoutY="11.0" prefHeight="0.0" prefWidth="382.0" styleClass="labelname" stylesheets="@../CSS/principal.css" text="FILTRAR BUSCA DE LIVROS">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -98,16 +98,12 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="background" stylesheets="@../CSS/consultar.css">
                <children>
-                  <Label layoutX="259.0" layoutY="11.0" prefHeight="47.0" prefWidth="479.0" styleClass="labelname" text="FILTRAR BUSCA DE MULTIMÍDIAS">
+                  <Label layoutX="259.0" layoutY="11.0" prefHeight="47.0" prefWidth="479.0" stylesheets="@../CSS/principal.css" text="FILTRAR BUSCA DE MULTIMÍDIAS">
                      <font>
                         <Font size="24.0" />
                      </font>
-                     <stylesheets>
-                        <URL value="@../CSS/consultar.css" />
-                        <URL value="@../CSS/principal.css" />
-                     </stylesheets>
                   </Label>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/LogoLPColor.png" />
                      </image>
@@ -158,8 +154,8 @@
                         <TableColumn fx:id="dataTb2" prefWidth="76.0" text="Data de Cadastro" />
                      </columns>
                   </TableView>
-                  <Button fx:id="pesquisarBtn2" layoutX="371.0" layoutY="184.0" mnemonicParsing="false" onAction="#pesquisarMultBtnAction" prefHeight="25.0" prefWidth="116.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="PESQUISAR" />
-                  <Button fx:id="limparBtn2" layoutX="515.0" layoutY="184.0" mnemonicParsing="false" onAction="#limparMultBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="LIMPAR" />
+                  <Button fx:id="pesquisarBtn2" layoutX="364.0" layoutY="184.0" mnemonicParsing="false" onAction="#pesquisarMultBtnAction" prefHeight="25.0" prefWidth="116.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="PESQUISAR" />
+                  <Button fx:id="limparBtn2" layoutX="514.0" layoutY="184.0" mnemonicParsing="false" onAction="#limparMultBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="LIMPAR" />
                </children></AnchorPane>
       </content>
     </Tab>
