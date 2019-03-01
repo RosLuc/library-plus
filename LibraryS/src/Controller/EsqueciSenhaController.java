@@ -90,7 +90,10 @@ public class EsqueciSenhaController {
         }
         fecha();
     }
-
+    
+    /**
+     * Método responsável alterar a senha do usuario.
+     */
     public void changePassword() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         Usuario user = new Usuario();
         user = user.verificarUsuario();
@@ -103,14 +106,18 @@ public class EsqueciSenhaController {
             }else erro();  
         }else erro();
     }
-    
+    /**
+     * Método responsável por exibir um alerta de erro.
+     */
     public void erro(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Redefinir senha");
             alert.setTitle("Codigo invalido");
             alert.setContentText("Não foi possivel redefinir a nova senha. Verifique se as informações estão corretas, e tente novamente.");
     }
-    
+    /**
+     * Método responsável por exibir um alerta de confirmação.
+     */
     public void confirmacao(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText("Redefinir senha");

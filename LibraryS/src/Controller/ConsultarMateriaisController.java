@@ -105,6 +105,11 @@ public class ConsultarMateriaisController implements Initializable{
     @FXML
     private TextField autorTx;
     
+    /**
+     * Método responsável por detectar um ActionEvent no backBtn e voltar
+     * para tela anterior.
+     * @param event 
+     */
     @FXML
     void backBtnAction(ActionEvent event) {
         GerAcervo ga = new GerAcervo();
@@ -116,6 +121,11 @@ public class ConsultarMateriaisController implements Initializable{
         fecha();
     }
      
+    /**
+     * Método responsável por detectar um ActionEvent no pesquisarBtn e pesquisar
+     * por lisvros.
+     * @param event 
+     */
     @FXML
     void pesquisarBtnAction(ActionEvent event) {
         try{
@@ -153,6 +163,11 @@ public class ConsultarMateriaisController implements Initializable{
         }
     }
     
+    /**
+     * Método responsável por detectar um ActionEvent no limparBtn e 
+     * limpar e TableView de livros.
+     * @param event 
+     */
     @FXML
     void limparBtnAction(ActionEvent event) {
         nChamTxt.setText("");
@@ -225,7 +240,13 @@ public class ConsultarMateriaisController implements Initializable{
 
     @FXML
     private Button backBtn2;
-
+    
+    
+    /**
+     * Método responsável por detectar um ActionEvent no pesquisarMultBtn e pesquisar
+     * por multimídias.
+     * @param event 
+     */
     @FXML
     void pesquisarMultBtnAction(ActionEvent event) {
         try{
@@ -252,6 +273,11 @@ public class ConsultarMateriaisController implements Initializable{
         }
     }
 
+    /**
+     * Método responsável por detectar um ActionEvent no limparMultBtn e 
+     * limpar e TableView de multimídias.
+     * @param event 
+     */
     @FXML
     void limparMultBtnAction(ActionEvent event) {
         nChamaTxt2.setText("");

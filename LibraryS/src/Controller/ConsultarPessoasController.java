@@ -97,6 +97,11 @@ public class ConsultarPessoasController implements Initializable {
         }
     }
     
+    /**
+     * Método responsável por detectar um ActionEvent no pesquisarBtn e pesquisar
+     * por pessoas.
+     * @param event 
+     */
     @FXML
     void pesquisarBtnAction(ActionEvent event){
         Pessoa p = new Pessoa();
@@ -108,6 +113,11 @@ public class ConsultarPessoasController implements Initializable {
         
     }
     
+    /**
+     * Método responsável por detectar um ActionEvent no limparBtn e 
+     * limpar e TableView de pessoas.
+     * @param event 
+     */
     @FXML
     void limparBtnAction(ActionEvent event){
         table.setItems(null);
@@ -141,6 +151,11 @@ public class ConsultarPessoasController implements Initializable {
         table.setItems(listaDePessoas(Pessoa.ListaDePessoa()));
     }
     
+    /**
+     * Método responsavel por converter a List adequada para a TableView.
+     * @param list Lista de Pessoa
+     * @return Lista apropriada para a TableView.
+     */
     private ObservableList<Pessoa> listaDePessoas(List<Pessoa> list){
         return FXCollections.observableArrayList(list);
     }

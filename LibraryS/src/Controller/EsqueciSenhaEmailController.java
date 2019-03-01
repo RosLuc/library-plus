@@ -96,6 +96,9 @@ public class EsqueciSenhaEmailController {
         fecha();
     }
 
+    /**
+     * Método responsável por enviar o email com o código de recuperação
+     */
     public void emailEsqSenha() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         Usuario us = new Usuario();
         us = us.verificarUsuario();
@@ -114,6 +117,9 @@ public class EsqueciSenhaEmailController {
         }else erro();
     }
     
+    /**
+     * Método responsável por exibir um alerta de erro.
+     */
     public void erro(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Email");
@@ -121,6 +127,9 @@ public class EsqueciSenhaEmailController {
             alert.setContentText("Não foi possivel redefinir a nova senha. Verifique se as informações estão corretas, e tente novamente.");
     }
     
+    /**
+     * Método responsável por exibir um alerta de confirmação.
+     */
     public void confirmacao(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText("Email");
