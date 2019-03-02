@@ -76,10 +76,28 @@ public class CadPessoaController implements Initializable {
         returnPes();
     }
     
-     @Override
+    @Override
     public void initialize(URL url, ResourceBundle rb){
         String[] lista = {"Funcionario", "Professor", "Aluno"};
         categoriaBox.getItems().addAll(lista);
+        categoriaBox.setOnAction((ActionEvent e) -> {
+            if(categoriaBox.getValue().equals("Funcionario") || 
+                    categoriaBox.getValue().equals("Professor")){
+                turnoTxt.setEditable(false);
+                turnoTxt.setText("-");
+                turmaTxt.setEditable(false);
+                turmaTxt.setText("-");
+                serieTxt.setEditable(false);
+                serieTxt.setText("-");
+            } else if(categoriaBox.getValue().equals("Aluno")) {
+                turnoTxt.setEditable(true);
+                turnoTxt.setText("");
+                turmaTxt.setEditable(true);
+                turmaTxt.setText("");
+                serieTxt.setEditable(true);
+                serieTxt.setText("");
+            }
+        });
     }
 
     /**

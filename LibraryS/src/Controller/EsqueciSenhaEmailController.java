@@ -98,6 +98,8 @@ public class EsqueciSenhaEmailController {
 
     /**
      * Método responsável por enviar o email com o código de recuperação
+     * @throws java.io.UnsupportedEncodingException
+     * @throws java.security.NoSuchAlgorithmException
      */
     public void emailEsqSenha() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         Usuario us = new Usuario();
