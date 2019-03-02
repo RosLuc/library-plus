@@ -122,6 +122,7 @@ public class CadPessoaController implements Initializable {
         p.setTurma(turmaTxt.getText());
         p.setTurno(turnoTxt.getText());
         p.setUsercode(11111);
+        p.setAtivos(0);
         if(!"".equals(p.getNome()) && !"".equals(p.getCategoria())){
             if(p.getCategoria().equalsIgnoreCase("Aluno")){
                 if(!"".equals(p.getTurno()) && !"".equals(p.getTurno()) && !"".equals(p.getTurno())){

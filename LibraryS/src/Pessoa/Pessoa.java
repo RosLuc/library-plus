@@ -33,6 +33,7 @@ public class Pessoa {
     private String contato;
     private String nome;
     private String cep;
+    private int ativos;
     
     /**
      * Método contrutor da classe Pessoa.
@@ -59,11 +60,12 @@ public class Pessoa {
      * @param contato - Contato da pessoa.
      * @param nome - Nome da pessoa.
      * @param cep - CEP da residência da pessoa.
+     * @param ativos - Quantidade de emprestimos ativos.
      */
     public Pessoa(int codinsc, int usercode, String estado, String numero,
             String serie, String endereco, String turno, String bairro,
             String turma, String cidade, String categoria, String email,
-            String contato, String nome, String cep) {
+            String contato, String nome, String cep, int ativos) {
         this.codinsc = codinsc;
         this.usercode = usercode;
         this.estado = estado;
@@ -78,6 +80,7 @@ public class Pessoa {
         this.email = email;
         this.nome = nome;
         this.cep = cep;
+        this.ativos = ativos;
     }
 
     
@@ -323,6 +326,85 @@ public class Pessoa {
     }
     
     /**
+     * Método para acessar o ativos.
+     * @return - Quantidade de emprestimos ativos.
+     */
+    public int getAtivos() {
+        return ativos;
+    }
+
+    /**
+     * Método para modificar o ativos.
+     * @param ativos - Quantidade de emprestimos a ser setado.
+     */
+    public void setAtivos(int ativos) {
+        this.ativos = ativos;
+    }
+    
+    /**
+     * Método que verificar o limite de emprestimo da pessoa, retornando quantos
+     * vagas estão disponiveis.
+     * @return Caso ativos menor que 5 é retornado número de vagas, caso ativos maior que 5
+     * é retornado 0, caso objeto seja null é retornado -1.
+     */
+    public int verificarLimite() {
+        if(this != null){
+            if(this.getAtivos() < 5) return (5 - this.getAtivos());
+            else return 0;
+        }else return -1;
+    }
+    
+    /**
+     * Método que responsavel por acrescentar emprestimos.
+     * @return Caso operação seja realizada com sucesso retorna true,
+     * caso contrario retorna false.
+     */
+    public boolean acrescentarAtivos(){
+        if(this != null && this.getAtivos() < 5){
+            this.setAtivos(this.getAtivos() + 1);
+            return true;
+        }else return false;
+    }
+    
+    /**
+     * Método que responsavel por retirar emprestimos.
+     * @return Caso operação seja realizada com sucesso retorna true,
+     * caso contrario retorna false.
+     */
+    public boolean retirarAtivos(){
+        if(this != null && this.getAtivos() > 0){
+            this.setAtivos(this.getAtivos() - 1);
+            return true;
+        }else return false;
+    }
+    
+    /**
+     * Método que responsavel por acrescentar um valor x de emprestimos.
+     * @param x
+     * @return Caso operação seja realizada com sucesso retorna true,
+     * caso contrario retorna false.
+     */
+    public boolean acrescentarAtivos(int x){
+        if(this != null && (this.getAtivos() + x) <= 5){
+            this.setAtivos(this.getAtivos() + x);
+            return true;
+        }else return false;
+    }
+    
+    /**
+     * Método que responsavel por retirar um valor x de emprestimos.
+     * @param x
+     * @return Caso operação seja realizada com sucesso retorna true,
+     * caso contrario retorna false.
+     */
+    public boolean retirarAtivos(int x){
+        if(this != null && (this.getAtivos() - x) >= 0){
+            this.setAtivos(this.getAtivos() - x);
+            return true;
+        }else return false;
+    }
+    
+    /**
      * Metodo responsável por salvar o objeto pessoa no banco de dados.
      * A operação é realizada utilizando hibernate.
      * @return boolean - Caso a operação for realizada com sucesso retorna true, caso contrário retorna false.
@@ -413,7 +495,7 @@ public class Pessoa {
      * @param codInsc - Codigo de inscrição da pessoa.
      * @return List - Caso a operação for realizada com sucesso retorna uma lista de pessoa, caso contrário retorna null.
      */
-    public Pessoa buscarPessoa(int codInsc){
+    static public Pessoa buscarPessoa(int codInsc){
         try{
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();

@@ -60,5 +60,6 @@ Contributor(s):
         <property name="contato"/>
         <property name="nome"/>
         <property name="cep"/>
+        <property name="ativos"/>
     </class>
 </hibernate-mapping>

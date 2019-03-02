@@ -5,7 +5,8 @@ create table Usuario(
 	nome varchar(70) not null,
 	email varchar(40) not null,
 	cpf varchar(11) not null unique,
-	codred varchar(15)
+	codred varchar(15),
+	ativos interger not null
 );
 create table Pessoa(
 	codinsc serial primary key unique,
