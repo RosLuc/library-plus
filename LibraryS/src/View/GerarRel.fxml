@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controller.GerarRelController">
+    <children>
+        <Button fx:id="gerCertBtn" layoutX="377.0" layoutY="202.0" mnemonicParsing="false" onAction="#gerCertBtnAction" prefHeight="39.0" prefWidth="207.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="RELATÓRIO 1" />
+        <Button fx:id="cancelBtn" layoutX="792.0" layoutY="44.0" mnemonicParsing="false" onAction="#cancelBtnAction" prefHeight="39.0" prefWidth="125.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="VOLTAR" />
+        <ImageView fitHeight="81.0" fitWidth="200.0" layoutX="30.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/LogoLPColor.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="306.0" layoutY="40.0" prefHeight="48.0" prefWidth="348.0" stylesheets="@../CSS/principal.css" text="GERAR RELATÓRIOS">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="335.0" layoutY="485.0" prefHeight="17.0" prefWidth="292.0" text="CAMINHO" textAlignment="CENTER" />
+      <Button fx:id="gerCertBtn1" layoutX="377.0" layoutY="270.0" mnemonicParsing="false" onAction="#gerCertBtnAction" prefHeight="39.0" prefWidth="207.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="RELATÓRIO 2" />
+      <Button fx:id="gerCertBtn11" layoutX="376.0" layoutY="339.0" mnemonicParsing="false" onAction="#gerCertBtnAction" prefHeight="39.0" prefWidth="207.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="RELATÓRIO 3" />
+    </children>
+</AnchorPane>

@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="LibraryScreens.jar" size="141248" download="eager" />
+    <jar href="LibraryScreens.jar" size="156833" download="eager" />
     <jar href="lib\antlr-2.7.7.jar" size="445288" download="eager" />
     <jar href="lib\commons-collections-3.1.jar" size="559366" download="eager" />
     <jar href="lib\dom4j-1.6.1.jar" size="313898" download="eager" />
