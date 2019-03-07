@@ -106,6 +106,47 @@ public class ConsultarMateriaisController implements Initializable{
     private TextField autorTx;
     
     /**
+     * Método responsável por fechar a tela atual
+     */
+    public void fecha() {
+        ConsultarMateriais.getStage().close();
+    }
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+
+        cduTb.setCellValueFactory(new PropertyValueFactory<>("cdu"));
+        cddTb.setCellValueFactory(new PropertyValueFactory<>("cdd"));
+        nchamTb.setCellValueFactory(new PropertyValueFactory<>("nchamada"));
+        nestTb.setCellValueFactory(new PropertyValueFactory<>("corestante"));
+        npraTb.setCellValueFactory(new PropertyValueFactory<>("codprateleira"));
+        tituloTb.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        autorTb.setCellValueFactory(new PropertyValueFactory<>("autor"));
+        editTb.setCellValueFactory(new PropertyValueFactory<>("editora"));
+        exemplarTb.setCellValueFactory(new PropertyValueFactory<>("exemplar"));
+        volTb.setCellValueFactory(new PropertyValueFactory<>("volume"));
+        anoTb.setCellValueFactory(new PropertyValueFactory<>("anopublicacao"));
+        statusTb.setCellValueFactory(new PropertyValueFactory<>("status"));
+        dataTb.setCellValueFactory(new PropertyValueFactory<>("data"));
+
+        nchamTb2.setCellValueFactory(new PropertyValueFactory<>("nchamada"));
+        nestTb2.setCellValueFactory(new PropertyValueFactory<>("corestante"));
+        npraTb2.setCellValueFactory(new PropertyValueFactory<>("codprateleira"));
+        tituloTb2.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        produtorTb.setCellValueFactory(new PropertyValueFactory<>("produtor"));
+        estudioTb.setCellValueFactory(new PropertyValueFactory<>("estudio"));
+        exemplarTb2.setCellValueFactory(new PropertyValueFactory<>("exemplar"));
+        volTb2.setCellValueFactory(new PropertyValueFactory<>("volume"));
+        anoTb2.setCellValueFactory(new PropertyValueFactory<>("anopublicacao"));
+        statusTb2.setCellValueFactory(new PropertyValueFactory<>("status"));
+        dataTb2.setCellValueFactory(new PropertyValueFactory<>("data"));
+
+    }
+    
+    /**
      * Método responsável por detectar um ActionEvent no backBtn e voltar
      * para tela anterior.
      * @param event 
@@ -123,7 +164,7 @@ public class ConsultarMateriaisController implements Initializable{
      
     /**
      * Método responsável por detectar um ActionEvent no pesquisarBtn e pesquisar
-     * por lisvros.
+     * por livros.
      * @param event 
      */
     @FXML
@@ -286,48 +327,8 @@ public class ConsultarMateriaisController implements Initializable{
         estudioTxt2.setText("");
         localTxt2.setText("");
         tableMult.setItems(null);
-    } 
-    /**
-     * Método responsável por fechar a tela atual
-     */
-    public void fecha() {
-        ConsultarMateriais.getStage().close();
     }
-    
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
-        cduTb.setCellValueFactory(new PropertyValueFactory<>("cdu"));
-        cddTb.setCellValueFactory(new PropertyValueFactory<>("cdd"));
-        nchamTb.setCellValueFactory(new PropertyValueFactory<>("nchamada"));
-        nestTb.setCellValueFactory(new PropertyValueFactory<>("corestante"));
-        npraTb.setCellValueFactory(new PropertyValueFactory<>("codprateleira"));
-        tituloTb.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        autorTb.setCellValueFactory(new PropertyValueFactory<>("autor"));
-        editTb.setCellValueFactory(new PropertyValueFactory<>("editora"));
-        exemplarTb.setCellValueFactory(new PropertyValueFactory<>("exemplar"));
-        volTb.setCellValueFactory(new PropertyValueFactory<>("volume"));
-        anoTb.setCellValueFactory(new PropertyValueFactory<>("anopublicacao"));
-        statusTb.setCellValueFactory(new PropertyValueFactory<>("status"));
-        dataTb.setCellValueFactory(new PropertyValueFactory<>("data"));
-        
-        nchamTb2.setCellValueFactory(new PropertyValueFactory<>("nchamada"));
-        nestTb2.setCellValueFactory(new PropertyValueFactory<>("corestante"));
-        npraTb2.setCellValueFactory(new PropertyValueFactory<>("codprateleira"));
-        tituloTb2.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        produtorTb.setCellValueFactory(new PropertyValueFactory<>("produtor"));
-        estudioTb.setCellValueFactory(new PropertyValueFactory<>("estudio"));
-        exemplarTb2.setCellValueFactory(new PropertyValueFactory<>("exemplar"));
-        volTb2.setCellValueFactory(new PropertyValueFactory<>("volume"));
-        anoTb2.setCellValueFactory(new PropertyValueFactory<>("anopublicacao"));
-        statusTb2.setCellValueFactory(new PropertyValueFactory<>("status"));
-        dataTb2.setCellValueFactory(new PropertyValueFactory<>("data"));
-        
-    }
-    
+
     /**
      * Método responsável por alerta de erro.
      * @param HeaderText String exibida no HeaderText.

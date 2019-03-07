@@ -26,7 +26,7 @@ public class TesteEmp {
      */
     @SuppressWarnings("unchecked")
     public static void main(String[] args){
-        /*Emprestimo emp = new Emprestimo();
+        Emprestimo emp = new Emprestimo();
         emp.setCodinsc(1);
         emp.setUsercode(11111);
         
@@ -38,15 +38,13 @@ public class TesteEmp {
         
         Set<Material> mat = new HashSet<>();
         Livro l = new Livro();
-        l.setNchamada(6);
+        l.setNchamada(1);
         mat.add(l.buscarMaterialNC());
-        l.setNchamada(4);
-        mat.add(l.buscarMaterialNC());
-        l.setNchamada(5);
+        l.setNchamada(2);
         mat.add(l.buscarMaterialNC());
         
         emp.setMateriais(mat);
-        emp.salvarEmprestimo();*/
+        emp.salvarEmprestimo();
         /*Emprestimo emp = Emprestimo.buscarEmprestimo(8);
         Set<Material> mat = emp.getMateriais();
         Iterator<Material> i = mat.iterator();

@@ -1,0 +1,28 @@
+.btnMais{
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 12;
+    -fx-alignment: center;
+    -fx-background-color: #71C875;
+    -fx-background-radius: 12;
+    -fx-text-fill: #39643b;
+}
+
+.labelErro{
+    -fx-opacity: 0.70;
+    -fx-font-size: 14;
+    -fx-font-family: "Montserrat";
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-text-fill: #CD0000;
+}
+
+.labelConf{
+    -fx-opacity: 0.70;
+    -fx-font-size: 14;
+    -fx-font-family: "Montserrat";
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-text-fill: #32CD32;
+}
+
+
