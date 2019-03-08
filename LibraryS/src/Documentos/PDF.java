@@ -151,7 +151,7 @@ public class PDF {
                 document.add(paragrafo2);
                 
                 Paragraph paragrafo3 = new Paragraph(".....", font);
-                if(listMaterial.contains(Livro.class)){
+                //if(listMaterial.contains(Livro.class)){
                     document.add(paragrafo3);
                     PdfPTable Tabela = new  PdfPTable(3);
                 
@@ -172,7 +172,7 @@ public class PDF {
                         Tabela.addCell(((Livro) listMaterial.get(i)).getTitulo());
                     }
                     document.add(Tabela);
-                }else if(listMaterial.contains(Multimidia.class)){
+                /*}else if(listMaterial.contains(Multimidia.class)){
                     document.add(paragrafo3);
                     PdfPTable Tabela = new  PdfPTable(3);
                 
@@ -193,11 +193,10 @@ public class PDF {
                         Tabela.addCell(((Multimidia) listMaterial.get(i)).getProdutor());
                     }
                     document.add(Tabela);
-                }
-                
+                }*/
             }catch(DocumentException ex){    
                 Logger.getLogger(PDF.class.getName()).log(Level.SEVERE,null, ex);        
-            }        
+            }
         }finally{
             if(document != null){
                 document.close();
