@@ -7,6 +7,7 @@ package Controller;
 
 import LibraryScreens.EmtDoc;
 import LibraryScreens.GerarCert;
+import LibraryScreens.GerarRel;
 import LibraryScreens.Principal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +45,13 @@ public class EmtDocController {
 
     @FXML
     void gerRelBtnAction(ActionEvent event) {
-
+        GerarRel p = new GerarRel();
+        try {
+            p.start(new Stage());
+            fecha();
+        } catch (Exception ex) {
+            Logger.getLogger(GerPessoasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

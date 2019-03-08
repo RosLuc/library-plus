@@ -6,6 +6,7 @@
 package Controller;
 
 import LibraryScreens.GerEmprestimos;
+import LibraryScreens.ListarEmprestimos;
 import LibraryScreens.Principal;
 import LibraryScreens.RealizarEmp;
 import java.util.logging.Level;
@@ -33,7 +34,13 @@ public class GerEmprestimosController {
 
     @FXML
     void consEmpBtnAction(ActionEvent event) {
-
+        ListarEmprestimos cm = new ListarEmprestimos();
+        try {
+            cm.start(new Stage());
+            fecha();
+        } catch (Exception ex) {
+            Logger.getLogger(GerEmprestimosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
