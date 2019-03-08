@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controller.GerPessoasController">
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GerPessoasController">
     <children>
         <Button fx:id="consPesBtn" layoutX="343.0" layoutY="294.0" mnemonicParsing="false" onAction="#consPesBtnAction" prefHeight="39.0" prefWidth="274.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="CONSULTAR PESSOA" />
         <Button fx:id="cadPesBtn" layoutX="343.0" layoutY="238.0" mnemonicParsing="false" onAction="#cadPesBtnAction" prefHeight="39.0" prefWidth="274.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="CADASTRAR PESSOA" />
@@ -19,7 +19,7 @@
                 <Image url="@../images/LogoLPColor.png" />
             </image>
         </ImageView>
-        <Label layoutX="307.0" layoutY="135.0" prefHeight="48.0" prefWidth="347.0" stylesheets="@../CSS/principal.css" text="GERENCIAR PESSOAS">
+        <Label layoutX="307.0" layoutY="40.0" prefHeight="48.0" prefWidth="347.0" stylesheets="@../CSS/principal.css" text="GERENCIAR PESSOAS">
             <font>
                 <Font size="14.0" />
             </font>

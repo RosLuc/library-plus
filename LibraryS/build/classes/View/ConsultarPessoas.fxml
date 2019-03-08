@@ -35,19 +35,18 @@
             </font>
         </Text>
         <TextField fx:id="emailTxt" layoutX="116.0" layoutY="132.0" prefHeight="32.0" prefWidth="319.0" styleClass="textfield" />
-        <TableView fx:id="table" layoutX="66.0" layoutY="292.0" prefHeight="221.0" prefWidth="828.0">
+        <TableView fx:id="table" layoutX="66.0" layoutY="292.0" prefHeight="221.0" prefWidth="823.0" styleClass="workspace-grid" stylesheets="@../CSS/consultar.css">
             <columns>
                 <TableColumn fx:id="codinscTb" prefWidth="59.0" text="Código de Inscrição" />
                 <TableColumn fx:id="nomeTb" prefWidth="141.0" text="Nome" />
                 <TableColumn fx:id="emailTb" minWidth="0.0" prefWidth="131.0" text="Email" />
                 <TableColumn fx:id="enderecoTb" prefWidth="102.0" text="Endereco" />
-                <TableColumn fx:id="bairroTb" prefWidth="75.0" text="Bairro" />
-                <TableColumn fx:id="cidadeTb" prefWidth="63.0" text="Cidade" />
-                <TableColumn fx:id="cepTb" prefWidth="46.0" text="Cep" />
-                <TableColumn fx:id="turnoTb" minWidth="0.0" prefWidth="89.0" text="Turno" />
-                <TableColumn fx:id="turmaTb" prefWidth="60.0" text="Turma" />
-                <TableColumn fx:id="serieTb" prefWidth="53.0" text="Série" />
-                <TableColumn fx:id="statusTb" minWidth="0.0" prefWidth="78.0" text="Status" />
+                <TableColumn fx:id="bairroTb" prefWidth="95.0" text="Bairro" />
+                <TableColumn fx:id="cidadeTb" prefWidth="89.0" text="Cidade" />
+                <TableColumn fx:id="cepTb" minWidth="0.0" prefWidth="95.0" text="Cep" />
+                <TableColumn fx:id="turnoTb" minWidth="0.0" prefWidth="62.0" text="Turno" />
+                <TableColumn fx:id="turmaTb" prefWidth="70.0" text="Turma" />
+                <TableColumn fx:id="serieTb" minWidth="0.0" prefWidth="50.0" text="Série" />
             </columns>
         </TableView>
         <Button fx:id="pesquisarBtn" layoutX="362.0" layoutY="242.0" mnemonicParsing="false" onAction="#pesquisarBtnAction" prefHeight="25.0" prefWidth="116.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="PESQUISAR" />

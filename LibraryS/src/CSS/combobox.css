@@ -21,7 +21,8 @@ and open the template in the editor.
 {
     -fx-background-color: white, white;
     -fx-background-insets: 0, 1;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow( three-pass-box , rgba(113, 200, 117, 1) , 8, 0.0 , 0 , 0 );
 }
 
 .combo-box-popup .list-view .list-cell
@@ -48,10 +49,12 @@ and open the template in the editor.
 .combo-box-base
 {
     -fx-skin: "com.sun.javafx.scene.control.skin.ComboBoxBaseSkin";
-    -fx-background-color: white, white, white, white;
+    -fx-font: "Montserrat";
+    -fx-background-color: transparent;
     -fx-background-radius: 5;
-    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
     -fx-padding: 0;
+    -fx-border-radius: 10;
+    -fx-border-color: gray;
 }
 
 .combo-box-base:hover
@@ -65,8 +68,11 @@ and open the template in the editor.
 }
 
 .combo-box-base:focused {
-    -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
-    -fx-background-radius: 6.4, 4, 5, 3;
+    -fx-background-color: transparent;
+    -fx-border-color: #71C875;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-focus-color: #71C875;
     -fx-background-insets: -1.4, 0, 1, 2;
 }
 

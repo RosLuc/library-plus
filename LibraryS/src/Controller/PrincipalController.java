@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import LibraryScreens.EmtDoc;
 import LibraryScreens.GerAcervo;
 import LibraryScreens.GerEmprestimos;
 import LibraryScreens.GerPessoas;
@@ -46,7 +47,13 @@ public class PrincipalController {
      */
     @FXML
     void emtDocBtnAction(ActionEvent event) {
-
+        EmtDoc p = new EmtDoc();
+        try {
+            p.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        fecha();
     }
 
     /**
