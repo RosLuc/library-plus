@@ -46,7 +46,7 @@ public class PDF {
      
         try{
             document = new Document(PageSize.A4.rotate(),30,20,20,30);
-            BaseFont Century_Schoolbook = BaseFont.createFont("Documentos/CenturySchoolbook.ttf", BaseFont.WINANSI,BaseFont.NOT_EMBEDDED);
+            BaseFont Century_Schoolbook = BaseFont.createFont("fonts/CenturySchoolbook.ttf", BaseFont.WINANSI,BaseFont.NOT_EMBEDDED);
             Font font = new Font(Century_Schoolbook, 58, Font.ITALIC, new BaseColor(43,57,144));
             Font font1 = new Font(Century_Schoolbook, 29, Font.ITALIC, new BaseColor(43,57,144));
             Font font2 = new Font(Century_Schoolbook, 14, Font.ITALIC, new BaseColor(43,57,144));
@@ -61,7 +61,7 @@ public class PDF {
                 PdfContentByte canvas = writer.getDirectContentUnder();
                 Image imagem = null;
                 try{
-                    imagem = Image.getInstance("imagem/modelo.jpg");
+                    imagem = Image.getInstance("fonts/modelo.jpg");
                     imagem.scaleAbsolute(PageSize.A4.rotate());
                     imagem.setAbsolutePosition(0, 0);
                     canvas.saveState();
@@ -117,83 +117,51 @@ public class PDF {
         }
     }
     
-    static public void gerarLivroPDF(List<Object> listMaterial) throws FileNotFoundException, DocumentException, BadElementException, IOException{
+    static public void gerarLivroPDF(List<Livro> listMaterial) throws FileNotFoundException, DocumentException, BadElementException, IOException{
         
         Document document=null;
         OutputStream outPutstream;
         try{
             document = new Document(PageSize.A4.rotate(),30,20,20,30);
-            Font fonte = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.NORMAL, new BaseColor(4,5,12));
-            Font font = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.NORMAL, new BaseColor(255,255,255));
             new File("Documento").mkdir();
             outPutstream = new FileOutputStream("Documento/TabelaLivros.pdf");
             try{
                 PdfWriter writer = PdfWriter.getInstance(document, outPutstream);
                 document.open();
-                Paragraph paragrafo4 = new Paragraph(".....", font);
-                document.add(paragrafo4);
-                Image imagem = Image.getInstance("Documento/Brasão.png");
-                imagem.setAlignment(Element.ALIGN_CENTER);
-                imagem.scalePercent(40);
-              
-                document.add(imagem);
-                Paragraph paragrafo = new Paragraph("ESC. EST. TEMPO INTEGRAL DR. JOSÉ FERNANDES DE MELO", fonte);
-                paragrafo.setLeading(0,3);
-                paragrafo.setAlignment(Element.ALIGN_CENTER);
-                document.add(paragrafo);
                 
-                Paragraph paragrafo1 = new Paragraph("GOVERNO DO ESTADO DO RIO GRANDE DO NORTE", fonte);
-                paragrafo1.setAlignment(Element.ALIGN_CENTER);
-                document.add(paragrafo1);
-                        
-                Paragraph paragrafo2 = new Paragraph("SECRETARIA DE EDUCAÇÃO CULTURA E DESPORTOS", fonte);
-                paragrafo2.setAlignment(Element.ALIGN_CENTER);
-                document.add(paragrafo2);
+                logoEscola(document);
                 
-                Paragraph paragrafo3 = new Paragraph(".....", font);
-                //if(listMaterial.contains(Livro.class)){
-                    document.add(paragrafo3);
-                    PdfPTable Tabela = new  PdfPTable(3);
+                PdfPTable Tabela = new  PdfPTable(8);
                 
-                    PdfPCell cabecalho = new PdfPCell(new Paragraph("LISTA DE LIVROS", fonte));
-                    cabecalho.setHorizontalAlignment(Element.ALIGN_CENTER);
+                PdfPCell cabecalho = new PdfPCell(new Paragraph("LISTA DE LIVROS",
+                        new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.NORMAL, new BaseColor(4,5,12))));
+                cabecalho.setHorizontalAlignment(Element.ALIGN_CENTER);
                 
-                    cabecalho.setBorder(PdfPCell.NO_BORDER);
-                    cabecalho.setBackgroundColor(new BaseColor(210,105,30));
-                    cabecalho.setColspan(3);
-                    Tabela.addCell(cabecalho);
-                    Tabela.addCell("NOME");
-                    Tabela.addCell("EMAIL");
-                    Tabela.addCell("ID_PDF");
+                cabecalho.setBorder(PdfPCell.NO_BORDER);
+                cabecalho.setBackgroundColor(new BaseColor(210,105,30));
+                cabecalho.setColspan(8);
+                Tabela.addCell(cabecalho);
+                Tabela.addCell("Nº Chamada");
+                Tabela.addCell("Titulo");
+                Tabela.addCell("Autor");
+                Tabela.addCell("Editora");
+                Tabela.addCell("Volume");
+                Tabela.addCell("Ano de Publicação");
+                Tabela.addCell("CDU");
+                Tabela.addCell("CDD");
+                
              
-                    for(int i = 0; i < listMaterial.size();i++){
-                        Tabela.addCell(((Livro) listMaterial.get(i)).getAutor());
-                        Tabela.addCell(((Livro) listMaterial.get(i)).getEditora());
-                        Tabela.addCell(((Livro) listMaterial.get(i)).getTitulo());
-                    }
-                    document.add(Tabela);
-                /*}else if(listMaterial.contains(Multimidia.class)){
-                    document.add(paragrafo3);
-                    PdfPTable Tabela = new  PdfPTable(3);
-                
-                    PdfPCell cabecalho = new PdfPCell(new Paragraph("LISTA DE LIVROS", fonte));
-                    cabecalho.setHorizontalAlignment(Element.ALIGN_CENTER);
-                
-                    cabecalho.setBorder(PdfPCell.NO_BORDER);
-                    cabecalho.setBackgroundColor(new BaseColor(210,105,30));
-                    cabecalho.setColspan(3);
-                    Tabela.addCell(cabecalho);
-                    Tabela.addCell("NOME");
-                    Tabela.addCell("EMAIL");
-                    Tabela.addCell("ID_PDF");
-             
-                    for(int i = 0; i < listMaterial.size();i++){
-                        Tabela.addCell(((Multimidia) listMaterial.get(i)).getProdutor());
-                        Tabela.addCell(((Multimidia) listMaterial.get(i)).getTitulo());
-                        Tabela.addCell(((Multimidia) listMaterial.get(i)).getProdutor());
-                    }
-                    document.add(Tabela);
-                }*/
+                for(int i = 0; i < listMaterial.size();i++){
+                    Tabela.addCell(String.valueOf(listMaterial.get(i).getNchamada()));
+                    Tabela.addCell(listMaterial.get(i).getTitulo());
+                    Tabela.addCell(listMaterial.get(i).getAutor());
+                    Tabela.addCell(listMaterial.get(i).getEditora());
+                    Tabela.addCell(String.valueOf(listMaterial.get(i).getVolume()));
+                    Tabela.addCell(String.valueOf(listMaterial.get(i).getAnopublicacao()));
+                    Tabela.addCell(String.valueOf(listMaterial.get(i).getCdu()));
+                    Tabela.addCell(String.valueOf(listMaterial.get(i).getCdd()));
+                }
+                document.add(Tabela);
             }catch(DocumentException ex){    
                 Logger.getLogger(PDF.class.getName()).log(Level.SEVERE,null, ex);        
             }
@@ -202,5 +170,83 @@ public class PDF {
                 document.close();
             }
         }
+    }
+    
+    static public void gerarMultimidiaPDF(List<Multimidia> listMaterial) throws FileNotFoundException, DocumentException, BadElementException, IOException{
+        
+        Document document=null;
+        OutputStream outPutstream;
+        try{
+            document = new Document(PageSize.A4.rotate(),30,20,20,30);
+            new File("Documento").mkdir();
+            outPutstream = new FileOutputStream("Documento/TabelaMultimidias.pdf");
+            try{
+                PdfWriter writer = PdfWriter.getInstance(document, outPutstream);
+                document.open();
+                
+                logoEscola(document);
+                
+                PdfPTable Tabela = new  PdfPTable(6);
+                
+                PdfPCell cabecalho = new PdfPCell(new Paragraph("LISTA DE MULTIMÍDIAS",
+                        new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.NORMAL, new BaseColor(4,5,12))));
+                cabecalho.setHorizontalAlignment(Element.ALIGN_CENTER);
+                
+                cabecalho.setBorder(PdfPCell.NO_BORDER);
+                cabecalho.setBackgroundColor(new BaseColor(210,105,30));
+                cabecalho.setColspan(6);
+                Tabela.addCell(cabecalho);
+                Tabela.addCell("Nº Chamada");
+                Tabela.addCell("Titulo");
+                Tabela.addCell("Produtor");
+                Tabela.addCell("Estudio");
+                Tabela.addCell("Volume");
+                Tabela.addCell("Ano de Publicação");
+                
+             
+                for(int i = 0; i < listMaterial.size();i++){
+                    Tabela.addCell(String.valueOf(listMaterial.get(i).getNchamada()));
+                    Tabela.addCell(listMaterial.get(i).getTitulo());
+                    Tabela.addCell(listMaterial.get(i).getProdutor());
+                    Tabela.addCell(listMaterial.get(i).getEstudio());
+                    Tabela.addCell(String.valueOf(listMaterial.get(i).getVolume()));
+                    Tabela.addCell(String.valueOf(listMaterial.get(i).getAnopublicacao()));
+                }
+                document.add(Tabela);
+            }catch(DocumentException ex){    
+                Logger.getLogger(PDF.class.getName()).log(Level.SEVERE,null, ex);        
+            }
+        }finally{
+            if(document != null){
+                document.close();
+            }
+        }
+    }
+    
+    static private void logoEscola(Document document) throws DocumentException, BadElementException, IOException{
+        Font fonte = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.NORMAL, new BaseColor(4,5,12));
+        Font font = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.NORMAL, new BaseColor(255,255,255));
+        Paragraph paragrafo4 = new Paragraph(".....", font);
+        document.add(paragrafo4);
+        Image imagem = Image.getInstance("fonts/Brasão.png");
+        imagem.setAlignment(Element.ALIGN_CENTER);
+        imagem.scalePercent(40);
+              
+        document.add(imagem);
+        Paragraph paragrafo = new Paragraph("ESC. EST. TEMPO INTEGRAL DR. JOSÉ FERNANDES DE MELO", fonte);
+        paragrafo.setLeading(0,3);
+        paragrafo.setAlignment(Element.ALIGN_CENTER);
+        document.add(paragrafo);
+                
+        Paragraph paragrafo1 = new Paragraph("GOVERNO DO ESTADO DO RIO GRANDE DO NORTE", fonte);
+        paragrafo1.setAlignment(Element.ALIGN_CENTER);
+        document.add(paragrafo1);
+                        
+        Paragraph paragrafo2 = new Paragraph("SECRETARIA DE EDUCAÇÃO CULTURA E DESPORTOS", fonte);
+        paragrafo2.setAlignment(Element.ALIGN_CENTER);
+        document.add(paragrafo2);
+        
+        Paragraph paragrafo3 = new Paragraph(".....", font);
+        document.add(paragrafo3);
     }
 }
