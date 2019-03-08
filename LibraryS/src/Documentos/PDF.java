@@ -117,7 +117,7 @@ public class PDF {
         }
     }
     
-    static public void gerarLivroPDF(List listMaterial) throws FileNotFoundException, DocumentException, BadElementException, IOException{
+    static public void gerarLivroPDF(List<Object> listMaterial) throws FileNotFoundException, DocumentException, BadElementException, IOException{
         
         Document document=null;
         OutputStream outPutstream;
@@ -166,10 +166,31 @@ public class PDF {
                     Tabela.addCell("EMAIL");
                     Tabela.addCell("ID_PDF");
              
-                    for(int i = 0; i < list_pdf.size();i++){
-                        Tabela.addCell(list_pdf.get(i).getNome());
-                        Tabela.addCell(list_pdf.get(i).getEmail());
-                        Tabela.addCell(String.valueOf(list_pdf.get(i).getId_pdf()));
+                    for(int i = 0; i < listMaterial.size();i++){
+                        Tabela.addCell(((Livro) listMaterial.get(i)).getAutor());
+                        Tabela.addCell(((Livro) listMaterial.get(i)).getEditora());
+                        Tabela.addCell(((Livro) listMaterial.get(i)).getTitulo());
+                    }
+                    document.add(Tabela);
+                }else if(listMaterial.contains(Multimidia.class)){
+                    document.add(paragrafo3);
+                    PdfPTable Tabela = new  PdfPTable(3);
+                
+                    PdfPCell cabecalho = new PdfPCell(new Paragraph("LISTA DE LIVROS", fonte));
+                    cabecalho.setHorizontalAlignment(Element.ALIGN_CENTER);
+                
+                    cabecalho.setBorder(PdfPCell.NO_BORDER);
+                    cabecalho.setBackgroundColor(new BaseColor(210,105,30));
+                    cabecalho.setColspan(3);
+                    Tabela.addCell(cabecalho);
+                    Tabela.addCell("NOME");
+                    Tabela.addCell("EMAIL");
+                    Tabela.addCell("ID_PDF");
+             
+                    for(int i = 0; i < listMaterial.size();i++){
+                        Tabela.addCell(((Multimidia) listMaterial.get(i)).getProdutor());
+                        Tabela.addCell(((Multimidia) listMaterial.get(i)).getTitulo());
+                        Tabela.addCell(((Multimidia) listMaterial.get(i)).getProdutor());
                     }
                     document.add(Tabela);
                 }
