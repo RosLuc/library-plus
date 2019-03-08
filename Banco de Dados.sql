@@ -5,8 +5,7 @@ create table Usuario(
 	nome varchar(70) not null,
 	email varchar(40) not null,
 	cpf varchar(11) not null unique,
-	codred varchar(15),
-	ativos interger not null
+	codred varchar(15)
 );
 create table Pessoa(
 	codinsc serial primary key unique,
@@ -24,6 +23,7 @@ create table Pessoa(
 	contato varchar(15) not null,
 	nome varchar(50) not null,
 	cep varchar(10),
+	ativos interger not null,
 	foreign key(usercode) references Usuario(usercode)
 );
 create table Material(

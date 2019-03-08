@@ -6,7 +6,6 @@
 package Emprestimo;
 
 
-import Classes.Livro;
 import Classes.Material;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -14,7 +13,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.hibernate.criterion.Order;
@@ -231,24 +229,8 @@ public class Emprestimo {
             return false;
         }
     }
-        
-    /*public Emprestimo verificarEmprestimo(){
-        try{
-            //é criado uma sessao de acordo com seu banco de dados, caso for tester configure o arquivo hibernate.gfj.xml
-            SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
-            Session sessao = fabrica.openSession();
-            //aqui a sessao é iniciado sem nessecidade de ocorrer um Transaction tx_part = sessao.beginTransaction();
-            sessao.getTransaction().begin();
-            //aqui é onde é importado a primeira linha da tabela para o objeto usuario
-            Emprestimo temp = (Emprestimo) sessao.createCriteria(Emprestimo.class).uniqueResult();
-            sessao.close();//sessao finalizada
-            fabrica.close();
-            return temp;          
-        }
-        catch(HibernateException e){
-            return null;
-        }
-    }*/
+    
+     
     
     /**
      * Método responsável por obter uma lista de objetos do tipo Emprestimo do banco de dados.
@@ -272,8 +254,9 @@ public class Emprestimo {
             return null;
         }
     }
+    
     /**
-     * Método  responsável em obter um objeto do tipo Livro no banco de dados,
+     * Método static responsável em obter um objeto do tipo Emprestimo no banco de dados,
      * sendo este com codemp igual parâmentro enviado.
      * A operação é realizada utilizando hibernate.
      * @param codemp Código de emprestimo a ser comparado.
@@ -294,23 +277,30 @@ public class Emprestimo {
             return null;
         }
     }
-    /* public List<Emprestimo> filtrarEmprestimo(){
+    
+    /**
+     * Método static responsável em obter uma List de objetos do tipo Emprestimo no banco de dados,
+     * sendo esta contendo emprestimos relacionados com codinsc igual parâmentro enviado.
+     * A operação é realizada utilizando hibernate.
+     * @param codinsc Código de inscrição de Pessoa que possue algum emprestimo a ser comparado.
+     * @return List - Caso a operação seja realizada com sucesso retorna uma List de Emprestimo, caso contrário retorna null.
+     */    
+    static public List<Emprestimo> buscarEmprestimoDePessoa(int codinsc){
         try{
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
-            Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes().ignoreCase();
             @SuppressWarnings("unchecked")
-            List<Emprestimo> listaEmprestimo = sessao.createCriteria(Emprestimo.class).add(exp).addOrder(Order.desc("nome")).list();
+            List<Emprestimo> listEmp = sessao.createCriteria(Emprestimo.class).add(Restrictions.eq("codinsc", codinsc)).list();
             sessao.close();
             fabrica.close();
-            return listaEmprestimo;
+            return listEmp;
         }
         catch(HibernateException e){
-            System.err.println("Erro: "+e);
+            System.err.println("Erro: " + e);
             e.printStackTrace();
             return null;
         }
-    }*/ 
+    }
     
     /**
      * Método sobreposto da superclasse Material responsável em obter uma lista de objetos do tipo Livro no banco de dados, 
