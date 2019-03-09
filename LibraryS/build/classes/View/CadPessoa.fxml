@@ -38,7 +38,7 @@
         <Label layoutX="76.0" layoutY="197.0" stylesheets="@../CSS/label.css" text="Email:" />
         <Label layoutX="653.0" layoutY="251.0" stylesheets="@../CSS/label.css" text="Contato:" />
         <Label layoutX="76.0" layoutY="143.0" stylesheets="@../CSS/label.css" text="Nome:" />
-        <Label layoutX="497.0" layoutY="251.0" stylesheets="@../CSS/label.css" text="Série:" />
+        <Label fx:id="serieLabel" layoutX="497.0" layoutY="251.0" stylesheets="@../CSS/label.css" text="Série:" />
         <Label layoutX="716.0" layoutY="356.0" stylesheets="@../CSS/label.css" text="Número:" />
         <Label layoutX="323.0" layoutY="357.0" stylesheets="@../CSS/label.css" text="Endereco:" />
         <Label layoutX="677.0" layoutY="144.0" stylesheets="@../CSS/label.css" text="Categoria:" />
@@ -47,9 +47,9 @@
         <Label layoutX="76.0" layoutY="356.0" stylesheets="@../CSS/label.css" text="Bairro:" />
         <Label layoutX="635.0" layoutY="301.0" stylesheets="@../CSS/label.css" text="Cidade:" />
         <Label layoutX="349.0" layoutY="300.0" stylesheets="@../CSS/label.css" text="Estado:" />
-        <Label layoutX="303.0" layoutY="251.0" stylesheets="@../CSS/label.css" text="Turma:" />
+        <Label fx:id="turmaLabel" layoutX="303.0" layoutY="251.0" stylesheets="@../CSS/label.css" text="Turma:" />
       <ComboBox fx:id="categoriaBox" layoutX="771.0" layoutY="140.0" prefHeight="32.0" prefWidth="119.0" promptText="Selecione" stylesheets="@../CSS/combobox.css" />
-      <Label layoutX="76.0" layoutY="250.0" stylesheets="@../CSS/label.css" text="Turno:" />
+      <Label fx:id="turnoLabel" layoutX="76.0" layoutY="250.0" stylesheets="@../CSS/label.css" text="Turno:" />
       <TextField fx:id="turnoTxt" layoutX="136.0" layoutY="248.0" prefHeight="32.0" prefWidth="161.0" styleClass="textfield" />
     </children>
 </AnchorPane>

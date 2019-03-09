@@ -12,7 +12,14 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import Documentos.PDF;
+import Classes.Livro;
+import Classes.Multimidia;
+import com.itextpdf.text.DocumentException;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * FXML Controller class
@@ -29,6 +36,9 @@ public class GerarRelController {
 
     @FXML
     private Button relMultBtn;
+    
+    @FXML
+    private Label caminhoLabel;
 
     @FXML
     void cancelBtnAction(ActionEvent event) {
@@ -43,12 +53,30 @@ public class GerarRelController {
 
     @FXML
     void relLivroBtnAction(ActionEvent event) {
-
+        caminhoLabel.setText("Gerando arquivo.");
+        List<Livro> listLivro = new Livro().listarMaterial();
+        if(listLivro != null){
+            try {
+                String diretorio = PDF.gerarLivroPDF(listLivro);
+                caminhoLabel.setText("Arquivo salvo em: "+ diretorio + "\\TabelaLivros.pdf" );
+            } catch (DocumentException | IOException ex) {
+                caminhoLabel.setText("Erro ao gerar documento.");
+            }
+        }else caminhoLabel.setText("Acervo de livros vazio.");   
     }
 
     @FXML
     void relMultBtnAction(ActionEvent event) {
-
+        caminhoLabel.setText("Gerando arquivo.");
+        List<Multimidia> listLivro = new Multimidia().listarMaterial();
+        if(listLivro != null){
+            try {
+                String diretorio = PDF.gerarMultimidiaPDF(listLivro);
+                caminhoLabel.setText("Arquivo salvo em: "+ diretorio + "\\TabelaMultimidias.pdf" );
+            } catch (DocumentException | IOException ex) {
+                caminhoLabel.setText("Erro ao gerar documento.");
+            }
+        }else caminhoLabel.setText("Acervo de multimidias vazio."); 
     }
 
     public void fecha() {

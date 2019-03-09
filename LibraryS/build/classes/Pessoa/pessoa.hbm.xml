@@ -61,5 +61,6 @@ Contributor(s):
         <property name="nome"/>
         <property name="cep"/>
         <property name="ativos"/>
+        <property name="total_emprestimos"/>
     </class>
 </hibernate-mapping>

@@ -143,7 +143,7 @@ public class ConsultarPessoasController implements Initializable {
         nomeTb.setCellValueFactory(
             new PropertyValueFactory<>("nome"));
         serieTb.setCellValueFactory(
-            new PropertyValueFactory<>("codinsc"));
+            new PropertyValueFactory<>("serie"));
         turmaTb.setCellValueFactory(
             new PropertyValueFactory<>("turma"));
         turnoTb.setCellValueFactory(

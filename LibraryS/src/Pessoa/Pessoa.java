@@ -34,6 +34,7 @@ public class Pessoa {
     private String nome;
     private String cep;
     private int ativos;
+    private int total_emprestimos;
     
     /**
      * Método contrutor da classe Pessoa.
@@ -61,11 +62,12 @@ public class Pessoa {
      * @param nome - Nome da pessoa.
      * @param cep - CEP da residência da pessoa.
      * @param ativos - Quantidade de emprestimos ativos.
+     * @param total_emprestimos - Quantidade total de emprestimos.
      */
     public Pessoa(int codinsc, int usercode, String estado, String numero,
             String serie, String endereco, String turno, String bairro,
             String turma, String cidade, String categoria, String email,
-            String contato, String nome, String cep, int ativos) {
+            String contato, String nome, String cep, int ativos, int total_emprestimos) {
         this.codinsc = codinsc;
         this.usercode = usercode;
         this.estado = estado;
@@ -81,6 +83,7 @@ public class Pessoa {
         this.nome = nome;
         this.cep = cep;
         this.ativos = ativos;
+        this.total_emprestimos = total_emprestimos;
     }
 
     
@@ -342,6 +345,22 @@ public class Pessoa {
     }
     
     /**
+     * Método para acessar o total_emprestimoss.
+     * @return - Quantidade total emprestimos.
+     */
+    public int getTotal_emprestimos() {
+        return total_emprestimos;
+    }
+
+    /**
+     * Método para modificar o total_emprestimos.
+     * @param total_emprestimos - Quantidade total emprestimos a ser setado.
+     */
+    public void setTotal_emprestimos(int total_emprestimos) {
+        this.total_emprestimos = total_emprestimos;
+    }
+    
+    /**
      * Método que verificar o limite de emprestimo da pessoa, retornando quantos
      * vagas estão disponiveis.
      * @return Caso ativos menor que 5 é retornado número de vagas, caso ativos maior que 5
@@ -405,6 +424,32 @@ public class Pessoa {
     }
     
     /**
+     * Método que responsavel por acrescentar um valor x do total de emprestimos.
+     * @param x
+     * @return Caso operação seja realizada com sucesso retorna true,
+     * caso contrario retorna false.
+     */
+    public boolean acrescentarTotal(int x){
+        if(this != null){
+            this.setAtivos(this.getAtivos() + x);
+            return true;
+        }else return false;
+    }
+    
+    /**
+     * Método que responsavel por retirar um valor x do total de emprestimos.
+     * @param x
+     * @return Caso operação seja realizada com sucesso retorna true,
+     * caso contrario retorna false.
+     */
+    public boolean retirarTotal(int x){
+        if(this != null && (this.getAtivos() - x) >= 0){
+            this.setAtivos(this.getAtivos() - x);
+            return true;
+        }else return false;
+    }
+    
+    /**
      * Metodo responsável por salvar o objeto pessoa no banco de dados.
      * A operação é realizada utilizando hibernate.
      * @return boolean - Caso a operação for realizada com sucesso retorna true, caso contrário retorna false.
@@ -456,7 +501,7 @@ public class Pessoa {
         try{
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
-            lista_Pessoa = new ArrayList();
+            //lista_Pessoa = new ArrayList();
             lista_Pessoa = sessao.createCriteria(Pessoa.class).addOrder(Order.asc("nome")).list();
             sessao.close();
             fabrica.close();
@@ -516,10 +561,11 @@ public class Pessoa {
      * @return List - Caso a operação for realizada com sucesso retorna uma lista de pessoa, caso contrário retorna null.
      */
     public List filtrarPessoa(){
+        List<Pessoa> listaPessoa;
         try{
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
-            List<Pessoa> listaPessoa = new ArrayList();
+            //listaPessoa = new ArrayList();
             Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes().ignoreCase();
             listaPessoa = sessao.createCriteria(Pessoa.class).add(exp).addOrder(Order.desc("nome")).list();
             sessao.close();
@@ -530,4 +576,5 @@ public class Pessoa {
             return null;
         }
     }
+
 }

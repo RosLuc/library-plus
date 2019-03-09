@@ -21,7 +21,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <Label layoutX="335.0" layoutY="485.0" prefHeight="17.0" prefWidth="292.0" text="CAMINHO" textAlignment="CENTER" />
+        <Label fx:id="caminhoLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="485.0" prefHeight="17.0" prefWidth="883.0" textAlignment="CENTER" />
       <Button fx:id="relMultBtn" layoutX="378.0" layoutY="285.0" mnemonicParsing="false" onAction="#relMultBtnAction" prefHeight="39.0" prefWidth="207.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="MULTIMÍDIA" />
     </children>
 </AnchorPane>

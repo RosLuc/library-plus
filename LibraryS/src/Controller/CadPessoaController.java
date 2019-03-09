@@ -20,6 +20,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import org.hibernate.HibernateException;
 
 /**
  * FXML Controller class
@@ -63,7 +65,11 @@ public class CadPessoaController implements Initializable {
     @FXML
     private ComboBox<String> categoriaBox;
     @FXML
-    private Button ButtonCategoria;
+    private Label serieLabel;
+    @FXML
+    private Label turmaLabel;
+    @FXML
+    private Label turnoLabel;
 
     /**
      * Método responssável por cancelar a ação atual e retornar para a tela
@@ -85,17 +91,29 @@ public class CadPessoaController implements Initializable {
                     categoriaBox.getValue().equals("Professor")){
                 turnoTxt.setEditable(false);
                 turnoTxt.setText("-");
+                turnoTxt.setOpacity(0.25);
+                turnoLabel.setOpacity(0.25);
                 turmaTxt.setEditable(false);
                 turmaTxt.setText("-");
+                turmaTxt.setOpacity(0.25);
+                turmaLabel.setOpacity(0.25);
                 serieTxt.setEditable(false);
                 serieTxt.setText("-");
+                serieTxt.setOpacity(0.25);
+                serieLabel.setOpacity(0.25);
             } else if(categoriaBox.getValue().equals("Aluno")) {
                 turnoTxt.setEditable(true);
                 turnoTxt.setText("");
+                turnoTxt.setOpacity(0.5);
+                turnoLabel.setOpacity(0.5);
                 turmaTxt.setEditable(true);
                 turmaTxt.setText("");
+                turmaTxt.setOpacity(0.5);
+                turmaLabel.setOpacity(0.5);
                 serieTxt.setEditable(true);
                 serieTxt.setText("");
+                serieTxt.setOpacity(0.5);
+                serieLabel.setOpacity(0.5);
             }
         });
     }
@@ -107,45 +125,128 @@ public class CadPessoaController implements Initializable {
      */
     @FXML
     void addBtnAction(ActionEvent event) {
+        try {
+            Pessoa p = capturaPessoa();
+            if(p != null){
+                if(p.salvarPessoa()){
+                    returnPes();
+                    confirma();
+                }else erro("Falha ao cadastrar pessoa.");
+            }
+        }catch (HibernateException e){
+            erro(e.toString());
+        }catch (Exception e){
+            erro("Erro.");
+        }
+    }
+    
+    private Pessoa capturaPessoa(){
+        String temp;
         Pessoa p = new Pessoa();
-        p.setBairro(bairroTxt.getText());
-        p.setCategoria(categoriaBox.getValue());
-        p.setCep(cepTxt.getText());
-        p.setCidade(cidadeTxt.getText());
-        p.setContato(telTxt.getText());
-        p.setEmail(emailTxt.getText());
-        p.setEndereco(enderecoTxt.getText());
-        p.setEstado(estadoTxt.getText());
-        p.setNome(nomeTxt.getText());
-        p.setNumero(numeroTxt.getText());
-        p.setSerie(serieTxt.getText());
-        p.setTurma(turmaTxt.getText());
-        p.setTurno(turnoTxt.getText());
         p.setUsercode(11111);
         p.setAtivos(0);
-        if(!"".equals(p.getNome()) && !"".equals(p.getCategoria())){
-            if(p.getCategoria().equalsIgnoreCase("Aluno")){
-                if(!"".equals(p.getTurno()) && !"".equals(p.getTurno()) && !"".equals(p.getTurno())){
-                    if(p.salvarPessoa()){
-                        confirma();
-                        returnPes();
-                    }else{
-                        erro();
-                    }
-                }else{
-                    erro();
-                }
-            }else{
-                if(p.salvarPessoa()){
-                    confirma();
-                    returnPes();
-                }else{
-                    erro();
-                }
+        p.setTotal_emprestimos(0);
+        
+        temp = categoriaBox.getValue();
+        if(temp.equals("Aluno") || temp.equals("Professor") || temp.equals("Funcionario")) p.setCategoria(temp);
+        else{
+            erro("ATENÇÃO CAMPO OBRIGATORIO: Categoria não está preenchido.");
+            return null;
+        }
+        
+        temp = nomeTxt.getText();
+        if(!(temp.trim().equals(""))) p.setNome(temp);
+        else{
+            erro("ATENÇÃO CAMPO OBRIGATORIO: Nome não está preenchido.");
+            return null;
+        }
+        
+        temp = emailTxt.getText();
+        if(!(temp.trim().equals(""))) p.setEmail(temp);
+        else{
+            erro("ATENÇÃO CAMPO OBRIGATORIO: Email não está preenchido.");
+            return null;
+        }
+        
+        temp = categoriaBox.getValue();
+        if(temp.equals("Aluno")){
+            String tp;
+            tp = turnoTxt.getText();
+            if(!(tp.trim().equals(""))) p.setTurno(tp);
+            else{
+                erro("ATENÇÃO CAMPO OBRIGATORIO: Turno não está preenchido.");
+                return null;
             }
-        }else erro();
+            
+            tp = turmaTxt.getText();
+            if(!(tp.trim().equals(""))) p.setTurma(tp);
+            else{
+                erro("ATENÇÃO CAMPO OBRIGATORIO: Turma não está preenchido.");
+                return null;
+            }
+            
+            tp = serieTxt.getText();
+            if(!(tp.trim().equals(""))) p.setSerie(tp);
+            else{
+                erro("ATENÇÃO CAMPO OBRIGATORIO: Série não está preenchido.");
+                return null;
+            }
+        }else{
+            p.setTurno(null);
+            p.setTurma(null);
+            p.setSerie(null);
+        }
         
+        temp = telTxt.getText();
+        if(!(temp.trim().equals(""))) p.setContato(temp);
+        else{
+            erro("ATENÇÃO CAMPO OBRIGATORIO: Contato não está preenchido.");
+            return null;
+        }
         
+        temp = cepTxt.getText();
+        if(!(temp.trim().equals(""))) p.setCep(temp);
+        else{
+            erro("ATENÇÃO CAMPO OBRIGATORIO: CEP não está preenchido.");
+            return null;
+        }
+        
+        temp = estadoTxt.getText();
+        if(!(temp.trim().equals(""))) p.setEstado(temp);
+        else{
+            erro("ATENÇÃO CAMPO OBRIGATORIO: Estado não está preenchido.");
+            return null;
+        }
+        
+        temp = cidadeTxt.getText();
+        if(!(temp.trim().equals(""))) p.setCidade(temp);
+        else{
+            erro("ATENÇÃO CAMPO OBRIGATORIO: Cidade não está preenchido.");
+            return null;
+        }
+        
+        temp = bairroTxt.getText();
+        if(!(temp.trim().equals(""))) p.setBairro(temp);
+        else{
+            erro("ATENÇÃO CAMPO OBRIGATORIO: Bairro não está preenchido.");
+            return null;
+        }
+        
+        temp = enderecoTxt.getText();
+        if(!(temp.trim().equals(""))) p.setEndereco(temp);
+        else{
+            erro("ATENÇÃO CAMPO OBRIGATORIO: Endereço não está preenchido.");
+            return null;
+        }
+        
+        temp = numeroTxt.getText();
+        if(!(temp.trim().equals(""))) p.setNumero(temp);
+        else{
+            erro("ATENÇÃO CAMPO OBRIGATORIO: Número não está preenchido.");
+            return null;
+        }
+        
+        return p;
     }
 
     /**
@@ -174,20 +275,20 @@ public class CadPessoaController implements Initializable {
      */
     public void confirma(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText("CADASTRO");
-        alert.setTitle("Nova Pessoa");
-        alert.setContentText("Pessoa adicionada com sucesso");
+        alert.setHeaderText("PESSOA CADASTRADA.");
+        alert.setTitle("Cadastro de pessoa");
+        alert.setContentText("Pessoa cadastrada com sucesso.");
         alert.show();
     }
     
     /**
      * Método responsável por alertar erro.
      */
-    public void erro(){
+    public void erro(String mensagem){
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("CADASTRO");
-        alert.setTitle("Nova Pessoa");
-        alert.setContentText("Erro ao cadastrar pessoa.");
+        alert.setHeaderText("FALHA AO CADASTRAR PESSOA.");
+        alert.setTitle("Cadastro de pessoa");
+        alert.setContentText(mensagem);
         alert.show();
     }
     

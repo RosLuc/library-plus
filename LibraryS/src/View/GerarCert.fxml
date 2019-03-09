@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controller.GerarCertController">
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GerarCertController">
     <children>
         <Button fx:id="gerCertBtn" layoutX="310.0" layoutY="415.0" mnemonicParsing="false" onAction="#gerCertBtnAction" prefHeight="39.0" prefWidth="207.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="GERAR CERTIFICADO" />
         <Button fx:id="cancelBtn" layoutX="792.0" layoutY="44.0" mnemonicParsing="false" onAction="#cancelBtnAction" prefHeight="39.0" prefWidth="125.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="VOLTAR" />
@@ -26,14 +26,14 @@
         </Label>
         <TableView fx:id="tableCert" layoutX="189.0" layoutY="191.0" prefHeight="200.0" prefWidth="583.0" stylesheets="@../CSS/consultar.css">
             <columns>
-                <TableColumn prefWidth="143.0" text="Código de Inscrição" />
-                <TableColumn prefWidth="309.0" text="Nome" />
-                <TableColumn prefWidth="122.0" text="Pontuação" />
+                <TableColumn fx:id="codinscTb" prefWidth="143.0" text="Código de Inscrição" />
+                <TableColumn fx:id="nomeTb" prefWidth="309.0" text="Nome" />
+                <TableColumn fx:id="pontuacaoTb" prefWidth="122.0" text="Pontuação" />
             </columns>
         </TableView>
         <TextField fx:id="nomeDocTxt" layoutX="415.0" layoutY="138.0" prefHeight="32.0" prefWidth="298.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
-        <Label layoutX="248.0" layoutY="144.0" stylesheets="@../CSS/consultar.css" text="NOME DO DOCUMENTO:" />
+        <Label fx:id="nomeTxt" layoutX="257.0" layoutY="144.0" stylesheets="@../CSS/consultar.css" text="NOME DO GANHADOR:" />
         <Button fx:id="zerarBtn" layoutX="541.0" layoutY="415.0" mnemonicParsing="false" onAction="#zerarBtnAction" prefHeight="32.0" prefWidth="109.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="ZERAR" />
-        <Label layoutX="333.0" layoutY="489.0" prefHeight="17.0" prefWidth="292.0" text="CAMINHO" />
+        <Label fx:id="caminhoLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="489.0" prefHeight="17.0" prefWidth="877.0" />
     </children>
 </AnchorPane>

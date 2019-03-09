@@ -39,12 +39,14 @@ import Classes.Multimidia;
 public class PDF {
    
     
-    static public void Gerar_certificado(String nome) throws DocumentException, IOException{
+    static public String Gerar_certificado(String nome) throws DocumentException, IOException{
   
         Document document=null;
         OutputStream outPutstream;
-     
+        String diretorio = null;
         try{
+            File f = new File("Documento");
+            f.mkdir();
             document = new Document(PageSize.A4.rotate(),30,20,20,30);
             BaseFont Century_Schoolbook = BaseFont.createFont("fonts/CenturySchoolbook.ttf", BaseFont.WINANSI,BaseFont.NOT_EMBEDDED);
             Font font = new Font(Century_Schoolbook, 58, Font.ITALIC, new BaseColor(43,57,144));
@@ -101,7 +103,7 @@ public class PDF {
                     paragrafo4.setAlignment(Element.ALIGN_JUSTIFIED);
                     paragrafo4.setSpacingBefore(100);
                     document.add(paragrafo4);
-                              
+                    diretorio = f.getAbsolutePath();         
                 
                 }catch(BadElementException | IOException ex){
                     System.err.println("ERRO: " + ex);            
@@ -115,15 +117,18 @@ public class PDF {
                 document.close();
             }
         }
+        return diretorio;
     }
     
-    static public void gerarLivroPDF(List<Livro> listMaterial) throws FileNotFoundException, DocumentException, BadElementException, IOException{
+    static public String gerarLivroPDF(List<Livro> listMaterial) throws FileNotFoundException, DocumentException, BadElementException, IOException{
         
         Document document=null;
         OutputStream outPutstream;
+        String diretorio = null;
         try{
             document = new Document(PageSize.A4.rotate(),30,20,20,30);
-            new File("Documento").mkdir();
+            File f = new File("Documento");
+            f.mkdir();
             outPutstream = new FileOutputStream("Documento/TabelaLivros.pdf");
             try{
                 PdfWriter writer = PdfWriter.getInstance(document, outPutstream);
@@ -162,6 +167,7 @@ public class PDF {
                     Tabela.addCell(String.valueOf(listMaterial.get(i).getCdd()));
                 }
                 document.add(Tabela);
+                diretorio = f.getAbsolutePath();
             }catch(DocumentException ex){    
                 Logger.getLogger(PDF.class.getName()).log(Level.SEVERE,null, ex);        
             }
@@ -170,15 +176,18 @@ public class PDF {
                 document.close();
             }
         }
+        return diretorio;
     }
     
-    static public void gerarMultimidiaPDF(List<Multimidia> listMaterial) throws FileNotFoundException, DocumentException, BadElementException, IOException{
+    static public String gerarMultimidiaPDF(List<Multimidia> listMaterial) throws FileNotFoundException, DocumentException, BadElementException, IOException{
         
         Document document=null;
         OutputStream outPutstream;
+        String diretorio = null;
         try{
             document = new Document(PageSize.A4.rotate(),30,20,20,30);
-            new File("Documento").mkdir();
+            File f = new File("Documento");
+            f.mkdir();
             outPutstream = new FileOutputStream("Documento/TabelaMultimidias.pdf");
             try{
                 PdfWriter writer = PdfWriter.getInstance(document, outPutstream);
@@ -213,6 +222,7 @@ public class PDF {
                     Tabela.addCell(String.valueOf(listMaterial.get(i).getAnopublicacao()));
                 }
                 document.add(Tabela);
+                diretorio = f.getAbsolutePath();
             }catch(DocumentException ex){    
                 Logger.getLogger(PDF.class.getName()).log(Level.SEVERE,null, ex);        
             }
@@ -221,6 +231,7 @@ public class PDF {
                 document.close();
             }
         }
+        return diretorio;
     }
     
     static private void logoEscola(Document document) throws DocumentException, BadElementException, IOException{
