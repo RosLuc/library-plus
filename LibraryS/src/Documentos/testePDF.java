@@ -17,11 +17,7 @@ public class testePDF {
     
     static public void main(String[] args) throws FileNotFoundException, DocumentException, BadElementException, IOException{
         Material livro = new Livro();
-        List<Livro> listLivro = livro.listarMaterial();
-        PDF.gerarLivroPDF(listLivro);
-        Material mult = new Multimidia();
-        List<Multimidia> listmult = mult.listarMaterial();
-        PDF.gerarMultimidiaPDF(listmult);
+        PDF.Gerar_certificado("Rosendo");
     }
     
 }

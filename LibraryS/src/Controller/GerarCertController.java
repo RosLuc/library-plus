@@ -56,7 +56,7 @@ public class GerarCertController implements Initializable {
     private TableColumn<Pessoa, Integer> pontuacaoTb;
 
     @FXML
-    private TextField nomeTxt;
+    private TextField nomeDocTxt;
 
     @FXML
     private Button zerarBtn;
@@ -115,7 +115,7 @@ public class GerarCertController implements Initializable {
 
     @FXML
     void gerCertBtnAction(ActionEvent event) {
-        String temp = nomeTxt.getText();
+        String temp = nomeDocTxt.getText();
         if(!(temp.trim().equals(""))){
             try {
                 String diretorio = PDF.Gerar_certificado(temp);
@@ -128,7 +128,14 @@ public class GerarCertController implements Initializable {
 
     @FXML
     void zerarBtnAction(ActionEvent event) {
-
+        if(Pessoa.zerarTotal()){
+            List listpessoa = Pessoa.ListaDePessoa();
+            Collections.sort(listpessoa, (t, t1) -> {
+                return compareTo((Pessoa) t,(Pessoa) t1);
+            });
+            tableCert.setItems(listaDePessoas(listpessoa));
+            caminhoLabel.setText("Pontuação zerada com sucesso.");
+        }else caminhoLabel.setText("Erro ao zerar pontuação.");
     }
 
     public void fecha() {

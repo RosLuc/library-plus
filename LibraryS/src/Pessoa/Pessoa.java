@@ -3,6 +3,7 @@ package Pessoa;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -431,7 +432,7 @@ public class Pessoa {
      */
     public boolean acrescentarTotal(int x){
         if(this != null){
-            this.setAtivos(this.getAtivos() + x);
+            this.setAtivos(this.getTotal_emprestimos() + x);
             return true;
         }else return false;
     }
@@ -443,11 +444,29 @@ public class Pessoa {
      * caso contrario retorna false.
      */
     public boolean retirarTotal(int x){
-        if(this != null && (this.getAtivos() - x) >= 0){
-            this.setAtivos(this.getAtivos() - x);
+        if(this != null && (this.getTotal_emprestimos() - x) >= 0){
+            this.setAtivos(this.getTotal_emprestimos() - x);
             return true;
         }else return false;
     }
+    
+    static public boolean zerarTotal(){
+        try{
+            SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
+            Session sessao = fabrica.openSession();
+            Transaction tx_part = sessao.beginTransaction();
+            Query query = sessao.createQuery("update Pessoa set total_emprestimos = 0");
+            query.executeUpdate();
+            tx_part.commit();
+            sessao.close();
+            fabrica.close();
+            return true;
+        }
+        catch(HibernateException e){
+            System.err.println("Erro: "+e);
+            return false;
+        }
+    } 
     
     /**
      * Metodo responsável por salvar o objeto pessoa no banco de dados.

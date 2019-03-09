@@ -55,7 +55,7 @@ public class PDF {
             Font font3 = new Font(Century_Schoolbook, 20, Font.ITALIC, new BaseColor(4,5,12));
         
                  
-            outPutstream = new FileOutputStream ("Documentos/Modelo_Certificado.pdf");
+            outPutstream = new FileOutputStream ("Documento/Modelo_Certificado.pdf");
             try{
                 PdfWriter writer = PdfWriter.getInstance(document, outPutstream);
                 document.open();

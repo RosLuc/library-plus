@@ -34,6 +34,6 @@
         <TextField fx:id="nomeDocTxt" layoutX="415.0" layoutY="138.0" prefHeight="32.0" prefWidth="298.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
         <Label fx:id="nomeTxt" layoutX="257.0" layoutY="144.0" stylesheets="@../CSS/consultar.css" text="NOME DO GANHADOR:" />
         <Button fx:id="zerarBtn" layoutX="541.0" layoutY="415.0" mnemonicParsing="false" onAction="#zerarBtnAction" prefHeight="32.0" prefWidth="109.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="ZERAR" />
-        <Label fx:id="caminhoLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="489.0" prefHeight="17.0" prefWidth="877.0" />
+        <Label fx:id="caminhoLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="489.0" prefHeight="17.0" prefWidth="877.0" />
     </children>
 </AnchorPane>
