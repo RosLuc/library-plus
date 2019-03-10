@@ -109,26 +109,6 @@ public class LoginController implements Initializable {
         Login.getStage().close();
     }
 
-    /* public void logar() {
-        Usuario us = new Usuario();
-        us.setLogin(userTxt.getText());
-        us.setSenha(passTxt.getText());
-        if (us.validarUsuario()) {
-            Principal p = new Principal();
-            try {
-                p.start(new Stage());
-            } catch (Exception ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            fecha();
-        } else {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setHeaderText("ERRO");
-            alert.setTitle("Erro");
-            alert.setContentText("Login ou Senha Incorretos");
-            alert.show();
-        }
-    }*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Usuario us = new Usuario();

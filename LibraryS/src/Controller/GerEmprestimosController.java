@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import LibraryScreens.FinEmprestimo;
 import LibraryScreens.GerEmprestimos;
 import LibraryScreens.ListarEmprestimos;
 import LibraryScreens.Principal;
@@ -52,6 +53,17 @@ public class GerEmprestimosController {
             Logger.getLogger(GerEmprestimosController.class.getName()).log(Level.SEVERE, null, ex);
         }
         fecha();
+    }
+
+    @FXML
+    void finEmpBtnAction(ActionEvent event) {
+        FinEmprestimo cm = new FinEmprestimo();
+        try {
+            cm.start(new Stage());
+            fecha();
+        } catch (Exception ex) {
+            Logger.getLogger(GerEmprestimosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
