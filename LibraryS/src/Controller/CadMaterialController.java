@@ -125,20 +125,26 @@ public class CadMaterialController {
             if(livroBox.isSelected()){
                 Livro livro = capturarLivro();
                 if(livro != null){
-                    if(livro.cadastrarMaterial()){
-                        alertaComf("LIVRO CADASTRADO.", "Cadastro do livro realizado com sucesso.");
-                    }else{
-                        alertaErro("LIVRO NÃO CADASTRADO.", "Falha ao cadastrar novo Livro.");          
+                    int j = (livro.getExemplar());
+                    for(int i = 0; i < j; i++){
+                        livro.setExemplar(i+1);
+                        livro.cadastrarMaterial();
                     }
+                    alertaComf("LIVROS CDASTRADOS COM SUCESSO", livro.getExemplar() + " exemplares cadastrado.");
+                }else{
+                    alertaErro("LIVROS NÃO CADASTRADOS.", "Falha ao capturar dados do Livro.");          
                 }
             }else if(multBox.isSelected()){
                 Multimidia mult = capturarMultimidia();
                 if(mult != null){
-                    if(mult.cadastrarMaterial()){
-                        alertaComf("MULTIMÍDIA CADASTRADA.", "Cadastro da multimídia realizado com sucesso.");
-                    }else{
-                        alertaErro("MULTIMÍDIA NÃO CADASTRADO.", "Falha ao cadastrar nova multimídia.");          
-                    }   
+                    int j = (mult.getExemplar());
+                    for(int i = 0; i < j; i++){
+                        mult.setExemplar(i+1);
+                        mult.cadastrarMaterial();
+                    }
+                    alertaComf("MULTIMÍDIAS CADASTRADAS COM SUCESSO", mult.getExemplar() + " exemplares cadastrado.");
+                }else{
+                    alertaErro("MULTIMÍDIAS NÃO CADASTRADAS.", "Falha ao capturar dados da multimídia.");          
                 }
             }else{
                 alertaErro("FALAHA AO REALIZAR CADASTRO.", "Selecione o tipo de material a ser cadastrado.");
@@ -225,7 +231,7 @@ public class CadMaterialController {
                 return null;            
             }
 
-            int exemplar = 0;
+            int exemplar = 1;
             temp = exemplarTxt.getText().trim();
             if(!(temp.equals(""))){
                exemplar = Integer.parseUnsignedInt(temp);
