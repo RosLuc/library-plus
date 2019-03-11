@@ -54,7 +54,8 @@ public class GerarRelController {
     @FXML
     void relLivroBtnAction(ActionEvent event) {
         caminhoLabel.setText("Gerando arquivo.");
-        List<Livro> listLivro = new Livro().listarMaterial();
+        Livro livro = new Livro();
+        List<Livro> listLivro = livro.listarMaterial();
         if(listLivro != null){
             try {
                 String diretorio = PDF.gerarLivroPDF(listLivro);
@@ -68,10 +69,10 @@ public class GerarRelController {
     @FXML
     void relMultBtnAction(ActionEvent event) {
         caminhoLabel.setText("Gerando arquivo.");
-        List<Multimidia> listLivro = new Multimidia().listarMaterial();
-        if(listLivro != null){
+        List<Multimidia> listmult = new Multimidia().listarMaterial();
+        if(listmult != null){
             try {
-                String diretorio = PDF.gerarMultimidiaPDF(listLivro);
+                String diretorio = PDF.gerarMultimidiaPDF(listmult);
                 caminhoLabel.setText("Arquivo salvo em: "+ diretorio + "\\TabelaMultimidias.pdf" );
             } catch (DocumentException | IOException ex) {
                 caminhoLabel.setText("Erro ao gerar documento.");

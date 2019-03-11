@@ -1,6 +1,5 @@
 package Pessoa;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -455,8 +454,7 @@ public class Pessoa {
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
             Transaction tx_part = sessao.beginTransaction();
-            Query query = sessao.createQuery("update Pessoa set total_emprestimos = 0");
-            query.executeUpdate();
+            sessao.createQuery("update Pessoa set total_emprestimos = 0").executeUpdate();
             tx_part.commit();
             sessao.close();
             fabrica.close();
