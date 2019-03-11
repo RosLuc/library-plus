@@ -54,9 +54,8 @@ public class GerarRelController {
     @FXML
     void relLivroBtnAction(ActionEvent event) {
         caminhoLabel.setText("Gerando arquivo.");
-        Livro livro = new Livro();
-        List<Livro> listLivro = livro.listarMaterial();
-        if(listLivro != null){
+        List<Livro> listLivro = new Livro().listarMaterial();
+        if(!listLivro.isEmpty()){
             try {
                 String diretorio = PDF.gerarLivroPDF(listLivro);
                 caminhoLabel.setText("Arquivo salvo em: "+ diretorio + "\\TabelaLivros.pdf" );
@@ -70,7 +69,7 @@ public class GerarRelController {
     void relMultBtnAction(ActionEvent event) {
         caminhoLabel.setText("Gerando arquivo.");
         List<Multimidia> listmult = new Multimidia().listarMaterial();
-        if(listmult != null){
+        if(!listmult.isEmpty()){
             try {
                 String diretorio = PDF.gerarMultimidiaPDF(listmult);
                 caminhoLabel.setText("Arquivo salvo em: "+ diretorio + "\\TabelaMultimidias.pdf" );
