@@ -15,18 +15,31 @@ import java.util.Set;
  */
 public class Notificar {
     
-   public String notificarEmprestimo(String nome, Emprestimo emp){
+    
+   /**
+    * Método responsavel pro gerar a menssagem de notificação de emprestimo. 
+    * @param nome String com o nome da pessoa
+    * @param emp Objeto do emprestimo
+    * @return Retorna uma string contendo a menssagem de emprestimo
+    */
+   public static String notificarEmprestimo(String nome, Emprestimo emp){
         String notEmp = "\tEmpréstimos realizados)\nCaro(a)" + nome +",\nOs emprestimo abaixo foram realizados com sucesso:\n"
                + "Data do Empréstimo: " + emp.getDataemp() + "Data para devolução: " + emp.getDatadev() + "Materiais:\n ";
         String materiais = "";
         Set<Material> mat = emp.getMateriais();
         for(Material x : mat){
-            materiais += (x.getNchamada() + x.getTitulo()); 
+            materiais += (x.getNchamada() + x.getTitulo());
         }
        return notEmp + materiais;
    }
    
-   public String notificarAtraso(String nome, Emprestimo emp){
+   /**
+    * Método responsavel pro gerar a menssagem de notificação de atraso. 
+    * @param nome String com o nome da pessoa
+    * @param emp Objeto do emprestimo
+    * @return Retorna uma string contendo a menssagem de atraso
+    */
+   public static String notificarAtraso(String nome, Emprestimo emp){
         String notEmp = "\tEmprestimos atrasados\nCaro(a)" + nome +",\nO(s) emprestimo(s) do(s) material(is) ";
        
         String materiais = "";
@@ -37,7 +50,13 @@ public class Notificar {
         return notEmp + materiais + "venceu dia" +emp.getDatadev()+ "Não esqueça de devolve-lo";
    }
    
-   public String notificarDevolucao(String nome, Emprestimo emp){
+   /**
+    * Método responsavel pro gerar a menssagem de notificação de devolução. 
+    * @param nome String com o nome da pessoa
+    * @param emp Objeto do emprestimo
+    * @return Retorna uma string contendo a menssagem de devolução
+    */
+   public static String notificarDevolucao(String nome, Emprestimo emp){
         String notEmp = "\tEmpréstimo Devolvidos\nCaro(a)" + nome +",\nOs emprestimo abaixo foram devolvidos com sucesso:\n"
                + "Materiais:\n ";
         String materiais = "";

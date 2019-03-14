@@ -77,7 +77,17 @@ public class Usuario {
     public void setCodRed(String codRed) {
         this.codRed = codRed;
     }
-
+    
+    /**
+     * Cotrutor de usuário
+     * @param userCode Codiggo de usuário do sistema
+     * @param nome Nome do usuário
+     * @param senha Senha do usuário
+     * @param email Email do usuário
+     * @param login login do usuário
+     * @param cpf 
+     * @param codRed Codigo para recuperação de senha.
+     */
     public Usuario(int userCode, String nome, String senha, String email, String login, String cpf, String codRed) {
         this.userCode = userCode;
         this.nome = nome;
@@ -87,6 +97,10 @@ public class Usuario {
         this.cpf = cpf;
         this.codRed = codRed;
     }
+    
+    /**
+     * Construtor de usuário
+     */
     public Usuario(){
     }
     
@@ -183,7 +197,7 @@ public class Usuario {
     }
     
     /**
-     * 
+     * Método que retorna o usuario cadastrado no sistema.
      * @return 
      */
     public Usuario verificarUsuario(){

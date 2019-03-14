@@ -31,6 +31,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.hibernate.HibernateException;
+import Notificar.Notificar;
+import Usuario.Email;
 
 /**
  * FXML Controller class
@@ -1071,7 +1073,7 @@ public class RealizarEmpController implements Initializable {
                     erroMaterial5.setVisible(true);
             }
         }catch (PossuiEmprestimoDoMaterial e){
-            erroMaterial5.setText("O material com número de chamada: " 
+            erroMaterial5.setText("O material com número de chamada: "
                     + verifica.getNchamada() + ", já está emprestado para "
                             + "essa pessoa.");
             erroMaterial5.setVisible(true);
@@ -1087,7 +1089,7 @@ public class RealizarEmpController implements Initializable {
         }
     }
     
-        /**
+    /**
      * Método responsável por alerta de confirmação.
      * @param HeaderText String exibida no HeaderText.
      * @param ContentText String exibida no ContextText.
@@ -1098,6 +1100,14 @@ public class RealizarEmpController implements Initializable {
         alert.setTitle("Cadastro de Livro");
         alert.setContentText(ContentText);
         alert.show();
+    }
+    
+    private void emprestimoNetificacao(Pessoa p, Emprestimo emp) {
+        String remetente = "libraryalory@gmail.com";
+        String senh = "libraryalory12345";
+        Email.enviarMensagem(remetente, p.getEmail(), "Email de realização de emprestimo",
+                Notificar.notificarEmprestimo(p.getNome(), emp), 
+                Email.conectarConta( Email.conexaoSMTP(p.getEmail()),remetente , senh));
     }
     
     /**
