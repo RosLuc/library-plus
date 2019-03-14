@@ -3,7 +3,7 @@ package Usuario;
 /**
  *
  * @author maria adriana
- */ 
+ */
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
@@ -14,12 +14,12 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class Usuario {
+
     private int userCode;
     private String nome;
     private String senha;
     private String email;
     private String login;
-    private String cpf;
     private String codRed;
 
     public int getUserCode() {
@@ -62,14 +62,6 @@ public class Usuario {
         this.login = login;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     public String getCodRed() {
         return codRed;
     }
@@ -94,7 +86,6 @@ public class Usuario {
         this.senha = senha;
         this.email = email;
         this.login = login;
-        this.cpf = cpf;
         this.codRed = codRed;
     }
     
@@ -102,15 +93,18 @@ public class Usuario {
      * Construtor de usuário
      */
     public Usuario(){
+
     }
-    
+
     /**
-     * Metodo responsável por salvar o objeto pessoa no banco de dados.
-     * A operação é realizada utilizando hibernate.
-     * @return boolean - Caso a operação for realizada com sucesso retorna true, caso contrário retorna false.
+     * Metodo responsável por salvar o objeto pessoa no banco de dados. A
+     * operação é realizada utilizando hibernate.
+     *
+     * @return boolean - Caso a operação for realizada com sucesso retorna true,
+     * caso contrário retorna false.
      */
-    public boolean salvarUsuario(){
-        try{
+    public boolean salvarUsuario() {
+        try {
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
             Transaction tx_part = sessao.beginTransaction();
@@ -119,21 +113,22 @@ public class Usuario {
             sessao.close();
             fabrica.close();
             System.out.println("Usuario salvo");
-            return true;  
-        }
-        catch(HibernateException e){
-            System.out.println("ERRO ao salvar" );
+            return true;
+        } catch (HibernateException e) {
+            System.out.println("ERRO ao salvar");
             return false;
         }
     }
-    
+
     /**
-     * Metodo responsável por exluir o objeto usuario do banco de dados.
-     * A operação é realizada utilizando hibernate.
-     * @return boolean - Caso a operação for realizada com sucesso retorna true, caso contrário retorna false.
+     * Metodo responsável por exluir o objeto usuario do banco de dados. A
+     * operação é realizada utilizando hibernate.
+     *
+     * @return boolean - Caso a operação for realizada com sucesso retorna true,
+     * caso contrário retorna false.
      */
-    public boolean excluirUsuario(){
-        try{
+    public boolean excluirUsuario() {
+        try {
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
             Transaction tx_part = sessao.beginTransaction();
@@ -143,20 +138,21 @@ public class Usuario {
             fabrica.close();
             System.out.println("usuario excluido");
             return true;
-        }
-        catch(HibernateException e){
+        } catch (HibernateException e) {
             System.out.println("ERRO ao excluir");
             return false;
         }
     }
-    
-   /**
-     * Metodo responsável por atualizar o objeto usuario no banco de dados.
-     * A operação é realizada utilizando hibernate.
-     * @return boolean - Caso a operação for realizada com sucesso retorna true, caso contrário retorna false.
+
+    /**
+     * Metodo responsável por atualizar o objeto usuario no banco de dados. A
+     * operação é realizada utilizando hibernate.
+     *
+     * @return boolean - Caso a operação for realizada com sucesso retorna true,
+     * caso contrário retorna false.
      */
-     public boolean atualizaUsuario(){
-        try{
+    public boolean atualizaUsuario() {
+        try {
             //é criado uma sessao de acordo com seu banco de dados, caso for tester configure o arquivo hibernate.gfj.xml
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
@@ -164,21 +160,22 @@ public class Usuario {
             sessao.update(this);
             tx_part.commit();
             sessao.close();
-            fabrica.close();            
+            fabrica.close();
             return true;
-        }
-        catch(HibernateException e){
+        } catch (HibernateException e) {
             return false;
         }
     }
-     
+
     /**
-     * Metodo responsável por validar o usuario no banco de dados.
-     * A operação é realizada utilizando hibernate.
-     * @return boolean - Caso o usuario for valido retorna true, caso contrário retorna false.
+     * Metodo responsável por validar o usuario no banco de dados. A operação é
+     * realizada utilizando hibernate.
+     *
+     * @return boolean - Caso o usuario for valido retorna true, caso contrário
+     * retorna false.
      */
-    public boolean validarUsuario(){
-        try{
+    public boolean validarUsuario() {
+        try {
             //é criado uma sessao de acordo com seu banco de dados, caso for tester configure o arquivo hibernate.gfj.xml
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
@@ -188,20 +185,21 @@ public class Usuario {
             Usuario temp = (Usuario) sessao.createCriteria(Usuario.class).uniqueResult();
             sessao.close();//sessao finalizada
             fabrica.close();
-            if(temp == null) return false;
-            return (this.senha.equals(temp.getSenha()) && this.login.equals(temp.getLogin()));      
-        }
-        catch(HibernateException e){
+            if (temp == null) {
+                return false;
+            }
+            return (this.senha.equals(temp.getSenha()) && this.login.equals(temp.getLogin()));
+        } catch (HibernateException e) {
             return false;
         }
     }
-    
+
     /**
      * Método que retorna o usuario cadastrado no sistema.
      * @return 
      */
-    public Usuario verificarUsuario(){
-        try{
+    public Usuario verificarUsuario() {
+        try {
             //é criado uma sessao de acordo com seu banco de dados, caso for tester configure o arquivo hibernate.gfj.xml
             SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session sessao = fabrica.openSession();
@@ -211,52 +209,52 @@ public class Usuario {
             Usuario temp = (Usuario) sessao.createCriteria(Usuario.class).uniqueResult();
             sessao.close();//sessao finalizada
             fabrica.close();
-            return temp;          
-        }
-        catch(HibernateException e){
+            return temp;
+        } catch (HibernateException e) {
             return null;
         }
     }
-    
+
     /**
-     * Metodo responsável por gerar números aleatorios e converter o tipo Int para String
-     * A operação é realizada utilizando um gerador de numeros da biblioteca 'Random'
-     * @return String - o codigo gerado para ser a nova senha 
+     * Metodo responsável por gerar números aleatorios e converter o tipo Int
+     * para String A operação é realizada utilizando um gerador de numeros da
+     * biblioteca 'Random'
+     *
+     * @return String - o codigo gerado para ser a nova senha
      */
-    public String retorna_g(){
+    public String retorna_g() {
         Random gerador = new Random();
         int mensagem;
-        do{
+        do {
             mensagem = gerador.nextInt();
-        }while(mensagem <= 0);
+        } while (mensagem <= 0);
         String strin = String.valueOf(mensagem);
         return strin;
     }
-    
+
     /**
-     * Metodo responsável por obter a nova senha e envia-la por e-mail
-     * A operação é realizada utilizando a chamada do gerador de numero e conexão com o e-mail remetente
+     * Metodo responsável por obter a nova senha e envia-la por e-mail A
+     * operação é realizada utilizando a chamada do gerador de numero e conexão
+     * com o e-mail remetente
+     *
      * @return String - a nova senha
      * @throws java.io.UnsupportedEncodingException
      * @throws java.security.NoSuchAlgorithmException
      */
-    public String recupera() throws UnsupportedEncodingException, NoSuchAlgorithmException{
-            String str = retorna_g();
-            String remetente = "libraryalory@gmail.com";
-            String senh = "libraryalory12345";
-            Usuario u = verificarUsuario();
-            Email Email = new Email();
-            if(Email.enviarMensagem(remetente, u.getEmail(), "Recuperar senha do sistema", str, Email.conectarConta(Email.conexaoSMTP(remetente), remetente, senh))){
-               System.out.println("E-mail enviado!");
-               return str;
-            }else{
-                System.out.println("Ocorreu erro, verifique as informações");
-                return null;
-            }
-           
-    }  
-   
-}
- 
+    public String recupera() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        String str = retorna_g();
+        String remetente = "libraryalory@gmail.com";
+        String senh = "libraryalory12345";
+        Usuario u = verificarUsuario();
+        Email Email = new Email();
+        if (Email.enviarMensagem(remetente, u.getEmail(), "Recuperar senha do sistema", str, Email.conectarConta(Email.conexaoSMTP(remetente), remetente, senh))) {
+            System.out.println("E-mail enviado!");
+            return str;
+        } else {
+            System.out.println("Ocorreu erro, verifique as informações");
+            return null;
+        }
 
-    
+    }
+
+}

@@ -15,7 +15,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,19 +31,20 @@ import javafx.stage.Stage;
  *
  * @author luand
  */
-public class ConsultarMateriaisController implements Initializable{
+public class ConsultarMateriaisController implements Initializable {
+
     @FXML
     private TableView<Livro> table;
- 
+
     @FXML
     private TableColumn<Livro, Integer> cduTb;
-    
+
     @FXML
     private TableColumn<Livro, Integer> cddTb;
-    
+
     @FXML
     private TableColumn<Livro, Integer> nchamTb;
-        
+
     @FXML
     private TableColumn<Livro, String> tituloTb;
 
@@ -53,40 +53,40 @@ public class ConsultarMateriaisController implements Initializable{
 
     @FXML
     private TableColumn<Livro, String> nestTb;
-    
+
     @FXML
     private TableColumn<Livro, Integer> npraTb;
-    
+
     @FXML
     private TableColumn<Livro, Integer> volTb;
-        
+
     @FXML
     private TableColumn<Livro, String> editTb;
 
     @FXML
     private TableColumn<Livro, String> statusTb;
-    
+
     @FXML
     private TableColumn<Livro, Integer> anoTb;
-    
+
     @FXML
     private TableColumn<Livro, Integer> exemplarTb;
-    
+
     @FXML
     private TableColumn<Livro, String> dataTb;
-    
+
     @FXML
     private Button limparBtn;
 
     @FXML
     private TextField tituloTxt;
-    
+
     @FXML
     private TextField cduTxt;
 
     @FXML
     private TextField cddTxt;
-    
+
     @FXML
     private TextField localTxt;
 
@@ -104,7 +104,7 @@ public class ConsultarMateriaisController implements Initializable{
 
     @FXML
     private TextField autorTx;
-    
+
     /**
      * Método responsável por fechar a tela atual
      */
@@ -145,11 +145,12 @@ public class ConsultarMateriaisController implements Initializable{
         dataTb2.setCellValueFactory(new PropertyValueFactory<>("data"));
 
     }
-    
+
     /**
-     * Método responsável por detectar um ActionEvent no backBtn e voltar
-     * para tela anterior.
-     * @param event 
+     * Método responsável por detectar um ActionEvent no backBtn e voltar para
+     * tela anterior.
+     *
+     * @param event
      */
     @FXML
     void backBtnAction(ActionEvent event) {
@@ -161,53 +162,55 @@ public class ConsultarMateriaisController implements Initializable{
         }
         fecha();
     }
-     
+
     /**
-     * Método responsável por detectar um ActionEvent no pesquisarBtn e pesquisar
-     * por livros.
-     * @param event 
+     * Método responsável por detectar um ActionEvent no pesquisarBtn e
+     * pesquisar por livros.
+     *
+     * @param event
      */
     @FXML
     void pesquisarBtnAction(ActionEvent event) {
-        try{
+        try {
             Livro l = new Livro();
             String temp = nChamTxt.getText().trim();
-            if(!(temp.equals(""))){
+            if (!(temp.equals(""))) {
                 l.setNchamada(Integer.parseUnsignedInt(temp));
             }
-            
+
             temp = cddTxt.getText().trim();
-            if(!(temp.equals(""))){
+            if (!(temp.equals(""))) {
                 l.setCdd(Integer.parseUnsignedInt(temp));
             }
-            
+
             temp = cduTxt.getText().trim();
-            if(!(temp.equals(""))){
-                
+            if (!(temp.equals(""))) {
+
                 l.setCdu(Integer.parseUnsignedInt(temp));
             }
-            
+
             l.setTitulo(tituloTxt.getText().trim());
             l.setAutor(autorTx.getText().trim());
             l.setEditora(editTxt.getText().trim());
             l.setLocal(localTxt.getText().trim());
-            List<Livro> list = l.filtrarMaterialCMP(); 
-            
-            if(list != null){
+            List<Livro> list = l.filtrarMaterialCMP();
+
+            if (list != null) {
                 table.setItems(FXCollections.observableList(list));
             }
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             alertaErro("Erro ao pesquisar", "Nós campos númericos digite apenas números inteiros.");
             Logger.getLogger(ConsultarMateriaisController.class.getName()).log(Level.SEVERE, null, e);
-        }catch (Exception e) {
+        } catch (Exception e) {
             Logger.getLogger(ConsultarMateriaisController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
     /**
-     * Método responsável por detectar um ActionEvent no limparBtn e 
-     * limpar e TableView de livros.
-     * @param event 
+     * Método responsável por detectar um ActionEvent no limparBtn e limpar e
+     * TableView de livros.
+     *
+     * @param event
      */
     @FXML
     void limparBtnAction(ActionEvent event) {
@@ -220,14 +223,14 @@ public class ConsultarMateriaisController implements Initializable{
         localTxt.setText("");
         table.setItems(null);
     }
-    
+
     //Referente a aba de multimídia.
     @FXML
     private TableView<Multimidia> tableMult;
 
     @FXML
     private TableColumn<Multimidia, Integer> exemplarTb2;
-    
+
     @FXML
     private TableColumn<Multimidia, Integer> volTb2;
 
@@ -236,7 +239,7 @@ public class ConsultarMateriaisController implements Initializable{
 
     @FXML
     private TableColumn<Multimidia, String> produtorTb;
-    
+
     @FXML
     private TableColumn<Multimidia, String> estudioTb;
 
@@ -281,19 +284,19 @@ public class ConsultarMateriaisController implements Initializable{
 
     @FXML
     private Button backBtn2;
-    
-    
+
     /**
-     * Método responsável por detectar um ActionEvent no pesquisarMultBtn e pesquisar
-     * por multimídias.
-     * @param event 
+     * Método responsável por detectar um ActionEvent no pesquisarMultBtn e
+     * pesquisar por multimídias.
+     *
+     * @param event
      */
     @FXML
     void pesquisarMultBtnAction(ActionEvent event) {
-        try{
+        try {
             Multimidia m = new Multimidia();
             String temp = nChamaTxt2.getText().trim();
-            if(!(temp.equals(""))){
+            if (!(temp.equals(""))) {
                 m.setNchamada(Integer.parseUnsignedInt(temp));
             }
 
@@ -301,23 +304,24 @@ public class ConsultarMateriaisController implements Initializable{
             m.setProdutor(produtorTx2.getText().trim());
             m.setEstudio(estudioTxt2.getText().trim());
             m.setLocal(localTxt2.getText().trim());
-            List<Multimidia> list = m.filtrarMaterialCMP(); 
-            
-            if(list != null){
+            List<Multimidia> list = m.filtrarMaterialCMP();
+
+            if (list != null) {
                 tableMult.setItems(FXCollections.observableList(list));
             }
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             alertaErro("Erro ao pesquisar", "Nós campos númericos digite apenas números inteiros.");
             Logger.getLogger(ConsultarMateriaisController.class.getName()).log(Level.SEVERE, null, e);
-        }catch (Exception e) {
+        } catch (Exception e) {
             Logger.getLogger(ConsultarMateriaisController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     /**
-     * Método responsável por detectar um ActionEvent no limparMultBtn e 
-     * limpar e TableView de multimídias.
-     * @param event 
+     * Método responsável por detectar um ActionEvent no limparMultBtn e limpar
+     * e TableView de multimídias.
+     *
+     * @param event
      */
     @FXML
     void limparMultBtnAction(ActionEvent event) {
@@ -331,15 +335,16 @@ public class ConsultarMateriaisController implements Initializable{
 
     /**
      * Método responsável por alerta de erro.
+     *
      * @param HeaderText String exibida no HeaderText.
      * @param ContentText String exibida no ContextText.
      */
-    private void alertaErro(String HeaderText, String ContentText){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(HeaderText);
-            alert.setTitle("Cadastro de Livro");
-            alert.setContentText(ContentText);
-            alert.show();
+    private void alertaErro(String HeaderText, String ContentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(HeaderText);
+        alert.setTitle("Cadastro de Livro");
+        alert.setContentText(ContentText);
+        alert.show();
     }
-        
+
 }

@@ -7,6 +7,7 @@ package Controller;
 
 import LibraryScreens.CadPessoa;
 import LibraryScreens.ConsultarPessoas;
+import LibraryScreens.ExcluirPessoa;
 import LibraryScreens.GerPessoas;
 import LibraryScreens.Principal;
 import java.util.logging.Level;
@@ -31,6 +32,9 @@ public class GerPessoasController {
 
     @FXML
     private Button backBtn;
+
+    @FXML
+    private Button excluirPesBtn;
 
     /**
      * Método responsável por abrir a tela de Consultar Pessoas
@@ -81,6 +85,17 @@ public class GerPessoasController {
      */
     public void returnPrincipal() {
         Principal p = new Principal();
+        try {
+            p.start(new Stage());
+        } catch (Exception ex) {
+            Logger.getLogger(GerPessoasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        fecha();
+    }
+
+    @FXML
+    void excluirPesBtnAction(ActionEvent event) {
+        ExcluirPessoa p = new ExcluirPessoa();
         try {
             p.start(new Stage());
         } catch (Exception ex) {

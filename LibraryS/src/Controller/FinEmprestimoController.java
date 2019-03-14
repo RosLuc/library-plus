@@ -5,8 +5,11 @@
  */
 package Controller;
 
+import Emprestimo.Emprestimo;
+import static Emprestimo.Emprestimo.buscarEmprestimoDePessoa;
 import LibraryScreens.FinEmprestimo;
 import LibraryScreens.GerEmprestimos;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -47,7 +50,10 @@ public class FinEmprestimoController {
 
     @FXML
     void finEmpBtnAction(ActionEvent event) {
-
+        List<Emprestimo> listEmp;
+        int cod = Integer.parseInt(codInscTxt.getText());
+        listEmp = buscarEmprestimoDePessoa(cod);
+        listEmp.get(cod).getMateriais();
     }
 
     /**
