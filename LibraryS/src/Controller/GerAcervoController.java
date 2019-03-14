@@ -7,6 +7,7 @@ package Controller;
 
 import LibraryScreens.CadMaterial;
 import LibraryScreens.ConsultarMateriais;
+import LibraryScreens.ExcluirMaterial;
 import LibraryScreens.GerAcervo;
 import LibraryScreens.Principal;
 import java.util.logging.Level;
@@ -37,7 +38,13 @@ public class GerAcervoController {
 
     @FXML
     void delMatBtnAction(ActionEvent event) {
-
+        ExcluirMaterial c = new ExcluirMaterial();
+        try {
+            c.start(new Stage());
+            fecha();
+        } catch (Exception ex) {
+            Logger.getLogger(GerAcervoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
