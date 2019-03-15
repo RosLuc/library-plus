@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import LibraryScreens.AtualizarMaterial;
 import LibraryScreens.CadMaterial;
 import LibraryScreens.ConsultarMateriais;
 import LibraryScreens.ExcluirMaterial;
@@ -35,6 +36,20 @@ public class GerAcervoController {
 
     @FXML
     private Button consMatBtn;
+
+    @FXML
+    private Button attMatBtn;
+
+    @FXML
+    void attMatBtnAction(ActionEvent event) {
+        AtualizarMaterial c = new AtualizarMaterial();
+        try {
+            c.start(new Stage());
+            fecha();
+        } catch (Exception ex) {
+            Logger.getLogger(GerAcervoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @FXML
     void delMatBtnAction(ActionEvent event) {

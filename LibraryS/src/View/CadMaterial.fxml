@@ -24,13 +24,13 @@
         </ImageView>
         <TextField fx:id="tituleTxt" layoutX="158.0" layoutY="143.0" prefHeight="32.0" prefWidth="405.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
         <TextField fx:id="volTxt" layoutX="655.0" layoutY="144.0" prefHeight="32.0" prefWidth="59.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
-        <TextField fx:id="authorTxt" layoutX="243.0" layoutY="194.0" prefHeight="30.0" prefWidth="161.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
       <TextField fx:id="exemplarTxt" layoutX="804.0" layoutY="143.0" prefHeight="32.0" prefWidth="59.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
-      <TextField fx:id="cduTxt" layoutX="758.0" layoutY="193.0" prefHeight="32.0" prefWidth="105.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
-      <TextField fx:id="cddTxt" layoutX="758.0" layoutY="244.0" prefHeight="32.0" prefWidth="105.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
+        <TextField fx:id="authorTxt" layoutX="243.0" layoutY="194.0" prefHeight="30.0" prefWidth="161.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
         <TextField fx:id="editorTxt" layoutX="551.0" layoutY="194.0" prefHeight="32.0" prefWidth="152.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
+      <TextField fx:id="cduTxt" layoutX="758.0" layoutY="193.0" prefHeight="32.0" prefWidth="105.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
       <TextField fx:id="aquisicaoTxt" layoutX="277.0" layoutY="245.0" prefHeight="32.0" prefWidth="173.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
       <TextField fx:id="anoPublicTxt" layoutX="623.0" layoutY="245.0" prefHeight="32.0" prefWidth="77.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
+      <TextField fx:id="cddTxt" layoutX="758.0" layoutY="244.0" prefHeight="32.0" prefWidth="105.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
       <TextField fx:id="localPublicTxt" layoutX="276.0" layoutY="296.0" prefHeight="32.0" prefWidth="269.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
       <TextField fx:id="obsTxt" layoutX="667.0" layoutY="298.0" prefHeight="32.0" prefWidth="200.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
       <TextField fx:id="estanteTxt" layoutX="237.0" layoutY="347.0" prefHeight="32.0" prefWidth="143.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />

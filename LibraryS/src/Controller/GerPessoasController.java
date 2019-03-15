@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import LibraryScreens.AtualizarPessoa;
 import LibraryScreens.CadPessoa;
 import LibraryScreens.ConsultarPessoas;
 import LibraryScreens.ExcluirPessoa;
@@ -35,6 +36,20 @@ public class GerPessoasController {
 
     @FXML
     private Button excluirPesBtn;
+
+    @FXML
+    private Button attPesBtn;
+
+    @FXML
+    void attPesBtnAction(ActionEvent event) {
+        AtualizarPessoa c = new AtualizarPessoa();
+        try {
+            c.start(new Stage());
+            fecha();
+        } catch (Exception ex) {
+            Logger.getLogger(GerPessoasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * Método responsável por abrir a tela de Consultar Pessoas

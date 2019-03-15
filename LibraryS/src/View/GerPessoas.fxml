@@ -22,6 +22,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-      <Button fx:id="excluirPesBtn" layoutX="344.0" layoutY="350.0" mnemonicParsing="false" onAction="#excluirPesBtnAction" prefHeight="39.0" prefWidth="274.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="EXCLUIR PESSOA" />
+      <Button fx:id="excluirPesBtn" layoutX="343.0" layoutY="406.0" mnemonicParsing="false" onAction="#excluirPesBtnAction" prefHeight="39.0" prefWidth="274.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="EXCLUIR PESSOA" />
+      <Button fx:id="attPesBtn" layoutX="344.0" layoutY="349.0" mnemonicParsing="false" onAction="#attPesBtnAction" prefHeight="39.0" prefWidth="274.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="ATUALIZAR PESSOA" />
     </children>
 </AnchorPane>
