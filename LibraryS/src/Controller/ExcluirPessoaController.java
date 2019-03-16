@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.hibernate.HibernateException;
 
 /**
  * FXML Controller class
@@ -71,12 +72,30 @@ public class ExcluirPessoaController {
     }
 
     public void excluirPes() {
-        int cod = Integer.parseInt(codInscTxt.getText());
-        Pessoa p = buscarPessoa(cod);
-        p.excluirPessoa();
-        System.out.println("Excluiu");
-        returnScreen();
-        alertaComf("Excluir Pessoa", "Pessoa excluida com sucesso");
+        try {
+            if(!(codInscTxt.getText().trim().equals(""))){
+                int cod = Integer.parseInt(codInscTxt.getText());
+                Pessoa p;
+                if((p = buscarPessoa(cod)) != null){
+                    if(p.excluirPessoa()){
+                        returnScreen();
+                        alertaComf("PESSOA EXCLUIDO COM SUCESSO.", "");
+                    }else {
+                        alertaErro("FALHA AO EXCLUIR.","Tente novamente.");
+                    }
+                }else {
+                    alertaErro("FAHA AO EXCLUIR PESSOA.","Pessoa não encontrada no sistema.");
+                }
+            }
+        } catch (NumberFormatException e) {
+            alertaErro("FALHA AO CADASTRAR.","ATENÇÃO:"
+                    + " Campos númericos não peenchido ou foi adicionado simbolos como:"
+                    + " [,./ -] e outro. Adicione apenas inteiros positivos.");
+        }catch (HibernateException e){
+            alertaErro("FALHA AO EXCLUIR.", e.toString());
+        }catch (Exception e){
+            alertaErro("FALHA AO EXCLUIR.", "Erro.");
+        }
     }
 
     /**
@@ -88,9 +107,22 @@ public class ExcluirPessoaController {
     private void alertaComf(String HeaderText, String ContentText) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText(HeaderText);
-        alert.setTitle("Cadastro de Livro");
+        alert.setTitle("Deletar pessoa");
         alert.setContentText(ContentText);
         alert.show();
+    }
+    
+    /**
+     * Método responsável por alerta de erro.
+     * @param HeaderText String exibida no HeaderText.
+     * @param ContentText String exibida no ContextText.
+     */
+    private void alertaErro(String HeaderText, String ContentText){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(HeaderText);
+            alert.setTitle("Deletar pessoa");
+            alert.setContentText(ContentText);
+            alert.show();
     }
 
 }
