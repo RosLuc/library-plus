@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -8,9 +14,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controller.FinEmprestimoController">
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FinEmprestimoController">
     <children>
-        <Button fx:id="finEmpBtn" layoutX="343.0" layoutY="405.0" mnemonicParsing="false" onAction="#finEmpBtnAction" prefHeight="39.0" prefWidth="274.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="FINALIZAR EMPRÉSTIMO" />
+        <Button fx:id="finEmpBtn" layoutX="343.0" layoutY="323.0" mnemonicParsing="false" onAction="#finEmpBtnAction" prefHeight="39.0" prefWidth="274.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="FINALIZAR EMPRÉSTIMO" />
         <Button fx:id="cancelBtn" layoutX="792.0" layoutY="44.0" mnemonicParsing="false" onAction="#cancelBtnAction" prefHeight="39.0" prefWidth="125.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="CANCELAR" />
         <ImageView fitHeight="81.0" fitWidth="200.0" layoutX="30.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -22,9 +28,27 @@
                 <Font size="14.0" />
             </font>
         </Label>
-      <TextField fx:id="numChamTxt" layoutX="343.0" layoutY="202.0" prefHeight="32.0" prefWidth="274.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
-      <Label layoutX="321.0" layoutY="164.0" stylesheets="@../CSS/label.css" text="Digite o número de chamada do livro:" />
-      <TextField fx:id="codInscTxt" layoutX="343.0" layoutY="288.0" prefHeight="32.0" prefWidth="274.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
-      <Label layoutX="316.0" layoutY="250.0" stylesheets="@../CSS/label.css" text="Digite o código de inscrição da pessoa:" />
+      <TextField fx:id="numChamTxt" layoutX="343.0" layoutY="217.0" prefHeight="32.0" prefWidth="274.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
+      <Label layoutX="305.0" layoutY="179.0" stylesheets="@../CSS/label.css" text="Digite o número de chamada do material:" />
+      <Label fx:id="confirmacaoLabel" layoutX="106.0" layoutY="264.0" prefHeight="39.0" prefWidth="748.0" styleClass="labelConf" stylesheets="@../CSS/emprestimo.css" text="CONFIRMAÇÃO" />
+      <Label fx:id="erroLabel" layoutX="106.0" layoutY="270.0" prefHeight="28.0" prefWidth="748.0" styleClass="labelErro" stylesheets="@../CSS/emprestimo.css" text="ERRO" />
+      <Button fx:id="excluiMaterial" layoutX="689.0" layoutY="217.0" mnemonicParsing="false" onAction="#excluiMaterialBtnAction" prefHeight="32.0" prefWidth="38.0" styleClass="btnMais" stylesheets="@../CSS/emprestimo.css">
+         <graphic>
+            <ImageView fitHeight="21.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exclui.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="confMaterial" layoutX="639.0" layoutY="217.0" mnemonicParsing="false" onAction="#confMaterialBtnAction" prefHeight="32.0" prefWidth="38.0" styleClass="btnMais" stylesheets="@../CSS/emprestimo.css">
+         <graphic>
+            <ImageView fitHeight="21.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/checked.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
     </children>
 </AnchorPane>
