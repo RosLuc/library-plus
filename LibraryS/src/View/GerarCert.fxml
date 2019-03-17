@@ -24,11 +24,11 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <TableView fx:id="tableCert" layoutX="189.0" layoutY="191.0" prefHeight="200.0" prefWidth="583.0" stylesheets="@../CSS/consultar.css">
+        <TableView fx:id="tableCert" layoutX="204.0" layoutY="191.0" prefHeight="200.0" prefWidth="553.0" stylesheets="@../CSS/consultar.css">
             <columns>
                 <TableColumn fx:id="codinscTb" prefWidth="143.0" text="Código de Inscrição" />
-                <TableColumn fx:id="nomeTb" prefWidth="309.0" text="Nome" />
-                <TableColumn fx:id="pontuacaoTb" prefWidth="122.0" text="Pontuação" />
+                <TableColumn fx:id="nomeTb" prefWidth="285.0" text="Nome" />
+                <TableColumn fx:id="pontuacaoTb" prefWidth="116.0" text="Pontuação" />
             </columns>
         </TableView>
         <TextField fx:id="nomeDocTxt" layoutX="415.0" layoutY="138.0" prefHeight="32.0" prefWidth="298.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
