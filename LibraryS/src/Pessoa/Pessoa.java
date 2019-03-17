@@ -1,6 +1,7 @@
 package Pessoa;
 
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -485,7 +486,7 @@ public class Pessoa {
      */
     public boolean acrescentarTotal(int x) {
         if (this != null) {
-            this.setAtivos(this.getTotal_emprestimos() + x);
+            this.setTotal_emprestimos(this.getTotal_emprestimos() + x);
             return true;
         } else {
             return false;
@@ -501,7 +502,7 @@ public class Pessoa {
      */
     public boolean retirarTotal(int x) {
         if (this != null && (this.getTotal_emprestimos() - x) >= 0) {
-            this.setAtivos(this.getTotal_emprestimos() - x);
+            this.setTotal_emprestimos(this.getTotal_emprestimos() - x);
             return true;
         } else {
             return false;
@@ -652,7 +653,9 @@ public class Pessoa {
             Session sessao = fabrica.openSession();
             //listaPessoa = new ArrayList();
             Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes().ignoreCase();
-            listaPessoa = sessao.createCriteria(Pessoa.class).add(exp).addOrder(Order.desc("nome")).list();
+            Criteria cri = sessao.createCriteria(Pessoa.class).add(exp).addOrder(Order.asc("codinsc"));
+            if(this.getCodinsc() != 0) cri.add(Restrictions.eq("id", this.getCodinsc()));
+            listaPessoa = cri.list();
             sessao.close();
             fabrica.close();
             return listaPessoa;

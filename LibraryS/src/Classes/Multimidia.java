@@ -178,7 +178,9 @@ public class Multimidia extends Material {
             Session session = factory.openSession();
             Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes().ignoreCase();
             @SuppressWarnings("unchecked")
-            List<Multimidia> listMultimidia = session.createCriteria(Multimidia.class).add(exp).addOrder(Order.desc("nchamada")).list();
+            Criteria cri = session.createCriteria(Multimidia.class).add(exp).addOrder(Order.asc("nchamada"));
+            if(this.getNchamada() != 0) cri.add(Restrictions.eq("id", this.getNchamada()));
+            List<Multimidia>listMultimidia = cri.list();
             session.close();
             return listMultimidia;
         }catch(HibernateException e){

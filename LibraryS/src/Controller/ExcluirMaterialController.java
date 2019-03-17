@@ -87,7 +87,7 @@ public class ExcluirMaterialController {
                 if(livroBox.isSelected()){
                     mat = new Livro();
                     mat.setNchamada(Integer.parseInt(numChamTxt.getText()));
-                    if(mat.buscarMaterialNC() != null){
+                    if((mat = mat.buscarMaterialNC()) != null){
                         if(mat.deleteMaterial()) {
                             returnScreen();
                             alertaComf("LIVRO EXCLUIDO COM SUCESSO","");
@@ -100,7 +100,7 @@ public class ExcluirMaterialController {
                 }else if(multBox.isSelected()){
                     mat = new Multimidia();
                     mat.setNchamada(Integer.parseInt(numChamTxt.getText()));
-                    if(mat.buscarMaterialNC() != null){
+                    if((mat = mat.buscarMaterialNC()) != null){
                         if(mat.deleteMaterial()) {
                             returnScreen();
                             alertaComf("MULTIMIDIA EXCLUIDO COM SUCESSO","");

@@ -226,7 +226,9 @@ public class Livro  extends Material{
         Session session = factory.openSession();
         try{
             Example exp = Example.create(this).enableLike(MatchMode.ANYWHERE).excludeZeroes().ignoreCase();
-            listLivro = session.createCriteria(Livro.class).add(exp).addOrder(Order.asc("nchamada")).list();
+            Criteria cri = session.createCriteria(Livro.class).add(exp).addOrder(Order.asc("nchamada"));
+            if(this.getNchamada() != 0) cri.add(Restrictions.eq("id", this.getNchamada()));
+            listLivro = cri.list();
             return listLivro;
         }catch(HibernateException e){
             System.err.println("Erro ao filtrar: " + e);

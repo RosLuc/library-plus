@@ -136,6 +136,8 @@ public class FinEmprestimoController implements Initializable{
         }
     }
     
+    
+    
     /**
      * Método de ação do botão finalizar responsavel por realizar as ultimas verificações e em seguida 
      * finalizar o emprestimo com todas as ações necessarias e atualizar o banco de dados.
@@ -172,7 +174,7 @@ public class FinEmprestimoController implements Initializable{
                     Emp.getPessoa().atualizaPessoa();
                     devolucaoNotificacao(Emp.getPessoa(), material);
                 }
-                fecha();
+                retornar();
                 alertaComf("EMPRÉSTIMO DO MATERIAL INFORMADO FINALIZADO COM SUCESSO.", "...");
             } else {
                 alertaErro("NÃO FOI POSSÍVEL FINALIZAR EMPRÉSTIMO.", "Informe e confirme o número de chamada de um material.");
@@ -221,7 +223,17 @@ public class FinEmprestimoController implements Initializable{
         alert.setContentText(ContentText);
         alert.show();
     }
-
+    
+    public void retornar() {
+        GerEmprestimos cm = new GerEmprestimos();
+        try {
+            cm.start(new Stage());
+            fecha();
+        } catch (Exception ex) {
+            Logger.getLogger(FinEmprestimoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * Método responsável por fechar a tela atual
      */

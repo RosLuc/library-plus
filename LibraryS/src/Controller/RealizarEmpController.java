@@ -1202,9 +1202,7 @@ public class RealizarEmpController implements Initializable {
     private void emprestimoNotificacao(Pessoa p, Emprestimo emp) {
         String remetente = "libraryalory@gmail.com";
         String senh = "libraryalory12345";
-        Email.enviarMensagem(remetente, p.getEmail(), "Email de confirmação da realização de emprestimo",
-                Notificar.notificarEmprestimo(p.getNome(), emp), 
-                Email.conectarConta( Email.conexaoSMTP(p.getEmail()),remetente , senh));
+        Email.enviarMensagem(remetente, p.getEmail(), "Notificação de realização de emprestimo", Notificar.notificarEmprestimo(p.getNome(), emp), Email.conectarConta(Email.conexaoSMTP(remetente), remetente, senh));
     }
     
     /**

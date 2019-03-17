@@ -76,7 +76,7 @@ public class ExcluirPessoaController {
             if(!(codInscTxt.getText().trim().equals(""))){
                 int cod = Integer.parseInt(codInscTxt.getText());
                 Pessoa p;
-                if((p = buscarPessoa(cod)) != null){
+                if((p = Pessoa.buscarPessoa(cod)) != null){
                     if(p.excluirPessoa()){
                         returnScreen();
                         alertaComf("PESSOA EXCLUIDO COM SUCESSO.", "");
