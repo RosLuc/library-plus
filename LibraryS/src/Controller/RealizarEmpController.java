@@ -9,7 +9,7 @@ import Classes.Livro;
 import Classes.Material;
 import Classes.Multimidia;
 import Emprestimo.Emprestimo;
-import Emprestimo.PossuiEmprestimoDoMaterial;
+import Emprestimo.PossuiEmprestimoDoMaterialException;
 import LibraryScreens.GerEmprestimos;
 import LibraryScreens.RealizarEmp;
 import Pessoa.Pessoa;
@@ -186,7 +186,7 @@ public class RealizarEmpController implements Initializable {
 
     
     /**
-     * Método responsável por fechar a tela atual
+     * Método responsável por fechar a tela atual.
      */
     public void fecha() {
         RealizarEmp.getStage().close();
@@ -203,7 +203,7 @@ public class RealizarEmpController implements Initializable {
     
     /**
      * Método responsável por retornar para a tela anterior e fechar a tela
-     * atual
+     * atual.
      */
     public void returnGerEmprestimo(){
         GerEmprestimos g = new GerEmprestimos();
@@ -217,44 +217,55 @@ public class RealizarEmpController implements Initializable {
     
     /**
      * Método responsável por confimar pessoa para o empréstimo.
-     * @param event - Evento do Botão
+     * @param event Evento do Botão.
      */
     @FXML
     void confPessoaBtnAction(ActionEvent event) {
-        String temp = nInscTxt.getText().trim();
-        if(!(temp.equals(""))){
-            p = Pessoa.buscarPessoa(Integer.parseUnsignedInt(temp));
-            if (p != null) {
-                if (p.verificarLimite() > 0) {
-                    erroPessoa.setVisible(false);
-                    nInscTxt.setVisible(false);
-                    confPessoa.setVisible(false);
-                    nInsc.setVisible(false);
-                    //colocar para exbir limite de emprestimo.
-                    checkPessoa.setText("Nº de Inscrição: " + p.getCodinsc()
-                            + "\tNome: " + p.getNome() + "\tEmpréstimos ativos: " 
-                            + p.getAtivos() + ".");
-                    checkPessoa.setVisible(true);
-                    excluiPessoa.setVisible(true);
+        try{
+            String temp = nInscTxt.getText().trim();
+            if (!(temp.equals(""))) {
+                p = Pessoa.buscarPessoa(Integer.parseUnsignedInt(temp));
+                if (p != null) {
+                    if (p.verificarLimite() > 0) {
+                        erroPessoa.setVisible(false);
+                        nInscTxt.setVisible(false);
+                        confPessoa.setVisible(false);
+                        nInsc.setVisible(false);
+                        checkPessoa.setText("Nº de Inscrição: " + p.getCodinsc()
+                                + "\tNome: " + p.getNome() + "\tEmpréstimos ativos: "
+                                + p.getAtivos() + ".");
+                        checkPessoa.setVisible(true);
+                        excluiPessoa.setVisible(true);
+                    } else {
+                        erroPessoa.setText("Essa pessoa já execedeu o seu limite "
+                                + "de  (cinco) empréstimos .");
+                        erroPessoa.setVisible(true);
+                    }
                 } else {
-                    erroPessoa.setText("Essa pessoa já execedeu o seu limite "
-                            + "de  (cinco) empréstimos .");
+                    erroPessoa.setText("Pessoa com esse número de inscrição "
+                            + "não existe.");
                     erroPessoa.setVisible(true);
                 }
             } else {
-                erroPessoa.setText("Pessoa com esse número de inscrição "
-                        + "não existe.");
+                erroPessoa.setText("Informe o número de inscrição da pessoa.");
                 erroPessoa.setVisible(true);
             }
-        }else{
-            erroPessoa.setText("Informe o número de inscrição da pessoa.");
+        }catch(NumberFormatException e){
+            erroPessoa.setText("Erro, não é possivel inserir número "
+                    + "negativos ou carateres.");
+            erroPessoa.setVisible(true);
+        }catch (HibernateException e){
+            erroPessoa.setText("Erro de acesso ao banco de dados.");
+            erroPessoa.setVisible(true);
+        }catch (Exception e){
+            erroPessoa.setText("Fatal erro: exception.");
             erroPessoa.setVisible(true);
         }
     }
 
     /**
      * Método responsável por confimar o primeiro material para o empréstimo.
-     * @param event - Evento do Botão
+     * @param event Evento do Botão.
      */
     @FXML
     void confMaterial1BtnAction(ActionEvent event) {
@@ -266,23 +277,31 @@ public class RealizarEmpController implements Initializable {
                     l.setNchamada(Integer.parseUnsignedInt(temp));
                     l = l.buscarMaterialNC();
                     if (l != null) {
-                        if (l.getStatus().equals("Disponivel")) {
-                            erroMaterial1.setVisible(false);
-                            material1Txt.setVisible(false);
-                            confMaterial1.setVisible(false);
-                            selectLivro1.setVisible(false);
-                            selectMult1.setVisible(false);
-                            checkMaterial1.setText("Nº de chamada: "
-                                    + l.getNchamada() + "\tNome: "
-                                    + l.getTitulo() + "\tExemplar: "
-                                    + l.getExemplar() + ".");
-                            checkMaterial1.setVisible(true);
-                            excluiMaterial1.setVisible(true);
-                            material1 = l;
-                        } else {
-                            erroMaterial1.setText("Livro não está disponível.");
+                        if (!(material2 != null && (material2.getNchamada() == l.getNchamada()))
+                                && !(material3 != null && (material3.getNchamada() == l.getNchamada()))
+                                && !(material4 != null && (material4.getNchamada() == l.getNchamada()))
+                                && !(material5 != null && (material5.getNchamada() == l.getNchamada()))) {
+                            if (l.getStatus().equals("Disponivel")) {
+                                erroMaterial1.setVisible(false);
+                                material1Txt.setVisible(false);
+                                confMaterial1.setVisible(false);
+                                selectLivro1.setVisible(false);
+                                selectMult1.setVisible(false);
+                                checkMaterial1.setText("Nº de chamada: "
+                                        + l.getNchamada() + "\tNome: "
+                                        + l.getTitulo() + "\tExemplar: "
+                                        + l.getExemplar() + ".");
+                                checkMaterial1.setVisible(true);
+                                excluiMaterial1.setVisible(true);
+                                material1 = l;
+                            } else {
+                                erroMaterial1.setText("Livro não está disponível.");
+                                erroMaterial1.setVisible(true);
+                            }
+                        }else{
+                            erroMaterial1.setText("Esse livro já está selecionado, "
+                                    + "não é possivel realizar emprestimo de materiais do mesmo tipo.");
                             erroMaterial1.setVisible(true);
-                            excluiMaterial1BtnAction(new ActionEvent());
                         }
                     } else {
                         erroMaterial1.setText("Livro com esse número de "
@@ -294,23 +313,31 @@ public class RealizarEmpController implements Initializable {
                     m.setNchamada(Integer.parseUnsignedInt(temp));
                     m = m.buscarMaterialNC();
                     if (m != null) {
-                        if (m.getStatus().equals("Disponivel")) {
-                            erroMaterial1.setVisible(false);
-                            material1Txt.setVisible(false);
-                            confMaterial1.setVisible(false);
-                            selectLivro1.setVisible(false);
-                            selectMult1.setVisible(false);
-                            checkMaterial1.setText("Nº de chamada: "
-                                    + m.getNchamada() + "\tNome: "
-                                    + m.getTitulo() + "\tExemplar: "
-                                    + m.getExemplar() + ".");
-                            checkMaterial1.setVisible(true);
-                            excluiMaterial1.setVisible(true);
-                            material1 = m;
+                        if (!(material2 != null && (material2.getNchamada() == m.getNchamada()))
+                                && !(material3 != null && (material3.getNchamada() == m.getNchamada()))
+                                && !(material4 != null && (material4.getNchamada() == m.getNchamada()))
+                                && !(material5 != null && (material5.getNchamada() == m.getNchamada()))) {
+                            if (m.getStatus().equals("Disponivel")) {
+                                erroMaterial1.setVisible(false);
+                                material1Txt.setVisible(false);
+                                confMaterial1.setVisible(false);
+                                selectLivro1.setVisible(false);
+                                selectMult1.setVisible(false);
+                                checkMaterial1.setText("Nº de chamada: "
+                                        + m.getNchamada() + "\tNome: "
+                                        + m.getTitulo() + "\tExemplar: "
+                                        + m.getExemplar() + ".");
+                                checkMaterial1.setVisible(true);
+                                excluiMaterial1.setVisible(true);
+                                material1 = m;
+                            } else {
+                                erroMaterial1.setText("Multimídia não está disponível.");
+                                erroMaterial1.setVisible(true);
+                            }
                         }else{
-                            erroMaterial1.setText("Multimídia não está disponível.");
+                            erroMaterial1.setText("Essa multimídia já está selecionada, "
+                                    + "não é possivel realizar emprestimo de materiais do mesmo tipo.");
                             erroMaterial1.setVisible(true);
-                            excluiMaterial1BtnAction(new ActionEvent());
                         }
                     } else {
                         erroMaterial1.setText("Multimídia com esse número de "
@@ -325,9 +352,6 @@ public class RealizarEmpController implements Initializable {
                 erroMaterial1.setText("Informe o número de chamada do material.");
                 erroMaterial1.setVisible(true);
             }
-        }catch (ArrayIndexOutOfBoundsException e){
-            erroMaterial5.setText("Erro IIV - 1.");
-            erroMaterial5.setVisible(true);
         }catch(NumberFormatException e){
             erroMaterial5.setText("Erro, não é possivel inserir número "
                     + "negativos ou carateres.");
@@ -343,7 +367,7 @@ public class RealizarEmpController implements Initializable {
 
     /**
      * Método responsável por exibir os campos para inserir segundo material para o empréstimo.
-     * @param event - Evento do Botão
+     * @param event Evento do Botão.
      */
     @FXML
     void addMateirial1BtnAction(ActionEvent event) {
@@ -369,7 +393,7 @@ public class RealizarEmpController implements Initializable {
 
     /**
      * Método responsável por confimar o segundo material para o empréstimo.
-     * @param event - Evento do Botão
+     * @param event Evento do Botão.
      */
     @FXML
     void confMaterial2BtnAction(ActionEvent event) {
@@ -381,23 +405,31 @@ public class RealizarEmpController implements Initializable {
                     l.setNchamada(Integer.parseUnsignedInt(temp));
                     l = l.buscarMaterialNC();
                     if (l != null) {
-                        if (l.getStatus().equals("Disponivel")){
-                            erroMaterial2.setVisible(false);
-                            material2Txt.setVisible(false);
-                            confMaterial2.setVisible(false);
-                            selectLivro2.setVisible(false);
-                            selectMult2.setVisible(false);
-                            checkMaterial2.setText("Nº de chamada: " + 
-                                    l.getNchamada() + "\tNome: "
-                                    + l.getTitulo() + "\tExemplar: " + 
-                                    l.getExemplar() + ".");
-                            checkMaterial2.setVisible(true);
-                            excluiMaterial2.setVisible(true);
-                            material2=l;                            
+                        if (!(material1 != null && (material1.getNchamada() == l.getNchamada()))
+                                && !(material3 != null && (material3.getNchamada() == l.getNchamada()))
+                                && !(material4 != null && (material4.getNchamada() == l.getNchamada()))
+                                && !(material5 != null && (material5.getNchamada() == l.getNchamada()))) {
+                            if (l.getStatus().equals("Disponivel")) {
+                                erroMaterial2.setVisible(false);
+                                material2Txt.setVisible(false);
+                                confMaterial2.setVisible(false);
+                                selectLivro2.setVisible(false);
+                                selectMult2.setVisible(false);
+                                checkMaterial2.setText("Nº de chamada: "
+                                        + l.getNchamada() + "\tNome: "
+                                        + l.getTitulo() + "\tExemplar: "
+                                        + l.getExemplar() + ".");
+                                checkMaterial2.setVisible(true);
+                                excluiMaterial2.setVisible(true);
+                                material2 = l;
+                            } else {
+                                erroMaterial2.setText("Livro não está disponível.");
+                                erroMaterial2.setVisible(true);
+                            }
                         }else{
-                            erroMaterial2.setText("Livro não está disponível.");
+                            erroMaterial2.setText("Esse livro já está selecionado, "
+                                    + "não é possivel realizar emprestimo de materiais do mesmo tipo.");
                             erroMaterial2.setVisible(true);
-                            excluiMaterial2BtnAction(new ActionEvent());
                         }
                     } else {
                         erroMaterial2.setText("Livro com esse número "
@@ -409,23 +441,31 @@ public class RealizarEmpController implements Initializable {
                     m.setNchamada(Integer.parseUnsignedInt(temp));
                     m = m.buscarMaterialNC();
                     if (m != null) {
-                        if (m.getStatus().equals("Disponivel")){
-                            erroMaterial2.setVisible(false);
-                            material2Txt.setVisible(false);
-                            confMaterial2.setVisible(false);
-                            selectLivro2.setVisible(false);
-                            selectMult2.setVisible(false);
-                            checkMaterial2.setText("Nº de chamada: " + 
-                                    m.getNchamada() + "\tNome: "
-                                    + m.getTitulo() + "\tExemplar: " + 
-                                    m.getExemplar() + ".");
-                            checkMaterial2.setVisible(true);
-                            excluiMaterial2.setVisible(true);
-                            material2=m;                            
+                        if (!(material1 != null && (material1.getNchamada() == m.getNchamada()))
+                                && !(material3 != null && (material3.getNchamada() == m.getNchamada()))
+                                && !(material4 != null && (material4.getNchamada() == m.getNchamada()))
+                                && !(material5 != null && (material5.getNchamada() == m.getNchamada()))) {
+                            if (m.getStatus().equals("Disponivel")) {
+                                erroMaterial2.setVisible(false);
+                                material2Txt.setVisible(false);
+                                confMaterial2.setVisible(false);
+                                selectLivro2.setVisible(false);
+                                selectMult2.setVisible(false);
+                                checkMaterial2.setText("Nº de chamada: "
+                                        + m.getNchamada() + "\tNome: "
+                                        + m.getTitulo() + "\tExemplar: "
+                                        + m.getExemplar() + ".");
+                                checkMaterial2.setVisible(true);
+                                excluiMaterial2.setVisible(true);
+                                material2 = m;
+                            } else {
+                                erroMaterial2.setText("Multímidia não está disponível.");
+                                erroMaterial2.setVisible(true);
+                            }
                         }else{
-                            erroMaterial2.setText("Multímidia não está disponível.");
+                            erroMaterial2.setText("Essa Multimídia já está selecionada, "
+                                    + "não é possivel realizar emprestimo de materiais do mesmo tipo.");
                             erroMaterial2.setVisible(true);
-                            excluiMaterial2BtnAction(new ActionEvent());
                         }
                     } else {
                         erroMaterial2.setText("Multimidia com esse número de "
@@ -441,9 +481,6 @@ public class RealizarEmpController implements Initializable {
                         + "material.");
                 erroMaterial2.setVisible(true);
             }            
-        }catch (ArrayIndexOutOfBoundsException e){
-            erroMaterial5.setText("Erro IIV - 1.");
-            erroMaterial5.setVisible(true);
         }catch(NumberFormatException e){
             erroMaterial5.setText("Erro, não é possivel inserir número "
                     + "negativos ou carateres.");
@@ -457,6 +494,10 @@ public class RealizarEmpController implements Initializable {
         }
     }
 
+    /**
+     * Método responsável por exibir os campos para inserir terceiro material para o empréstimo.
+     * @param event Evento do Botão.
+     */
     @FXML
     void addMateirial2BtnAction(ActionEvent event) {
         if (p != null) {
@@ -493,23 +534,31 @@ public class RealizarEmpController implements Initializable {
                     l.setNchamada(Integer.parseUnsignedInt(temp));
                     l = l.buscarMaterialNC();
                     if (l != null) {
-                        if (l.getStatus().equals("Disponivel")){
-                            erroMaterial3.setVisible(false);
-                            material3Txt.setVisible(false);
-                            confMaterial3.setVisible(false);
-                            selectLivro3.setVisible(false);
-                            selectMult3.setVisible(false);
-                            checkMaterial3.setText("Nº de chamada: " + 
-                                    l.getNchamada() + "\tNome: "
-                                    + l.getTitulo() + "\tExemplar: " + 
-                                    l.getExemplar() + ".");
-                            checkMaterial3.setVisible(true);
-                            excluiMaterial3.setVisible(true);
-                            material3 = l;                            
+                        if (!(material1 != null && (material1.getNchamada() == l.getNchamada()))
+                                && !(material2 != null && (material2.getNchamada() == l.getNchamada()))
+                                && !(material4 != null && (material4.getNchamada() == l.getNchamada()))
+                                && !(material5 != null && (material5.getNchamada() == l.getNchamada()))) {
+                            if (l.getStatus().equals("Disponivel")) {
+                                erroMaterial3.setVisible(false);
+                                material3Txt.setVisible(false);
+                                confMaterial3.setVisible(false);
+                                selectLivro3.setVisible(false);
+                                selectMult3.setVisible(false);
+                                checkMaterial3.setText("Nº de chamada: "
+                                        + l.getNchamada() + "\tNome: "
+                                        + l.getTitulo() + "\tExemplar: "
+                                        + l.getExemplar() + ".");
+                                checkMaterial3.setVisible(true);
+                                excluiMaterial3.setVisible(true);
+                                material3 = l;
+                            } else {
+                                erroMaterial3.setText("Livro não está disponível.");
+                                erroMaterial3.setVisible(true);
+                            }
                         }else{
-                            erroMaterial3.setText("Livro não está disponível.");
+                            erroMaterial3.setText("Esse livro já está selecionado, "
+                                    + "não é possivel realizar emprestimo de materiais do mesmo tipo.");
                             erroMaterial3.setVisible(true);
-                            excluiMaterial3BtnAction(new ActionEvent());
                         }
                     } else {
                         erroMaterial3.setText("Livro com esse número de "
@@ -521,23 +570,31 @@ public class RealizarEmpController implements Initializable {
                     m.setNchamada(Integer.parseUnsignedInt(temp));
                     m = m.buscarMaterialNC();
                     if (m != null) {
-                        if (m.getStatus().equals("Disponivel")){
-                            erroMaterial3.setVisible(false);
-                            material3Txt.setVisible(false);
-                            confMaterial3.setVisible(false);
-                            selectLivro3.setVisible(false);
-                            selectMult3.setVisible(false);
-                            checkMaterial3.setText("Nº de chamada: " + 
-                                    m.getNchamada() + "\tNome: "
-                                    + m.getTitulo() + "\tExemplar: " + 
-                                    m.getExemplar() + ".");
-                            checkMaterial3.setVisible(true);
-                            excluiMaterial3.setVisible(true);
-                            material3 = m;                            
+                        if (!(material1 != null && (material1.getNchamada() == m.getNchamada()))
+                                && !(material2 != null && (material2.getNchamada() == m.getNchamada()))
+                                && !(material4 != null && (material4.getNchamada() == m.getNchamada()))
+                                && !(material5 != null && (material5.getNchamada() == m.getNchamada()))) {
+                            if (m.getStatus().equals("Disponivel")) {
+                                erroMaterial3.setVisible(false);
+                                material3Txt.setVisible(false);
+                                confMaterial3.setVisible(false);
+                                selectLivro3.setVisible(false);
+                                selectMult3.setVisible(false);
+                                checkMaterial3.setText("Nº de chamada: "
+                                        + m.getNchamada() + "\tNome: "
+                                        + m.getTitulo() + "\tExemplar: "
+                                        + m.getExemplar() + ".");
+                                checkMaterial3.setVisible(true);
+                                excluiMaterial3.setVisible(true);
+                                material3 = m;
+                            } else {
+                                erroMaterial3.setText("Multimídia não está disponível.");
+                                erroMaterial3.setVisible(true);
+                            }
                         }else{
-                            erroMaterial3.setText("Multimídia não está disponível.");
+                            erroMaterial3.setText("Essa multimídia já está selecionada, "
+                                    + "não é possivel realizar emprestimo de materiais do mesmo tipo.");
                             erroMaterial3.setVisible(true);
-                            excluiMaterial3BtnAction(new ActionEvent());                            
                         }
                     } else {
                         erroMaterial3.setText("Multimidia com esse número de "
@@ -553,10 +610,7 @@ public class RealizarEmpController implements Initializable {
                         + "material.");
                 erroMaterial3.setVisible(true);
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            erroMaterial5.setText("Erro IIV - 1.");
-            erroMaterial5.setVisible(true);
-        } catch (NumberFormatException e) {
+        }catch (NumberFormatException e) {
             erroMaterial5.setText("Erro, não é possivel inserir número "
                     + "negativos ou carateres.");
             erroMaterial5.setVisible(true);
@@ -568,7 +622,11 @@ public class RealizarEmpController implements Initializable {
             erroMaterial5.setVisible(true);
         }
     }
-
+    
+    /**
+     * Método responsável por exibir os campos para inserir quarto material para o empréstimo.
+     * @param event Evento do Botão.
+     */
     @FXML
     void addMateirial3BtnAction(ActionEvent event) {
         if (p != null) {
@@ -593,7 +651,7 @@ public class RealizarEmpController implements Initializable {
 
     /**
      * Método responsável por confimar o quarto material para o empréstimo.
-     * @param event - Evento do Botão
+     * @param event Evento do Botão
      */
     @FXML
     void confMaterial4BtnAction(ActionEvent event) {
@@ -605,23 +663,31 @@ public class RealizarEmpController implements Initializable {
                     l.setNchamada(Integer.parseUnsignedInt(temp));
                     l = l.buscarMaterialNC();
                     if (l != null) {
-                        if (l.getStatus().equals("Disponivel")){
-                            erroMaterial4.setVisible(false);
-                            material4Txt.setVisible(false);
-                            confMaterial4.setVisible(false);
-                            selectLivro4.setVisible(false);
-                            selectMult4.setVisible(false);
-                            checkMaterial4.setText("Nº de chamada: " + 
-                                    l.getNchamada() + "\tNome: "
-                                    + l.getTitulo() + "\tExemplar: " + 
-                                    l.getExemplar() + ".");
-                            checkMaterial4.setVisible(true);
-                            excluiMaterial4.setVisible(true);
-                            material4 = l;                            
+                        if (!(material1 != null && (material1.getNchamada() == l.getNchamada()))
+                                && !(material2 != null && (material2.getNchamada() == l.getNchamada()))
+                                && !(material3 != null && (material3.getNchamada() == l.getNchamada()))
+                                && !(material5 != null && (material5.getNchamada() == l.getNchamada()))) {
+                            if (l.getStatus().equals("Disponivel")) {
+                                erroMaterial4.setVisible(false);
+                                material4Txt.setVisible(false);
+                                confMaterial4.setVisible(false);
+                                selectLivro4.setVisible(false);
+                                selectMult4.setVisible(false);
+                                checkMaterial4.setText("Nº de chamada: "
+                                        + l.getNchamada() + "\tNome: "
+                                        + l.getTitulo() + "\tExemplar: "
+                                        + l.getExemplar() + ".");
+                                checkMaterial4.setVisible(true);
+                                excluiMaterial4.setVisible(true);
+                                material4 = l;
+                            } else {
+                                erroMaterial4.setText("Livro não está disponível.");
+                                erroMaterial4.setVisible(true);
+                            }
                         }else{
-                            erroMaterial4.setText("Livro não está disponível.");
+                            erroMaterial4.setText("Esse livro já está selecionado, "
+                                    + "não é possivel realizar emprestimo de materiais do mesmo tipo.");
                             erroMaterial4.setVisible(true);
-                            excluiMaterial4BtnAction(new ActionEvent());
                         }
                     } else {
                         erroMaterial4.setText("Livro com esse número de "
@@ -633,23 +699,31 @@ public class RealizarEmpController implements Initializable {
                     m.setNchamada(Integer.parseUnsignedInt(temp));
                     m = m.buscarMaterialNC();
                     if (m != null) {
-                        if (m.getStatus().equals("Disponivel")){
-                            erroMaterial4.setVisible(false);
-                            material4Txt.setVisible(false);
-                            confMaterial4.setVisible(false);
-                            selectLivro4.setVisible(false);
-                            selectMult4.setVisible(false);
-                            checkMaterial4.setText("Nº de chamada: " + 
-                                    m.getNchamada() + "\tNome: "
-                                    + m.getTitulo() + "\tExemplar: " + 
-                                    m.getExemplar() + ".");
-                            checkMaterial4.setVisible(true);
-                            excluiMaterial4.setVisible(true);
-                            material4 = m;                            
+                        if (!(material1 != null && (material1.getNchamada() == m.getNchamada()))
+                                && !(material2 != null && (material2.getNchamada() == m.getNchamada()))
+                                && !(material3 != null && (material3.getNchamada() == m.getNchamada()))
+                                && !(material5 != null && (material5.getNchamada() == m.getNchamada()))) {
+                            if (m.getStatus().equals("Disponivel")) {
+                                erroMaterial4.setVisible(false);
+                                material4Txt.setVisible(false);
+                                confMaterial4.setVisible(false);
+                                selectLivro4.setVisible(false);
+                                selectMult4.setVisible(false);
+                                checkMaterial4.setText("Nº de chamada: "
+                                        + m.getNchamada() + "\tNome: "
+                                        + m.getTitulo() + "\tExemplar: "
+                                        + m.getExemplar() + ".");
+                                checkMaterial4.setVisible(true);
+                                excluiMaterial4.setVisible(true);
+                                material4 = m;
+                            } else {
+                                erroMaterial4.setText("Multimídia não está disponível.");
+                                erroMaterial4.setVisible(true);
+                            }
                         }else{
-                            erroMaterial4.setText("Multimídia não está disponível.");
+                            erroMaterial4.setText("Essa multimídia já está selecionada, "
+                                    + "não é possivel realizar emprestimo de materiais do mesmo tipo.");
                             erroMaterial4.setVisible(true);
-                            excluiMaterial4BtnAction(new ActionEvent());
                         }
                     } else {
                         erroMaterial4.setText("Multimidia com esse número "
@@ -665,10 +739,7 @@ public class RealizarEmpController implements Initializable {
                         + "material.");
                 erroMaterial4.setVisible(true);
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            erroMaterial5.setText("Erro IIV - 1.");
-            erroMaterial5.setVisible(true);
-        } catch (NumberFormatException e) {
+        }catch (NumberFormatException e) {
             erroMaterial5.setText("Erro, não é possivel inserir número "
                     + "negativos ou carateres.");
             erroMaterial5.setVisible(true);
@@ -681,6 +752,10 @@ public class RealizarEmpController implements Initializable {
         }
     }
 
+    /**
+     * Método responsável por exibir os campos para inserir quinto material para o empréstimo.
+     * @param event - Evento do Botão.
+     */
     @FXML
     void addMateirial4BtnAction(ActionEvent event) {
         if (p != null) {
@@ -701,9 +776,10 @@ public class RealizarEmpController implements Initializable {
             erroMaterial4.setVisible(true);
         }
     }
+    
     /**
      * Método responsável por confimar o quinto material para o empréstimo.
-     * @param event - Evento do Botão
+     * @param event Evento do Botão
      */
     @FXML
     void confMaterial5BtnAction(ActionEvent event) {
@@ -715,23 +791,32 @@ public class RealizarEmpController implements Initializable {
                     l.setNchamada(Integer.parseUnsignedInt(temp));
                     l = l.buscarMaterialNC();
                     if (l != null) {
-                        if (l.getStatus().equals("Disponivel")){
-                            erroMaterial5.setVisible(false);
-                            material5Txt.setVisible(false);
-                            confMaterial5.setVisible(false);
-                            selectLivro5.setVisible(false);
-                            selectMult5.setVisible(false);
-                            checkMaterial5.setText("Nº de chamada: " + 
-                                    l.getNchamada() + "\tNome: "
-                                    + l.getTitulo() + "\tExemplar: " + 
-                                    l.getExemplar() + ".");
-                            checkMaterial5.setVisible(true);
-                            excluiMaterial5.setVisible(true);
-                            material5 = l;                            
+                        if (!(material1 != null && (material1.getNchamada() == l.getNchamada()))
+                                && !(material2 != null && (material2.getNchamada() == l.getNchamada()))
+                                && !(material3 != null && (material3.getNchamada() == l.getNchamada()))
+                                && !(material4 != null && (material4.getNchamada() == l.getNchamada()))) {
+                            if (l.getStatus().equals("Disponivel")) {
+                                erroMaterial5.setVisible(false);
+                                material5Txt.setVisible(false);
+                                confMaterial5.setVisible(false);
+                                selectLivro5.setVisible(false);
+                                selectMult5.setVisible(false);
+                                checkMaterial5.setText("Nº de chamada: "
+                                        + l.getNchamada() + "\tNome: "
+                                        + l.getTitulo() + "\tExemplar: "
+                                        + l.getExemplar() + ".");
+                                checkMaterial5.setVisible(true);
+                                excluiMaterial5.setVisible(true);
+                                material5 = l;
+                            } else {
+                                erroMaterial5.setText("Livro não está disponível.");
+                                erroMaterial5.setVisible(true);
+                                excluiMaterial5BtnAction(new ActionEvent());
+                            }
                         }else{
-                            erroMaterial5.setText("Livro não está disponível.");
+                            erroMaterial5.setText("Esse livro já está selecionado, "
+                                    + "não é possivel realizar emprestimo de materiais do mesmo tipo.");
                             erroMaterial5.setVisible(true);
-                            excluiMaterial5BtnAction(new ActionEvent());
                         }
                     } else {
                         erroMaterial5.setText("Livro com esse número de "
@@ -743,23 +828,32 @@ public class RealizarEmpController implements Initializable {
                     m.setNchamada(Integer.parseUnsignedInt(temp));
                     m = m.buscarMaterialNC();
                     if (m != null) {
-                        if (m.getStatus().equals("Disponivel")){
-                            erroMaterial5.setVisible(false);
-                            material5Txt.setVisible(false);
-                            confMaterial5.setVisible(false);
-                            selectLivro5.setVisible(false);
-                            selectMult5.setVisible(false);
-                            checkMaterial5.setText("Nº de chamada: " + 
-                                    m.getNchamada() + "\tNome: "
-                                    + m.getTitulo() + "\tExemplar: " + 
-                                    m.getExemplar() + ".");
-                            checkMaterial5.setVisible(true);
-                            excluiMaterial5.setVisible(true);
-                            material5 = m;                            
+                        if (!(material1 != null && (material1.getNchamada() == m.getNchamada()))
+                                && !(material2 != null && (material2.getNchamada() == m.getNchamada()))
+                                && !(material3 != null && (material3.getNchamada() == m.getNchamada()))
+                                && !(material4 != null && (material4.getNchamada() == m.getNchamada()))) {
+                            if (m.getStatus().equals("Disponivel")) {
+                                erroMaterial5.setVisible(false);
+                                material5Txt.setVisible(false);
+                                confMaterial5.setVisible(false);
+                                selectLivro5.setVisible(false);
+                                selectMult5.setVisible(false);
+                                checkMaterial5.setText("Nº de chamada: "
+                                        + m.getNchamada() + "\tNome: "
+                                        + m.getTitulo() + "\tExemplar: "
+                                        + m.getExemplar() + ".");
+                                checkMaterial5.setVisible(true);
+                                excluiMaterial5.setVisible(true);
+                                material5 = m;
+                            } else {
+                                erroMaterial5.setText("Multimídia não está disponível.");
+                                erroMaterial5.setVisible(true);
+                                excluiMaterial5BtnAction(new ActionEvent());
+                            }
                         }else{
-                            erroMaterial5.setText("Multimídia não está disponível.");
+                            erroMaterial5.setText("Essa multimídia já está selecionada, "
+                                    + "não é possivel realizar emprestimo de materiais do mesmo tipo.");
                             erroMaterial5.setVisible(true);
-                            excluiMaterial5BtnAction(new ActionEvent());
                         }
                     } else {
                         erroMaterial5.setText("Multimidia com esse número de "
@@ -774,9 +868,6 @@ public class RealizarEmpController implements Initializable {
                 erroMaterial5.setText("Informe o número de chamada do material.");
                 erroMaterial5.setVisible(true);
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            erroMaterial5.setText("Erro IIV - 1.");
-            erroMaterial5.setVisible(true);
         } catch (NumberFormatException e) {
             erroMaterial5.setText("Erro, não é possivel inserir número negativos."
                     + " ou carateres.");
@@ -793,7 +884,7 @@ public class RealizarEmpController implements Initializable {
     /**
      * Método responsavel por executar a ação de bloquear a checkBox contraria 
      * após selecionar chechBox de livro referente ao primeiro material. 
-     * @param event - Evento de seleção do checkBox.
+     * @param event Evento de seleção do checkBox.
      */
     @FXML
     void selectLivro1BoxAction(ActionEvent event) {
@@ -803,7 +894,7 @@ public class RealizarEmpController implements Initializable {
     /**
      * Método responsavel por executar a ação de bloquear a checkBox contraria
      * após selecionar chechBox de multimídia referente ao primeiro material. 
-     * @param event - Evento de seleção do checkBox.
+     * @param event Evento de seleção do checkBox.
      */
     @FXML
     void selectMult1BoxAction(ActionEvent event) {
@@ -823,7 +914,7 @@ public class RealizarEmpController implements Initializable {
     /**
      * Método responsavel por executar a ação de bloquear a checkBox contraria
      * após selecionar chechBox de multimídia referente ao segundo material. 
-     * @param event - Evento de seleção do checkBox.
+     * @param event Evento de seleção do checkBox.
      */
     @FXML 
     void selectMult2BoxAction(ActionEvent event) {
@@ -833,7 +924,7 @@ public class RealizarEmpController implements Initializable {
     /**
      * Método responsavel por executar a ação de bloquear a checkBox contraria
      * após selecionar chechBox de livro referente ao terceiro material. 
-     * @param event - Evento de seleção do checkBox.
+     * @param event Evento de seleção do checkBox.
      */
     @FXML
     void selectLivro3BoxAction(ActionEvent event) {
@@ -843,7 +934,7 @@ public class RealizarEmpController implements Initializable {
     /**
      * Método responsavel por executar a ação de bloquear a checkBox contraria
      * após selecionar chechBox de multimídia referente ao terceiro material. 
-     * @param event - Evento de seleção do checkBox.
+     * @param event Evento de seleção do checkBox.
      */
     @FXML
     void selectMult3BoxAction(ActionEvent event) {
@@ -853,7 +944,7 @@ public class RealizarEmpController implements Initializable {
     /**
      * Método responsavel por executar a ação de bloquear a checkBox contraria
      * após selecionar chechBox de livro referente ao quarto material. 
-     * @param event - Evento de seleção do checkBox.
+     * @param event Evento de seleção do checkBox.
      */
     @FXML
     void selectLivro4BoxAction(ActionEvent event) {
@@ -863,7 +954,7 @@ public class RealizarEmpController implements Initializable {
     /**
      * Método responsavel por executar a ação de bloquear a checkBox contraria
      * após selecionar chechBox de multimídia referente ao quarto material. 
-     * @param event - Evento de seleção do checkBox.
+     * @param event Evento de seleção do checkBox.
      */
     @FXML
     void selectMult4BoxAction(ActionEvent event) {
@@ -873,7 +964,7 @@ public class RealizarEmpController implements Initializable {
     /**
      * Método responsavel por executar a ação de bloquear a checkBox contraria
      * após selecionar chechBox de livro referente ao quinto material. 
-     * @param event - Evento de seleção do checkBox.
+     * @param event Evento de seleção do checkBox.
      */
     @FXML
     void selectLivro5BoxAction(ActionEvent event) {
@@ -883,7 +974,7 @@ public class RealizarEmpController implements Initializable {
     /**
      * Método responsavel por executar a ação de bloquear a checkBox contraria
      * após selecionar chechBox de multimídia referente ao quinto material. 
-     * @param event - Evento de seleção do checkBox.
+     * @param event Evento de seleção do checkBox.
      */
     @FXML
     void selectMult5BoxAction(ActionEvent event) {
@@ -892,7 +983,7 @@ public class RealizarEmpController implements Initializable {
 
     /**
      * Método responsavel por cancelar a seleção do primeiro Pessoa.
-     * @param event - Evento de botão.
+     * @param event Evento de botão.
      */
     @FXML
     void excluiPessoaBtnAction(ActionEvent event) {
@@ -906,7 +997,7 @@ public class RealizarEmpController implements Initializable {
     
     /**
      * Método responsavel por cancelar a seleção do primeiro material.
-     * @param event - Evento de botão.
+     * @param event Evento de botão.
      */
     @FXML
     void excluiMaterial1BtnAction(ActionEvent event) {
@@ -922,7 +1013,7 @@ public class RealizarEmpController implements Initializable {
 
     /**
      * Método responsavel por cancelar a seleção do segundo material.
-     * @param event - Evento de botão.
+     * @param event Evento de botão.
      */    
     @FXML
     void excluiMaterial2BtnAction(ActionEvent event) {
@@ -938,7 +1029,7 @@ public class RealizarEmpController implements Initializable {
 
     /**
      * Método responsavel por cancelar a seleção do terceiro material.
-     * @param event - Evento de botão.
+     * @param event Evento de botão.
      */    
     @FXML
     void excluiMaterial3BtnAction(ActionEvent event) {
@@ -954,7 +1045,7 @@ public class RealizarEmpController implements Initializable {
     
     /**
      * Método responsavel por cancelar a seleção do quarto material.
-     * @param event - Evento de botão.
+     * @param event Evento de botão.
      */
     @FXML
     void excluiMaterial4BtnAction(ActionEvent event) {
@@ -970,7 +1061,7 @@ public class RealizarEmpController implements Initializable {
 
     /**
      * Método responsavel por cancelar a seleção do quinto material.
-     * @param event - Evento de botão.
+     * @param event Evento de botão.
      */
     @FXML
     void excluiMaterial5BtnAction(ActionEvent event) {
@@ -984,9 +1075,9 @@ public class RealizarEmpController implements Initializable {
     }
     
     /**
-     * Método de ação do botão finalizar responsavel por realizar todas as verificações e após verificar 
+     * Método de ação do botão finalizar responsavel por realizar as ultimas verificações e em seguida 
      * realizar o emprestimo com todas as ações necessarias e atualizar o banco de dados.
-     * @param event - Evento de botão. 
+     * @param event Evento de botão. 
      */
     @FXML
     void finalizarBtnAction(ActionEvent event) {
@@ -999,31 +1090,31 @@ public class RealizarEmpController implements Initializable {
                     for (Emprestimo x : listEmp) {
                         Set<Material> setMat = x.getMateriais();
                         for (Material y : setMat) {
-                            if (material1 != null && (y.getNchamada()) 
-                                    == (material1.getNchamada())) {
+                            if (material1 != null && 
+                                    (y.getTitulo().equalsIgnoreCase(material1.getTitulo()))){
                                 verifica = material1;
-                                throw new PossuiEmprestimoDoMaterial();
-                            } else if (material2 != null && (y.getNchamada())
-                                    == (material2.getNchamada())) {
+                                throw new PossuiEmprestimoDoMaterialException();
+                            } else if (material2 != null && 
+                                    (y.getTitulo().equalsIgnoreCase(material2.getTitulo()))) {
                                 verifica = material2;
-                                throw new PossuiEmprestimoDoMaterial();
-                            } else if (material3 != null && (y.getNchamada())
-                                    == (material3.getNchamada())) {
+                                throw new PossuiEmprestimoDoMaterialException();
+                            } else if (material3 != null && 
+                                    (y.getTitulo().equalsIgnoreCase(material3.getTitulo()))) {
                                 verifica = material3;
-                                throw new PossuiEmprestimoDoMaterial();
-                            } else if (material4 != null && (y.getNchamada())
-                                    == (material4.getNchamada())) {
+                                throw new PossuiEmprestimoDoMaterialException();
+                            } else if (material4 != null && 
+                                    (y.getTitulo().equalsIgnoreCase(material4.getTitulo()))) {
                                 verifica = material4;
-                                throw new PossuiEmprestimoDoMaterial();
-                            } else if (material5 != null && (y.getNchamada())
-                                    == (material5.getNchamada())) {
+                                throw new PossuiEmprestimoDoMaterialException();
+                            } else if (material5 != null && 
+                                    (y.getTitulo().equalsIgnoreCase(material5.getTitulo()))) {
                                 verifica = material5;
-                                throw new PossuiEmprestimoDoMaterial();
+                                throw new PossuiEmprestimoDoMaterialException();
                             }
                         }
                     }
                     Emprestimo emp = new Emprestimo();
-                    emp.setCodinsc(p.getCodinsc());
+                    emp.setPessoa(p);
                     emp.setUsercode(11111);
                     GregorianCalendar c = new GregorianCalendar();
                     emp.setDataemp(c.getTime());
@@ -1059,7 +1150,9 @@ public class RealizarEmpController implements Initializable {
                         x.updateMaterial();
                     }
                     p.acrescentarAtivos(i);
+                    p.acrescentarTotal(i);
                     p.atualizaPessoa();
+                    emprestimoNotificacao(p, emp);
                     returnGerEmprestimo();
                     alertaComf("EMPRESTIMO REALIZADO COM SUCESSO.", "");
                 }else{
@@ -1072,10 +1165,9 @@ public class RealizarEmpController implements Initializable {
                             + "para o empréstimo.");
                     erroMaterial5.setVisible(true);
             }
-        }catch (PossuiEmprestimoDoMaterial e){
-            erroMaterial5.setText("O material com número de chamada: "
-                    + verifica.getNchamada() + ", já está emprestado para "
-                            + "essa pessoa.");
+        }catch (PossuiEmprestimoDoMaterialException e){
+            erroMaterial5.setText("Essa pessoa já possui emprestimo de um exemplar do " + "material com número de chamada: "
+                    + verifica.getNchamada() + ".");
             erroMaterial5.setVisible(true);
         }catch (ArrayIndexOutOfBoundsException e) {
             erroMaterial5.setText("Erro IIV - 1.");
@@ -1102,10 +1194,15 @@ public class RealizarEmpController implements Initializable {
         alert.show();
     }
     
-    private void emprestimoNetificacao(Pessoa p, Emprestimo emp) {
+    /**
+     * Método responsável por enviar notificação para pessoa que realizou empréstimo com sucesso.
+     * @param p Pessoa que realizou o empréstimo.
+     * @param emp Empréstimo realizado.
+     */
+    private void emprestimoNotificacao(Pessoa p, Emprestimo emp) {
         String remetente = "libraryalory@gmail.com";
         String senh = "libraryalory12345";
-        Email.enviarMensagem(remetente, p.getEmail(), "Email de realização de emprestimo",
+        Email.enviarMensagem(remetente, p.getEmail(), "Email de confirmação da realização de emprestimo",
                 Notificar.notificarEmprestimo(p.getNome(), emp), 
                 Email.conectarConta( Email.conexaoSMTP(p.getEmail()),remetente , senh));
     }

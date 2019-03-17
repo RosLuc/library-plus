@@ -6,14 +6,14 @@ package Emprestimo;
  * É acionada quando se tenta realizar emprestimo de materiais iguais para uma pessoa.
  * @author luand
  */
-public class PossuiEmprestimoDoMaterial extends Exception{
+public class PossuiEmprestimoDoMaterialException extends Exception{
 
     private static final long serialVersionUID = 1L;
 
-    public PossuiEmprestimoDoMaterial() {
+    public PossuiEmprestimoDoMaterialException() {
     }
     
-    public PossuiEmprestimoDoMaterial(String message) {
+    public PossuiEmprestimoDoMaterialException(String message) {
         super(message);
     }  
 }

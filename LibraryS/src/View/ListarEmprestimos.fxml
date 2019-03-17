@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -9,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ListarEmprestimosController">
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ListarEmprestimosController">
     <children>
         <Button fx:id="cancelBtn" layoutX="792.0" layoutY="44.0" mnemonicParsing="false" onAction="#cancelBtnAction" prefHeight="39.0" prefWidth="125.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="VOLTAR" />
         <ImageView fitHeight="81.0" fitWidth="200.0" layoutX="30.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
@@ -22,14 +27,15 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <TableView fx:id="tableEmprestimo" layoutX="70.0" layoutY="157.0" prefHeight="323.0" prefWidth="836.0" stylesheets="@../CSS/consultar.css">
+        <TableView fx:id="tableEmprestimo" layoutX="70.0" layoutY="137.0" prefHeight="370.0" prefWidth="836.0" stylesheets="@../CSS/consultar.css">
             <columns>
-                <TableColumn fx:id="codinscTb" prefWidth="143.0" text="Código de Inscrição" />
-                <TableColumn fx:id="nomeTb" prefWidth="192.0" text="Nome" />
-                <TableColumn fx:id="tituloTb" prefWidth="191.0" text="Título do Livro" />
-            <TableColumn fx:id="chamadaTb" prefWidth="123.0" text="Nº de Chamada" />
-            <TableColumn fx:id="dataEmpTb" minWidth="0.0" prefWidth="141.0" text="Data de Empréstimo" />
-            <TableColumn fx:id="dataDevTb" prefWidth="43.0" text="Data de Devolução" />
+                <TableColumn fx:id="codInscColumn" prefWidth="143.0" text="Código de Inscrição" />
+                <TableColumn fx:id="nomeColumn" prefWidth="192.0" text="Nome" />
+                <TableColumn fx:id="tituloColumn" prefWidth="191.0" text="Título do Livro" />
+            <TableColumn fx:id="nChamadaColumn" prefWidth="123.0" text="Nº de Chamada" />
+            <TableColumn fx:id="dataEmpColumn" minWidth="0.0" prefWidth="141.0" text="Data de Empréstimo" />
+            <TableColumn fx:id="datDevColumn" editable="false" prefWidth="43.0" text="Data de Devolução" />
+            <TableColumn fx:id="statusColumn" prefWidth="43.0" text="Status" />
             </columns>
         </TableView>
     </children>

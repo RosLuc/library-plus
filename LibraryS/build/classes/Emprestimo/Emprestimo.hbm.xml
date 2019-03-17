@@ -8,7 +8,8 @@
             <param name="sequence">emprestimo_codemp_seq</param>
             </generator>
         </id>
-        <property name="codinsc"/>
+        <many-to-one name="pessoa" class="Pessoa.Pessoa" fetch="join"
+            column="codinsc" not-null="true"/>
         <property name="usercode"/>
         <property name="dataemp" type="date">
             <column name="dataemp" length="13" not-null="true" />

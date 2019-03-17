@@ -5,18 +5,23 @@
  */
 package Controller;
 
-import Classes.Material;
+import Emprestimo.TableEmprestimo;
 import LibraryScreens.GerEmprestimos;
 import LibraryScreens.ListarEmprestimos;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import Emprestimo.Emprestimo;
 //import Pessoa.Pessoa;
@@ -26,6 +31,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+
 /**
  * FXML Controller class
  *
@@ -33,29 +39,32 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class ListarEmprestimosController implements Initializable {
 
-    @FXML
+@FXML
     private Button cancelBtn;
 
     @FXML
-    private TableView<Emprestimo> tableEmprestimo;
-    
-    @FXML
-    private TableColumn<Emprestimo, Integer> codinscTb;
+    private TableColumn<TableEmprestimo, Integer> nChamadaColumn;
 
     @FXML
-    private TableColumn<Emprestimo, String> nomeTb;
+    private TableColumn<TableEmprestimo, String> dataEmpColumn;
 
     @FXML
-    private TableColumn<Emprestimo, Set<Material>> tituloTb;
+    private TableColumn<TableEmprestimo, String> statusColumn;
 
     @FXML
-    private TableColumn<Emprestimo, String> chamadaTb;
+    private TableColumn<TableEmprestimo, Integer> codInscColumn;
 
     @FXML
-    private TableColumn<Emprestimo, Date> dataEmpTb;
+    private TableView<TableEmprestimo> tableEmprestimo;
 
     @FXML
-    private TableColumn<Emprestimo, Date> dataDevTb;
+    private TableColumn<TableEmprestimo, String> nomeColumn;
+
+    @FXML
+    private TableColumn<TableEmprestimo, String> datDevColumn;
+
+    @FXML
+    private TableColumn<TableEmprestimo, String> tituloColumn;
 
     @FXML
     void cancelBtnAction(ActionEvent event) {
@@ -64,7 +73,7 @@ public class ListarEmprestimosController implements Initializable {
             p.start(new Stage());
             fecha();
         } catch (Exception ex) {
-            Logger.getLogger(GerPessoasController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListarEmprestimosController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -75,17 +84,25 @@ public class ListarEmprestimosController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        codinscTb.setCellValueFactory(
-            new PropertyValueFactory<>("codinsc"));
-        nomeTb.setCellValueFactory(
-            new PropertyValueFactory<>("nome"));
-        tituloTb.setCellValueFactory(
-            new PropertyValueFactory<>("Set<Material>"));
-        dataEmpTb.setCellValueFactory(
-            new PropertyValueFactory<>("dataemp"));
-        dataDevTb.setCellValueFactory(
-            new PropertyValueFactory<>("datadev"));
-        tableEmprestimo.setItems(FXCollections.observableArrayList(new Emprestimo().ListaDeEmprestimo()));
+        nChamadaColumn.setCellValueFactory(new PropertyValueFactory<>("chamada"));  
+        tituloColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        dataEmpColumn.setCellValueFactory(new PropertyValueFactory<>("dataemp"));
+        datDevColumn.setCellValueFactory(new PropertyValueFactory<>("datadev"));
+        codInscColumn.setCellValueFactory(new PropertyValueFactory<>("codinsc"));    
+        nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        
+        tableEmprestimo.setItems(listaDeEmprestimos(TableEmprestimo.converteEmprestimos()));
+        
+    }
+    
+    /**
+     * Método responsavel por converter a List adequada para a TableView.
+     * @param list Lista de Emprestimos.
+     * @return Lista apropriada para a TableView.
+     */
+    private ObservableList<TableEmprestimo> listaDeEmprestimos(List<TableEmprestimo> list){
+        return FXCollections.observableArrayList(list);
     }
 
     public void fecha() {
