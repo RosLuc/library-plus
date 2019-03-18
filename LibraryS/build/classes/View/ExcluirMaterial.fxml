@@ -25,7 +25,7 @@
         </Label>
         <TextField fx:id="numChamTxt" layoutX="343.0" layoutY="232.0" onKeyPressed="#excluirMatKeyAction" prefHeight="32.0" prefWidth="274.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
         <Label layoutX="305.0" layoutY="189.0" stylesheets="@../CSS/label.css" text="Digite o número de chamada do material:" />
-      <CheckBox fx:id="livroBox" layoutX="413.0" layoutY="279.0" mnemonicParsing="false" onAction="#livroSelectBox" text="Livro" />
-      <CheckBox fx:id="multBox" layoutX="491.0" layoutY="279.0" mnemonicParsing="false" onAction="#multSelectBox" text="Multimidia" />
+      <CheckBox fx:id="livroBox" layoutX="390.0" layoutY="273.0" mnemonicParsing="false" onAction="#livroSelectBox" stylesheets="@../CSS/checkbox.css" text="Livro" />
+      <CheckBox fx:id="multBox" layoutX="468.0" layoutY="273.0" mnemonicParsing="false" onAction="#multSelectBox" stylesheets="@../CSS/checkbox.css" text="Multimidia" />
     </children>
 </AnchorPane>
