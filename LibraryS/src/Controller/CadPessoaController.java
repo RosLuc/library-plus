@@ -24,7 +24,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
-import javax.mail.internet.ParseException;
 import javax.swing.text.MaskFormatter;
 import org.hibernate.HibernateException;
 
@@ -41,8 +40,6 @@ public class CadPessoaController implements Initializable {
     private TextField telTxt;
     @FXML
     private TextField enderecoTxt;
-    @FXML
-    private TextField codInsTxt;
     @FXML
     private TextField emailTxt;
     @FXML
