@@ -214,6 +214,56 @@ public class Multimidia extends Material {
             return null;
         }
     }
+    
+    /**
+     * Método responsável em obter um objeto do tipo Multimidiao no banco de dados,
+     * sendo este com titulo igual ao objeto instanciado.
+     * A operação é realizada utilizando hibernate.
+     * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
+     */
+    public Multimidia buscarMultNomePrim(){
+        try{
+            SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
+            Session session = factory.openSession();
+            Criterion cri1 = Restrictions.eq("titulo", this.getTitulo());
+            Multimidia l = (Multimidia) session.createCriteria(Multimidia.class).add(cri1).list().get(0);
+            session.close();
+            factory.close();
+            return l;
+        }catch(NonUniqueResultException er){
+            System.err.println("Erro ao filtrar: " + er);
+            return null;
+        }catch(HibernateException e){
+            System.err.println("Erro ao filtrar: " + e);
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
+     * Método responsável em obter um objeto do tipo Multimidia no banco de dados,
+     * sendo este com cdu titulo ao objeto instanciado.
+     * A operação é realizada utilizando hibernate.
+     * @return Livro - Caso a operação for realizada com sucesso retorna um objeto Livro, caso contrário retorna null.
+     */
+    public Multimidia buscarMultNomeUlt(){
+        try{
+            SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
+            Session session = factory.openSession();
+            Criterion cri1 = Restrictions.eq("titulo", this.getTitulo());
+            Multimidia l = (Multimidia) session.createCriteria(Multimidia.class).add(cri1).addOrder(Order.desc("exemplar")).list().get(0);
+            session.close();
+            factory.close();
+            return l;
+        }catch(NonUniqueResultException er){
+            System.err.println("Erro ao filtrar: " + er);
+            return null;
+        }catch(HibernateException e){
+            System.err.println("Erro ao filtrar: " + e);
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
 
 

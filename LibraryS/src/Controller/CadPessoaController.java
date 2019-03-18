@@ -133,6 +133,8 @@ public class CadPessoaController implements Initializable {
                     confirma();
                 }else erro("Falha ao cadastrar pessoa.");
             }
+        }catch (NumberFormatException e){
+            erro("ATENÇÃO: Campos númericos não peenchido ou foi adicionado simbolos como: [,./ -] e outro. Adicione apenas inteiros positivos.");
         }catch (HibernateException e){
             erro(e.toString());
         }catch (Exception e){

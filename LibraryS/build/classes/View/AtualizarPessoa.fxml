@@ -55,7 +55,7 @@
         <Label layoutX="349.0" layoutY="340.0" stylesheets="@../CSS/label.css" text="Estado:" />
         <Label fx:id="turmaLabel" layoutX="303.0" layoutY="291.0" stylesheets="@../CSS/label.css" text="Turma:" />
         <Label fx:id="turnoLabel" layoutX="76.0" layoutY="290.0" stylesheets="@../CSS/label.css" text="Turno:" />
-        <TextField fx:id="codInscTxt" layoutX="346.0" layoutY="148.0" onKeyPressed="#excluirPesKeyAction" prefHeight="32.0" prefWidth="274.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
+        <TextField fx:id="codInscTxt" layoutX="346.0" layoutY="148.0" prefHeight="32.0" prefWidth="274.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
         <Label layoutX="319.0" layoutY="110.0" stylesheets="@../CSS/label.css" text="Digite o código de inscrição da pessoa:" />
     </children>
 </AnchorPane>
