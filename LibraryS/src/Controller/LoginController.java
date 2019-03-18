@@ -120,25 +120,26 @@ public class LoginController implements Initializable {
         if (us.verificarUsuario() != null) {
             signupBtn.setVisible(false);
         }
-        if(Emprestimo.verificaEmprestimosAtrasados()){
+        if (Emprestimo.verificaEmprestimosAtrasados()) {
             List<Emprestimo> list = Emprestimo.ListaDeEmprestimoAtrasados();
-            for(Emprestimo x: list){
+            for (Emprestimo x : list) {
                 emprestimoNotificacao(x.getPessoa(), x);
             }
-        }   
+        }
     }
-    
+
     /**
-     * Método responsável por enviar notificação para pessoa que possue empréstimo
-     * atrasado.
+     * Método responsável por enviar notificação para pessoa que possue
+     * empréstimo atrasado.
+     *
      * @param p Pessoa que realizou o empréstimo.
      * @param emp Empréstimo realizado.
      */
     private void emprestimoNotificacao(Pessoa p, Emprestimo emp) {
         String remetente = "libraryalory@gmail.com";
         String senh = "libraryalory12345";
-        Email.enviarMensagem(remetente, p.getEmail(), "Notificação de atraso de empréstimo(s)", 
-                Notificar.notificarAtraso(p.getNome(), emp), 
+        Email.enviarMensagem(remetente, p.getEmail(), "Notificação de atraso de empréstimo(s)",
+                Notificar.notificarAtraso(p.getNome(), emp),
                 Email.conectarConta(Email.conexaoSMTP(remetente), remetente, senh));
     }
 
@@ -162,16 +163,16 @@ public class LoginController implements Initializable {
         if (login.length() == 0 && senha.length() == 0) {
             errorTxt.setStyle("-fx-opacity: 1");
             errorTxt.setText("CAMPOS OBRIGATÓRIOS NÃO INFORMADOS!");
-            userTxt.setStyle("-fx-border-color: #ff2323");
-            passTxt.setStyle("-fx-border-color: #ff2323");
+            userTxt.setStyle("-fx-border-color: #DC143C");
+            passTxt.setStyle("-fx-border-color: #DC143C");
         } else if (login.length() == 0 && senha.length() != 0) {
             errorTxt.setStyle("-fx-opacity: 1");
             errorTxt.setText("CAMPO USUÁRIO OBRIGATÓRIO!");
-            userTxt.setStyle("-fx-border-color: #ff2323");
+            userTxt.setStyle("-fx-border-color: #DC143C");
         } else if (login.length() != 0 && senha.length() == 0) {
             errorTxt.setStyle("-fx-opacity: 1");
             errorTxt.setText("CAMPO SENHA OBRIGATÓRIO!");
-            passTxt.setStyle("-fx-border-color: #ff2323");
+            passTxt.setStyle("-fx-border-color: #DC143C");
         } else {
             if (us.validarUsuario()) {
                 Principal p = new Principal();
@@ -184,8 +185,8 @@ public class LoginController implements Initializable {
             } else {
                 errorTxt.setStyle("-fx-opacity: 1");
                 errorTxt.setText("LOGIN OU SENHA INCORRETOS!");
-                userTxt.setStyle("-fx-border-color: #ff2323");
-                passTxt.setStyle("-fx-border-color: #ff2323");
+                userTxt.setStyle("-fx-border-color: #DC143C");
+                passTxt.setStyle("-fx-border-color: #DC143C");
             }
         }
     }
