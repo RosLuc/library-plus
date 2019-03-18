@@ -111,9 +111,9 @@ public class ExcluirMaterialController {
                         alertaErro("FAHA AO EXCLUIR MULTIMIDIA","Multimidia não encontrada no sistema.");
                     }
                 }else {
-                    alertaErro("FALHA AO EXCLUIR.", "Selecione o tipo de material a ser cadastrado.");
+                    alertaErro("FALHA AO EXCLUIR.", "Selecione o tipo de material a ser excluido.");
                 }
-            }
+            } else alertaErro("FAHA AO EXCLUIR LIVRO","Nº de chamada não preenchido.");
         }catch (NumberFormatException e){
             alertaErro("FALHA AO EXCLUIR.","ATENÇÃO:"
                     + " Campos númericos não peenchido ou foi adicionado simbolos como:"

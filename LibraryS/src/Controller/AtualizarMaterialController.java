@@ -129,7 +129,7 @@ public class AtualizarMaterialController {
                         confirma();
                     }else erro("Erro, verifique o livro.");                
                 }else erro("Nº de chamada não preenchido");
-            }
+            }else erro("Marque o tipo do material");
         }catch (NumberFormatException e){
             erro("ATENÇÃO: Campos númericos não peenchido ou foi adicionado simbolos como: [,./ -] e outro. Adicione apenas inteiros positivos.");
         }catch (HibernateException e){

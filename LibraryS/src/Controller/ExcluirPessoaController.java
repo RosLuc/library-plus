@@ -8,7 +8,6 @@ package Controller;
 import LibraryScreens.ExcluirPessoa;
 import LibraryScreens.GerPessoas;
 import Pessoa.Pessoa;
-import static Pessoa.Pessoa.buscarPessoa;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -86,7 +85,7 @@ public class ExcluirPessoaController {
                 }else {
                     alertaErro("FAHA AO EXCLUIR PESSOA.","Pessoa não encontrada no sistema.");
                 }
-            }
+            }else alertaErro("FAHA AO EXCLUIR LIVRO","Código de inscrição não preenchido.");
         } catch (NumberFormatException e) {
             alertaErro("FALHA AO CADASTRAR.","ATENÇÃO:"
                     + " Campos númericos não peenchido ou foi adicionado simbolos como:"

@@ -23,7 +23,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <Button fx:id="confMaterial" layoutX="822.0" layoutY="143.0" mnemonicParsing="false" onAction="#confMaterialBtnAction" prefHeight="32.0" prefWidth="38.0" styleClass="btnMais" stylesheets="@../CSS/emprestimo.css">
+        <Button fx:id="confMaterial" layoutX="655.0" layoutY="145.0" mnemonicParsing="false" onAction="#confMaterialBtnAction" prefHeight="32.0" prefWidth="38.0" styleClass="btnMais" stylesheets="@../CSS/emprestimo.css">
             <graphic>
                 <ImageView fitHeight="21.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -56,11 +56,9 @@
         <Label layoutX="704.0" layoutY="321.0" styleClass="labelname" stylesheets="@../CSS/label.css" text="CDD:" />
         <Label layoutX="98.0" layoutY="411.0" styleClass="labelname" stylesheets="@../CSS/label.css" text="Cor da Estante:" />
         <Label layoutX="97.0" layoutY="318.0" styleClass="labelname" stylesheets="@../CSS/label.css" text="Forma de Aquisiçao:" />
-        <TextField fx:id="chamadaTxt" layoutX="206.0" layoutY="144.0" prefHeight="32.0" prefWidth="274.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
-        <Label layoutX="240.0" layoutY="109.0" stylesheets="@../CSS/label.css" text="Digite o Nº de chamada:" />
+        <TextField fx:id="chamadaTxt" layoutX="356.0" layoutY="145.0" prefHeight="32.0" prefWidth="274.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
+        <Label layoutX="390.0" layoutY="110.0" stylesheets="@../CSS/label.css" text="Digite o Nº de chamada:" />
         <CheckBox fx:id="multBox" layoutX="700.0" layoutY="413.0" mnemonicParsing="false" onAction="#multSelectBox" stylesheets="@../CSS/checkbox.css" text="Multimídia" />
         <CheckBox fx:id="livroBox" layoutX="622.0" layoutY="413.0" mnemonicParsing="false" onAction="#livroSelectBox" stylesheets="@../CSS/checkbox.css" text="Livro" />
-      <TextField fx:id="Txt" layoutX="507.0" layoutY="144.0" prefHeight="32.0" prefWidth="274.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
-      <Label layoutX="598.0" layoutY="109.0" stylesheets="@../CSS/label.css" text="A Definir:" />
     </children>
 </AnchorPane>

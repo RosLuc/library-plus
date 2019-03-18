@@ -136,7 +136,7 @@ public class PDF {
                 
                 logoEscola(document);
                 
-                PdfPTable Tabela = new  PdfPTable(8);
+                PdfPTable Tabela = new  PdfPTable(9);
                 
                 PdfPCell cabecalho = new PdfPCell(new Paragraph("LISTA DE LIVROS",
                         new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.NORMAL, new BaseColor(4,5,12))));
@@ -144,7 +144,7 @@ public class PDF {
                 
                 cabecalho.setBorder(PdfPCell.NO_BORDER);
                 cabecalho.setBackgroundColor(new BaseColor(210,105,30));
-                cabecalho.setColspan(8);
+                cabecalho.setColspan(9);
                 Tabela.addCell(cabecalho);
                 Tabela.addCell("Nº Chamada");
                 Tabela.addCell("Titulo");
@@ -154,6 +154,7 @@ public class PDF {
                 Tabela.addCell("Ano de Publicação");
                 Tabela.addCell("CDU");
                 Tabela.addCell("CDD");
+                Tabela.addCell("Exemplar");
                 
              
                 for(int i = 0; i < listMaterial.size();i++){
@@ -165,6 +166,7 @@ public class PDF {
                     Tabela.addCell(String.valueOf(listMaterial.get(i).getAnopublicacao()));
                     Tabela.addCell(String.valueOf(listMaterial.get(i).getCdu()));
                     Tabela.addCell(String.valueOf(listMaterial.get(i).getCdd()));
+                    Tabela.addCell(String.valueOf(listMaterial.get(i).getExemplar()));
                 }
                 document.add(Tabela);
                 diretorio = f.getAbsolutePath();
@@ -195,7 +197,7 @@ public class PDF {
                 
                 logoEscola(document);
                 
-                PdfPTable Tabela = new  PdfPTable(6);
+                PdfPTable Tabela = new  PdfPTable(7);
                 
                 PdfPCell cabecalho = new PdfPCell(new Paragraph("LISTA DE MULTIMÍDIAS",
                         new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.NORMAL, new BaseColor(4,5,12))));
@@ -203,7 +205,7 @@ public class PDF {
                 
                 cabecalho.setBorder(PdfPCell.NO_BORDER);
                 cabecalho.setBackgroundColor(new BaseColor(210,105,30));
-                cabecalho.setColspan(6);
+                cabecalho.setColspan(7);
                 Tabela.addCell(cabecalho);
                 Tabela.addCell("Nº Chamada");
                 Tabela.addCell("Titulo");
@@ -211,6 +213,7 @@ public class PDF {
                 Tabela.addCell("Estudio");
                 Tabela.addCell("Volume");
                 Tabela.addCell("Ano de Publicação");
+                Tabela.addCell("Exemplar");
                 
              
                 for(int i = 0; i < listMaterial.size();i++){
@@ -220,6 +223,7 @@ public class PDF {
                     Tabela.addCell(listMaterial.get(i).getEstudio());
                     Tabela.addCell(String.valueOf(listMaterial.get(i).getVolume()));
                     Tabela.addCell(String.valueOf(listMaterial.get(i).getAnopublicacao()));
+                    Tabela.addCell(String.valueOf(listMaterial.get(i).getExemplar()));
                 }
                 document.add(Tabela);
                 diretorio = f.getAbsolutePath();
