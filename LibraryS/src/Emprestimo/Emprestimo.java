@@ -14,9 +14,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 /**
@@ -185,6 +187,7 @@ public class Emprestimo {
             return true;  
         }
         catch(HibernateException e){
+            System.err.println("Erro: " + e);
             return false;
         }
     }
@@ -206,6 +209,7 @@ public class Emprestimo {
             return true;
         }
         catch(HibernateException e){
+            System.err.println("Erro: " + e);
             return false;
         }
     }
@@ -228,17 +232,16 @@ public class Emprestimo {
             return true;
         }
         catch(HibernateException e){
+            System.err.println("Erro: " + e);
             return false;
         }
     }
-    
-     
-    
+
     /**
-     * Método responsável por obter uma lista de objetos do tipo Emprestimo do banco de dados
+     * Método static responsável por obter uma lista de objetos do tipo Emprestimo do banco de dados
      * ordenado conforme data de devolução do emprestimo.
      * A operação é realizada utilizando hibernate.
-     * @return List - Caso a operação for realizada com sucesso retorna lista de objetos do tipo Livro, caso contrário retorna null.
+     * @return List - Caso a operação for realizada com sucesso retorna lista de objetos do tipo Emprestimo, caso contrário retorna null.
      */    
     @SuppressWarnings("unchecked")
     public static List<Emprestimo> ListaDeEmprestimo(){
@@ -253,7 +256,6 @@ public class Emprestimo {
         }
         catch(HibernateException e){
             System.err.println("Erro: " + e);
-            e.printStackTrace();
             return null;
         }
     }
@@ -276,7 +278,6 @@ public class Emprestimo {
         }
         catch(HibernateException e){
             System.err.println("Erro: "+e);
-            e.printStackTrace();
             return null;
         }
     }
@@ -300,7 +301,6 @@ public class Emprestimo {
         }
         catch(HibernateException e){
             System.err.println("Erro: " + e);
-            e.printStackTrace();
             return null;
         }
     }
@@ -324,7 +324,57 @@ public class Emprestimo {
         }
         catch(HibernateException e){
             System.err.println("Erro: " + e);
-            e.printStackTrace();
+            return null;
+        }
+    }
+     
+    /**
+     * Método static responsavel por verificar no banco de dados os emprestimos 
+     * atrasados e atualizar seu status caso esteja atrasados.
+     * @return boolean - Caso a operação seja realizada com sucesso return true, caso contrário false.
+     */ 
+    public static boolean verificaEmprestimosAtrasados(){
+        try{
+            SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
+            Session sessao = fabrica.openSession();
+            Transaction tx = sessao.beginTransaction();
+            String hql = "update Emprestimo as e set e.status = :newstatus"
+                    + " where e.datadev < :datadev_cmp";
+            sessao.createQuery(hql).setString("newstatus", "Atrasado").
+                    setCalendarDate("datadev_cmp", new GregorianCalendar()).executeUpdate();
+            tx.commit();
+            sessao.close();
+            fabrica.close();
+            return true;
+        }
+        catch(HibernateException e){
+            System.err.println("Erro: " + e);
+            return false;
+        }
+    } 
+    
+    /**
+     * Método static responsável por obter uma lista de objetos do tipo
+     * Emprestimo, que estajam atrasados, do banco de dados.
+     * A operação é realizada utilizando hibernate.
+     * @return List - Caso a operação for realizada com sucesso retorna lista de
+     * objetos do tipo Emprestimo, caso contrário retorna null.
+     */
+    @SuppressWarnings("unchecked")
+    public static List<Emprestimo> ListaDeEmprestimoAtrasados() {
+        List<Emprestimo> lista_Emprestimo;
+        try {
+            SessionFactory fabrica = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
+            Session sessao = fabrica.openSession();
+            lista_Emprestimo = sessao.createCriteria(Emprestimo.class).
+                    add(Restrictions.ilike("status", "Atrasado")).
+                    setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).
+                    addOrder(Order.desc("datadev")).list();
+            sessao.close();
+            fabrica.close();
+            return lista_Emprestimo;
+        } catch (HibernateException e) {
+            System.err.println("Erro: " + e);
             return null;
         }
     }

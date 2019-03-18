@@ -551,7 +551,7 @@ public class Pessoa {
     /**
      * Metodo responsável por atualizar o objeto pessoa no banco de dados. A
      * operação é realizada utilizando hibernate.
-     *
+     * 
      * @return boolean - Caso a operação for realizada com sucesso retorna true,
      * caso contrário retorna false.
      */

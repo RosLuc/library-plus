@@ -193,7 +193,7 @@ public class FinEmprestimoController implements Initializable{
     private void devolucaoNotificacao(Pessoa p, Material m) {
         String remetente = "libraryalory@gmail.com";
         String senh = "libraryalory12345";
-        Email.enviarMensagem(remetente, p.getEmail(), "Email de confirmação da devolução de material",
+        Email.enviarMensagem(remetente, p.getEmail(), "Notificação de confirmação da devolução de material",
                 Notificar.notificarDevolucao(p.getNome(), m), 
                 Email.conectarConta( Email.conexaoSMTP(p.getEmail()),remetente , senh));
     }
