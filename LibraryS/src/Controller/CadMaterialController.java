@@ -120,7 +120,6 @@ public class CadMaterialController {
      */
     @FXML
     void addBtnAction(ActionEvent event) {
-        returnGerAcervo();
         try{
             if(livroBox.isSelected()){
                 Livro livro = capturarLivro();
@@ -130,6 +129,7 @@ public class CadMaterialController {
                         livro.setExemplar(i+1);
                         livro.cadastrarMaterial();
                     }
+                    returnGerAcervo();
                     alertaComf("LIVROS CDASTRADOS COM SUCESSO", livro.getExemplar() + " exemplares cadastrado.");
                 }else{
                     alertaErro("LIVROS NÃO CADASTRADOS.", "Falha ao capturar dados do Livro.");          
@@ -142,6 +142,7 @@ public class CadMaterialController {
                         mult.setExemplar(i+1);
                         mult.cadastrarMaterial();
                     }
+                    returnGerAcervo();
                     alertaComf("MULTIMÍDIAS CADASTRADAS COM SUCESSO", mult.getExemplar() + " exemplares cadastrado.");
                 }else{
                     alertaErro("MULTIMÍDIAS NÃO CADASTRADAS.", "Falha ao capturar dados da multimídia.");          
