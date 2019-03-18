@@ -1113,6 +1113,7 @@ public class RealizarEmpController implements Initializable {
                             }
                         }
                     }
+                    String not = "";
                     Emprestimo emp = new Emprestimo();
                     emp.setPessoa(p);
                     emp.setUsercode(11111);
@@ -1154,11 +1155,11 @@ public class RealizarEmpController implements Initializable {
                     p.atualizaPessoa();
                     try{
                         emprestimoNotificacao(p, emp);
-                    }catch (Exception e){
-                        
+                    } catch(RuntimeException e){
+                        not = "Não foi possivel enviar notificação de emprestimo, email inválido.";
                     }
                     returnGerEmprestimo();
-                    alertaComf("EMPRESTIMO REALIZADO COM SUCESSO.", "");
+                    alertaComf("EMPRESTIMO REALIZADO COM SUCESSO.", not);
                 }else{
                     erroMaterial5.setText("Insira e confirme algum material "
                             + "para o empréstimo.");

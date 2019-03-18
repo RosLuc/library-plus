@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" stylesheets="@../CSS/consultar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ConsultarPessoasController">
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" stylesheets="@../CSS/consultar.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ConsultarPessoasController">
     <children>
         <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -17,32 +19,33 @@
             </image>
         </ImageView>
         <Button fx:id="backBtn" layoutX="814.0" layoutY="29.0" mnemonicParsing="false" onAction="#backBtnAction" styleClass="btn" stylesheets="@../CSS/principal.css" text="CANCELAR" />
-        <Text layoutX="66.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Nome:">
+        <Text layoutX="293.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Nome:">
             <font>
                 <Font name="Comic Sans MS Bold" size="18.0" />
             </font>
         </Text>
-        <TextField fx:id="nomeTxt" alignment="BASELINE_LEFT" layoutX="116.0" layoutY="97.0" prefHeight="32.0" prefWidth="319.0" styleClass="textfield" />
-        <Text fontSmoothingType="LCD" layoutX="66.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Código de Inscrição:">
+        <TextField fx:id="nomeTxt" alignment="BASELINE_LEFT" layoutX="343.0" layoutY="97.0" prefHeight="32.0" prefWidth="319.0" styleClass="textfield" />
+        <Text fontSmoothingType="LCD" layoutX="293.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Código de Inscrição:">
             <font>
                 <Font name="Comic Sans MS Bold" size="17.0" />
             </font>
         </Text>
-        <TextField fx:id="codInscTxt" layoutX="206.0" layoutY="167.0" prefHeight="32.0" prefWidth="229.0" styleClass="textfield" />
-        <Text layoutX="66.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Email:">
+        <TextField fx:id="codInscTxt" layoutX="433.0" layoutY="167.0" prefHeight="32.0" prefWidth="229.0" styleClass="textfield" />
+        <Text layoutX="293.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textfield" text="Email:">
             <font>
                 <Font name="Comic Sans MS Bold" size="17.0" />
             </font>
         </Text>
-        <TextField fx:id="emailTxt" layoutX="116.0" layoutY="132.0" prefHeight="32.0" prefWidth="319.0" styleClass="textfield" />
+        <TextField fx:id="emailTxt" layoutX="343.0" layoutY="132.0" prefHeight="32.0" prefWidth="319.0" styleClass="textfield" />
         <TableView fx:id="table" layoutX="66.0" layoutY="292.0" prefHeight="221.0" prefWidth="823.0" styleClass="workspace-grid" stylesheets="@../CSS/consultar.css">
             <columns>
                 <TableColumn fx:id="codinscTb" prefWidth="59.0" text="Código de Inscrição" />
                 <TableColumn fx:id="nomeTb" prefWidth="141.0" text="Nome" />
                 <TableColumn fx:id="emailTb" minWidth="0.0" prefWidth="131.0" text="Email" />
-                <TableColumn fx:id="enderecoTb" prefWidth="102.0" text="Endereco" />
-                <TableColumn fx:id="bairroTb" prefWidth="95.0" text="Bairro" />
-                <TableColumn fx:id="cidadeTb" prefWidth="89.0" text="Cidade" />
+            <TableColumn fx:id="contatoTb" prefWidth="111.0" text="Contato" />
+                <TableColumn fx:id="enderecoTb" prefWidth="86.0" text="Endereco" />
+                <TableColumn fx:id="bairroTb" prefWidth="92.0" text="Bairro" />
+                <TableColumn fx:id="cidadeTb" prefWidth="72.0" text="Cidade" />
                 <TableColumn fx:id="cepTb" minWidth="0.0" prefWidth="95.0" text="Cep" />
                 <TableColumn fx:id="turnoTb" minWidth="0.0" prefWidth="62.0" text="Turno" />
                 <TableColumn fx:id="turmaTb" prefWidth="70.0" text="Turma" />

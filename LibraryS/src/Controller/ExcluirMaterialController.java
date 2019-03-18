@@ -8,6 +8,7 @@ package Controller;
 import Classes.Livro;
 import Classes.Material;
 import Classes.Multimidia;
+import Emprestimo.Emprestimo;
 import LibraryScreens.ExcluirMaterial;
 import LibraryScreens.GerAcervo;
 import java.util.logging.Level;
@@ -88,12 +89,15 @@ public class ExcluirMaterialController {
                     mat = new Livro();
                     mat.setNchamada(Integer.parseUnsignedInt(numChamTxt.getText()));
                     if((mat = mat.buscarMaterialNC()) != null){
-                        if(mat.deleteMaterial()) {
-                            returnScreen();
-                            alertaComf("LIVRO EXCLUIDO COM SUCESSO","");
-                        }else {
-                            alertaErro("FALHA AO EXCLUIR LIVRO","Tente novamente.");
-                        }
+                        Emprestimo emp = Emprestimo.buscarEmprestimoDeMaterial(mat.getNchamada());
+                        if(emp == null) {
+                            if(mat.deleteMaterial()) {
+                                returnScreen();
+                                alertaComf("LIVRO EXCLUIDO COM SUCESSO","");
+                            }else {
+                                alertaErro("FALHA AO EXCLUIR LIVRO","Tente novamente.");
+                            }
+                        }alertaErro("FALHA AO EXCLUIR LIVRO","Livro está em um emprestimo ativo");
                     }else{
                         alertaErro("FALHA AO EXCLUIR LIVRO","Livro não encontrada no sistema..");
                     }
@@ -101,12 +105,15 @@ public class ExcluirMaterialController {
                     mat = new Multimidia();
                     mat.setNchamada(Integer.parseUnsignedInt(numChamTxt.getText()));
                     if((mat = mat.buscarMaterialNC()) != null){
-                        if(mat.deleteMaterial()) {
-                            returnScreen();
-                            alertaComf("MULTIMIDIA EXCLUIDO COM SUCESSO","");
-                        }else {
-                            alertaErro("FALHA AO EXCLUIR MULTIMIDIA","Tente novamente.");
-                        }
+                        Emprestimo emp = Emprestimo.buscarEmprestimoDeMaterial(mat.getNchamada());
+                        if(emp == null) {
+                            if(mat.deleteMaterial()) {
+                                returnScreen();
+                                alertaComf("MULTIMIDIA EXCLUIDO COM SUCESSO","");
+                            }else {
+                                alertaErro("FALHA AO EXCLUIR MULTIMIDIA","Tente novamente.");
+                            }
+                        }else alertaErro("FALHA AO EXCLUIR LIVRO","Multimídia está em um emprestimo ativo.");
                     }else {
                         alertaErro("FALHA AO EXCLUIR MULTIMIDIA","Multimidia não encontrada no sistema.");
                     }

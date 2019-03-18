@@ -5,9 +5,11 @@
  */
 package Controller;
 
+import Emprestimo.Emprestimo;
 import LibraryScreens.ExcluirPessoa;
 import LibraryScreens.GerPessoas;
 import Pessoa.Pessoa;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -76,12 +78,15 @@ public class ExcluirPessoaController {
                 int cod = Integer.parseUnsignedInt(codInscTxt.getText());
                 Pessoa p;
                 if((p = Pessoa.buscarPessoa(cod)) != null){
-                    if(p.excluirPessoa()){
-                        returnScreen();
-                        alertaComf("PESSOA EXCLUIDO COM SUCESSO.", "");
-                    }else {
-                        alertaErro("FALHA AO EXCLUIR.","Tente novamente.");
-                    }
+                    List<Emprestimo> list = Emprestimo.buscarEmprestimoDePessoa(p.getCodinsc());
+                    if(list.isEmpty()) {
+                        if(p.excluirPessoa()){
+                            returnScreen();
+                            alertaComf("PESSOA EXCLUIDO COM SUCESSO.", "");
+                        }else {
+                            alertaErro("FALHA AO EXCLUIR.","Tente novamente.");
+                        }
+                    }alertaErro("FALHA AO EXCLUIR.","Pessoa com emprestimo ativo.");
                 }else {
                     alertaErro("FAHA AO EXCLUIR PESSOA.","Pessoa não encontrada no sistema.");
                 }

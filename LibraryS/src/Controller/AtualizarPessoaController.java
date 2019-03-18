@@ -16,7 +16,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javax.swing.text.MaskFormatter;
 import org.hibernate.HibernateException;
 
 /**
@@ -107,7 +109,63 @@ public class AtualizarPessoaController {
             Logger.getLogger(CadPessoaController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+    void contatoOnKeyReleased(KeyEvent event) {
+        String mask = "(##)#####-####";
+        String caracteres = "0123456789";
+        formatter(telTxt, caracteres, mask);
+    }
+    
+    @FXML
+    void cepOnKeyReleased(KeyEvent event) {
+        String mask = "#####-###";
+        String caracteres = "0123456789";
+        formatter(cepTxt, caracteres, mask);
+    }
+    
+    public void formatter(TextField tf, String CaracteresValidos, String mask) {
+        MaskFormatter mf = new MaskFormatter();
+        try {
+            mf.setMask(mask);
+        } catch (java.text.ParseException ex) {
+            System.out.println(ex.getMessage());
+        }
 
+        mf.setValidCharacters(CaracteresValidos);
+        mf.setValueContainsLiteralCharacters(false);
+        String text = tf.getText().replaceAll("[\\W]", "");
+        
+        boolean repetir = true;
+        while (repetir) {
+
+            char ultimoCaractere;
+
+            if (text.equals("")) {
+                break;
+            } else {
+                ultimoCaractere = text.charAt(text.length() - 1);
+            }
+
+            try {
+                text = mf.valueToString(text);
+                repetir = false;
+            } catch (java.text.ParseException ex) {
+                text = text.replace(ultimoCaractere + "", "");
+                repetir = true;
+            }
+
+        }
+
+        tf.setText(text);
+
+        if (!text.equals("")) {
+            for (int i = 0; tf.getText().charAt(i) != ' ' && i < tf.getLength() - 1; i++) {
+                tf.forward();
+            }
+        }
+    }
+    
     @FXML
     void confPessoaBtnAction(ActionEvent event) {
         String temp = codInscTxt.getText();

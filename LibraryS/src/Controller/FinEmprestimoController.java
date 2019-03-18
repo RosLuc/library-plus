@@ -147,6 +147,7 @@ public class FinEmprestimoController implements Initializable{
     void finEmpBtnAction(ActionEvent event) {
         try{
             if (Emp != null) {
+                String not = "";
                 if (Emp.getMateriais().isEmpty()) {
                     Emp.excluirEmprestimo();
                     material.setStatus("Disponivel");
@@ -159,7 +160,11 @@ public class FinEmprestimoController implements Initializable{
                     }
                     Emp.getPessoa().retirarAtivos();
                     Emp.getPessoa().atualizaPessoa();
-                    devolucaoNotificacao(Emp.getPessoa(), material);
+                    try{
+                       devolucaoNotificacao(Emp.getPessoa(), material); 
+                    } catch(RuntimeException e){
+                        not = "Não foi possivel enviar notificação, email inválido.";
+                    }
                 } else {
                     Emp.atualizarEmprestimo();
                     material.setStatus("Disponivel");
@@ -172,10 +177,15 @@ public class FinEmprestimoController implements Initializable{
                     }
                     Emp.getPessoa().retirarAtivos();
                     Emp.getPessoa().atualizaPessoa();
-                    devolucaoNotificacao(Emp.getPessoa(), material);
+                    try{
+                       devolucaoNotificacao(Emp.getPessoa(), material); 
+                    } catch(RuntimeException e){
+                        not = "Não foi possivel enviar notificação de devolução, email inválido.";
+                    }
+                    
                 }
                 retornar();
-                alertaComf("EMPRÉSTIMO DO MATERIAL INFORMADO FINALIZADO COM SUCESSO.", "...");
+                alertaComf("EMPRÉSTIMO DO MATERIAL INFORMADO FINALIZADO COM SUCESSO.", not);
             } else {
                 alertaErro("NÃO FOI POSSÍVEL FINALIZAR EMPRÉSTIMO.", "Informe e confirme o número de chamada de um material.");
             }    

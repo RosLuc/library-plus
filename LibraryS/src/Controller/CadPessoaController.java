@@ -18,9 +18,14 @@ import javafx.stage.Stage;
 import Pessoa.Pessoa;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
+import javax.mail.internet.ParseException;
+import javax.swing.text.MaskFormatter;
 import org.hibernate.HibernateException;
 
 /**
@@ -70,7 +75,27 @@ public class CadPessoaController implements Initializable {
     private Label turmaLabel;
     @FXML
     private Label turnoLabel;
+    
+    private static final String EMAIL_PATTERN
+            = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
+    private static final Pattern PATTERN = Pattern.compile(EMAIL_PATTERN, Pattern.CASE_INSENSITIVE);
+    
+    @FXML
+    void contatoOnKeyReleased(KeyEvent event) {
+        String mask = "(##)#####-####";
+        String caracteres = "0123456789";
+        formatter(telTxt, caracteres, mask);
+    }
+    
+    @FXML
+    void cepOnKeyReleased(KeyEvent event) {
+        String mask = "#####-###";
+        String caracteres = "0123456789";
+        formatter(cepTxt, caracteres, mask);
+    }
+    
     /**
      * Método responssável por cancelar a ação atual e retornar para a tela
      * antetior
@@ -84,6 +109,7 @@ public class CadPessoaController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        
         String[] lista = {"Funcionario", "Professor", "Aluno"};
         categoriaBox.getItems().addAll(lista);
         categoriaBox.setOnAction((ActionEvent e) -> {
@@ -104,6 +130,48 @@ public class CadPessoaController implements Initializable {
                 serieTxt.setText("");
             }
         });
+    }
+    
+    public void formatter(TextField tf, String CaracteresValidos, String mask) {
+        MaskFormatter mf = new MaskFormatter();
+        try {
+            mf.setMask(mask);
+        } catch (java.text.ParseException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        mf.setValidCharacters(CaracteresValidos);
+        mf.setValueContainsLiteralCharacters(false);
+        String text = tf.getText().replaceAll("[\\W]", "");
+        
+        boolean repetir = true;
+        while (repetir) {
+
+            char ultimoCaractere;
+
+            if (text.equals("")) {
+                break;
+            } else {
+                ultimoCaractere = text.charAt(text.length() - 1);
+            }
+
+            try {
+                text = mf.valueToString(text);
+                repetir = false;
+            } catch (java.text.ParseException ex) {
+                text = text.replace(ultimoCaractere + "", "");
+                repetir = true;
+            }
+
+        }
+
+        tf.setText(text);
+
+        if (!text.equals("")) {
+            for (int i = 0; tf.getText().charAt(i) != ' ' && i < tf.getLength() - 1; i++) {
+                tf.forward();
+            }
+        }
     }
 
     /**
@@ -152,7 +220,10 @@ public class CadPessoaController implements Initializable {
         }
         
         temp = emailTxt.getText();
-        if(!(temp.trim().equals(""))) p.setEmail(temp);
+        if(!(temp.trim().equals(""))){
+            if(validarEmail(temp)) p.setEmail(temp);
+            else erro("ATENÇÃO EMAIL INVÁLIDO: Verifique o email");
+        }
         else{
             erro("ATENÇÃO CAMPO OBRIGATORIO: Email não está preenchido.");
             return null;
@@ -258,6 +329,17 @@ public class CadPessoaController implements Initializable {
      */
     public void fecha() {
         CadPessoa.getStage().close();
+    }
+    
+    /**
+     * Método responsável por validar o email.
+     *
+     * @param email String email a ser verificado.
+     * @return Boolean - true caso seja valido e false caso não seja.
+     */
+    public static boolean validarEmail(String email) {
+        Matcher matcher = PATTERN.matcher(email);
+        return matcher.matches();
     }
     
     /**

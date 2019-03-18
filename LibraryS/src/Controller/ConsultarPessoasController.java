@@ -45,6 +45,9 @@ public class ConsultarPessoasController implements Initializable {
     private TableColumn<Pessoa, String> emailTb;
     
     @FXML
+    private TableColumn<Pessoa, String> contatoTb;
+    
+    @FXML
     private TableColumn<Pessoa, String> enderecoTb;
     
     @FXML
@@ -138,6 +141,8 @@ public class ConsultarPessoasController implements Initializable {
             new PropertyValueFactory<>("cidade"));
         emailTb.setCellValueFactory(
             new PropertyValueFactory<>("email"));
+        contatoTb.setCellValueFactory(
+            new PropertyValueFactory<>("contato"));
         enderecoTb.setCellValueFactory(
             new PropertyValueFactory<>("endereco"));
         nomeTb.setCellValueFactory(

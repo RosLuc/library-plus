@@ -123,7 +123,11 @@ public class LoginController implements Initializable {
         if(Emprestimo.verificaEmprestimosAtrasados()){
             List<Emprestimo> list = Emprestimo.ListaDeEmprestimoAtrasados();
             for(Emprestimo x: list){
-                emprestimoNotificacao(x.getPessoa(), x);
+                try {
+                    emprestimoNotificacao(x.getPessoa(), x);
+                } catch(RuntimeException e){
+                    System.err.println("Erro:"+e);
+                }
             }
         }   
     }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AtualizarPessoaController">
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AtualizarPessoaController">
     <children>
         <Button fx:id="atPesBtn" layoutX="343.0" layoutY="458.0" mnemonicParsing="false" onAction="#atPesBtnAction" prefHeight="39.0" prefWidth="274.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="ATUALIZAR" />
         <Button fx:id="cancelBtn" layoutX="792.0" layoutY="44.0" mnemonicParsing="false" onAction="#cancelBtnAction" prefHeight="39.0" prefWidth="125.0" styleClass="btn" stylesheets="@../CSS/principal.css" text="CANCELAR" />
@@ -36,8 +36,8 @@
         <TextField fx:id="turnoTxt" layoutX="136.0" layoutY="288.0" prefHeight="32.0" prefWidth="161.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
         <TextField fx:id="turmaTxt" layoutX="364.0" layoutY="289.0" prefHeight="32.0" prefWidth="126.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
         <TextField fx:id="serieTxt" layoutX="550.0" layoutY="289.0" prefHeight="32.0" prefWidth="93.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
-        <TextField fx:id="telTxt" layoutX="730.0" layoutY="288.0" prefHeight="32.0" prefWidth="160.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
-        <TextField fx:id="cepTxt" layoutX="121.0" layoutY="339.0" prefHeight="32.0" prefWidth="218.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
+        <TextField fx:id="telTxt" layoutX="730.0" layoutY="288.0" onKeyReleased="#contatoOnKeyReleased" prefHeight="32.0" prefWidth="160.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
+        <TextField fx:id="cepTxt" layoutX="121.0" layoutY="339.0" onKeyReleased="#cepOnKeyReleased" prefHeight="32.0" prefWidth="218.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
         <TextField fx:id="estadoTxt" layoutX="414.0" layoutY="340.0" prefHeight="32.0" prefWidth="200.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
         <TextField fx:id="cidadeTxt" layoutX="703.0" layoutY="338.0" prefHeight="32.0" prefWidth="187.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
         <TextField fx:id="bairroTxt" layoutX="134.0" layoutY="389.0" prefHeight="32.0" prefWidth="180.0" styleClass="textfield" stylesheets="@../CSS/consultar.css" />
