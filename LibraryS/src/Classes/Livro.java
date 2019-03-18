@@ -178,7 +178,7 @@ public class Livro  extends Material{
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
             @SuppressWarnings("unchecked")
-            List<Livro> listLivro= session.createQuery("from Classes.Livro").list();
+            List<Livro> listLivro= session.createCriteria(Livro.class).addOrder(Order.asc("nchamada")).list();
             session.close();
             factory.close();
             return listLivro;

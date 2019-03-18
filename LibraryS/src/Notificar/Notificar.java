@@ -41,14 +41,15 @@ public class Notificar {
     * @return Retorna uma string contendo a menssagem de atraso.
     */
    public static String notificarAtraso(String nome, Emprestimo emp){
-        String notEmp = "\tEmprestimos atrasados\nCaro(a)" + nome +", o(s) emprestimo(s) do(s) material(is) ";
-       
+        String notEmp = "\tAviso de Emprestimos atrasados: \nCaro(a)" + nome 
+                +", o(s) emprestimo(s) do(s) material(is):\n ";
         String materiais = "";
         Set<Material> mat = emp.getMateriais();
         for(Material x : mat){
-            materiais += x.getNchamada() + x.getTitulo(); 
+            materiais += ("Nº de chamada: " + x.getNchamada()
+                    + " - Título: " + x.getTitulo() + " - Exemplar: " + x.getExemplar() + ", \n");
         }
-        return notEmp + materiais + "venceu dia" +emp.getDatadev()+ "Não esqueça de devolve-lo";
+        return notEmp + materiais + "\nse venceu(ram) dia: " + emp.getDatadev() + ". NÃO ESQUEÇA DE DEVOLVE-LO(S)!";
    }
    
    /**

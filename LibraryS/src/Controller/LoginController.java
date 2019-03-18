@@ -5,12 +5,17 @@
  */
 package Controller;
 
+import Emprestimo.Emprestimo;
 import LibraryScreens.Cadastrar;
 import LibraryScreens.EsqueciSenhaEmail;
 import LibraryScreens.Login;
 import LibraryScreens.Principal;
+import Notificar.Notificar;
+import Pessoa.Pessoa;
+import Usuario.Email;
 import Usuario.Usuario;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -115,6 +120,26 @@ public class LoginController implements Initializable {
         if (us.verificarUsuario() != null) {
             signupBtn.setVisible(false);
         }
+        if(Emprestimo.verificaEmprestimosAtrasados()){
+            List<Emprestimo> list = Emprestimo.ListaDeEmprestimoAtrasados();
+            for(Emprestimo x: list){
+                emprestimoNotificacao(x.getPessoa(), x);
+            }
+        }   
+    }
+    
+    /**
+     * Método responsável por enviar notificação para pessoa que possue empréstimo
+     * atrasado.
+     * @param p Pessoa que realizou o empréstimo.
+     * @param emp Empréstimo realizado.
+     */
+    private void emprestimoNotificacao(Pessoa p, Emprestimo emp) {
+        String remetente = "libraryalory@gmail.com";
+        String senh = "libraryalory12345";
+        Email.enviarMensagem(remetente, p.getEmail(), "Notificação de atraso de empréstimo(s)", 
+                Notificar.notificarAtraso(p.getNome(), emp), 
+                Email.conectarConta(Email.conexaoSMTP(remetente), remetente, senh));
     }
 
     /**

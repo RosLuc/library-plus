@@ -134,7 +134,7 @@ public class Multimidia extends Material {
             SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
             Session session = factory.openSession();
             @SuppressWarnings("unchecked")
-            List<Multimidia> listMultimidia = session.createQuery("from Classes.Multimidia").list();
+            List<Multimidia> listMultimidia = session.createCriteria(Multimidia.class).addOrder(Order.asc("nchamada")).list();
             session.close();
             return listMultimidia;
         } catch (HibernateException e) {
