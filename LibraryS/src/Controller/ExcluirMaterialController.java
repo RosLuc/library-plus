@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Emprestimo.Emprestimo;
 import Materiais.Livro;
 import Materiais.Material;
 import Materiais.Multimidia;

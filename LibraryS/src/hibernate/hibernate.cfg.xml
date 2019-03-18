@@ -7,7 +7,6 @@
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Banco_Biblioteca</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">8237</property>
-    <!--<mapping resource="Classes/Prateleira.hbm.xml"/>-->
     <mapping resource="Usuario/usuario.hbm.xml"/>
     <mapping resource="Pessoa/pessoa.hbm.xml"/>
     <mapping resource="Emprestimo/Emprestimo.hbm.xml"/>
