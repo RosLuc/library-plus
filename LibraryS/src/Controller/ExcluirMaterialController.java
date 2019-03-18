@@ -5,10 +5,9 @@
  */
 package Controller;
 
-import Classes.Livro;
-import Classes.Material;
-import Classes.Multimidia;
-import Emprestimo.Emprestimo;
+import Materiais.Livro;
+import Materiais.Material;
+import Materiais.Multimidia;
 import LibraryScreens.ExcluirMaterial;
 import LibraryScreens.GerAcervo;
 import java.util.logging.Level;

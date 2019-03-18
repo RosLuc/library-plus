@@ -1,4 +1,4 @@
-package Classes;
+package Materiais;
 
 import java.util.*;
 import org.hibernate.*;

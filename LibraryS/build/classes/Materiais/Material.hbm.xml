@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="Materiais.Material" table="material">
+    <id column="nchamada" name="nchamada" type="int">
+      <generator class="sequence">
+        <param name="sequence">material_nchamada_seq</param>
+      </generator>
+    </id>
+    <property name="usercode" type="int">
+      <column name="usercode"/>
+    </property>
+    <property name="corestante" type="string">
+      <column length="10" name="corestante" not-null="true"/>
+    </property>
+    <property name="codprateleira" type="int">
+      <column name="codprateleira" not-null="true"/>
+    </property>
+    <property name="data" type="date">
+      <column name="data" not-null="true"/>
+    </property>
+    <property name="titulo" type="string">
+      <column name="titulo" not-null="true"/>
+    </property>
+    <property name="exemplar" type="int">
+      <column name="exemplar"/>
+    </property>
+    <property name="volume" type="int">
+      <column name="volume"/>
+    </property>
+    <property name="local" type="string">
+      <column name="local" not-null="true"/>
+    </property>
+    <property name="anopublicacao" type="int">
+      <column name="anopublicacao" not-null="true"/>
+    </property>
+    <property name="formadeaquisicao" type="string">
+      <column name="formadeaquisicao" not-null="true"/>
+    </property>
+    <property name="observacao" type="string">
+      <column name="observacao"/>
+    </property>
+    <property name="status" type="string">
+      <column length="10" name="status" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

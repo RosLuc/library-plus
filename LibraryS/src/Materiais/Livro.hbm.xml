@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <joined-subclass extends="Materiais.Material" name="Materiais.Livro" table="livro">
+    <key column="nchamada"/>
+    <property name="autor" type="string">
+      <column length="50" name="autor" not-null="true"/>
+    </property>
+    <property name="editora" type="string">
+      <column length="40" name="editora" not-null="true"/>
+    </property>
+    <property name="cdu" type="int">
+      <column name="cdu"/>
+    </property>
+    <property name="cdd" type="int">
+      <column name="cdd"/>
+    </property>
+  </joined-subclass>
+</hibernate-mapping>

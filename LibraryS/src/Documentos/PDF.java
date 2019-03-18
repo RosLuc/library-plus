@@ -32,8 +32,8 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Classes.Livro;
-import Classes.Multimidia;
+import Materiais.Livro;
+import Materiais.Multimidia;
 
 
 public class PDF {

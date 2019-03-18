@@ -6,7 +6,7 @@
 package Emprestimo;
 
 
-import Classes.Material;
+import Materiais.Material;
 import Pessoa.Pessoa;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

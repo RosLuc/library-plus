@@ -5,9 +5,9 @@
  */
 package Controller;
 
-import Classes.Livro;
-import Classes.Material;
-import Classes.Multimidia;
+import Materiais.Livro;
+import Materiais.Material;
+import Materiais.Multimidia;
 import Emprestimo.Emprestimo;
 import LibraryScreens.FinEmprestimo;
 import LibraryScreens.GerEmprestimos;
