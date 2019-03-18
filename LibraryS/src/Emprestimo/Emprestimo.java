@@ -18,7 +18,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 /**
