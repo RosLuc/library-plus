@@ -1152,7 +1152,11 @@ public class RealizarEmpController implements Initializable {
                     p.acrescentarAtivos(i);
                     p.acrescentarTotal(i);
                     p.atualizaPessoa();
-                    emprestimoNotificacao(p, emp);
+                    try{
+                        emprestimoNotificacao(p, emp);
+                    }catch (Exception e){
+                        
+                    }
                     returnGerEmprestimo();
                     alertaComf("EMPRESTIMO REALIZADO COM SUCESSO.", "");
                 }else{

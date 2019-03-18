@@ -92,10 +92,10 @@ public class ExcluirMaterialController {
                             returnScreen();
                             alertaComf("LIVRO EXCLUIDO COM SUCESSO","");
                         }else {
-                            alertaErro("FAHA AO EXCLUIR LIVRO","Tente novamente.");
+                            alertaErro("FALHA AO EXCLUIR LIVRO","Tente novamente.");
                         }
                     }else{
-                        alertaErro("FAHA AO EXCLUIR LIVRO","Livro não encontrada no sistema..");
+                        alertaErro("FALHA AO EXCLUIR LIVRO","Livro não encontrada no sistema..");
                     }
                 }else if(multBox.isSelected()){
                     mat = new Multimidia();
@@ -105,15 +105,15 @@ public class ExcluirMaterialController {
                             returnScreen();
                             alertaComf("MULTIMIDIA EXCLUIDO COM SUCESSO","");
                         }else {
-                            alertaErro("FAHA AO EXCLUIR MULTIMIDIA","Tente novamente.");
+                            alertaErro("FALHA AO EXCLUIR MULTIMIDIA","Tente novamente.");
                         }
                     }else {
-                        alertaErro("FAHA AO EXCLUIR MULTIMIDIA","Multimidia não encontrada no sistema.");
+                        alertaErro("FALHA AO EXCLUIR MULTIMIDIA","Multimidia não encontrada no sistema.");
                     }
                 }else {
                     alertaErro("FALHA AO EXCLUIR.", "Selecione o tipo de material a ser excluido.");
                 }
-            } else alertaErro("FAHA AO EXCLUIR LIVRO","Nº de chamada não preenchido.");
+            } else alertaErro("FALHA AO EXCLUIR LIVRO","Nº de chamada não preenchido.");
         }catch (NumberFormatException e){
             alertaErro("FALHA AO EXCLUIR.","ATENÇÃO:"
                     + " Campos númericos não peenchido ou foi adicionado simbolos como:"
