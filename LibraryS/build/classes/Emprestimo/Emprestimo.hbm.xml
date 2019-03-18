@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
 <hibernate-mapping>
-    <class name="Emprestimo.Emprestimo" table="emprestimo">
-        <id name="codemp" column="codemp" type="int">
-            <generator class="sequence">              
-            <param name="sequence">emprestimo_codemp_seq</param>
-            </generator>
-        </id>
-        <many-to-one name="pessoa" class="Pessoa.Pessoa" fetch="join"
-            column="codinsc" not-null="true"/>
-        <property name="usercode"/>
-        <property name="dataemp" type="date">
-            <column name="dataemp" length="13" not-null="true" />
-        </property>
-        <property name="datadev" type="date">
-            <column name="datadev" length="13" not-null="true" />
-        </property>
-        <property name="status" type="string">
-            <column name="status" length="20" not-null="true" />
-        </property>
-        <set name="materiais" table="indicar" lazy="false" fetch="join">
-            <key>
-                <column name="codemp" not-null="true" />
-            </key>
-            <many-to-many column = "nchamada" class="Classes.Material"/>
-        </set>
-    </class>
+  <class name="Emprestimo.Emprestimo" table="emprestimo">
+    <id column="codemp" name="codemp" type="int">
+      <generator class="sequence">
+        <param name="sequence">emprestimo_codemp_seq</param>
+      </generator>
+    </id>
+    <many-to-one class="Pessoa.Pessoa" column="codinsc" fetch="join" name="pessoa" not-null="true"/>
+    <property name="usercode"/>
+    <property name="dataemp" type="date">
+      <column length="13" name="dataemp" not-null="true"/>
+    </property>
+    <property name="datadev" type="date">
+      <column length="13" name="datadev" not-null="true"/>
+    </property>
+    <property name="status" type="string">
+      <column length="20" name="status" not-null="true"/>
+    </property>
+    <set fetch="join" lazy="false" name="materiais" table="indicar">
+      <key>
+        <column name="codemp" not-null="true"/>
+      </key>
+      <many-to-many class="Materiais.Material" column="nchamada"/>
+    </set>
+  </class>
 </hibernate-mapping>

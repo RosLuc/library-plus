@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <joined-subclass extends="Materiais.Material" name="Materiais.Multimidia" table="multimidia">
+    <key column="nchamada"/>
+    <property name="produtor" type="string">
+      <column length="50" name="produtor" not-null="true"/>
+    </property>
+    <property name="estudio" type="string">
+      <column length="40" name="estudio" not-null="true"/>
+    </property>
+  </joined-subclass>
+</hibernate-mapping>

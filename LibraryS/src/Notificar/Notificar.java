@@ -5,7 +5,7 @@
  */
 package Notificar;
 
-import Classes.Material;
+import Materiais.Material;
 import Emprestimo.Emprestimo;
 import java.util.Set;
 

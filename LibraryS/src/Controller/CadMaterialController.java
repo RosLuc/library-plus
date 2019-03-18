@@ -5,8 +5,8 @@
  */
 package Controller;
 
-import Classes.Livro;
-import Classes.Multimidia;
+import Materiais.Livro;
+import Materiais.Multimidia;
 import LibraryScreens.CadMaterial;
 import LibraryScreens.GerAcervo;
 import java.util.Date;
