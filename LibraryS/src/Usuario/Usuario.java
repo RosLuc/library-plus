@@ -4,6 +4,7 @@ package Usuario;
  *
  * @author maria adriana
  */
+import Notificar.Email;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;

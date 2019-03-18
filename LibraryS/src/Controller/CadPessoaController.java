@@ -91,29 +91,17 @@ public class CadPessoaController implements Initializable {
                     categoriaBox.getValue().equals("Professor")){
                 turnoTxt.setEditable(false);
                 turnoTxt.setText("-");
-                turnoTxt.setOpacity(0.25);
-                turnoLabel.setOpacity(0.25);
                 turmaTxt.setEditable(false);
                 turmaTxt.setText("-");
-                turmaTxt.setOpacity(0.25);
-                turmaLabel.setOpacity(0.25);
                 serieTxt.setEditable(false);
                 serieTxt.setText("-");
-                serieTxt.setOpacity(0.25);
-                serieLabel.setOpacity(0.25);
             } else if(categoriaBox.getValue().equals("Aluno")) {
                 turnoTxt.setEditable(true);
                 turnoTxt.setText("");
-                turnoTxt.setOpacity(0.5);
-                turnoLabel.setOpacity(0.5);
                 turmaTxt.setEditable(true);
                 turmaTxt.setText("");
-                turmaTxt.setOpacity(0.5);
-                turmaLabel.setOpacity(0.5);
                 serieTxt.setEditable(true);
                 serieTxt.setText("");
-                serieTxt.setOpacity(0.5);
-                serieLabel.setOpacity(0.5);
             }
         });
     }

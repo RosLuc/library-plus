@@ -73,7 +73,7 @@ public class ExcluirPessoaController {
     public void excluirPes() {
         try {
             if(!(codInscTxt.getText().trim().equals(""))){
-                int cod = Integer.parseInt(codInscTxt.getText());
+                int cod = Integer.parseUnsignedInt(codInscTxt.getText());
                 Pessoa p;
                 if((p = Pessoa.buscarPessoa(cod)) != null){
                     if(p.excluirPessoa()){

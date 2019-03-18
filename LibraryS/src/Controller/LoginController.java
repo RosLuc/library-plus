@@ -12,7 +12,7 @@ import LibraryScreens.Login;
 import LibraryScreens.Principal;
 import Notificar.Notificar;
 import Pessoa.Pessoa;
-import Usuario.Email;
+import Notificar.Email;
 import Usuario.Usuario;
 import java.net.URL;
 import java.util.List;

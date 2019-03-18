@@ -1,4 +1,4 @@
-package Usuario;
+package Notificar;
 
 import java.util.Properties;
 import javax.mail.Address;

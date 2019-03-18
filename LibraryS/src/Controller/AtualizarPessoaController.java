@@ -113,7 +113,7 @@ public class AtualizarPessoaController {
         String temp = codInscTxt.getText();
         try {
             if(!(temp.trim().equals(""))){
-                pessoa = Pessoa.buscarPessoa(Integer.parseInt(temp));
+                pessoa = Pessoa.buscarPessoa(Integer.parseUnsignedInt(temp));
                 if(pessoa != null){
                     nomeTxt.setPromptText(pessoa.getNome());
                     emailTxt.setPromptText(pessoa.getEmail());

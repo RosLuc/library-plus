@@ -32,7 +32,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.hibernate.HibernateException;
 import Notificar.Notificar;
-import Usuario.Email;
+import Notificar.Email;
 
 /**
  * FXML Controller class

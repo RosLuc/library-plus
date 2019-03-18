@@ -13,7 +13,7 @@ import LibraryScreens.FinEmprestimo;
 import LibraryScreens.GerEmprestimos;
 import Notificar.Notificar;
 import Pessoa.Pessoa;
-import Usuario.Email;
+import Notificar.Email;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Set;
