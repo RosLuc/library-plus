@@ -97,7 +97,7 @@ public class ExcluirMaterialController {
                             }else {
                                 alertaErro("FALHA AO EXCLUIR LIVRO","Tente novamente.");
                             }
-                        }alertaErro("FALHA AO EXCLUIR LIVRO","Livro está em um emprestimo ativo");
+                        }else alertaErro("FALHA AO EXCLUIR LIVRO","Livro está em um emprestimo ativo");
                     }else{
                         alertaErro("FALHA AO EXCLUIR LIVRO","Livro não encontrada no sistema..");
                     }
@@ -113,7 +113,7 @@ public class ExcluirMaterialController {
                             }else {
                                 alertaErro("FALHA AO EXCLUIR MULTIMIDIA","Tente novamente.");
                             }
-                        }else alertaErro("FALHA AO EXCLUIR LIVRO","Multimídia está em um emprestimo ativo.");
+                        }else alertaErro("FALHA AO EXCLUIR MULTIMIDIA","Multimídia está em um emprestimo ativo.");
                     }else {
                         alertaErro("FALHA AO EXCLUIR MULTIMIDIA","Multimidia não encontrada no sistema.");
                     }

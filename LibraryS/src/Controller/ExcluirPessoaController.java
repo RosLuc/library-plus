@@ -86,7 +86,7 @@ public class ExcluirPessoaController {
                         }else {
                             alertaErro("FALHA AO EXCLUIR.","Tente novamente.");
                         }
-                    }alertaErro("FALHA AO EXCLUIR.","Pessoa com emprestimo ativo.");
+                    }else alertaErro("FALHA AO EXCLUIR.","Pessoa com emprestimo ativo.");
                 }else {
                     alertaErro("FAHA AO EXCLUIR PESSOA.","Pessoa não encontrada no sistema.");
                 }
