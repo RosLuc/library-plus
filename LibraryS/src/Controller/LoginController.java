@@ -5,30 +5,24 @@
  */
 package Controller;
 
-import Emprestimo.Emprestimo;
-import LibraryScreens.Cadastrar;
-import LibraryScreens.EsqueciSenhaEmail;
-import LibraryScreens.Login;
-import LibraryScreens.Principal;
-import Notificar.Notificar;
-import Pessoa.Pessoa;
-import Notificar.Email;
+import Main.Main;
 import Usuario.Usuario;
+import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -50,6 +44,12 @@ public class LoginController implements Initializable {
 
     @FXML
     private Label errorTxt;
+    
+    private static Parent telaRestSenha;
+    
+    private static Parent telaPrincipal;
+    
+    private static Parent telaCadastro;
 
     /**
      * Método responsável por realizar o login do Usuário
@@ -82,13 +82,14 @@ public class LoginController implements Initializable {
      */
     @FXML
     void forgotPassBtnAction(ActionEvent event) {
-        EsqueciSenhaEmail es = new EsqueciSenhaEmail();
+        resetSenha();
+        /*EsqueciSenhaEmail es = new EsqueciSenhaEmail();
         try {
             es.start(new Stage());
         } catch (Exception ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fecha();
+        fecha();*/
     }
 
     /**
@@ -98,20 +99,14 @@ public class LoginController implements Initializable {
      */
     @FXML
     void signUpBtnAction(ActionEvent event) {
-        Cadastrar c = new Cadastrar();
-        try {
-            c.start(new Stage());
-        } catch (Exception ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        fecha();
+        cadastro();
     }
 
     /**
      * Método responsável por fechar a tela atual
      */
     public void fecha() {
-        Login.getStage().close();
+        Main.fecharTela();
     }
 
     @Override
@@ -119,31 +114,7 @@ public class LoginController implements Initializable {
         Usuario us = new Usuario();
         if (us.verificarUsuario() != null) {
             signupBtn.setVisible(false);
-        }
-        if(Emprestimo.verificaEmprestimosAtrasados()){
-            List<Emprestimo> list = Emprestimo.ListaDeEmprestimoAtrasados();
-            for(Emprestimo x: list){
-                try {
-                    emprestimoNotificacao(x.getPessoa(), x);
-                } catch(RuntimeException e){
-                    System.err.println("Erro:"+e);
-                }
-            }
-        }   
-    }
-    
-    /**
-     * Método responsável por enviar notificação para pessoa que possue empréstimo
-     * atrasado.
-     * @param p Pessoa que realizou o empréstimo.
-     * @param emp Empréstimo realizado.
-     */
-    private void emprestimoNotificacao(Pessoa p, Emprestimo emp) {
-        String remetente = "libraryalory@gmail.com";
-        String senh = "libraryalory12345";
-        Email.enviarMensagem(remetente, p.getEmail(), "Notificação de atraso de empréstimo(s)", 
-                Notificar.notificarAtraso(p.getNome(), emp), 
-                Email.conectarConta(Email.conexaoSMTP(remetente), remetente, senh));
+        }  
     }
 
     /**
@@ -178,19 +149,40 @@ public class LoginController implements Initializable {
             passTxt.setStyle("-fx-border-color: #ff2323");
         } else {
             if (us.validarUsuario()) {
-                Principal p = new Principal();
-                try {
-                    p.start(new Stage());
-                } catch (Exception ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                fecha();
+                principal();
             } else {
                 errorTxt.setStyle("-fx-opacity: 1");
                 errorTxt.setText("LOGIN OU SENHA INCORRETOS!");
                 userTxt.setStyle("-fx-border-color: #ff2323");
                 passTxt.setStyle("-fx-border-color: #ff2323");
             }
+        }
+    }
+    
+    private void principal() {
+        try {
+            telaPrincipal = FXMLLoader.load(getClass().getResource("/View/Principal.fxml"));
+            Main.trocarTela(telaPrincipal);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void resetSenha() {
+        try{
+            telaRestSenha = FXMLLoader.load(getClass().getResource("/View/EsqueciSenhaEmail.fxml"));
+            Main.trocarTela(telaRestSenha);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void cadastro() {
+        try{
+            telaCadastro = FXMLLoader.load(getClass().getResource("/View/Cadastrar.fxml"));
+            Main.trocarTela(telaCadastro);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

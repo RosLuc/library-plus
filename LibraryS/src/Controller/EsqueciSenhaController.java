@@ -7,13 +7,17 @@ package Controller;
 
 import LibraryScreens.EsqueciSenha;
 import LibraryScreens.Login;
+import Main.Main;
 import Usuario.Usuario;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -37,6 +41,9 @@ public class EsqueciSenhaController {
     private Button cancelBtn;
     @FXML
     private TextField codVerTxt;
+    
+    private static Parent telaLogin;
+     
 
     /**
      * Método responsável por mudar a senha do Usuário
@@ -75,24 +82,25 @@ public class EsqueciSenhaController {
      * Método responsável por fechar a tela atual
      */
     public void fecha() {
-        EsqueciSenha.getStage().close();
+        Main.fecharTela();
     }
 
     /**
      * Método responsável por abrir a tela de Login e fechar a tela atual
      */
     public void returnLogin() {
-        Login l = new Login();
-        try {
-            l.start(new Stage());
-        } catch (Exception ex) {
-            Logger.getLogger(EsqueciSenhaController.class.getName()).log(Level.SEVERE, null, ex);
+        try{
+            telaLogin = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
+            Main.trocarTela(telaLogin);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fecha();
     }
     
     /**
      * Método responsável alterar a senha do usuario.
+     * @throws java.io.UnsupportedEncodingException
+     * @throws java.security.NoSuchAlgorithmException
      */
     public void changePassword() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         Usuario user = new Usuario();

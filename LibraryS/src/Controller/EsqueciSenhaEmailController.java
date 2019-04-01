@@ -8,19 +8,22 @@ package Controller;
 import LibraryScreens.EsqueciSenha;
 import LibraryScreens.EsqueciSenhaEmail;
 import LibraryScreens.Login;
+import Main.Main;
 import Usuario.Usuario;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -35,6 +38,10 @@ public class EsqueciSenhaEmailController {
     private Button confirmBtn;
     @FXML
     private TextField emailTxt;
+    
+    private static Parent telaLogin;
+    
+    private static Parent telaEsqueciSenha;
 
     /**
      * Método responsável por enviar um código de verificação para o email do
@@ -66,20 +73,19 @@ public class EsqueciSenhaEmailController {
      */
     @FXML
     void cancelBtnAction(ActionEvent event) {
-        Login l = new Login();
-        try {
-            l.start(new Stage());
-        } catch (Exception ex) {
-            Logger.getLogger(EsqueciSenhaEmailController.class.getName()).log(Level.SEVERE, null, ex);
+        try{
+            telaLogin = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
+            Main.trocarTela(telaLogin);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fecha();
     }
 
     /**
      * Método responsável por fechar a tela atual
      */
     public void fecha() {
-        EsqueciSenhaEmail.getStage().close();
+        Main.fecharTela();
     }
 
     /**
@@ -87,13 +93,12 @@ public class EsqueciSenhaEmailController {
      * atual
      */
     public void esqSenha() {
-        EsqueciSenha l = new EsqueciSenha();
-        try {
-            l.start(new Stage());
-        } catch (Exception ex) {
-            Logger.getLogger(EsqueciSenhaEmailController.class.getName()).log(Level.SEVERE, null, ex);
+        try{
+            telaEsqueciSenha = FXMLLoader.load(getClass().getResource("/View/EsqueciSenha.fxml"));
+            Main.trocarTela(telaEsqueciSenha);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fecha();
     }
 
     /**

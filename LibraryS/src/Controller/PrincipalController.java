@@ -5,18 +5,15 @@
  */
 package Controller;
 
-import LibraryScreens.EmtDoc;
-import LibraryScreens.GerAcervo;
-import LibraryScreens.GerEmprestimos;
-import LibraryScreens.GerPessoas;
-import LibraryScreens.Login;
-import LibraryScreens.Principal;
+import Main.Main;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -39,6 +36,16 @@ public class PrincipalController {
 
     @FXML
     private Button gerAcBtn;
+    
+    private static Parent telaEmprestimos;
+    
+    private static Parent telaAcervo;
+    
+    private static Parent telaPessoa;
+    
+    private static Parent telaDocumentos;
+    
+    private static Parent telaLogin;
 
     /**
      * Método responsável por abrir a tela de Emitir Documentos
@@ -47,13 +54,12 @@ public class PrincipalController {
      */
     @FXML
     void emtDocBtnAction(ActionEvent event) {
-        EmtDoc p = new EmtDoc();
         try {
-            p.start(new Stage());
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            telaDocumentos = FXMLLoader.load(getClass().getResource("/View/EmtDoc.fxml"));
+            Main.trocarTela(telaDocumentos);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fecha();
     }
 
     /**
@@ -63,13 +69,12 @@ public class PrincipalController {
      */
     @FXML
     void gerPesBtnAction(ActionEvent event) {
-        GerPessoas ac = new GerPessoas();
         try {
-            ac.start(new Stage());
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            telaPessoa = FXMLLoader.load(getClass().getResource("/View/GerPessoas.fxml"));
+            Main.trocarTela(telaPessoa);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fecha();
     }
 
     /**
@@ -79,13 +84,12 @@ public class PrincipalController {
      */
     @FXML
     void gerAcBtnAction(ActionEvent event) {
-        GerAcervo ac = new GerAcervo();
         try {
-            ac.start(new Stage());
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            telaAcervo = FXMLLoader.load(getClass().getResource("/View/GerAcervo.fxml"));
+            Main.trocarTela(telaAcervo);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fecha();
     }
 
     /**
@@ -95,13 +99,12 @@ public class PrincipalController {
      */
     @FXML
     void gerEmpBtnAction(ActionEvent event) {
-        GerEmprestimos cm = new GerEmprestimos();
         try {
-            cm.start(new Stage());
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            telaEmprestimos = FXMLLoader.load(getClass().getResource("/View/GerEmprestimos.fxml"));
+            Main.trocarTela(telaEmprestimos);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fecha();
     }
 
     /**
@@ -119,20 +122,19 @@ public class PrincipalController {
      * atual
      */
     public void returnLogin() {
-        Login l = new Login();
         try {
-            l.start(new Stage());
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            telaLogin = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
+            Main.trocarTela(telaLogin);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fecha();
     }
 
     /**
      * Método responsável por fechar a tela atual
      */
     public void fecha() {
-        Principal.getStage().close();
+        Main.fecharTela();
     }
 
 }

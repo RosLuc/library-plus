@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="LibraryScreens.jar" size="220847" download="eager" />
+    <jar href="LibraryScreens.jar" size="222373" download="eager" />
     <jar href="lib\antlr-2.7.7.jar" size="445288" download="eager" />
     <jar href="lib\commons-collections-3.1.jar" size="559366" download="eager" />
     <jar href="lib\dom4j-1.6.1.jar" size="313898" download="eager" />
@@ -27,6 +27,6 @@
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="LibraryScreens" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="LibraryScreens.Login"  name="LibraryScreens" />
+  <jfx:javafx-desc  width="800" height="600" main-class="Main.Main"  name="LibraryScreens" />
   <update check="always"/>
 </jnlp>

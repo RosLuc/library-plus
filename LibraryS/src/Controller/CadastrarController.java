@@ -5,22 +5,23 @@
  */
 package Controller;
 
-import LibraryScreens.Cadastrar;
-import LibraryScreens.Login;
+import Main.Main;
 import Usuario.Usuario;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -47,6 +48,8 @@ public class CadastrarController {
     private Button signInBtn;
     @FXML
     private TextField cpfTxt;
+    
+    private static Parent telaLogin;
 
     private static final String EMAIL_PATTERN
             = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -91,7 +94,7 @@ public class CadastrarController {
      * Método responsável por fechar a tela atual
      */
     public void fecha() {
-        Cadastrar.getStage().close();
+        Main.fecharTela();
     }
 
     /**
@@ -99,13 +102,12 @@ public class CadastrarController {
      * atual
      */
     public void returnLogin() {
-        Login l = new Login();
-        try {
-            l.start(new Stage());
-        } catch (Exception ex) {
-            Logger.getLogger(CadastrarController.class.getName()).log(Level.SEVERE, null, ex);
+        try{
+            telaLogin = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
+            Main.trocarTela(telaLogin);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fecha();
     }
 
     /**

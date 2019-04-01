@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -8,18 +9,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../CSS/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="960.0" styleClass="background" stylesheets="@../CSS/login.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
     <children>
-        <TextField fx:id="userTxt" layoutX="337.0" layoutY="221.0" prefHeight="39.0" prefWidth="287.0" promptText="USUÁRIO" />
-        <PasswordField fx:id="passTxt" layoutX="337.0" layoutY="277.0" onKeyPressed="#loginBtnKeyAction" prefHeight="39.0" prefWidth="287.0" promptText="SENHA" />
-        <Button fx:id="loginBtn" layoutX="337.0" layoutY="330.0" mnemonicParsing="false" onAction="#loginBtnAction" prefHeight="39.0" prefWidth="287.0" styleClass="login-btn" text="LOGIN" />
-        <ImageView fitHeight="125.0" fitWidth="419.0" layoutX="303.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+        <TextField fx:id="userTxt" layoutX="337.0" layoutY="223.0" prefHeight="43.0" prefWidth="287.0" promptText="USUÁRIO" AnchorPane.leftAnchor="303.0" AnchorPane.rightAnchor="302.2569274902344" />
+        <PasswordField fx:id="passTxt" layoutX="337.0" layoutY="277.0" onKeyPressed="#loginBtnKeyAction" prefHeight="39.0" prefWidth="287.0" promptText="SENHA" AnchorPane.leftAnchor="303.0" AnchorPane.rightAnchor="302.2569274902344" />
+        <Button fx:id="loginBtn" layoutX="337.0" layoutY="330.0" mnemonicParsing="false" onAction="#loginBtnAction" prefHeight="39.0" prefWidth="287.0" styleClass="login-btn" text="LOGIN" AnchorPane.leftAnchor="303.0" AnchorPane.rightAnchor="302.2569274902344" />
+        <ImageView fitHeight="125.0" fitWidth="572.0" layoutX="303.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="303.0" AnchorPane.rightAnchor="302.2569274902344">
             <image>
                 <Image url="@../images/LogoLP.png" />
             </image>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
         </ImageView>
-        <Button fx:id="forgotpassBtn" layoutX="371.0" layoutY="390.0" mnemonicParsing="false" onAction="#forgotPassBtnAction" prefHeight="32.0" prefWidth="220.0" styleClass="other-btn" text="ESQUECI MINHA SENHA" />
-        <Button fx:id="signupBtn" layoutX="419.0" layoutY="423.0" mnemonicParsing="false" onAction="#signUpBtnAction" styleClass="other-btn" text="CADASTRAR" />
-      <Label fx:id="errorTxt" layoutX="200.0" layoutY="480.0" prefHeight="27.0" prefWidth="560.0" styleClass="label2" />
+        <Button fx:id="forgotpassBtn" layoutX="371.0" layoutY="390.0" mnemonicParsing="false" onAction="#forgotPassBtnAction" prefHeight="32.0" prefWidth="220.0" styleClass="other-btn" text="ESQUECI MINHA SENHA" AnchorPane.leftAnchor="303.0" AnchorPane.rightAnchor="302.2569274902344" />
+        <Button fx:id="signupBtn" layoutX="419.0" layoutY="423.0" mnemonicParsing="false" onAction="#signUpBtnAction" styleClass="other-btn" text="CADASTRAR" AnchorPane.leftAnchor="303.0" AnchorPane.rightAnchor="302.2569274902344" />
+      <Label fx:id="errorTxt" layoutX="200.0" layoutY="480.0" prefHeight="27.0" prefWidth="560.0" styleClass="label2" AnchorPane.leftAnchor="303.0" AnchorPane.rightAnchor="302.2569274902344" />
     </children>
 </AnchorPane>
