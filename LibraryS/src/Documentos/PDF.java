@@ -1,14 +1,10 @@
-﻿/*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package Documentos;
 
-/**
- *
- * @author maria
- */
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import java.io.FileOutputStream;
@@ -268,9 +264,9 @@ public class PDF {
     private static String convertePDF(File direct){
         String temp = direct.toString();
         int i = temp.length();
-        if(!(temp.substring(i-4, i-1).equals("pdf"))){
+        if(!(temp.substring(i-4, i-1).equals(".pdf"))){
             temp = temp + ".pdf";
         }
         return temp;
-    }
+    }    
 }
