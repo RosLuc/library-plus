@@ -1,4 +1,4 @@
-/*
+﻿/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -39,7 +39,7 @@ import Materiais.Multimidia;
 public class PDF {
    
     
-    static public String Gerar_certificado(String nome) throws DocumentException, IOException{
+    static public String Gerar_certificado(String nome, File select) throws DocumentException, IOException{
   
         Document document=null;
         OutputStream outPutstream;
@@ -55,13 +55,13 @@ public class PDF {
             Font font3 = new Font(Century_Schoolbook, 20, Font.ITALIC, new BaseColor(4,5,12));
         
                  
-            outPutstream = new FileOutputStream ("Documento/Modelo_Certificado.pdf");
+            outPutstream = new FileOutputStream (convertePDF(select));
             try{
                 PdfWriter writer = PdfWriter.getInstance(document, outPutstream);
                 document.open();
             
                 PdfContentByte canvas = writer.getDirectContentUnder();
-                Image imagem = null;
+                Image imagem;
                 try{
                     imagem = Image.getInstance("fonts/modelo.jpg");
                     imagem.scaleAbsolute(PageSize.A4.rotate());
@@ -103,7 +103,7 @@ public class PDF {
                     paragrafo4.setAlignment(Element.ALIGN_JUSTIFIED);
                     paragrafo4.setSpacingBefore(100);
                     document.add(paragrafo4);
-                    diretorio = f.getAbsolutePath();         
+                    diretorio = (convertePDF(select));       
                 
                 }catch(BadElementException | IOException ex){
                     System.err.println("ERRO: " + ex);            
@@ -120,7 +120,7 @@ public class PDF {
         return diretorio;
     }
     
-    static public String gerarLivroPDF(List<Livro> listMaterial) throws FileNotFoundException, DocumentException, BadElementException, IOException{
+    static public String gerarLivroPDF(List<Livro> listMaterial, File select) throws FileNotFoundException, DocumentException, BadElementException, IOException{
         
         Document document=null;
         OutputStream outPutstream;
@@ -129,7 +129,7 @@ public class PDF {
             document = new Document(PageSize.A4.rotate(),30,20,20,30);
             File f = new File("Documento");
             f.mkdir();
-            outPutstream = new FileOutputStream("Documento/TabelaLivros.pdf");
+            outPutstream = new FileOutputStream(convertePDF(select));
             try{
                 PdfWriter writer = PdfWriter.getInstance(document, outPutstream);
                 document.open();
@@ -169,7 +169,7 @@ public class PDF {
                     Tabela.addCell(String.valueOf(listMaterial.get(i).getExemplar()));
                 }
                 document.add(Tabela);
-                diretorio = f.getAbsolutePath();
+                diretorio = (convertePDF(select));
             }catch(DocumentException ex){    
                 Logger.getLogger(PDF.class.getName()).log(Level.SEVERE,null, ex);        
             }
@@ -181,7 +181,7 @@ public class PDF {
         return diretorio;
     }
     
-    static public String gerarMultimidiaPDF(List<Multimidia> listMaterial) throws FileNotFoundException, DocumentException, BadElementException, IOException{
+    static public String gerarMultimidiaPDF(List<Multimidia> listMaterial, File select) throws FileNotFoundException, DocumentException, BadElementException, IOException{
         
         Document document=null;
         OutputStream outPutstream;
@@ -190,7 +190,7 @@ public class PDF {
             document = new Document(PageSize.A4.rotate(),30,20,20,30);
             File f = new File("Documento");
             f.mkdir();
-            outPutstream = new FileOutputStream("Documento/TabelaMultimidias.pdf");
+            outPutstream = new FileOutputStream(convertePDF(select));
             try{
                 PdfWriter writer = PdfWriter.getInstance(document, outPutstream);
                 document.open();
@@ -226,7 +226,7 @@ public class PDF {
                     Tabela.addCell(String.valueOf(listMaterial.get(i).getExemplar()));
                 }
                 document.add(Tabela);
-                diretorio = f.getAbsolutePath();
+                diretorio = (convertePDF(select));
             }catch(DocumentException ex){    
                 Logger.getLogger(PDF.class.getName()).log(Level.SEVERE,null, ex);        
             }
@@ -263,5 +263,14 @@ public class PDF {
         
         Paragraph paragrafo3 = new Paragraph(".....", font);
         document.add(paragrafo3);
+    }
+    
+    private static String convertePDF(File direct){
+        String temp = direct.toString();
+        int i = temp.length();
+        if(!(temp.substring(i-4, i-1).equals("pdf"))){
+            temp = temp + ".pdf";
+        }
+        return temp;
     }
 }

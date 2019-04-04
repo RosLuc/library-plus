@@ -18,8 +18,11 @@ import Documentos.PDF;
 import Materiais.Livro;
 import Materiais.Multimidia;
 import com.itextpdf.text.DocumentException;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * FXML Controller class
@@ -56,9 +59,10 @@ public class GerarRelController {
         caminhoLabel.setText("Gerando arquivo.");
         List<Livro> listLivro = new Livro().listarMaterial();
         if(!listLivro.isEmpty()){
+            File select = buscarDiretorio();
             try {
-                String diretorio = PDF.gerarLivroPDF(listLivro);
-                caminhoLabel.setText("Arquivo salvo em: "+ diretorio + "\\TabelaLivros.pdf" );
+                String diretorio = PDF.gerarLivroPDF(listLivro, select);
+                caminhoLabel.setText("Arquivo salvo em: "+ diretorio);
             } catch (DocumentException | IOException ex) {
                 caminhoLabel.setText("Erro ao gerar documento.");
             }
@@ -70,9 +74,10 @@ public class GerarRelController {
         caminhoLabel.setText("Gerando arquivo.");
         List<Multimidia> listmult = new Multimidia().listarMaterial();
         if(!listmult.isEmpty()){
+            File select = buscarDiretorio();
             try {
-                String diretorio = PDF.gerarMultimidiaPDF(listmult);
-                caminhoLabel.setText("Arquivo salvo em: "+ diretorio + "\\TabelaMultimidias.pdf" );
+                String diretorio = PDF.gerarMultimidiaPDF(listmult, select);
+                caminhoLabel.setText("Arquivo salvo em: "+ diretorio);
             } catch (DocumentException | IOException ex) {
                 caminhoLabel.setText("Erro ao gerar documento.");
             }
@@ -82,5 +87,15 @@ public class GerarRelController {
     public void fecha() {
         GerarRel.getStage().close();
     }
-
+    
+    private static File buscarDiretorio(){
+        JFileChooser file = new JFileChooser();
+        file.setDialogTitle("Selecione o diretorio");
+        file.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF", "pdf");
+        file.setFileFilter(filter);
+        file.showOpenDialog(file);
+        File selected = file.getSelectedFile();
+        return selected;
+    }
 }

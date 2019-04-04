@@ -10,6 +10,7 @@ import LibraryScreens.EmtDoc;
 import LibraryScreens.GerarCert;
 import Pessoa.Pessoa;
 import com.itextpdf.text.DocumentException;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
@@ -29,6 +30,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * FXML Controller class
@@ -120,9 +123,17 @@ public class GerarCertController implements Initializable {
     void gerCertBtnAction(ActionEvent event) {
         String temp = nomeDocTxt.getText();
         if (!(temp.trim().equals(""))) {
+            JFileChooser file = new JFileChooser();
+            file.setDialogTitle("Selecione o diretorio");
+            file.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF", "pdf");
+            file.setFileFilter(filter);
+            file.showOpenDialog(file);
+            File selected = file.getSelectedFile();
+             
             try {
-                String diretorio = PDF.Gerar_certificado(temp);
-                caminhoLabel.setText("Arquivo salvo em: " + diretorio + "\\Modelo_Certificado.pdf");
+                String diretorio = PDF.Gerar_certificado(temp, selected);
+                caminhoLabel.setText("Arquivo salvo em: " + diretorio);
             } catch (DocumentException | IOException ex) {
                 caminhoLabel.setText("Erro ao gerar documento.");
             }
